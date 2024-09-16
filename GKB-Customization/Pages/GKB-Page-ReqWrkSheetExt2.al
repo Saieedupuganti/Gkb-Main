@@ -2,10 +2,11 @@ namespace Proejct.Proejct;
 
 using Microsoft.Inventory.Requisition;
 
-
+// here we changed the caption of req worksheet to purchase request.
 
 pageextension 50101 "Req Work" extends "Req. Worksheet"
 {
+    Caption = 'Purchase Request';
     layout
     {
         modify(Control1903326807)
