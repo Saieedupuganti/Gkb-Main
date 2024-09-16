@@ -13,5 +13,11 @@ tableextension 50102 GKBItemExt extends Item
             FieldClass = FlowField;
             CalcFormula = Lookup("Vendor".Name WHERE("No."=FIELD("Vendor No.")));
         }
+        field(50111; VendorName; Text[100])
+        {
+            Caption = 'Vendor Name';
+            FieldClass = FlowField;
+            CalcFormula = Lookup("Vendor".Name WHERE("No."=FIELD("Vendor No.")));
+        }
     }
 }
