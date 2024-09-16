@@ -2,7 +2,7 @@
   "id": "a447e6e8-e43c-44f0-b366-24dcc23ee48a",
   "name": "GKB-Customization",
   "publisher": "Default Publisher",
-  "version": "1.0.0.0",
+  "version": "1.0.0.1",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -13,7 +13,7 @@
   "dependencies": [],
   "screenshots": [],
   "platform": "24.0.0.0",
-  "application": "24.3.21374.21517",
+  "application": "24.4.22295.22393",
   "idRanges": [
     {
       "from": 50100,
@@ -30,3 +30,4 @@
     "NoImplicitWith"
   ]
 }
+
