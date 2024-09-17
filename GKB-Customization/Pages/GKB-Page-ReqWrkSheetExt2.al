@@ -6,7 +6,7 @@ using Microsoft.Inventory.Requisition;
 
 pageextension 50101 "Req Work" extends "Req. Worksheet"
 {
-    Caption = 'Purchase Request';
+    Caption = 'Purchase Request';    // Here Changing the Caption from req. worksheet to Purchase Request.
     layout
     {
         modify(Control1903326807)
