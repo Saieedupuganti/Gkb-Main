@@ -7,7 +7,7 @@
             "type": "al",
             "environmentType": "Sandbox",
             "environmentName": "ObrienDev",
-            "startupObjectId": 22,
+            "startupObjectId": 49,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
