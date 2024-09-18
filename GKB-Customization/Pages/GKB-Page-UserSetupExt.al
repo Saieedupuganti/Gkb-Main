@@ -12,6 +12,18 @@ pageextension 50120 "User Setup Page Ext" extends "User Setup"
             {
                 ApplicationArea = all;
             }
+            field("Customer Card";Rec."Customer Card")
+            {
+                ApplicationArea = all;
+            }
+            field("G\L Account";Rec."G\L Account")
+            {
+                ApplicationArea = all;
+            }
+            field("Location";Rec."Location")
+            {
+                ApplicationArea = all;
+            }
         }
     }
 }
