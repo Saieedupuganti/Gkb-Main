@@ -11,6 +11,11 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
 {
     layout
     {
+        modify("Location Code")
+        {
+            Caption = 'Warehouse';
+        }
+
         addafter(Control1903326807)
         {
             part(ItemAvailability; "Req WO FactBox")
@@ -20,7 +25,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 Visible = true;
             }
         }
-        
+
     }
 
     actions
