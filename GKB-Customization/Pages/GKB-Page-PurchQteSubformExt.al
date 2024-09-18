@@ -33,6 +33,7 @@ pageextension 50153 "Purchase Quote SubForm Ext" extends "Purchase Quote Subform
         modify("Direct Unit Cost")
         {
             Caption = 'Direct Unit Cost Excl. GSt';
+            CaptionClass = GetFieldCaption(39, 22, 'Direct unit Cose Excl. GST');
         }
         modify("Line Amount")
         {
