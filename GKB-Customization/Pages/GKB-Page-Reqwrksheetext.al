@@ -13,7 +13,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
     {
         modify("Location Code")
         {
-            Caption = 'Warehouse';
+            Caption = 'Warehouse';  // Changing the location code to warehouse in req. worksheet.
         }
 
         addafter(Control1903326807)
