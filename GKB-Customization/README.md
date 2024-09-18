@@ -12,4 +12,8 @@
 ### Version 1.0.0.2 (Customization)
 - **Added**: Added OBS Item Name,Vendor Item Name in Items Card Page
              Added current cost,Vendor Name in the Item Vendor Catalog Page
-             
+             Changed Location Code to the Warehouse in Purchase Request. - Koti
+
+### Version 1.0.0.3 (Customization) 
+- **Added**: Hided the printorders from purchase request in the request page of the report.   - Koti
+                 
