@@ -4,7 +4,7 @@ pageextension 50124 "GKB Rec.Req.Worksheet" extends "Recurring Req. Worksheet"
 
     layout
     {
-        modify("Location Code")
+        modify("Location Code")     // changing the Location Code to Warehouse.
         {
             Caption = 'Warehouse';
         }

@@ -1,4 +1,3 @@
-using Microsoft.Inventory.Item.Catalog;
 
 pageextension 50141 ItemVendCatalog extends "Item Vendor Catalog"
 {
