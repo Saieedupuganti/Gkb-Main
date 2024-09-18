@@ -1,4 +1,4 @@
-pageextension 50152 "Purchase Quote SubForm Ext" extends "Purchase Quote Subform"
+pageextension 50153 "Purchase Quote SubForm Ext" extends "Purchase Quote Subform"
 {
     layout
     {
