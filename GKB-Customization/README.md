@@ -16,4 +16,7 @@
 
 ### Version 1.0.0.3 (Customization) 
 - **Added**: Hided the printorders from purchase request in the request page of the report.   - Koti
-                 
+
+
+### Version 1.0.0.3 (Customization) 
+- **Added**: Changed the VAT to GST in the Header of the Items, vendor , Customer,PO,PI,PQuote
