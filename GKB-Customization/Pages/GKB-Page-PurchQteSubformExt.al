@@ -80,10 +80,11 @@ pageextension 50153 "Purchase Quote SubForm Ext" extends "Purchase Quote Subform
     var
         GlobalPurchaseHeader: Record "Purchase Header";
         GlobalField: Record "Field";
+        Caption: Text;
 
     procedure GetPurchaseLineCaptionClass(var PurchaseLine: Record "Purchase Line"; FieldNumber: Integer): Text
     var
-        Caption: Text;
+
         IsHandled: Boolean;
     begin
         if (GlobalPurchaseHeader."Document Type" <> PurchaseLine."Document Type") or
@@ -110,7 +111,7 @@ pageextension 50153 "Purchase Quote SubForm Ext" extends "Purchase Quote Subform
     local procedure GetFieldCaption(TableNumber: Integer; FieldNumber: Integer; Caption: Text): Text
     begin
         if (GlobalField.TableNo <> TableNumber) or (GlobalField."No." <> FieldNumber) or (GlobalField."Field Caption" <> Caption) then
-            GlobalField.Get(TableNumber, FieldNumber, Caption);
+            GlobalField.Get(TableNumber, FieldNumber);
         exit(GlobalField."Field Caption");
     end;
 
