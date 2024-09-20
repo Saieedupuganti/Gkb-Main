@@ -16,7 +16,7 @@ pageextension 50151 "Purchase Credit Memo Ext" extends "Purchase Credit Memo"
         }
         modify("Prices Including VAT")
         {
-            Caption = 'Prices Including VAT';
+            Caption = 'Prices Including GST';
             ToolTip = 'Specifies if the Unit Price and Line Amount fields on document lines should be shown with or without VAT.';
 
         }

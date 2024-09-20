@@ -18,5 +18,11 @@
 - **Added**: Hided the printorders from purchase request in the request page of the report.   - Koti
 
 
-### Version 1.0.0.3 (Customization) 
+### Version 1.0.0.4 (Customization) 
 - **Added**: Changed the VAT to GST in the Header of the Items, vendor , Customer,PO,PI,PQuote
+
+### Version 1.0.0.5 (Customization) 
+- **Added**: Changed the VAT to GST in the Header of the Items, vendor , Customer,PO,PI,PQuote in Lines
+
+### Version 1.0.0.7 (Customization) 
+- **Added**: Added validation Message in the Purchase request if obu's are not same
