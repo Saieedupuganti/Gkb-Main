@@ -42,6 +42,7 @@ tableextension 50142 "Vendor Ext" extends Vendor
         {
             Caption = 'Account Contract Manager';
             DataClassification = ToBeClassified;
+            TableRelation = User;
         }
         field(70107; "Capex From"; Date)
         {
@@ -56,6 +57,32 @@ tableextension 50142 "Vendor Ext" extends Vendor
         field(70109; "ABN No."; Text[100])
         {
             Caption = 'ABN No';
+            DataClassification = ToBeClassified;
+        }
+        field(70110; "Customer Group"; Option)
+        {
+            Caption = 'Customer Group';
+            DataClassification = ToBeClassified;
+            OptionCaption = 'Option1,Option2';
+            OptionMembers = "Option1", "Option2";
+        }
+        field(70111; "Contact Groups"; Option)
+        {
+            Caption = 'Contact Groups';
+            DataClassification = ToBeClassified;
+            OptionCaption = 'Option1,Option2';
+            OptionMembers = "Option1", "Option2";
+        }
+        field(70112; "Credit Hold"; Option)
+        {
+            Caption = 'Credit Hold';
+            DataClassification = ToBeClassified;
+            OptionCaption = 'Option1,Option2';
+            OptionMembers = "Option1", "Option2";
+        }
+        field(70113; "SAP Vendor No"; Text[100])
+        {
+            Caption = 'SAP Vendor No';
             DataClassification = ToBeClassified;
         }
     }
