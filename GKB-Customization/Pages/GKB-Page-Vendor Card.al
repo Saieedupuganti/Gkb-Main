@@ -52,6 +52,27 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                     ApplicationArea = All;
                     Caption = 'Capex To';
                 }
+                field("Customer Group"; Rec."Customer Group")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Customer Group';
+                }
+                field("Contact Groups"; Rec."Contact Groups")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Contact Groups';
+                }
+                field("Credit Hold"; Rec."Credit Hold")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Credit Hold';
+                }
+                field("SAP Vendor No"; Rec."SAP Vendor No")
+                {
+                    ApplicationArea = All;
+                    Caption = 'SAP Vendor No';
+                }
+
             }
         }
         addafter("IRD No.")

@@ -4,25 +4,27 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
     {
         modify(ABN)
         {
-            Editable = false;
-            Enabled = false;
-            Visible = false;
+            Editable = true;
+            Enabled = true;
+            Visible = true;
         }
-        modify("VAT Bus. Posting Group")
-        {
-            Caption = 'GST Bus. Posting Group';
-            ToolTip = 'Specifies the customers GST specification to link transactions made for this customer to.';
-        }
-        modify("VAT Registration No.")
-        {
-            Caption = 'GST Registration NO.';
-            ToolTip = 'Specifies the customer''s GST registration number for customers in EU countries/regions.';
-        }
-        modify("Prices Including VAT")
-        {
-            Caption = 'Prices Including GST';
-            ToolTip = 'Specifies if the Unit Price and Line Amount fields on document lines should be shown with or without GST';
-        }
+        // modify("VAT Bus. Posting Group")
+        // {
+        //     Caption = 'GST Bus. Posting Group';
+        //     ToolTip = 'Specifies the customers GST specification to link transactions made for this customer to.';
+        // }
+        // modify("VAT Registration No.")
+        // {
+        //     Caption = 'GST Registration NO.';
+        //     ToolTip = 'Specifies the customer''s GST registration number for customers in EU countries/regions.';
+        // }
+        // modify("Prices Including VAT")
+        // {
+        //     Caption = 'Prices Including GST';
+        //     ToolTip = 'Specifies if the Unit Price and Line Amount fields on document lines should be shown with or without GST';
+        //}
+
+
         addafter(General)
         {
             group("D365 CUSTOM FIELDS")
@@ -60,6 +62,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Account Contract Manager';
+                    //look up 
                 }
                 field("Capex From"; Rec."Capex From")
                 {
@@ -70,9 +73,34 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                     ApplicationArea = All;
                     Caption = 'Capex To';
                 }
+                field("Customer group"; Rec."Customer group")
+                {
+                    ApplicationArea = all;
+                }
+                field("Contact Group"; Rec."Contact Group")
+                {
+                    ApplicationArea = all;
+                }
+                field("Credit Hold"; Rec."Credit Hold")
+                {
+                    ApplicationArea = all;
+                }
+                field(Description; Rec.Description)
+                {
+                    ApplicationArea = all;
+                    MultiLine = true;
+                }
+                field("Import Serial No"; Rec."Import Serial No")
+                {
+                    ApplicationArea = all;
+                }
+                field("Owner Ship"; Rec."Owner Ship")
+                {
+                    ApplicationArea = all;
+                }
             }
         }
-        
+
         addafter("IRD No.")
         {
             field("ABN No."; Rec."ABN No.")
@@ -81,7 +109,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 ShowMandatory = true;
             }
         }
-        
+
     }
     trigger OnOpenPage();
     var
