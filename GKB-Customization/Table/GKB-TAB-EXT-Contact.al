@@ -14,5 +14,10 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             OptionCaption = ' ,Account Payable,Accounts,Billing,Billing + Maintenance,Energy,Head Office Contact,Maintenance,Management,Managing Director,Orders,Sales,Statements,Training,Worksheet Email';
             OptionMembers = " ", "Account Payable", "Accounts", "Billing", "Billing + Maintenance", "Energy", "Head Office Contact", "Maintenance", "Management", "Managing Director", "Orders", "Sales", "Statements", "Training", "Worksheet Email";
         }
+        field(70102; "Description"; Text[100])
+        {
+            Caption = 'Description';
+            DataClassification = ToBeClassified;
+        }
     }
 }
