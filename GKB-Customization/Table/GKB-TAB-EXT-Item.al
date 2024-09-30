@@ -16,8 +16,8 @@ tableextension 50102 GKBItemExt extends Item
         {
             Caption = 'Trade Type';
             DataClassification = ToBeClassified;
-            OptionCaption = 'Sample1,Sample2';
-            OptionMembers = Sample1,Sample2;
+            OptionCaption = 'Service Engineer Dual Trade,First-Year Apprentice,Second-Year Apprenctice,Third-Year Apprenctice,Fourth-Year Apprenctice';
+            OptionMembers = "Service Engineer Dual Trade","First-Year Apprentice","Second-Year Apprenctice","Third-Year Apprenctice","Fourth-Year Apprenctice";
         }
         field(50100; "OBS Item Name"; Text[100])
         {

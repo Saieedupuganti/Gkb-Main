@@ -26,3 +26,18 @@
 
 ### Version 1.0.0.7 (Customization) 
 - **Added**: Added validation Message in the Purchase request if obu's are not same
+
+### Version 1.0.0.10 (Customization) 
+- **Added**:1. Creating two templets
+                with SAP Number(Item No)
+                with Manufacture Code(Item Reference Number)
+            2. Changes in Purchase Order
+                CreatedBy autofill with userid
+                OrderBy Dropdown with Employee table.
+            3. Changes in EmailBody
+                Adding OrderNo
+                Adding Shipto adress
+            4. Adding project No in the PO in line level
+            5. Adding project No in Req. Worksheet
+### Version 1.0.0.12 (Customization) 
+- **Added**:1. Created the VendorName for alternate vendorno in Req. Worksheet.

@@ -4,9 +4,10 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
     {
         modify(ABN)
         {
-            Editable = false;
-            Enabled = false;
-            Visible = false;
+            Editable = true;
+            Enabled = true;
+            Visible = true;
+            ShowMandatory = true;
         }
         addafter(General)
         {
@@ -17,12 +18,12 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                     ApplicationArea = All;
                     Caption = 'Vendor Profile';
                 }
-                field("Supplier account Group"; Rec."Supplier account Group")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Supplier account Group';
-                    ShowMandatory = true;
-                }
+                // field("Supplier account Group"; Rec."Supplier account Group")
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Supplier account Group';
+                //     ShowMandatory = false;
+                // }
                 field("D365 Account ID"; Rec."D365 Account ID")
                 {
                     ApplicationArea = All;
@@ -62,26 +63,51 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                     ApplicationArea = All;
                     Caption = 'Contact Groups';
                 }
-                field("Credit Hold"; Rec."Credit Hold")
+                field("CreditHold"; Rec."Credit Hold")
                 {
                     ApplicationArea = All;
                     Caption = 'Credit Hold';
+                    Visible = false;
                 }
                 field("SAP Vendor No"; Rec."SAP Vendor No")
                 {
                     ApplicationArea = All;
                     Caption = 'SAP Vendor No';
                 }
+                field("Owner Ship"; Rec."Owner Ship")
+                {
+                    ApplicationArea = all;
+                }
+                field("Credit Holds"; Rec."Credit Holds")
+                {
+                    ApplicationArea = all;
+                }
 
             }
         }
         addafter("IRD No.")
         {
-            field("ABN No."; Rec."ABN No.")
-            {
-                ApplicationArea = All;
-                ShowMandatory = true;
-            }
+            // field("ABN No."; Rec."ABN No.")
+            // {
+            //     ApplicationArea = All;
+            //     ShowMandatory = true;
+            // }
         }
     }
+    trigger OnOpenPage();
+    var
+        UserSetupRec: Record "User Setup";
+        IsUserAllowed: Boolean;
+    begin
+        // Check if the current user has permission to edit the Vendor Card
+        if UserSetupRec.Get(UserId()) then begin
+            IsUserAllowed := UserSetupRec."Allow Edit Mode";
+        end else begin
+            IsUserAllowed := false;
+        end;
+
+        // If the user does not have permission, make the fields non-editable
+        if not IsUserAllowed then
+            CurrPage.Editable(false);  // Set the entire page to non-editable
+    end;
 }

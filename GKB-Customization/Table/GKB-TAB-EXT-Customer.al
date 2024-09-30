@@ -11,7 +11,7 @@ tableextension 50100 "Customer Ext" extends Customer
         }
         field(70102; "Supplier account Group"; Option)
         {
-            Caption = 'Supplier account Group';
+            Caption = 'Supplier Account Group';
             DataClassification = ToBeClassified;
             OptionCaption = ' ,Accounting,Amenities,Boiler Ancillaries,Boiler Manufacturer,Burner Management,Communication,Competition,Consultants,Credit Cards,Electrical,Employees,Engineering,Equipment Rental,Freight & Transport,Gas Components,Inspection & Certification,IT,Legal,Motor Vehicles,Plumbing,Safety Equipment,Subcontractor,Tooling,Travel,Other,N/A';
             OptionMembers = " ","Accounting","Amenities","Boiler Ancillaries","Boiler Manufacturer","Burner Management","Communication","Competition","Consultants","Credit Cards","Electrical","Employees","Engineering","Equipment Rental","Freight & Transport","Gas Components","Inspection & Certification","IT","Legal","Motor Vehicles","Plumbing","Safety Equipment","Subcontractor","Tooling","Travel","Other","N/A";
@@ -30,19 +30,13 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'Service Agreement';
             DataClassification = ToBeClassified;
-            OptionCaption = 'Basic,Pro';
-            OptionMembers = "Basic","Pro";
+            OptionCaption = ' ,Basic,Pro';
+            OptionMembers = " ","Basic","Pro";
         }
         field(70106; "Account Contract Manager"; Text[100])
         {
             Caption = 'Account Contract Manager';
             DataClassification = ToBeClassified;
-            trigger OnLookup()
-            var
-                emp: Record Employee;
-            begin
-
-            end;
         }
         field(70107; "Capex From"; Date)
         {
@@ -63,15 +57,15 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'Customer Group';
             DataClassification = ToBeClassified;
-            OptionCaption = 'Sample1,Sample2';
-            OptionMembers = " ","Sample","Sample2";
+            OptionCaption = ' ,Platinum,Gold,Silver,Bronze,N/A';
+            OptionMembers = " ",Platinum,Gold,Silver,Bronze,"N/A";
         }
         field(70111; "Contact Group"; Option)
         {
             Caption = 'Contact Group';
             DataClassification = ToBeClassified;
-            OptionCaption = 'Sample1,Sample2';
-            OptionMembers = "",Sample1,Sample2;
+            OptionCaption = ' ,Competitor,Consultant,Customer,Influencer,Investor,Manufacturer,Partner,Press,Prospect,Reseller,Sub Contractor,Vendor,Others';
+            OptionMembers = " ",Competitor,Consultant,Customer,Influencer,Investor,Manufacturer,Partner,Press,Prospect,Reseller,"Sub Contractor",Vendor,Others;
         }
         field(70112; "Credit Hold"; Boolean)
         {
@@ -90,8 +84,8 @@ tableextension 50100 "Customer Ext" extends Customer
         field(70115; "Owner Ship"; Option)
         {
             Caption = 'Owner Ship';
-            OptionCaption = 'Sample1,Sample2';
-            OptionMembers = Sample1,Sample2;
+            OptionCaption = ' ,Private,Public,Subsidary,Others';
+            OptionMembers = " ",Private,Public,Subsidary,Others;
         }
         field(70116; "Supplier Account Groups"; Option)
         {

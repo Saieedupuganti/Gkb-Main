@@ -9,11 +9,39 @@ using Microsoft.Inventory.Item;
 
 pageextension 50100 "Req WO" extends "Req. Worksheet"
 {
+    Caption = 'Purchase Request';
     layout
     {
         modify("Location Code")
         {
             Caption = 'Warehouse';  // Changing the location code to warehouse in req. worksheet.
+        }
+        modify(Control1903326807)
+        {
+            Visible = false;
+
+        }
+        addlast(Control1)
+        {
+            field(projectNo; Rec.projectNo)
+            {
+                ApplicationArea = all;
+            }
+
+        }
+        addafter("Vendor No.")
+        {
+            field("Vendor Name"; Rec."Vendor Name")
+            {
+                ApplicationArea = all;
+                Visible = false;
+            }
+            field(VendorName; Rec.VendorName)
+            {
+                ApplicationArea = all;
+                Visible = true;
+            }
+
         }
 
         addafter(Control1903326807)
@@ -23,6 +51,16 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 ApplicationArea = Planning;
                 SubPageLink = "Worksheet Template Name" = field("Worksheet Template Name"), "Journal Batch Name" = field("Journal Batch Name"), "Line No." = field("Line No.");
                 Visible = true;
+            }
+        }
+        addafter(Control1)
+        {
+
+            part(Inventory; "Req WO FactBox")
+            {
+                ApplicationArea = Planning;
+                SubPageLink = "Worksheet Template Name" = field("Worksheet Template Name"), "Journal Batch Name" = field("Journal Batch Name"), "Line No." = field("Line No.");
+                Visible = false;
             }
         }
 
@@ -44,7 +82,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 // Initialize the first record's Obrien_Business Unit Code
                 if Rec.FindSet then begin
                     FirstBusinessUnitCode := Rec."Shortcut Dimension 1 Code";
-                    
+
                     // Message(FirstBusinessUnitCode);
                     // Loop through all records to check if the Obrien_Business Unit Code matches the first record
                     repeat
@@ -60,7 +98,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                     Error('The Obrien_Business Unit Codes are not the same.');
                     // exit;
                 end;
-                
+
             end;
         }
         addfirst(processing)
@@ -78,14 +116,14 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 var
                     Ph: Record "Purchase Header";
                 begin
-                    
+
                 end;
             }
 
-            
+
         }
 
-        
+
     }
-   
+
 }

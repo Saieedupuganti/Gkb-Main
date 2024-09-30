@@ -6,17 +6,17 @@ pageextension 50152 "GKB-Page-PurchaseReturnorder" extends "Purchase Return Orde
 {
     layout
     {
-        modify("VAT Bus. Posting Group")
-        {
-            Caption='GST Bus. Posting Group';
-        }
-        modify("VAT Reporting Date")
-        {
-            Caption= 'GST Reporting Date';
-        }
-        modify("Prices Including VAT")
-        {
-            Caption = 'Prices Including GST';
-        }
+        // modify("VAT Bus. Posting Group")
+        // {
+        //     Caption='GST Bus. Posting Group';
+        // }
+        // modify("VAT Reporting Date")
+        // {
+        //     Caption= 'GST Reporting Date';
+        // }
+        // modify("Prices Including VAT")
+        // {
+        //     Caption = 'Prices Including GST';
+        // }
     }
 }
