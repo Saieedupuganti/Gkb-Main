@@ -7,5 +7,18 @@ tableextension 50120 "GKBPurchase LineExt" extends "Purchase Line"
             Caption = 'Comments2';
             DataClassification = ToBeClassified;
         }
+        field(50101; VendorCatalogueNo; Code[20])
+        {
+            ToolTip = 'Specifies vendor given name to the item';
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            var
+                item: Record Item;
+            begin
+                item."Vendor 1 Catalogue Number" := Rec.VendorCatalogueNo;
+            end;
+        }
+        
     }
 }

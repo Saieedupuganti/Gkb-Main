@@ -2,49 +2,58 @@ pageextension 50118 PurchOrderSubExt extends "Purchase Order Subform"
 {
     layout
     {
-        modify("VAT Bus. Posting Group")
+        addlast(Control1)
         {
-            Caption = 'GST Bus. Posting Group';
+            field(VendorCatalogueNo; Rec.VendorCatalogueNo)
+            {
+                Caption = 'Vendor Catologue No';
+                ApplicationArea = all;
+            }
         }
-        modify("Total VAT Amount")     //in po
-        {
-            Caption = 'Total GST Amount';
-            CaptionClass = GetCaptionWithCurrencyCode('Total GST Amount', Rec."Currency Code");
-        }
-        modify("Total Amount Excl. VAT")
-        {
-            Caption = 'Total Amount Excl. GST';
-            CaptionClass = GetCaptionWithCurrencyCode('Total Amount Excl. GST', Rec."Currency Code");
-        }
-        modify("Total Amount Incl. VAT")
-        {
-            Caption = 'Total Amount Incl. GST';
-            CaptionClass = GetCaptionWithCurrencyCode('Total Amount Incl. GST', Rec."Currency Code");
-        }
-        modify("VAT Prod. Posting Group")
-        {
-            Caption = 'GST Prod. Posting Group';
-            //    CaptionClass=GetCaptionWithCurrencyCode('GST Prod. Posting Group',Rec."Currency Code");
-        }
-        modify(AmountBeforeDiscount)   //in po
-        {
-            Caption = 'Sub Total Excl. GST';
-            CaptionClass = GetCaptionWithCurrencyCode('Sub Total Excl. GST', Rec."Currency Code");
-        }
-        modify("Location Code")
-        {
-            Caption = 'Warehouse';
-        }
-        modify("Direct Unit Cost")
-        {
-            Caption = 'Direct Unit Cost Excl. GST';
-            //  CaptionClass = GetFieldCaption(39, 22);
-        }
-        modify("Line Amount")
-        {
-            Caption = 'Line Amount Excl. GST';
-            //  CaptionClass = GetFieldCaption(39, 103);
-        }
+
+        //     modify("VAT Bus. Posting Group")
+        //     {
+        //         Caption = 'GST Bus. Posting Group';
+        //     }
+        //     modify("Total VAT Amount")     //in po
+        //     {
+        //         Caption = 'Total GST Amount';
+        //         CaptionClass = GetCaptionWithCurrencyCode('Total GST Amount', Rec."Currency Code");
+        //     }
+        //     modify("Total Amount Excl. VAT")
+        //     {
+        //         Caption = 'Total Amount Excl. GST';
+        //         CaptionClass = GetCaptionWithCurrencyCode('Total Amount Excl. GST', Rec."Currency Code");
+        //     }
+        //     modify("Total Amount Incl. VAT")
+        //     {
+        //         Caption = 'Total Amount Incl. GST';
+        //         CaptionClass = GetCaptionWithCurrencyCode('Total Amount Incl. GST', Rec."Currency Code");
+        //     }
+        //     modify("VAT Prod. Posting Group")
+        //     {
+        //         Caption = 'GST Prod. Posting Group';
+        //         //    CaptionClass=GetCaptionWithCurrencyCode('GST Prod. Posting Group',Rec."Currency Code");
+        //     }
+        //     modify(AmountBeforeDiscount)   //in po
+        //     {
+        //         Caption = 'Sub Total Excl. GST';
+        //         CaptionClass = GetCaptionWithCurrencyCode('Sub Total Excl. GST', Rec."Currency Code");
+        //     }
+        //     modify("Location Code")
+        //     {
+        //         Caption = 'Warehouse';
+        //     }
+        //     modify("Direct Unit Cost")
+        //     {
+        //         Caption = 'Direct Unit Cost Excl. GST';
+        //         //  CaptionClass = GetFieldCaption(39, 22);
+        //     }
+        //     modify("Line Amount")
+        //     {
+        //         Caption = 'Line Amount Excl. GST';
+        //         //  CaptionClass = GetFieldCaption(39, 103);
+        //     }
 
     }
     actions

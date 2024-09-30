@@ -2,9 +2,9 @@ pageextension 50157 PostedPurchasecreditmemo extends "Posted Purchase Credit Mem
 {
     layout
     {
-        modify("VAT Reporting Date")
-        {
-            Caption = 'GST Reporting Date';
-        }
+        // modify("VAT Reporting Date")
+        // {
+        //     Caption = 'GST Reporting Date';
+        // }
     }
 }

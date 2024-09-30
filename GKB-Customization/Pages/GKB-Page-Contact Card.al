@@ -16,11 +16,11 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
                     ApplicationArea = All;
                     Caption = 'E-Mail Group Code';
                 }
-                field("Description";Rec."Description")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Description';
-                }
+                // field("Description";Rec."Description")
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Description';
+                // }
             }
         }
     }
