@@ -15,31 +15,47 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
                 Caption = 'Created By';
             }
         }
-        // modify("VAT Bus. Posting Group")
-        // {
-        //     Caption = 'GST Bus. Posting Group';
-        //     ToolTip = 'Specifies the GST specification of the involved customer or vendor to link transactions made for this record with the appropriate general ledger account according to the GST posting setup.';
-        // }
-        // modify("VAT Reporting Date")
-        // {
-        //     Caption = 'GST Reporting Date';
-        //     ToolTip = 'Specifies the date used to include entries on GST reports in a GST period. This is either the date that the document was created or posted, depending on your setting on the General Ledger Setup page.';
-        // }
-        // modify("Prices Including VAT")
-        // {
-        //     Caption = 'Prices Including GST';
-        //     ToolTip = 'Specifies if the Unit Price and Line Amount fields on document lines should be shown with or without GST.';
-        // }
-        // modify("Location Code")
-        // {
-        //     Caption = 'Ware House';
-        // }
     }
-
     actions
     {
+        modify("&Print")
+        {
+            Enabled = (Rec.Status = Rec.Status::Released);
+            trigger OnBeforeAction()
+            var
+                myInt: Integer;
+            begin
+                if Rec.Status <> Rec.Status::Released then begin
+                    Message('Cannot print. The Purchase Order status must be Released.');
+                    exit;
+                end;
+            end;
+        }
+        modify(SendCustom)
+        {
+            Enabled = (Rec.Status = Rec.Status::Released);
+            trigger OnBeforeAction()
+            var
+                myInt: Integer;
+            begin
+                if Rec.Status <> Rec.Status::Released then begin
+                    Message('Cannot Send. The Purchase Order status must be Released.');
+                    exit;
+                end;
+            end;
+        }
+        modify(Release)
+        {
+            Enabled = (Rec.Status = Rec.Status::Released);
+            trigger OnBeforeAction()
+            var
+                myInt: Integer;
+            begin
+                if Rec.Status <> Rec.Status::Released then begin
+                    Message('Cannot Release. The Purchase Order status must be Released.');
+                    exit;
+                end;
+            end;
+        }
     }
-    var
-        myInt: Integer;
-        
 }
