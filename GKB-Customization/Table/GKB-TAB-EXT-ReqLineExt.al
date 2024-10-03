@@ -27,8 +27,10 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
 
 
     }
-    // [IntegrationEvent(false, false)]
-    // local procedure OnBeforePLInsert(var PurchaseLine: Record "Purchase Line"; var IsHandled: Boolean)
-    // begin
-    // end;
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforePLInsert(var PurchaseLine: Record "Purchase Line"; var IsHandled: Boolean)
+    begin
+    end;
+
+    
 }

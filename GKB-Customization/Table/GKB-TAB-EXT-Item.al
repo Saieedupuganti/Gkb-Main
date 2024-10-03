@@ -36,6 +36,10 @@ tableextension 50102 GKBItemExt extends Item
             FieldClass = FlowField;
             CalcFormula = Lookup("Vendor".Name WHERE("No." = FIELD("Vendor No.")));
         }
+        field(50103;QrCode;Blob)
+        {
+            DataClassification=ToBeClassified;  
+        }
 
     }
 }
