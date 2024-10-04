@@ -1,19 +1,23 @@
-pageextension 50107 PurchaseListExt extends "Purchase Order List"
+pageextension 50107 "Purchase Order List Ext" extends "Purchase Order List"
 {
     layout
     {
-        // modify("Amount Including VAT")
-        // {
-        //     Caption = 'Amount Including GST';
-        //     ToolTip = 'Specifies the sum of amounts, including GST, on all the lines in the document. This will include invoice discounts.';
-        // }
-    }
-
-    actions
-    {
-        // Add changes to page actions here
+        addlast(Control1)
+        {
+            field("Amount Excl. GST"; PurchHeader."Amount")
+            {
+                ApplicationArea = All;
+                Caption = 'Amount Excl. GST';
+                Editable = false; // Make it non-editable for display purposes
+            }
+        }
     }
 
     var
-        myInt: Integer;
+        PurchHeader: Record "Purchase Header";
+
+    trigger OnAfterGetRecord()
+    begin
+        PurchHeader.Get(Rec."Document Type", Rec."No."); // Get the Purchase Header based on Document Type and No.
+    end;
 }

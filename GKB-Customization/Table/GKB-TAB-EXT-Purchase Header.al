@@ -27,4 +27,6 @@ tableextension 50119 "GKBPurchase HeaderExt" extends "Purchase Header"
         IF User.GET(USERID) THEN 
         Rec."Created By" := User."User ID";
     end;
+
 }
+
