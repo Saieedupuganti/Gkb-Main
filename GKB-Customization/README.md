@@ -42,3 +42,7 @@
 ### Version 1.0.0.12 (Customization) 
 - **Added**:1. Created the VendorName for alternate vendorno in Req. Worksheet.
            :2. Approval For PO
+
+### Version 1.0.0.13 (Customization) 
+- **Added**:1.WorkOrder problem.
+              Reqline to purchaseline project no.
