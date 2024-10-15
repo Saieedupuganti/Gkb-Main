@@ -7,5 +7,14 @@ tableextension 50125 "GKBSales HeaderExt" extends "Sales Header"
             Caption = 'Comments2';
             DataClassification = ToBeClassified;
         }
+        field(50101; "Work Details"; Blob)
+        {
+            Caption = 'Work Details';
+            DataClassification = ToBeClassified;
+           // ExtendedDatatype= RichContent
+        }
     }
+   
+
+    
 }

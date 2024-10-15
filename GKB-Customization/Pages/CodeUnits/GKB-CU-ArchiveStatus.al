@@ -4,12 +4,14 @@ codeunit 50105 "Archive Status"
     local procedure OnBeforeDeletePurchaseHeader(var Rec: Record "Purchase Header")
     var
         PurchOrderArchive: Record "Purchase Header Archive";
+        purchhead: Record "Purchase Header";
     begin
         PurchOrderArchive.Init();
+        //PurchOrderArchive.Copy(Rec);
         PurchOrderArchive."Document Type" := Rec."Document Type";
         PurchOrderArchive."No." := Rec."No.";
-        PurchOrderArchive."Entry Type" := 'Deleted'; 
+        PurchOrderArchive."Entry Type" := 'Deleted';
 
-        PurchOrderArchive.Insert();
+        PurchOrderArchive.Insert(true);
     end;
 }
