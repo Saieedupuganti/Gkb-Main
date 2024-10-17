@@ -1,5 +1,6 @@
 pageextension 50201 "Sales Order Ext" extends "Sales Order"
 {
+    Caption = 'Test Sales Order';
     layout
     {
         addafter(General)
@@ -10,10 +11,10 @@ pageextension 50201 "Sales Order Ext" extends "Sales Order"
                 field(RichText; RichTextVar)
                 {
                     ApplicationArea = all;
-                   // Caption = 'Custom Rich Text';
+                    // Caption = 'Custom Rich Text';
                     MultiLine = true;
-                    ExtendedDatatype=RichContent;
-                    ShowCaption=false;
+                    ExtendedDatatype = RichContent;
+                    ShowCaption = false;
 
 
                     trigger OnValidate()
@@ -26,7 +27,7 @@ pageextension 50201 "Sales Order Ext" extends "Sales Order"
     }
     trigger OnAfterGetCurrRecord()
     begin
-        RichTextVar :=Rec.GetRichText()
+        RichTextVar := Rec.GetRichText()
     end;
 
     var
