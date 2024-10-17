@@ -32,6 +32,11 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 {
                     ApplicationArea = all;
                 }
+                field(SAPITEMID;Rec.SAPITEMID)
+                {
+                    ApplicationArea = all;
+                    Caption = 'SAP ITEM ID';
+                }
             }
         }
 
