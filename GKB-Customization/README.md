@@ -46,3 +46,10 @@
 ### Version 1.0.0.13 (Customization) 
 - **Added**:1.WorkOrder problem.
               Reqline to purchaseline project no.
+### Version 1.0.0.15 (Customization)
+- **Added**:1.Created field status in Archive document that holds the value with deleted if we delete   the purchase order
+           :2.Created the field in sales order(richtext)
+
+### Version 1.0.0.16 (Customization) 
+- **Added**:1.Created the button that makes the Sales blanket order from the sales quote.
+            2.Created the Remaining qty field which autopopulates the value of quantity in blanket order.
