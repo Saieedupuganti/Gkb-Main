@@ -40,6 +40,10 @@ tableextension 50102 GKBItemExt extends Item
         {
             DataClassification=ToBeClassified;  
         }
+        field(50104;SAPITEMID;Code[100])
+        {
+            DataClassification=ToBeClassified;  
+        }
 
     }
 }

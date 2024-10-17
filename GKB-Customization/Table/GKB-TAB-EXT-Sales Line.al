@@ -9,7 +9,19 @@ tableextension 50128 "GKBSales LineExt" extends "Sales Line"
         }
         field(50101; "Remaining Quantity"; Decimal)
         {
+            Caption = 'Remaining Quantity';
+            DataClassification = ToBeClassified;
+            
+              
+            
+        }
+        field(50102; "QuantityShipped"; Decimal)
+        {
+            Caption = 'Quantity Shipped';
             DataClassification = ToBeClassified;
         }
     }
+
+    
+   
 }
