@@ -21,7 +21,7 @@ tableextension 50125 "GKBSales HeaderExt" extends "Sales Header"
     }
 
     var
-        Readdataskippedmsg: Label 'Loading Field %1 Will bw skipped because there was an error when reading tha date.';
+        Readdataskippedmsg: Label 'Loading Field %1 Will be skipped because there was an error when reading tha date.';
 
     procedure SetRichText(RichText1: Text)
     var
