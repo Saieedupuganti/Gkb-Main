@@ -10,19 +10,10 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                 Caption = 'Percentage to Update';
             }
         }
-
     }
+
     actions
     {
-        modify(MakeOrder)
-        {
-            Visible = true;
-
-            trigger OnBeforeAction()
-            begin
-                MakeOrderAndUpdateQuantities();
-            end;
-        }
         addafter("Archi&ve Document")
         {
             action("Create Invoice")
@@ -42,6 +33,20 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
             }
         }
     }
+
+    actions
+    {
+        modify(MakeOrder)
+        {
+            Visible = true;
+
+            trigger OnBeforeAction()
+            begin
+                MakeOrderAndUpdateQuantities();
+            end;
+        }
+    }
+
     local procedure MakeOrderAndUpdateQuantities()
     var
         SalesLine: Record "Sales Line";
@@ -49,8 +54,9 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
         if Rec."Document Type" <> Rec."Document Type"::"Blanket Order" then
             Error('This is not a Blanket Order.');
 
+        // Set the range based on "Document Type" and "No." (not "Document No.")
         SalesLine.SetRange("Document Type", SalesLine."Document Type"::"Blanket Order");
-        SalesLine.SetRange("Document No.", Rec."No.");
+        SalesLine.SetRange("Document No.", Rec."No.");  // Use Rec."No." instead of Rec."Document No."
 
         if SalesLine.FindSet(True) then begin
             repeat

@@ -49,16 +49,16 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
                 end;
             }
 
-            action(MakeOrder)
-            {
-                ApplicationArea = All;
-                Caption = 'Make Order';
-                Image = CreateOrder;
-                trigger OnAction();
-                begin
-                    MakeOrderAndUpdateQuantities();
-                end;
-            }
+            // action(MakeOrder)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Make Order';
+            //     Image = CreateOrder;
+            //     trigger OnAction();
+            //     begin
+            //         MakeOrderAndUpdateQuantities();
+            //     end;
+            // }
         }
     }
 
