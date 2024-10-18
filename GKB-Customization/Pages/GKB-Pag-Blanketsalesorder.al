@@ -11,4 +11,45 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
             }
         }
     }
+
+    actions
+    {
+        modify(MakeOrder)
+        {
+            Visible = true;
+
+            trigger OnBeforeAction()
+            begin
+                MakeOrderAndUpdateQuantities();
+            end;
+        }
+    }
+
+    local procedure MakeOrderAndUpdateQuantities()
+    var
+        SalesLine: Record "Sales Line";
+    begin
+        if Rec."Document Type" <> Rec."Document Type"::"Blanket Order" then
+            Error('This is not a Blanket Order.');
+
+        SalesLine.SetRange("Document Type", SalesLine."Document Type"::"Blanket Order");
+        SalesLine.SetRange("Document No.", Rec."Document No.");
+
+        if SalesLine.FindSet(True) then begin
+            repeat
+                // Subtract Qty to Ship from Remaining Quantity and update the remaining and shipped quantities
+                SalesLine."Remaining Quantity" := SalesLine."Remaining Quantity" - SalesLine."Qty. to Ship";
+                if SalesLine."Remaining Quantity" < 0 then
+                    SalesLine."Remaining Quantity" := 0;
+
+                SalesLine."QuantityShippedtillnow" := SalesLine.Quantity - SalesLine."Remaining Quantity";
+
+                SalesLine.Modify();
+            until SalesLine.Next() = 0;
+
+            // Optionally show a message indicating success
+            Message('Order created and quantities updated successfully.');
+        end else
+            Error('No sales lines found for the specified Blanket Order.');
+    end;
 }
