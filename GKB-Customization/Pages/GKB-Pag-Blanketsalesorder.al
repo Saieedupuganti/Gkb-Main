@@ -14,16 +14,6 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
 
     actions
     {
-        modify(MakeOrder)
-        {
-            Visible = true;
-
-            trigger OnBeforeAction()
-            begin
-                MakeOrderAndUpdateQuantities();
-            end;
-        }
-
         addafter("Archi&ve Document")
         {
             action("Create Invoice")
@@ -41,6 +31,19 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                     BlanketToInvoice.CreateInvoiceFromBlanketOrder(Rec);
                 end;
             }
+        }
+    }
+
+    actions
+    {
+        modify(MakeOrder)
+        {
+            Visible = true;
+
+            trigger OnBeforeAction()
+            begin
+                MakeOrderAndUpdateQuantities();
+            end;
         }
     }
 
