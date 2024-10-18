@@ -14,6 +14,15 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
     }
     actions
     {
+        modify(MakeOrder)
+        {
+            Visible = true;
+
+            trigger OnBeforeAction()
+            begin
+                MakeOrderAndUpdateQuantities();
+            end;
+        }
         addafter("Archi&ve Document")
         {
             action("Create Invoice")
@@ -33,20 +42,6 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
             }
         }
     }
-
-    actions
-    {
-        modify(MakeOrder)
-        {
-            Visible = true;
-
-            trigger OnBeforeAction()
-            begin
-                MakeOrderAndUpdateQuantities();
-            end;
-        }
-    }
-
     local procedure MakeOrderAndUpdateQuantities()
     var
         SalesLine: Record "Sales Line";
@@ -55,7 +50,7 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
             Error('This is not a Blanket Order.');
 
         SalesLine.SetRange("Document Type", SalesLine."Document Type"::"Blanket Order");
-        SalesLine.SetRange("Document No.", Rec."Document No.");
+        SalesLine.SetRange("Document No.", Rec."No.");
 
         if SalesLine.FindSet(True) then begin
             repeat
