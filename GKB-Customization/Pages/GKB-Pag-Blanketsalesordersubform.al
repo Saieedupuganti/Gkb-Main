@@ -4,9 +4,9 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
     {
         modify(Quantity)
         {
+         Editable = Rec."Outstanding Qty. (Base)" = Rec.Quantity;
             trigger OnBeforeValidate()
             begin
-                // Initialize Remaining Quantity to match Quantity if it's the first time
                 if Rec."Quantity" <> 0 then begin
                     if Rec."Remaining Quantity" = 0 then
                         Rec."Remaining Quantity" := Rec."Quantity";
@@ -18,15 +18,15 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
             field("Remaining Quantity"; Rec."Remaining Quantity")
             {
                 ApplicationArea = All;
+                Editable=false;
             }
-
             field("QuantityShippedtillnow"; Rec."QuantityShippedtillnow")
             {
                 ApplicationArea = All;
+                Editable=false;
             }
         }
     }
-
     actions
     {
         addlast(processing)
@@ -131,5 +131,6 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
             Message('Order created and quantities updated successfully.');
         end else
             Error('No sales lines found for the specified Blanket Order.');
-    end;
+    end;  
 }
+

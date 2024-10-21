@@ -32,10 +32,6 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                 end;
             }
         }
-    }
-
-    actions
-    {
         modify(MakeOrder)
         {
             Visible = true;
@@ -43,7 +39,7 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
             trigger OnBeforeAction()
             begin
                 MakeOrderAndUpdateQuantities();
-            end;
+            end;   
         }
     }
 

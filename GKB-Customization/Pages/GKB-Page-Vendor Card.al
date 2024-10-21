@@ -18,12 +18,6 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                     ApplicationArea = All;
                     Caption = 'Vendor Profile';
                 }
-                // field("Supplier account Group"; Rec."Supplier account Group")
-                // {
-                //     ApplicationArea = All;
-                //     Caption = 'Supplier account Group';
-                //     ShowMandatory = false;
-                // }
                 field("D365 Account ID"; Rec."D365 Account ID")
                 {
                     ApplicationArea = All;

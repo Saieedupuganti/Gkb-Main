@@ -6,7 +6,6 @@ using System.Security.User;
 using Microsoft.Purchases.Document;
 using Microsoft.Inventory.Item;
 
-
 pageextension 50100 "Req WO" extends "Req. Worksheet"
 {
     Caption = 'Purchase Request';
@@ -21,13 +20,17 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             Visible = false;
 
         }
+        modify("Due Date")
+        {
+            Caption = 'Requested by date';
+            ShowMandatory = true;
+        }
         addlast(Control1)
         {
             field(projectNo; Rec.projectNo)
             {
                 ApplicationArea = all;
             }
-
         }
         addafter("Vendor No.")
         {
@@ -41,9 +44,14 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 ApplicationArea = all;
                 Visible = true;
             }
-
         }
-
+        addafter("Replenishment System")
+        {
+            field("Requested By Name"; Rec."Requested By Name")
+            {
+                ApplicationArea = all;
+            }
+        }
         addafter(Control1903326807)
         {
             part(ItemAvailability; "Req WO FactBox")
@@ -63,9 +71,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 Visible = false;
             }
         }
-
     }
-
     actions
     {
         modify(CarryOutActionMessage)
@@ -119,11 +125,6 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
 
                 end;
             }
-
-
         }
-
-
     }
-
 }
