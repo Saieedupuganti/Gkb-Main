@@ -32,6 +32,7 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                 end;
             }
         }
+
         modify(MakeOrder)
         {
             Visible = true;
