@@ -24,13 +24,23 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
             FieldClass = FlowField;
             CalcFormula = Lookup("Vendor".Name WHERE("No." = FIELD("Vendor No.")));
         }
-
-
+        field(50106; "Requested By Name"; Code[30])
+        {
+            Caption = 'Requested By Name';
+            //TableRelation = User;
+        }
     }
+
+    trigger OnInsert()
+    var
+        User: Record "User Setup";
+    begin
+        IF User.GET(USERID) THEN
+            Rec."Requested By Name" := User."User ID";
+    end;
+
     [IntegrationEvent(false, false)]
     local procedure OnBeforePLInsert(var PurchaseLine: Record "Purchase Line"; var IsHandled: Boolean)
     begin
     end;
-
-    
 }

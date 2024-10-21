@@ -53,3 +53,7 @@
 ### Version 1.0.0.16 (Customization) 
 - **Added**:1.Created the button that makes the Sales blanket order from the sales quote.
             2.Created the Remaining qty field which autopopulates the value of quantity in blanket order.
+            3.Created The button(Make Invoice) in Blanket Order that creats the invoice.
+            4.Restrict to Edit the Sales Quote Page.
+            5.Adding the field(Requested By Name) in Requisition Worksheet.
+            6.Changed filed caption Due Date with Requested By Date in Requestion Worksheet.

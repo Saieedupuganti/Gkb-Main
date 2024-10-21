@@ -17,10 +17,22 @@ pageextension 50202 "Sales Quote Ext" extends "Sales Quote"
                 var
                 QuoteToBlanketOrder: Codeunit SalesQteToBlanketOrder;
                 begin
-                    // Call the procedure to convert Sales Quote to Blanket Sales Order
                     QuoteToBlanketOrder.ConvertQuoteToBlanketOrder(Rec);
                 end;
             }
         }
     }
+    trigger OnOpenPage()
+    var
+    UserSetup : Record "User Setup";
+    IsUserAllowed : Boolean;
+    begin
+        if UserSetup.Get(UserId()) then begin
+            IsUserAllowed:= UserSetup."Sales Quote";
+        end else begin
+            IsUserAllowed := false;
+        end;
+        if not IsUserAllowed then
+        CurrPage.Editable(false);    
+    end;
 }

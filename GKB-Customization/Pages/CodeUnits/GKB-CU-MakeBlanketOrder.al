@@ -9,7 +9,6 @@ codeunit 50106 SalesQteToBlanketOrder
         BlanketOrderLine: Record "Sales Line";
         SalesQuoteLine: Record "Sales Line";
     begin
-        // Check if the Sales Quote has a Sell-to Customer No.
         if SalesQuoteRec."Sell-to Customer No." = '' then
             Error('Sell-to Customer No. is not specified on the Sales Quote.');
 
@@ -20,7 +19,7 @@ codeunit 50106 SalesQteToBlanketOrder
         BlanketOrderHeader."Document Type" := BlanketOrderHeader."Document Type"::"Blanket Order";
         BlanketOrderHeader.Validate("Sell-to Customer No.", SalesQuoteRec."Sell-to Customer No.");
         BlanketOrderHeader."Order Date" := SalesQuoteRec."Document Date";
-        BlanketOrderHeader.Insert(true); // Insert the new Blanket Sales Order
+        BlanketOrderHeader.Insert(true); 
         Message('Blanket Order Header created: %1', BlanketOrderHeader."No.");
 
         // Copy Sales Quote Lines to Blanket Sales Order Lines

@@ -27,5 +27,10 @@ tableextension 50139 "User Setup Extension" extends "User Setup"
             Caption = 'Location Edit';
             DataClassification = ToBeClassified;
         }
+        field(50106;"Sales Quote";Boolean)
+        {
+            Caption='Sales Quote';
+            DataClassification=ToBeClassified;
+        }
     }
 }
