@@ -2,7 +2,7 @@
   "id": "a447e6e8-e43c-44f0-b366-24dcc23ee48a",
   "name": "GKB-Customization",
   "publisher": "Default Publisher",
-  "version": "1.0.0.16",
+  "version": "1.0.0.17",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -24,6 +24,7 @@
     "allowDebugging": true,
     "allowDownloadingSource": true,
     "includeSourceInSymbolFile": true
+
   },
   "runtime": "13.0",
   "features": [

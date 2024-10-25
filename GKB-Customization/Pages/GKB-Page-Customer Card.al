@@ -25,9 +25,9 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                     ApplicationArea = All;
                     Caption = 'Supplier account Group';
                     ShowMandatory = true;
-                    Editable = false;
-                    Enabled = false;
-                    Visible = false;
+                    Editable = true;
+                    //Enabled = false;
+                    Visible = true;
                 }
                 field("D365 Account ID"; Rec."D365 Account ID")
                 {

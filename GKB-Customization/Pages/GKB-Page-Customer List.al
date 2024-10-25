@@ -14,9 +14,9 @@ pageextension 50123 "GKB customer list EXT" extends "Customer List"
                 ApplicationArea = All;
                 Caption = 'Supplier account Group';
                 ShowMandatory = true;
-                Editable = false;
+                //Editable = false;
                 Enabled = false;
-                Visible = false;
+                Visible = true;
             }
             field("D365 Account ID"; Rec."D365 Account ID")
             {

@@ -21,9 +21,8 @@ tableextension 50128 "GKBSales LineExt" extends "Sales Line"
         {
             Caption='Sales Order Created';
             DataClassification=ToBeClassified;
+
         }
     }
-
-    
    
 }

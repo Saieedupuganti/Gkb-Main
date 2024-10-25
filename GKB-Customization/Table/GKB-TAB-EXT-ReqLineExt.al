@@ -27,7 +27,7 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
         field(50106; "Requested By Name"; Code[30])
         {
             Caption = 'Requested By Name';
-            //TableRelation = User;
+            TableRelation = Employee;
         }
     }
 

@@ -55,7 +55,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 field("Contact Groups"; Rec."Contact Groups")
                 {
                     ApplicationArea = All;
-                    Caption = 'Contact Groups';
+                    Caption = 'Contact Group';
                 }
                 field("CreditHold"; Rec."Credit Hold")
                 {
