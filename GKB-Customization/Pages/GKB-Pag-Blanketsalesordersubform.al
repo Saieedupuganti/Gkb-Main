@@ -10,6 +10,7 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
                 if Rec."Quantity" <> 0 then begin
                     if Rec."Remaining Quantity" = 0 then
                         Rec."Remaining Quantity" := Rec."Quantity";
+
                 end;
             end;
         }
@@ -60,6 +61,7 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
             //     end;
             // }
         }
+    
     }
 
     local procedure RequestPercentageInput(): Decimal

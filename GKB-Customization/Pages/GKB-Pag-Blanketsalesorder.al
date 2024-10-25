@@ -36,10 +36,12 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
         modify(MakeOrder)
         {
             Visible = true;
-
+            
             trigger OnBeforeAction()
             begin
                 MakeOrderAndUpdateQuantities();
+                // RestrictModifyQtyAfterAction()
+                
             end;   
         }
     }
@@ -72,4 +74,11 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
         end else
             Error('No sales lines found for the specified Blanket Order.');
     end;
+    // local procedure RestrictModifyQtyAfterAction()
+    // var 
+    // SalesLine : Record "Sales Line";
+    // begin
+    //     SalesLine.SalesOrderCreated := true;
+    //     SalesLine.modify(true);
+    // end;
 }
