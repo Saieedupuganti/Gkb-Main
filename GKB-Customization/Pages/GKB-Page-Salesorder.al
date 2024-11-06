@@ -11,11 +11,9 @@ pageextension 50201 "Sales Order Ext" extends "Sales Order"
                 field(RichText; RichTextVar)
                 {
                     ApplicationArea = all;
-                    // Caption = 'Custom Rich Text';
                     MultiLine = true;
                     ExtendedDatatype = RichContent;
                     ShowCaption = false;
-
 
                     trigger OnValidate()
                     begin
@@ -24,17 +22,37 @@ pageextension 50201 "Sales Order Ext" extends "Sales Order"
                 }
             }
         }
+
+        addafter("Sell-to Address 2")
+        {
+            field("Address 3"; Rec."Address 3")
+            {
+                ApplicationArea = all;
+            }
+        }
     }
+    
     trigger OnAfterGetCurrRecord()
     begin
-        RichTextVar := Rec.GetRichText()
+        RichTextVar := Rec.GetRichText();
+    end;
+
+    // Add an OnAfterValidate trigger for the "Sell-to Customer No." field
+    trigger OnAfterGetRecord()
+    var
+        CustomerRec: Record Customer;
+    begin
+        if CustomerRec.Get(Rec."Sell-to Customer No.") then begin
+            Rec."Address 3" := CustomerRec."Address 3";
+            CurrPage.Update(false);
+        end;
     end;
 
     var
         RichTextVar: Text;
-
-
 }
+
+
 
 
 //     trigger OnAfterGetRecord()

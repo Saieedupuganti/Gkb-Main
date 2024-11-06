@@ -18,6 +18,10 @@ tableextension 50125 "GKBSales HeaderExt" extends "Sales Header"
             Caption = 'Rich Text';
             DataClassification = CustomerContent;
         }
+        field(50202; "Address 3";Text[100])
+        {
+            Caption = 'Address 3';
+        }
     }
 
     var

@@ -93,6 +93,10 @@ tableextension 50100 "Customer Ext" extends Customer
             OptionCaption = 'Sample1,Sample2';
             OptionMembers = Sample1,Sample2;
         }
+        field(50117; "Address 3";Text[100])
+        {
+            Caption = 'Address 3';
+        }
 
     }
 }

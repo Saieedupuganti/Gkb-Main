@@ -91,5 +91,9 @@ tableextension 50142 "Vendor Ext" extends Vendor
             Caption = 'Credit Holds';
             DataClassification = ToBeClassified;
         }
+        field(50116; "Address 3";Text[100])
+        {
+            Caption = 'Address 3';
+        }
     }
 }

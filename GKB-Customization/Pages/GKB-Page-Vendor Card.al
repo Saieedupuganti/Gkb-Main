@@ -87,6 +87,13 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
             //     ShowMandatory = true;
             // }
         }
+        addafter("Address 2")
+        {
+            field("Address 3";Rec."Address 3")
+            {
+                ApplicationArea = all;
+            }
+        }
     }
     trigger OnOpenPage();
     var

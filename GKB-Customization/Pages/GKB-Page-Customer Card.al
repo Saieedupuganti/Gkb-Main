@@ -86,6 +86,13 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 }
             }
         }
+        addafter("Address 2")
+        {
+            field("Address 3";Rec."Address 3")
+            {
+                ApplicationArea = all;
+            }
+        }
 
         addafter("IRD No.")
         {

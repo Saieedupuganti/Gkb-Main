@@ -18,6 +18,10 @@ tableextension 50119 "GKBPurchase HeaderExt" extends "Purchase Header"
             Caption = 'Ordered By';
             TableRelation = Employee;
         }
+        field(50103; "Address 3";Text[100])
+        {
+            Caption = 'Address 3';
+        }
     }
     trigger OnInsert()
     var

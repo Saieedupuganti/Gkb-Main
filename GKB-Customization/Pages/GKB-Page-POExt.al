@@ -15,6 +15,13 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
                 Caption = 'Created By';
             }
         }
+        addafter("Buy-from Address 2")
+        {
+            field("Address 3";Rec."Address 3")
+            {
+                ApplicationArea = all;
+            }
+        }
     }
     actions
     {
@@ -58,4 +65,14 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
             end;
         }
     }
+
+    trigger OnAfterGetRecord()
+    var
+        VendorRec: Record Vendor;
+    begin
+        if VendorRec.Get(Rec."Buy-from Vendor No.") then begin
+            Rec."Address 3" := VendorRec."Address 3";
+            CurrPage.Update(false);
+        end;
+    end;
 }
