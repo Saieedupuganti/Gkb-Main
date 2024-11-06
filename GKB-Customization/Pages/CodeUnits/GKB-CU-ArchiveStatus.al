@@ -13,6 +13,9 @@ codeunit 50105 "Archive Status"
         PurchOrderArchive.Validate("Buy-from Vendor No.", rec."Buy-from Vendor No.");
         PurchOrderArchive."Document Date" := rec."Document Date";
         PurchOrderArchive."Document Type" := Rec."Document Type";
+        PurchOrderArchive."Posting Date" := Rec."Posting Date";
+        PurchOrderArchive."Due Date" := Rec."Due Date";
+        PurchOrderArchive."Order Date" := Rec."Order Date";
         PurchOrderArchive."No." := Rec."No.";
         PurchOrderArchive."Entry Type" := 'Deleted';
 
