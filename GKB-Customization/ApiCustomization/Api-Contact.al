@@ -118,7 +118,7 @@ page 50307 "API Contact"
 }
 
 
-tableextension 50310 "API Contact CRM Field" extends Contact
+tableextension 50311 "API Contact CRM Field" extends Contact
 {
     fields
     {

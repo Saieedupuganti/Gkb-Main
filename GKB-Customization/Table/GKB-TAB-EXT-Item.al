@@ -44,6 +44,11 @@ tableextension 50102 GKBItemExt extends Item
         {
             DataClassification=ToBeClassified;  
         }
+        field(50105;"CRM ID"; Text[100])
+        {
+            Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
 
     }
 }

@@ -62,10 +62,12 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 field("Customer group"; Rec."Customer group")
                 {
                     ApplicationArea = all;
+                    Visible=false;
                 }
                 field("Contact Group"; Rec."Contact Group")
                 {
                     ApplicationArea = all;
+
                 }
                 field("Credit Hold"; Rec."Credit Hold")
                 {
@@ -84,6 +86,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 {
                     ApplicationArea = all;
                 }
+                
             }
         }
         addafter("Address 2")

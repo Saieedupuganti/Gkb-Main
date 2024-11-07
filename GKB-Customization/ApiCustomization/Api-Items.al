@@ -1,13 +1,13 @@
-page 50309 "API Customer"
+page 50312 "API Items"
 {
     PageType = API;
-    Caption = 'API Employee';
+    Caption = 'API Item';
     APIPublisher = 'integration';
     APIGroup = 'api';
     APIVersion = 'v2.0', 'v1.0';
-    EntityName = 'Customer';
-    EntitySetName = 'Customer';
-    SourceTable = Customer;
+    EntityName = 'Item';
+    EntitySetName = 'Item';
+    SourceTable = Item;
     DelayedInsert = true;
 
     layout
@@ -30,10 +30,3 @@ page 50309 "API Customer"
 }
 
 
-// tableextension 50321 "API Customer CRM Field" extends Customer
-// {
-//     fields
-//     {
-        
-//     }
-// }
