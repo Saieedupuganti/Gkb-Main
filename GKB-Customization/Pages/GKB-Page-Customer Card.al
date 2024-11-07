@@ -84,6 +84,10 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 {
                     ApplicationArea = all;
                 }
+                field("crmid";Rec."CRM ID")
+                {
+                    ApplicationArea = all;
+                }
             }
         }
         addafter("Address 2")

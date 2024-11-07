@@ -37,6 +37,82 @@ pageextension 50149 GKBItemExt extends "Item Card"
                     ApplicationArea = all;
                     Caption = 'SAP ITEM ID';
                 }
+                field(BaseUnitofMeasure;Rec."Base Unit of Measure")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Base Unit of Measure';
+                }
+                field(D365ProductID;Rec."D365 Product ID")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Base Unit of Measure';
+                }
+                field(Description1;Rec."Description")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Description';
+                }
+                field(Description2;Rec."Description 2")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Description 2';
+                }
+                field(GrossWeight;Rec."Gross Weight")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Gross Weight';
+                }
+                field(Inventor;Rec."Inventory")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Inventory';
+                }
+                field(No;Rec."No.")
+                {
+                    ApplicationArea = all;
+                    Caption = 'No .';
+                }
+                field(OBSItemName;Rec."OBS Item Name")
+                {
+                    ApplicationArea = all;
+                    Caption = 'OBSItemName';
+                }
+                field(StandardCost;Rec."Standard Cost")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Standard Cost';
+                }
+                field(Tradetype;Rec."Trade Type")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Trade Type';
+                }
+                field(Types;Rec.Type)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Type';
+                }
+                field(UnitCost;Rec."Unit Cost")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Unit Cost';
+                }
+                field(UnitPrice;Rec."Unit Price")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Unit Price';
+                }
+                field(UnitVolume;Rec."Unit Volume")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Unit Volume';
+                }
+                field(Vendor1CatalogueNumber;Rec."Vendor 1 Catalogue Number")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Vendor 1 Catalogue Number';
+                }
+                
             }
         }
 
