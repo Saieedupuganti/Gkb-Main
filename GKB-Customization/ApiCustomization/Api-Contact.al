@@ -1,4 +1,4 @@
-page 50320 "API Contact"
+page 50307 "API Contact"
 {
     PageType = API;
     Caption = 'API Employee';
@@ -118,7 +118,7 @@ page 50320 "API Contact"
 }
 
 
-tableextension 50320 "API Contact CRM Field" extends Contact
+tableextension 50311 "API Contact CRM Field" extends Contact
 {
     fields
     {
