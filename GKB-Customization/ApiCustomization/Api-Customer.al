@@ -1,4 +1,4 @@
-page 50308 "API Customer"
+page 50321 "API Customer"
 {
     PageType = API;
     Caption = 'API Employee';
@@ -179,6 +179,46 @@ page 50308 "API Customer"
                 }
 
             }
+        }
+    }
+}
+tableextension 50321 "API Customer" extends Customer
+{
+    fields
+    {
+        field(50500; "Dimension"; Code[20])
+        {
+            Caption = 'Dimension';
+            DataClassification = ToBeClassified;
+        }
+        field(50501; "Dimension ID"; Text[100])
+        {
+            Caption = 'Dimension ID';
+            DataClassification = ToBeClassified;
+        }
+         field(50502; "Customer Price Group Id"; Text[100])
+        {
+            Caption = 'Customer Price Group Id';
+            DataClassification = ToBeClassified;
+        }
+        field(50503; "Custom Contact Id"; Text[100])
+        {
+            Caption ='Custom Contact Id';
+            DataClassification = ToBeClassified;
+        }
+         field(50504; Territory; Code[20])
+        {
+            Caption = 'Territory';
+            DataClassification = ToBeClassified;
+        }
+        field(50505; "Territory Code ID"; Text[100])
+        {
+            Caption = 'Territory Code ID';
+            DataClassification = ToBeClassified;
+        }
+        field(50506;"Territory Id";Text[100])
+        {
+        DataClassification=ToBeClassified;
         }
     }
 }

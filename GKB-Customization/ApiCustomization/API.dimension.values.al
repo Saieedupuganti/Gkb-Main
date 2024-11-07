@@ -1,4 +1,4 @@
-page 50308 DimensionValueApi
+page 50323 DimensionValueApi
 {
     PageType = API;
     Caption = 'Dimension Value API';
