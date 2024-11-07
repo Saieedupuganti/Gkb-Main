@@ -1,4 +1,4 @@
-page 50310 DimensionApi
+page 50322 DimensionApi
 {
     PageType = API;
     Caption = 'Dimension API';
@@ -66,7 +66,7 @@ page 50310 DimensionApi
 }
 
 
-tableextension 50310 "Dimension CRM" extends "Dimension"
+tableextension 50322 "Dimension CRM" extends "Dimension"
 {
     fields
     {
