@@ -97,6 +97,11 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'Address 3';
         }
+        field(50131; "CRM ID"; Text[100])
+        {
+            Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
 
     }
 }
