@@ -1,5 +1,4 @@
 enum 50100 "Purch header Archive"
-//enum 3812 "Purchase Document Status"
 {
     Extensible = true;
     AssignmentCompatibility = true;

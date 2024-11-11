@@ -83,7 +83,6 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Account Contract Manager Id';
                 }
-
                 field(Name; Rec.Name)
                 {
                     Caption = 'Name';
@@ -116,7 +115,6 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Currency Code Id';
                 }
-
                 field("CustomerGroup"; Rec."Customer Group")
                 {
                     Caption = 'Customer group';

@@ -1,1 +1,1 @@
-﻿{"Added":[],"Modified":[],"Removed":[]}
+﻿{"Added":[{"Id":50311,"Kind":17,"Name":"API Contact CRM Field","Namespace":""},{"Id":50307,"Kind":12,"Name":"API Contact","Namespace":""}],"Modified":[{"Id":50340,"Kind":17,"Name":"Api vendor","Namespace":""},{"Id":50340,"Kind":12,"Name":"API Vendor","Namespace":""}],"Removed":[{"Id":50320,"Kind":12,"Name":"API Contact","Namespace":""},{"Id":50320,"Kind":17,"Name":"API Contact CRM Field","Namespace":""}]}
