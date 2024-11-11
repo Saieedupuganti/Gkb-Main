@@ -49,6 +49,50 @@ tableextension 50102 GKBItemExt extends Item
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
         }
+        field(50106;Currency;Code[30])              //lookup
+        {
+        DataClassification = ToBeClassified;
+        TableRelation = Currency;
+        }
+        field(50107;"Posting Group";Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "Sample1;Sample";
+            OptionCaption = 'Sample1,Sample2';
+        }
+        field(50108;"Vendor Id";Code[30])   //lookup
+        {
+            DataClassification= ToBeClassified;
+            TableRelation = Vendor;
+        }
+        field(50109;"Product Type";Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "Sample1;Sample";
+            OptionCaption = 'Sample1,Sample2';
+        }
+        field(50110;"Product Structure";Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "Sample1;Sample";
+            OptionCaption = 'Sample1,Sample2';
+        }
+        field(50102;Status;Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50112;"Currency Id";Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50113;"Custom Vendor Id";Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50114;"Base Unit Of Measure Id";Text[100])
+        {
+            DataClassification=ToBeClassified;
+        }
 
     }
 }

@@ -27,6 +27,14 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
                 }
             }
         }
+        addbefore(Address)
+        {
+            field("Adress Name"; Rec."Adress Name")
+            {
+                Caption = 'Address Name';
+                ApplicationArea = all;
+            }
+        }
 
         addafter("Address 2")
         {
@@ -34,6 +42,7 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
             {
                 ApplicationArea = all;
             }
+
         }
     }
 }
