@@ -23,6 +23,10 @@ page 50340 "API Vendor"
                 {
                     Caption = 'no';
                 }
+                field("crmid"; Rec."CRM ID")
+                {
+                    Caption = 'BC ID';
+                }
                 field(Address; Rec.Address)
                 {
                     Caption = 'Address';
@@ -190,6 +194,10 @@ tableextension 50340 "Api vendor" extends Vendor
             DataClassification = ToBeClassified;
         }
         field(50506; "Territory Code Id"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50507; "CRM ID"; Text[100])
         {
             DataClassification = ToBeClassified;
         }

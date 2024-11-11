@@ -120,6 +120,10 @@ page 50307 "API Contact"
                 {
                     Caption = 'Dimension ID';
                 }
+                field(Dimension; Rec.Dimension)
+                {
+                    Caption = 'Dimension';
+                }
             }
         }
     }
@@ -145,6 +149,12 @@ tableextension 50311 "API Contact CRM Field" extends Contact
             Caption = 'Primary Contact';
             DataClassification = ToBeClassified;
             TableRelation = Contact."No.";
+        }
+        field(50134; "Dimension"; Text[100])
+        {
+            Caption = 'Dimension';
+            DataClassification = ToBeClassified;
+            TableRelation = Dimension.Code;
         }
     }
 }
