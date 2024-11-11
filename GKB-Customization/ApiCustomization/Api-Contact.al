@@ -1,4 +1,4 @@
-page 50320 "API Contact"
+page 50307 "API Contact"
 {
     PageType = API;
     Caption = 'API Employee';
@@ -21,6 +21,10 @@ page 50320 "API Contact"
                     Caption = 'CRM ID';
                 }
                 field(CompanyName; Rec."Company Name")
+                {
+                    Caption = 'Company Name';
+                }
+                field(type; Rec.Type)
                 {
                     Caption = 'Company Name';
                 }
@@ -88,6 +92,10 @@ page 50320 "API Contact"
                 {
                     Caption = 'Name';
                 }
+                field(businessrelation; Rec."Contact Business Relation")
+                {
+                    Caption = 'Name';
+                }
                 field(JobTitle; Rec."Job Title")
                 {
                     Caption = 'Job Title';
@@ -118,7 +126,7 @@ page 50320 "API Contact"
 }
 
 
-tableextension 50320 "API Contact CRM Field" extends Contact
+tableextension 50311 "API Contact CRM Field" extends Contact
 {
     fields
     {
@@ -131,6 +139,12 @@ tableextension 50320 "API Contact CRM Field" extends Contact
         {
             Caption = 'Dimension ID';
             DataClassification = ToBeClassified;
+        }
+        field(50133; "Primary Contact"; Text[100])
+        {
+            Caption = 'Primary Contact';
+            DataClassification = ToBeClassified;
+            TableRelation = Contact."No.";
         }
     }
 }

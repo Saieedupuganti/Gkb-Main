@@ -84,11 +84,20 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 {
                     ApplicationArea = all;
                 }
+                field("crmid"; Rec."CRM ID")
+                {
+                    ApplicationArea = all;
+                }
+                field("Primary Contact 2"; Rec."Primary Contact")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Primary Contact';
+                }
             }
         }
         addafter("Address 2")
         {
-            field("Address 3";Rec."Address 3")
+            field("Address 3"; Rec."Address 3")
             {
                 ApplicationArea = all;
             }
@@ -108,6 +117,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
     var
         UserSetupRec: Record "User Setup";
         IsUserAllowed: Boolean;
+        ContactRec: Record Contact;
     begin
         // Check if the current user has permission to edit the Vendor Card
         if UserSetupRec.Get(UserId()) then begin
@@ -121,3 +131,4 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
             CurrPage.Editable(false);  // Set the entire page to non-editable
     end;
 }
+

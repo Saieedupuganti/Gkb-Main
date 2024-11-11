@@ -21,12 +21,16 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
                 //     ApplicationArea = All;
                 //     Caption = 'Description';
                 // }
+                field("Primary Contact"; Rec."Primary Contact")
+                {
+                    Caption = 'Primary Caption';
+                }
             }
         }
 
         addafter("Address 2")
         {
-            field("Address 3";Rec."Address 3")
+            field("Address 3"; Rec."Address 3")
             {
                 ApplicationArea = all;
             }
