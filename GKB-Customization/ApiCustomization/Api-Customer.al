@@ -52,6 +52,10 @@ page 50321 "API Customer"
                 {
                     Caption = 'Account Contract Manager';
                 }
+                field("AccountContractManagerid"; Rec."Account Contract Manager ID")
+                {
+                    Caption = 'Account Contract Manager ID';
+                }
                 field(Address; Rec.Address)
                 {
                     Caption = 'Address';
@@ -240,6 +244,11 @@ tableextension 50321 "API Customer" extends Customer
         field(50134; "Primary Contact CRMID"; Text[100])
         {
             Caption = 'Primary Contact CRMID';
+            DataClassification = ToBeClassified;
+        }
+        field(50135; "Account Contract Manager ID"; Text[100])
+        {
+            Caption = 'Account Contract Manager ID';
             DataClassification = ToBeClassified;
         }
     }
