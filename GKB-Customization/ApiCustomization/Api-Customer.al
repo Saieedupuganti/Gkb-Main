@@ -24,156 +24,167 @@ page 50321 "API Customer"
                 {
                     Caption = 'no';
                 }
-                
-                field("PhoneNo";Rec."Phone No.")
+                field(primarycontact; Rec."Primary Contact No.")
+                {
+                    Caption = 'no';
+                }
+                field(primarycontact2; Rec."Primary Contact")
+                {
+                    Caption = 'Primary Contact';
+                }
+                field(primarycontact2id; Rec."Primary Contact CRMID")
+                {
+                    Caption = 'Primary Contact CRMID';
+                }
+                field("PhoneNo"; Rec."Phone No.")
                 {
                     Caption = 'Phone No.';
                 }
-                field("D365AccountID";Rec."D365 Account ID")
+                field("D365AccountID"; Rec."D365 Account ID")
                 {
                     Caption = 'Account Id';
                 }
-                field(ABN;Rec.ABN)
+                field(ABN; Rec.ABN)
                 {
                     Caption = 'ABN';
                 }
-                field("AccountContractManager";Rec."Account Contract Manager")
+                field("AccountContractManager"; Rec."Account Contract Manager")
                 {
                     Caption = 'Account Contract Manager';
                 }
-                field(Address;Rec.Address)
-                {
-                    Caption= 'Address';
-                }
-                field("Address2";Rec."Address 2")
-                {
-                    Caption='Address 2';
-                }
-                field("Address3";Rec."Address 3")
+                field(Address; Rec.Address)
                 {
                     Caption = 'Address';
                 }
-                field("CapexFrom";Rec."Capex From")
+                field("Address2"; Rec."Address 2")
+                {
+                    Caption = 'Address 2';
+                }
+                field("Address3"; Rec."Address 3")
+                {
+                    Caption = 'Address';
+                }
+                field("CapexFrom"; Rec."Capex From")
                 {
                     Caption = 'Capex From';
                 }
-                field("CapexTo";Rec."Capex To")
+                field("CapexTo"; Rec."Capex To")
                 {
                     Caption = 'Capex To';
                 }
-                field("CountryRegionCode";Rec."Country/Region Code")
+                field("CountryRegionCode"; Rec."Country/Region Code")
                 {
                     Caption = 'Country/Region Code';
                 }
-                field(Contact;Rec.Contact)             //lookup feild
+                field(Contact; Rec.Contact)
                 {
                     Caption = 'Contact';
                 }
-                field("ContactGroup";Rec."Contact Group")
+                field("ContactGroup"; Rec."Contact Group")
                 {
-                    Caption= 'Contact Group';
+                    Caption = 'Contact Group';
                 }
-                field("CreditHold";Rec."Credit Hold")
+                field("CreditHold"; Rec."Credit Hold")
                 {
                     Caption = 'Credit Hold';
                 }
-                field("CreditLimitLCY";Rec."Credit Limit (LCY)")
+                field("CreditLimitLCY"; Rec."Credit Limit (LCY)")
                 {
                     Caption = 'Credit Limit';
                 }
-                field(County;Rec.County)
+                field(County; Rec.County)
                 {
                     Caption = 'County';
                 }
-                field("CurrencyCode";Rec."Currency Code")
+                field("CurrencyCode"; Rec."Currency Code")
                 {
-                    Caption='Currency Code';
+                    Caption = 'Currency Code';
                 }
-                field("Customergroup";Rec."Customer group")
+                field("Customergroup"; Rec."Customer group")
                 {
                     Caption = 'Customer Group';
                 }
-                 field("CustomerPriceGroup";Rec."Customer Price Group")  //lookup
-                 {
+                field("CustomerPriceGroup"; Rec."Customer Price Group")  //lookup
+                {
                     Caption = 'Customer Price Group';
-                 }
-                 field("CustomerProfile";Rec."Customer Profile")
-                 {
-                    Caption='Customer Profile';
-                 }
-                 field("OwnerShip";Rec."Owner Ship")
-                 {
+                }
+                field("CustomerProfile"; Rec."Customer Profile")
+                {
+                    Caption = 'Customer Profile';
+                }
+                field("OwnerShip"; Rec."Owner Ship")
+                {
                     Caption = 'Owner Ship';
-                 }
-                 field("PaymentMethodCode";Rec."Payment Method Code")
-                 {
+                }
+                field("PaymentMethodCode"; Rec."Payment Method Code")
+                {
                     Caption = 'Payment Method Code';
-                 }
-                 field("PaymentTermsCode";Rec."Payment Terms Code")
-                 {
-                  Caption = 'Payment Terms Code';
-                 }
-                 field("SalespersonCode";Rec."Salesperson Code")
-                 {
-                    Caption='Sales person Code';
-                 }
-                field(Description;Rec.Description)
+                }
+                field("PaymentTermsCode"; Rec."Payment Terms Code")
+                {
+                    Caption = 'Payment Terms Code';
+                }
+                field("SalespersonCode"; Rec."Salesperson Code")
+                {
+                    Caption = 'Sales person Code';
+                }
+                field(Description; Rec.Description)
                 {
                     Caption = 'Description';
                 }
-                field("ServiceAgreement";Rec."Service Agreement")
+                field("ServiceAgreement"; Rec."Service Agreement")
                 {
                     Caption = 'Service Agreement';
                 }
-                field("EMail";Rec."E-Mail")
+                field("EMail"; Rec."E-Mail")
                 {
                     Caption = 'Caption';
                 }
-                field("FaxNo";Rec."Fax No.")
+                field("FaxNo"; Rec."Fax No.")
                 {
                     Caption = 'Fax No';
                 }
-                field("TerritoryCode";Rec."Territory Code")  //lookup
+                field("TerritoryCode"; Rec."Territory Code")  //lookup
                 {
                     Caption = 'Territory Code';
                 }
-                field(Name;Rec.Name)
+                field(Name; Rec.Name)
                 {
-                    Caption= 'Name';
+                    Caption = 'Name';
                 }
-                field("PostCode";Rec."Post Code")
+                field("PostCode"; Rec."Post Code")
                 {
                     Caption = 'Postal Code';
                 }
-                field("SAPCustomerNumber";Rec."SAP Customer Number")
+                field("SAPCustomerNumber"; Rec."SAP Customer Number")
                 {
-                    Caption= 'SAP Customer No.';
+                    Caption = 'SAP Customer No.';
                 }
-                field(Dimension;Rec.Dimension)
+                field(Dimension; Rec.Dimension)
                 {
                     Caption = 'Dimension';
                 }
-                field("DimensionId";Rec."Dimension Id")
+                field("DimensionId"; Rec."Dimension Id")
                 {
-                    Caption='Dimension Id';
+                    Caption = 'Dimension Id';
                 }
-                field("CustomContactId";Rec."Custom Contact Id")
+                field("CustomContactId"; Rec."Custom Contact Id")
                 {
                     Caption = 'Contact Id';
                 }
-                field("TerritoryCodeID";Rec."Territory Code ID")
+                field("TerritoryCodeID"; Rec."Territory Code ID")
                 {
-                    Caption= 'Territory Code Id';
+                    Caption = 'Territory Code Id';
                 }
-                field("CustomerPriceGroupId";Rec."Customer Price Group Id")
+                field("CustomerPriceGroupId"; Rec."Customer Price Group Id")
                 {
                     Caption = 'Customer Price Group Id';
                 }
-                field(Territory;Rec.Territory)
+                field(Territory; Rec.Territory)
                 {
                     Caption = 'Terrotory';
                 }
-                field("TerritoryId";Rec."Territory Id")
+                field("TerritoryId"; Rec."Territory Id")
                 {
                     Caption = 'Territory Id';
                 }
@@ -196,17 +207,17 @@ tableextension 50321 "API Customer" extends Customer
             Caption = 'Dimension ID';
             DataClassification = ToBeClassified;
         }
-         field(50502; "Customer Price Group Id"; Text[100])
+        field(50502; "Customer Price Group Id"; Text[100])
         {
             Caption = 'Customer Price Group Id';
             DataClassification = ToBeClassified;
         }
         field(50503; "Custom Contact Id"; Text[100])
         {
-            Caption ='Custom Contact Id';
+            Caption = 'Custom Contact Id';
             DataClassification = ToBeClassified;
         }
-         field(50504; Territory; Code[20])
+        field(50504; Territory; Code[20])
         {
             Caption = 'Territory';
             DataClassification = ToBeClassified;
@@ -216,9 +227,20 @@ tableextension 50321 "API Customer" extends Customer
             Caption = 'Territory Code ID';
             DataClassification = ToBeClassified;
         }
-        field(50506;"Territory Id";Text[100])
+        field(50506; "Territory Id"; Text[100])
         {
-        DataClassification=ToBeClassified;
+            DataClassification = ToBeClassified;
+        }
+        field(50133; "Primary Contact"; Text[100])
+        {
+            Caption = 'Primary Contact';
+            DataClassification = ToBeClassified;
+            TableRelation=Contact."No.";
+        }
+        field(50134; "Primary Contact CRMID"; Text[100])
+        {
+            Caption = 'Primary Contact CRMID';
+            DataClassification = ToBeClassified;
         }
     }
 }

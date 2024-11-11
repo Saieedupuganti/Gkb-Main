@@ -24,6 +24,10 @@ page 50307 "API Contact"
                 {
                     Caption = 'Company Name';
                 }
+                field(type; Rec.Type)
+                {
+                    Caption = 'Company Name';
+                }
                 field(CompanyID; Rec."Company No.")
                 {
                     Caption = 'Company ID';
@@ -88,6 +92,10 @@ page 50307 "API Contact"
                 {
                     Caption = 'Name';
                 }
+                field(businessrelation; Rec."Contact Business Relation")
+                {
+                    Caption = 'Name';
+                }
                 field(JobTitle; Rec."Job Title")
                 {
                     Caption = 'Job Title';
@@ -131,6 +139,12 @@ tableextension 50311 "API Contact CRM Field" extends Contact
         {
             Caption = 'Dimension ID';
             DataClassification = ToBeClassified;
+        }
+        field(50133; "Primary Contact"; Text[100])
+        {
+            Caption = 'Primary Contact';
+            DataClassification = ToBeClassified;
+            TableRelation = Contact."No.";
         }
     }
 }
