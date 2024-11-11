@@ -23,5 +23,9 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
         {
             Caption = 'Address 3';
         }
+        field(70104;"Adress Name";Text[100])
+        {
+            Caption = 'Adress Name';
+        }
     }
 }
