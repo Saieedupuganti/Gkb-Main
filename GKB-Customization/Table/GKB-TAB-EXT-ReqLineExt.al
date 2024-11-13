@@ -29,6 +29,12 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
             Caption = 'Requested By Name';
             TableRelation = Employee;
         }
+        field(50107;"Project Task No";Code[30])
+        {
+            TableRelation = "Job Task";
+            Caption = 'Project Task No';
+            DataClassification = ToBeClassified;
+        }
     }
 
     trigger OnInsert()

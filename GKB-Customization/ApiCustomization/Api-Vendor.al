@@ -87,7 +87,6 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Account Contract Manager Id';
                 }
-
                 field(Name; Rec.Name)
                 {
                     Caption = 'Name';
@@ -169,6 +168,10 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Territory Code Id';
                 }
+                field("addressname"; Rec."Address Name")
+                {
+                    Caption = 'Address Name';
+                }
             }
         }
     }
@@ -198,6 +201,10 @@ tableextension 50340 "Api vendor" extends Vendor
             DataClassification = ToBeClassified;
         }
         field(50507; "CRM ID"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50508; "Address Name"; Text[100])
         {
             DataClassification = ToBeClassified;
         }
