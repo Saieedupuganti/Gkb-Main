@@ -95,5 +95,39 @@ tableextension 50142 "Vendor Ext" extends Vendor
         {
             Caption = 'Address 3';
         }
+        field(50117; "Contact Code"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Contact;
+        }
+        field(50118; State; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50119; "Description"; Text[100])
+        {
+            Caption = 'Description';
+            DataClassification = ToBeClassified;
+        }
+        field(50120; "Dimension"; Text[100])
+        {
+            Caption = 'Description';
+            DataClassification = ToBeClassified;
+        }
+        field(50121; WEB; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50122; "Sales Person Code"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            //TableRelation = 
+        }
+         field(50123; "Customer Price Group"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            //TableRelation = 
+        }
+
     }
 }

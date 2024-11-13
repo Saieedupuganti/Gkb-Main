@@ -200,6 +200,22 @@ page 50321 "API Customer"
                 {
                     Caption = 'Territory Id';
                 }
+                field(owner;Rec."Owner")
+                {
+                    Caption = 'Owner';
+                }
+                field(ownerid;Rec."Owner Id")
+                {
+                    Caption = 'Owner ID';
+                }
+                field(supplieraccountgroup;Rec."Supplier Account Group")
+                {
+                    Caption = 'Supplier Account Group';
+                }
+                field(website;Rec.Website)
+                {
+                    Caption = 'Website';
+                }
 
             }
         }
@@ -262,6 +278,21 @@ tableextension 50321 "API Customer" extends Customer
         field(50136; "Address Name"; Text[100])
         {
             Caption = 'Address Name';
+            DataClassification = ToBeClassified;
+        }
+        field(50137; "Owner Id"; Text[100])
+        {
+            Caption = 'Owner Id';
+            DataClassification = ToBeClassified;
+        }
+        field(50138; "Owner"; Code[30])
+        {
+            Caption = 'Owner';
+            DataClassification = ToBeClassified;
+        }
+        field(50139; "Website"; Code[30])
+        {
+            Caption = 'Website';
             DataClassification = ToBeClassified;
         }
     }
