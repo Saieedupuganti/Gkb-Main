@@ -31,6 +31,10 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             {
                 ApplicationArea = all;
             }
+            field("Project Task No";Rec."Project Task No")
+            {
+                ApplicationArea=all;
+            }
         }
         addafter("Vendor No.")
         {
