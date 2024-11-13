@@ -200,6 +200,7 @@ page 50321 "API Customer"
                 {
                     Caption = 'Territory Id';
                 }
+<<<<<<< HEAD
                 field(owner;Rec."Owner")
                 {
                     Caption = 'Owner';
@@ -216,6 +217,28 @@ page 50321 "API Customer"
                 {
                     Caption = 'Website';
                 }
+=======
+               field("BlockPaymentTolerance";Rec."Block Payment Tolerance")
+               {
+                Caption = 'Block Payment Tolerence';
+               }
+               field("SupplieraccountGroup";Rec."Supplier account Group")
+               {
+                Caption = 'Supplier Account Group';
+               }
+               field(WEB;Rec.WEB)
+               {
+                Caption = 'WEB';
+               }
+               field("PrivacyBlocked";Rec."Privacy Blocked")
+               {
+                Caption ='Privacy Blocked';
+               }
+               field("ContactCode";Rec."Contact Code")
+               {
+                Caption= 'Contact Code';
+               }
+>>>>>>> 8dfa0ac858cb4a8ca03b439610e6a38951d74017
 
             }
         }
@@ -270,6 +293,10 @@ tableextension 50321 "API Customer" extends Customer
             Caption = 'Primary Contact CRMID';
             DataClassification = ToBeClassified;
         }
+<<<<<<< HEAD
+        
+        
+=======
         field(50135; "Account Contract Manager ID"; Text[100])
         {
             Caption = 'Account Contract Manager ID';
@@ -280,6 +307,7 @@ tableextension 50321 "API Customer" extends Customer
             Caption = 'Address Name';
             DataClassification = ToBeClassified;
         }
+<<<<<<< HEAD
         field(50137; "Owner Id"; Text[100])
         {
             Caption = 'Owner Id';
@@ -295,5 +323,8 @@ tableextension 50321 "API Customer" extends Customer
             Caption = 'Website';
             DataClassification = ToBeClassified;
         }
+=======
+>>>>>>> cba38c36962e8b4526adb5d9fa122c3a353dd2c3
+>>>>>>> 8dfa0ac858cb4a8ca03b439610e6a38951d74017
     }
 }
