@@ -192,6 +192,26 @@ page 50321 "API Customer"
                 {
                     Caption = 'Territory Id';
                 }
+               field("BlockPaymentTolerance";Rec."Block Payment Tolerance")
+               {
+                Caption = 'Block Payment Tolerence';
+               }
+               field("SupplieraccountGroup";Rec."Supplier account Group")
+               {
+                Caption = 'Supplier Account Group';
+               }
+               field(WEB;Rec.WEB)
+               {
+                Caption = 'WEB';
+               }
+               field("PrivacyBlocked";Rec."Privacy Blocked")
+               {
+                Caption ='Privacy Blocked';
+               }
+               field("ContactCode";Rec."Contact Code")
+               {
+                Caption= 'Contact Code';
+               }
 
             }
         }
@@ -246,10 +266,7 @@ tableextension 50321 "API Customer" extends Customer
             Caption = 'Primary Contact CRMID';
             DataClassification = ToBeClassified;
         }
-        field(50135; "Account Contract Manager ID"; Text[100])
-        {
-            Caption = 'Account Contract Manager ID';
-            DataClassification = ToBeClassified;
-        }
+        
+        
     }
 }

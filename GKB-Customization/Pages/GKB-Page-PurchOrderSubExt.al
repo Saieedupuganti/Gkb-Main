@@ -56,33 +56,33 @@ pageextension 50118 PurchOrderSubExt extends "Purchase Order Subform"
         //     }
 
     }
-    actions
-    {
-        // Add changes to page actions here
-    }
+    // actions
+    // {
+    //     // Add changes to page actions here
+    // }
 
-    var
-        myInt: Integer;
+    // var
+    //     myInt: Integer;
 
-    local procedure GetCaptionClassWithCurrencyCode(CaptionWithoutCurrencyCode: Text; CurrencyCode: Code[10]): Text
-    begin
-        exit('3,' + GetCaptionWithCurrencyCode(CaptionWithoutCurrencyCode, CurrencyCode));
-    end;
+    // local procedure GetCaptionClassWithCurrencyCode(CaptionWithoutCurrencyCode: Text; CurrencyCode: Code[10]): Text
+    // begin
+    //     exit('3,' + GetCaptionWithCurrencyCode(CaptionWithoutCurrencyCode, CurrencyCode));
+    // end;
 
-    local procedure GetCaptionWithCurrencyCode(CaptionWithoutCurrencyCode: Text; CurrencyCode: Code[10]): Text
-    var
-        GLSetup: Record "General Ledger Setup";
-    begin
-        if CurrencyCode = '' then begin
-            GLSetup.Get();
-            CurrencyCode := GLSetup.GetCurrencyCode(CurrencyCode);
-        end;
+    // local procedure GetCaptionWithCurrencyCode(CaptionWithoutCurrencyCode: Text; CurrencyCode: Code[10]): Text
+    // var
+    //     GLSetup: Record "General Ledger Setup";
+    // begin
+    //     if CurrencyCode = '' then begin
+    //         GLSetup.Get();
+    //         CurrencyCode := GLSetup.GetCurrencyCode(CurrencyCode);
+    //     end;
 
-        if CurrencyCode <> '' then
-            exit(CaptionWithoutCurrencyCode + StrSubstNo(' (%1)', CurrencyCode));
+    //     if CurrencyCode <> '' then
+    //         exit(CaptionWithoutCurrencyCode + StrSubstNo(' (%1)', CurrencyCode));
 
-        exit(CaptionWithoutCurrencyCode);
-    end;
+    //     exit(CaptionWithoutCurrencyCode);
+    // end;
 
     // var
     //     GlobalPurchaseHeader: Record "Purchase Header";

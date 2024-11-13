@@ -93,6 +93,17 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                     ApplicationArea = all;
                     Caption = 'Primary Contact';
                 }
+                field(WEB; Rec.WEB)
+                {
+                    ApplicationArea = all;
+                    Caption = 'WEB';
+                }
+                field("Contact Code";Rec."Contact Code")
+                {
+                    ApplicationArea=all;
+                    Caption = 'Contact Code';
+                }
+
             }
         }
         addafter("Address 2")
