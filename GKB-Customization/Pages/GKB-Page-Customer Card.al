@@ -93,11 +93,37 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                     ApplicationArea = all;
                     Caption = 'Primary Contact';
                 }
+<<<<<<< HEAD
+                field(WEB; Rec.WEB)
+                {
+                    ApplicationArea = all;
+                    Caption = 'WEB';
+                }
+                field("Contact Code";Rec."Contact Code")
+                {
+                    ApplicationArea=all;
+                    Caption = 'Contact Code';
+                }
+
+=======
+                field("Primary Contact CRM ID"; Rec."Primary Contact CRMID")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Primary Contact CRM ID';
+                }
+>>>>>>> cba38c36962e8b4526adb5d9fa122c3a353dd2c3
             }
         }
         addafter("Address 2")
         {
             field("Address 3"; Rec."Address 3")
+            {
+                ApplicationArea = all;
+            }
+        }
+        addbefore(Address)
+        {
+            field("Address Name"; Rec."Address Name")
             {
                 ApplicationArea = all;
             }

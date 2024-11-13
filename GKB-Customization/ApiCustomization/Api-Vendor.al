@@ -169,6 +169,40 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Territory Code Id';
                 }
+                field("ContactCode"; Rec."Contact Code")
+                {
+                    Caption = 'Contact Code';
+                }
+                field(State; Rec.State)
+                {
+                    Caption = 'State';
+                }
+                field(Description; Rec.Description)
+                {
+                    Caption = 'Description';
+                }
+                field(Dimension; Rec.Dimension)
+                {
+                    Caption = 'Dimension';
+                }
+                field("SupplieraccountGroup"; Rec."Supplier account Group")
+                {
+                    Caption = 'Supplier Account Group';
+                }
+                field(WEB; Rec.WEB)
+                {
+                    Caption = 'WEB';
+                }
+                 field("CustomerPriceGroup"; Rec."Customer Price Group")
+                {
+                    Caption = 'Customer Price Group';
+                }
+                field("SalesPersonCode"; Rec."Sales Person Code")
+                {
+                    Caption = 'Sales Person Code';
+                }
+               
+
             }
         }
     }
@@ -201,5 +235,6 @@ tableextension 50340 "Api vendor" extends Vendor
         {
             DataClassification = ToBeClassified;
         }
+
     }
 }

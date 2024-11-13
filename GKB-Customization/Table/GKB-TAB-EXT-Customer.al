@@ -102,6 +102,20 @@ tableextension 50100 "Customer Ext" extends Customer
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
         }
+        field(50135; "Account Contract Manager ID"; Text[100])
+        {
+            Caption = 'Account Contract Manager ID';
+            DataClassification = ToBeClassified;
+        }
+        field(50137;WEB;Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50138;"Contact Code";Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation= Contact;
+        }
 
     }
 }

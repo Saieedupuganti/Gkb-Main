@@ -56,6 +56,10 @@ page 50321 "API Customer"
                 {
                     Caption = 'Account Contract Manager ID';
                 }
+                field(Addressname; Rec."Address Name")
+                {
+                    Caption = 'Address Name';
+                }
                 field(Address; Rec.Address)
                 {
                     Caption = 'Address';
@@ -128,6 +132,10 @@ page 50321 "API Customer"
                 {
                     Caption = 'Payment Terms Code';
                 }
+                field("city"; Rec.City)
+                {
+                    Caption = 'City';
+                }
                 field("SalespersonCode"; Rec."Salesperson Code")
                 {
                     Caption = 'Sales person Code';
@@ -192,6 +200,26 @@ page 50321 "API Customer"
                 {
                     Caption = 'Territory Id';
                 }
+               field("BlockPaymentTolerance";Rec."Block Payment Tolerance")
+               {
+                Caption = 'Block Payment Tolerence';
+               }
+               field("SupplieraccountGroup";Rec."Supplier account Group")
+               {
+                Caption = 'Supplier Account Group';
+               }
+               field(WEB;Rec.WEB)
+               {
+                Caption = 'WEB';
+               }
+               field("PrivacyBlocked";Rec."Privacy Blocked")
+               {
+                Caption ='Privacy Blocked';
+               }
+               field("ContactCode";Rec."Contact Code")
+               {
+                Caption= 'Contact Code';
+               }
 
             }
         }
@@ -239,17 +267,27 @@ tableextension 50321 "API Customer" extends Customer
         {
             Caption = 'Primary Contact';
             DataClassification = ToBeClassified;
-            TableRelation=Contact."No.";
+            TableRelation = Contact."No.";
         }
         field(50134; "Primary Contact CRMID"; Text[100])
         {
             Caption = 'Primary Contact CRMID';
             DataClassification = ToBeClassified;
         }
+<<<<<<< HEAD
+        
+        
+=======
         field(50135; "Account Contract Manager ID"; Text[100])
         {
             Caption = 'Account Contract Manager ID';
             DataClassification = ToBeClassified;
         }
+        field(50136; "Address Name"; Text[100])
+        {
+            Caption = 'Address Name';
+            DataClassification = ToBeClassified;
+        }
+>>>>>>> cba38c36962e8b4526adb5d9fa122c3a353dd2c3
     }
 }

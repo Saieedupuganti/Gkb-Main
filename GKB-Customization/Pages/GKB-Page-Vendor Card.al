@@ -76,6 +76,46 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 {
                     ApplicationArea = all;
                 }
+                field(State; Rec.State)
+                {
+                    ApplicationArea = all;
+                    Caption = 'State';
+                }
+                field("Sales Person Code"; Rec."Sales Person Code")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Sales Person Code';
+                }
+                field("Contact Code"; Rec."Contact Code")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Contact Code';
+                }
+                field("Supplier account Group"; Rec."Supplier account Group")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Supplier Account Group';
+                }
+                field(WEB; Rec.WEB)
+                {
+                    ApplicationArea = all;
+                    Caption = 'WEB';
+                }
+                field(Dimension; Rec.Dimension)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Dimension';
+                }
+                field(Description; Rec.Description)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Description';
+                }
+                field("Customer Price Group"; Rec."Customer Price Group")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Customer Price Group';
+                }
 
             }
         }
@@ -89,7 +129,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
         }
         addafter("Address 2")
         {
-            field("Address 3";Rec."Address 3")
+            field("Address 3"; Rec."Address 3")
             {
                 ApplicationArea = all;
             }
