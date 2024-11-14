@@ -84,6 +84,10 @@ page 50307 "API Contact"
                 {
                     Caption = 'Currency Code';
                 }
+                field(CurrencyCodeid; Rec."Currency Code Id")
+                {
+                    Caption = 'Currency Code Id';
+                }
                 field(Faxno; Rec."Fax No.")
                 {
                     Caption = 'Fax No';
@@ -155,6 +159,11 @@ tableextension 50311 "API Contact CRM Field" extends Contact
             Caption = 'Dimension';
             DataClassification = ToBeClassified;
             TableRelation = Dimension.Code;
+        }
+        field(50135; "Currency Code Id"; Text[100])
+        {
+            Caption = 'Currency Code Id';
+            DataClassification = ToBeClassified;
         }
     }
 }
