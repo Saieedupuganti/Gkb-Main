@@ -108,6 +108,10 @@ page 50321 "API Customer"
                 {
                     Caption = 'Currency Code';
                 }
+                field("CurrencyCodeid"; Rec."Currency Code Id")
+                {
+                    Caption = 'Currency Code Id';
+                }
                 field("Customergroup"; Rec."Customer group")
                 {
                     Caption = 'Customer Group';
@@ -200,46 +204,38 @@ page 50321 "API Customer"
                 {
                     Caption = 'Territory Id';
                 }
-<<<<<<< HEAD
-                field(owner;Rec."Owner")
+                field(owner; Rec."Owner")
                 {
                     Caption = 'Owner';
                 }
-                field(ownerid;Rec."Owner Id")
+                field(ownerid; Rec."Owner Id")
                 {
                     Caption = 'Owner ID';
                 }
-                field(supplieraccountgroup;Rec."Supplier Account Group")
+                field(supplieraccountgroup; Rec."Supplier Account Group")
                 {
                     Caption = 'Supplier Account Group';
                 }
-                field(website;Rec.Website)
+                field(website; Rec.Website)
                 {
                     Caption = 'Website';
                 }
-=======
-               field("BlockPaymentTolerance";Rec."Block Payment Tolerance")
-               {
-                Caption = 'Block Payment Tolerence';
-               }
-               field("SupplieraccountGroup";Rec."Supplier account Group")
-               {
-                Caption = 'Supplier Account Group';
-               }
-               field(WEB;Rec.WEB)
-               {
-                Caption = 'WEB';
-               }
-               field("PrivacyBlocked";Rec."Privacy Blocked")
-               {
-                Caption ='Privacy Blocked';
-               }
-               field("ContactCode";Rec."Contact Code")
-               {
-                Caption= 'Contact Code';
-               }
->>>>>>> 8dfa0ac858cb4a8ca03b439610e6a38951d74017
-
+                field("BlockPaymentTolerance"; Rec."Block Payment Tolerance")
+                {
+                    Caption = 'Block Payment Tolerence';
+                }
+                field(WEB; Rec.WEB)
+                {
+                    Caption = 'WEB';
+                }
+                field("PrivacyBlocked"; Rec."Privacy Blocked")
+                {
+                    Caption = 'Privacy Blocked';
+                }
+                field("ContactCode"; Rec."Contact Code")
+                {
+                    Caption = 'Contact Code';
+                }
             }
         }
     }
@@ -293,29 +289,9 @@ tableextension 50321 "API Customer" extends Customer
             Caption = 'Primary Contact CRMID';
             DataClassification = ToBeClassified;
         }
-<<<<<<< HEAD
-        
-        
-=======
-        field(50135; "Account Contract Manager ID"; Text[100])
-        {
-            Caption = 'Account Contract Manager ID';
-            DataClassification = ToBeClassified;
-        }
         field(50136; "Address Name"; Text[100])
         {
             Caption = 'Address Name';
-            DataClassification = ToBeClassified;
-        }
-<<<<<<< HEAD
-        field(50137; "Owner Id"; Text[100])
-        {
-            Caption = 'Owner Id';
-            DataClassification = ToBeClassified;
-        }
-        field(50138; "Owner"; Code[30])
-        {
-            Caption = 'Owner';
             DataClassification = ToBeClassified;
         }
         field(50139; "Website"; Code[30])
@@ -323,8 +299,20 @@ tableextension 50321 "API Customer" extends Customer
             Caption = 'Website';
             DataClassification = ToBeClassified;
         }
-=======
->>>>>>> cba38c36962e8b4526adb5d9fa122c3a353dd2c3
->>>>>>> 8dfa0ac858cb4a8ca03b439610e6a38951d74017
+        field(50140; "Owner Id"; Text[100])
+        {
+            Caption = 'Owner Id';
+            DataClassification = ToBeClassified;
+        }
+        field(50141; "Owner"; Code[30])
+        {
+            Caption = 'Owner';
+            DataClassification = ToBeClassified;
+        }
+        field(50142; "Currency Code Id"; Text[100])
+        {
+            Caption = 'Currency Code Id';
+            DataClassification = ToBeClassified;
+        }
     }
 }

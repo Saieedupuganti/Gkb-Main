@@ -168,12 +168,10 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Territory Code Id';
                 }
-<<<<<<< HEAD
                 field("addressname"; Rec."Address Name")
                 {
                     Caption = 'Address Name';
                 }
-=======
                 field("ContactCode"; Rec."Contact Code")
                 {
                     Caption = 'Contact Code';
@@ -208,7 +206,6 @@ page 50340 "API Vendor"
                 }
                
 
->>>>>>> 8dfa0ac858cb4a8ca03b439610e6a38951d74017
             }
         }
     }
@@ -241,13 +238,10 @@ tableextension 50340 "Api vendor" extends Vendor
         {
             DataClassification = ToBeClassified;
         }
-<<<<<<< HEAD
         field(50508; "Address Name"; Text[100])
         {
             DataClassification = ToBeClassified;
         }
-=======
 
->>>>>>> 8dfa0ac858cb4a8ca03b439610e6a38951d74017
     }
 }
