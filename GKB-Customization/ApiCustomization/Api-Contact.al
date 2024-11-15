@@ -52,18 +52,18 @@ page 50307 "API Contact"
                 {
                     Caption = 'Address';
                 }
-                // field(Address2Street1;Rec."Address 2 Street 1")
-                // {
-                //     Caption = 'Address 2 Street 1';
-                // }
-                // field(Address2Street2;Rec."Address 2 Street 2")
-                // {
-                //     Caption = 'Address 2 Street 2';
-                // }
-                // field(Address2Street3;Rec."Address 2 Street 3")
-                // {
-                //     Caption = 'Address 2 Street 3';
-                // }
+                field("Address2Street1";Rec."Address 2 Street1")
+                {
+                    Caption = 'Address 2 Street 1';
+                }
+                field(Address2Street2;Rec."Address 2 Street 2")
+                {
+                    Caption = 'Address 2 Street 2';
+                }
+                field(Address2Street3;Rec."Address 2 Street 3")
+                {
+                    Caption = 'Address 2 Street 3';
+                }
                 field(City; Rec."City")
                 {
                     Caption = 'City';
@@ -128,6 +128,14 @@ page 50307 "API Contact"
                 {
                     Caption = 'Dimension';
                 }
+                field(Description; Rec.Description)
+                {
+                    Caption = 'Description';
+                }
+                field("EMailGroupCode"; Rec."E-Mail Group Code")
+                {
+                    Caption = 'Email Group Code';
+                }
             }
         }
     }
@@ -165,5 +173,20 @@ tableextension 50311 "API Contact CRM Field" extends Contact
             Caption = 'Currency Code Id';
             DataClassification = ToBeClassified;
         }
+        field(50136; "Address 2 Street1";Text[100])
+        {
+            Caption = 'Address 2';
+            DataClassification = ToBeClassified;
+        }
+        field(50137;"Address 2 Street 2";Text[100])
+        {
+            Caption = 'Address 2';
+            DataClassification = ToBeClassified;
+        }
+        field(50138;"Address 2 Street 3";Text[100])
+        {
+            Caption = 'Address 2';
+            DataClassification = ToBeClassified;
+        }
     }
-}
+    }

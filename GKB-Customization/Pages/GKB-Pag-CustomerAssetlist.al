@@ -3,6 +3,7 @@ page 50555 "Customer Asset List"
     PageType = list;
     ApplicationArea = All;
     UsageCategory = Administration;
+
     SourceTable = "Customer Asset";
     
     layout
