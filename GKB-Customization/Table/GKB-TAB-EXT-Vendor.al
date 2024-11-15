@@ -123,10 +123,14 @@ tableextension 50142 "Vendor Ext" extends Vendor
             DataClassification = ToBeClassified;
             //TableRelation = 
         }
-         field(50123; "Customer Price Group"; Code[30])
+        field(50123; "Customer Price Group"; Code[30])
         {
             DataClassification = ToBeClassified;
             //TableRelation = 
+        }
+        field(50124; "Address Name"; Text[100])
+        {
+            DataClassification = ToBeClassified;
         }
 
     }

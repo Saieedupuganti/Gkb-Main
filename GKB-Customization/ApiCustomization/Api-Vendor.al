@@ -87,7 +87,6 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Account Contract Manager Id';
                 }
-
                 field(Name; Rec.Name)
                 {
                     Caption = 'Name';
@@ -193,7 +192,7 @@ page 50340 "API Vendor"
                 {
                     Caption = 'WEB';
                 }
-                 field("CustomerPriceGroup"; Rec."Customer Price Group")
+                field("CustomerPriceGroup"; Rec."Customer Price Group")
                 {
                     Caption = 'Customer Price Group';
                 }
@@ -201,7 +200,7 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Sales Person Code';
                 }
-               
+
 
             }
         }
