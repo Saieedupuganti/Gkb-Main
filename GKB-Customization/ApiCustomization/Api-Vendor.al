@@ -19,7 +19,7 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Email';
                 }
-                field("no"; Rec."No.")
+                field("code"; Rec."No.")
                 {
                     Caption = 'no';
                 }
@@ -103,7 +103,11 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Address 3';
                 }
-                field("ContactGroups"; Rec."Contact Groups")
+                field(Contact; Rec.Contact)
+                {
+                    Caption = 'Contact';
+                }
+                field("ContactGroup"; Rec."Contact Groups")
                 {
                     Caption = 'Contact Group';
                 }
@@ -111,11 +115,11 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Balance Due';
                 }
-                field("CurrencyCode"; Rec."Currency Code")  //llokup
+                field("Currency"; Rec."Currency Code")  //llokup
                 {
                     Caption = 'Currency Code';
                 }
-                field("CurrencyCodeId"; Rec."Currency Code Id")
+                field("CurrencyId"; Rec."Currency Code Id")
                 {
                     Caption = 'Currency Code Id';
                 }
@@ -160,11 +164,11 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Privacy Blocked';
                 }
-                field("TerritoryCode"; Rec."Territory Code")   //lookup
+                field("Territory"; Rec."Territory Code")   //lookup
                 {
                     Caption = 'Territory Code';
                 }
-                field("TerritoryCodeId"; Rec."Territory Code Id")
+                field("TerritoryId"; Rec."Territory Code Id")
                 {
                     Caption = 'Territory Code Id';
                 }
@@ -188,6 +192,10 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Dimension';
                 }
+                field("DimensionId"; Rec."Dimension Id")
+                {
+                    Caption = 'Dimension Id';
+                }
                 field("SupplieraccountGroup"; Rec."Supplier account Group")
                 {
                     Caption = 'Supplier Account Group';
@@ -200,9 +208,25 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Customer Price Group';
                 }
+                field("CustomerPriceGroupId"; Rec."Customer Price Group Id")
+                {
+                    Caption = 'Customer Price Group Id';
+                }
                 field("SalesPersonCode"; Rec."Sales Person Code")
                 {
                     Caption = 'Sales Person Code';
+                }
+                field("OwnerShip"; Rec."Owner Ship")
+                {
+                    Caption = 'Owner Ship';
+                }
+                field(owner; Rec."Owner")
+                {
+                    Caption = 'Owner';
+                }
+                field(ownerid; Rec."Owner Id")
+                {
+                    Caption = 'Owner ID';
                 }
                
 
@@ -215,7 +239,7 @@ tableextension 50340 "Api vendor" extends Vendor
     fields
     {
 
-        field(50502; "Primary Contact No Id"; Text[100])
+        field(50501; "Primary Contact No Id"; Text[100])
         {
             Caption = 'Customer Price Group Id';
             DataClassification = ToBeClassified;
@@ -230,6 +254,11 @@ tableextension 50340 "Api vendor" extends Vendor
             Caption = 'Account Contract Manager ID';
             DataClassification = ToBeClassified;
         }
+        field(50504; Territory; Code[20])
+        {
+            Caption = 'Territory';
+            DataClassification = ToBeClassified;
+        }
         field(50506; "Territory Code Id"; Text[100])
         {
             DataClassification = ToBeClassified;
@@ -242,7 +271,30 @@ tableextension 50340 "Api vendor" extends Vendor
         {
             DataClassification = ToBeClassified;
         }
-        
-
+        field(50510; "Dimension ID"; Text[100])
+        {
+            Caption = 'Dimension ID';
+            DataClassification = ToBeClassified;
+        }
+        field(50511; "Customer Price Group Id"; Text[100])
+        {
+            Caption = 'Customer Price Group Id';
+            DataClassification = ToBeClassified;
+        }
+        field(50512; "Custom Contact Id"; Text[100])
+        {
+            Caption = 'Custom Contact Id';
+            DataClassification = ToBeClassified;
+        }
+        field(50140; "Owner Id"; Text[100])
+        {
+            Caption = 'Owner Id';
+            DataClassification = ToBeClassified;
+        }
+        field(50141; "Owner"; Code[30])
+        {
+            Caption = 'Owner';
+            DataClassification = ToBeClassified;
+        }
     }
 }

@@ -28,11 +28,7 @@ page 50321 "API Customer"
                 {
                     Caption = 'no';
                 }
-                field(primarycontact2; Rec."Primary Contact")
-                {
-                    Caption = 'Primary Contact';
-                }
-                field(primarycontact2id; Rec."Primary Contact CRMID")
+                field(primarycontactid; Rec."Primary Contact CRMID")
                 {
                     Caption = 'Primary Contact CRMID';
                 }
@@ -70,7 +66,7 @@ page 50321 "API Customer"
                 }
                 field("Address3"; Rec."Address 3")
                 {
-                    Caption = 'Address';
+                    Caption = 'Address 3';
                 }
                 field("CapexFrom"; Rec."Capex From")
                 {

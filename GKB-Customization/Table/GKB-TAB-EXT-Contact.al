@@ -28,5 +28,17 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             // Caption = 'Adress Name';
             DataClassification = ToBeClassified;
         }
+        field(70107; "Address 2 Street1"; Text[100])
+        {
+            Caption = 'Address 2';
+        }
+        field(70105; "Address 2 Street 2"; Text[100])
+        {
+            Caption = 'Address 2';
+        }
+        field(70106; "Address 2 Street 3"; Text[100])
+        {
+            Caption = 'Address 3 Street 3';
+        }
     }
 }
