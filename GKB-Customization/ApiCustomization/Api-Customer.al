@@ -108,6 +108,10 @@ page 50321 "API Customer"
                 {
                     Caption = 'Currency Code';
                 }
+                field("CurrencyCodeid"; Rec."Currency Code Id")
+                {
+                    Caption = 'Currency Code Id';
+                }
                 field("Customergroup"; Rec."Customer group")
                 {
                     Caption = 'Customer Group';
@@ -200,27 +204,38 @@ page 50321 "API Customer"
                 {
                     Caption = 'Territory Id';
                 }
+                 field(owner;  Rec."Owner")
+                 {
+                        Caption = 'Owner';
+                }
+                field(ownerid; Rec."Owner Id")
+                {
+                    Caption = 'Owner ID';
+                 }
+                 field(supplieraccountgroup;  Rec."Supplier Account Group")
+                 {
+                        Caption = 'Supplier Account Group';
+                 }
+                field(website; Rec.Website)
+                {
+                    Caption = 'Website';
+                }
                 field("BlockPaymentTolerance"; Rec."Block Payment Tolerance")
                 {
                     Caption = 'Block Payment Tolerence';
                 }
-                field("SupplieraccountGroup"; Rec."Supplier account Group")
-                {
-                    Caption = 'Supplier Account Group';
-                }
-                field(WEB; Rec.WEB)
-                {
-                    Caption = 'WEB';
-                }
-                field("PrivacyBlocked"; Rec."Privacy Blocked")
-                {
-                    Caption = 'Privacy Blocked';
-                }
-                field("ContactCode"; Rec."Contact Code")
-                {
-                    Caption = 'Contact Code';
-                }
-
+                 field(WEB;  Rec.WEB)
+                 {
+                        Caption = 'WEB';
+                 }
+                 field("PrivacyBlocked";  Rec."Privacy Blocked")
+                 {
+                        Caption =  'Privacy Blocked';
+                 }
+                 field("ContactCode";  Rec."Contact Code")
+                 {
+                        Caption  = 'Contact Code';
+                 }
             }
         }
     }
@@ -279,5 +294,6 @@ tableextension 50321 "API Customer" extends Customer
             Caption = 'Address Name';
             DataClassification = ToBeClassified;
         }
+>>>>>>> cba38c36962e8b4526adb5d9fa122c3a353dd2c3
     }
 }

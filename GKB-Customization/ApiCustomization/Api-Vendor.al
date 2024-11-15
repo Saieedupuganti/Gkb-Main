@@ -168,6 +168,10 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Territory Code Id';
                 }
+                field("addressname"; Rec."Address Name")
+                {
+                    Caption = 'Address Name';
+                }
                 field("ContactCode"; Rec."Contact Code")
                 {
                     Caption = 'Contact Code';
@@ -234,6 +238,11 @@ tableextension 50340 "Api vendor" extends Vendor
         {
             DataClassification = ToBeClassified;
         }
+        field(50508; "Address Name"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        
 
     }
 }
