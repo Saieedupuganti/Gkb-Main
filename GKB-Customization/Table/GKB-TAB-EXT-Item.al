@@ -96,3 +96,69 @@ tableextension 50102 GKBItemExt extends Item
 
     }
 }
+tableextension 50351 "ItemExt" extends Item
+{
+    fields
+    {
+        modify("Base Unit of Measure")
+        {
+            trigger OnAfterValidate()
+            var
+                unitRec: Record "Unit of Measure";
+            begin
+                unitRec.SetFilter(Code,Rec."Base Unit of Measure");
+                if unitRec.FindFirst() then begin
+                    Rec."Base Unit Of Measure Id":=unitRec."CRM ID";
+                    Message(unitRec."CRM ID");
+                    Rec.Modify(false);
+                end;
+            end;
+        }
+        modify(Currency)
+        {
+            trigger OnAfterValidate()
+            var
+                unitRec: Record Currency;
+            begin
+                unitRec.SetFilter(Code,Rec.Currency);
+                if unitRec.FindFirst() then begin
+                    Rec."Currency Id":=unitRec."CRM ID";
+                    Message(unitRec."CRM ID");
+                    Rec.Modify(false);
+                end;
+            end;
+        }
+        modify("Vendor Id")
+        {
+            trigger OnAfterValidate()
+            var
+                unitRec: Record Vendor;
+            begin
+                unitRec.SetFilter("No.",Rec."Vendor Id");
+                if unitRec.FindFirst() then begin
+                    Rec."Vendor Id CRM":=unitRec."CRM ID";
+                    Message(unitRec."CRM ID");
+                    Rec.Modify(false);
+                end;
+            end;
+        }
+    }
+}
+
+// pageextension 50341 "Itemext" extends "Item Card"
+// {
+//     trigger OnModifyRecord(): Boolean
+//     var
+//         unitRec: Record "Unit of Measure";
+//     begin
+//         // Message('Triggered'+Format(Rec."Base Unit of Measure"));
+//         unitRec.SetFilter(Code,Rec."Base Unit of Measure");
+//         if unitRec.FindFirst() then begin
+//             Rec."Base Unit Of Measure Id":=unitRec."CRM ID";
+//             Message(unitRec."CRM ID");
+//             Rec.Modify(false);
+//         end;
+//     end;
+// }
+
+

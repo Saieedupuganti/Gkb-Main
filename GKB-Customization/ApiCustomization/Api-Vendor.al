@@ -242,6 +242,7 @@ tableextension 50340 "Api vendor" extends Vendor
         {
             DataClassification = ToBeClassified;
         }
+        
 
     }
 }
