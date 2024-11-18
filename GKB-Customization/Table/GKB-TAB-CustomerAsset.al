@@ -366,6 +366,11 @@ table 70000 "Customer Asset"
             DataClassification = ToBeClassified;
             TableRelation = Employee;
         }
+         field(5064;Notes; Text[100])
+        {
+            Caption = 'Notes';
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {

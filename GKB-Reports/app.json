@@ -10,7 +10,13 @@
   "help": "",
   "url": "",
   "logo": "",
-  "dependencies": [],
+  "dependencies": [
+    {
+    "id" : "a447e6e8-e43c-44f0-b366-24dcc23ee48a",
+    "publisher" : "Default Publisher",
+    "name": "GKB-Customization",
+    "version": "1.0.0.19"}
+  ],
   "screenshots": [],
   "platform": "24.0.0.0",
   "application": "24.3.21374.21517",

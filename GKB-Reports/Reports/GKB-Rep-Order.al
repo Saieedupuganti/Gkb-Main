@@ -43,6 +43,8 @@ report 60102 "Purchase Order"
             column(No_PurchHdr; "No.")
             {
             }
+            column(Ordered_By; "Ordered By") { }
+            column(Created_By; "Created By") { }
             column(AmtCaption; AmtCaptionLbl)
             {
             }
