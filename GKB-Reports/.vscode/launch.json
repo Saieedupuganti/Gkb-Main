@@ -11,6 +11,7 @@
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
+            "schemaUpdateMode": "Synchronize",
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true
         }
