@@ -24,6 +24,10 @@ page 50304 "API UOM"
                 {
                     Caption = 'CRM ID';
                 }
+                field(unitgroupcrmid; Rec."Unitgroup CRM ID")
+                {
+                    Caption = 'Unitgroup CRM ID';
+                }
                 field(description; Rec.Description)
                 {
                     Caption = 'Description';
@@ -67,6 +71,11 @@ tableextension 50304 "API UOM" extends "Unit of Measure"
         field(50100; "CRM ID"; Text[100])
         {
             Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
+        field(50101; "Unitgroup CRM ID"; Text[100])
+        {
+            Caption = 'Unitgroup CRM ID';
             DataClassification = ToBeClassified;
         }
     }

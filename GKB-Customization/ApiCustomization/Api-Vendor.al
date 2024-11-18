@@ -204,7 +204,7 @@ page 50340 "API Vendor"
                 {
                     Caption = 'WEB';
                 }
-                 field("CustomerPriceGroup"; Rec."Customer Price Group")
+                field("CustomerPriceGroup"; Rec."Customer Price Group")
                 {
                     Caption = 'Customer Price Group';
                 }
@@ -264,10 +264,6 @@ tableextension 50340 "Api vendor" extends Vendor
             DataClassification = ToBeClassified;
         }
         field(50507; "CRM ID"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50508; "Address Name"; Text[100])
         {
             DataClassification = ToBeClassified;
         }
