@@ -4,9 +4,9 @@ cmds = '''cd..
 git add .
 git commit -m "Your commit message"
 git checkout main
-git merge --no-ff k30
+git merge --no-ff v11
 git push origin main
-git checkout k30'''
+git checkout v11'''
 for i in cmds.splitlines():
   os.system(i)
 
