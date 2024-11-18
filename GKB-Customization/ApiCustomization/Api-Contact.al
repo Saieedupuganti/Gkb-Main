@@ -173,20 +173,5 @@ tableextension 50311 "API Contact CRM Field" extends Contact
             Caption = 'Currency Code Id';
             DataClassification = ToBeClassified;
         }
-        field(50136; "Address 2 Street1";Text[100])
-        {
-            Caption = 'Address 2';
-            DataClassification = ToBeClassified;
-        }
-        field(50137;"Address 2 Street 2";Text[100])
-        {
-            Caption = 'Address 2';
-            DataClassification = ToBeClassified;
-        }
-        field(50138;"Address 2 Street 3";Text[100])
-        {
-            Caption = 'Address 2';
-            DataClassification = ToBeClassified;
-        }
     }
     }

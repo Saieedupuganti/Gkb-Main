@@ -68,8 +68,8 @@ tableextension 50102 GKBItemExt extends Item
         field(50109;"Product Type";Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "Sample1;Sample";
-            OptionCaption = 'Sample1,Sample2';
+            OptionMembers = " ;1;2;3;4";
+            OptionCaption = ' ,Sales Inventory,Miscellaneous Charges,Services,Flat Fees';
         }
         field(50110;"Product Structure";Option)
         {
