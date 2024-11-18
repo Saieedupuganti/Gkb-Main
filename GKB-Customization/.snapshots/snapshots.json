@@ -1,0 +1,26 @@
+[
+  {
+    "debuggingContext": "5bfe90e7-1eec-47d7-8d02-7777c66aaba2",
+    "snapshotContext": {
+      "debugConfig": {
+        "type": "al",
+        "request": "snapshotInitialize",
+        "name": "AL: Generated Snapshot request",
+        "configuration": {
+          "port": 7083,
+          "tenant": "24282a43-26d3-4103-b121-1b1826430826",
+          "name": "AL: Generated Snapshot request",
+          "request": "snapshotInitialize",
+          "environmentType": "Sandbox",
+          "environmentName": "INTEGRATION"
+        },
+        "sessionId": 9937
+      },
+      "workspacePath": "c:\\Users\\sreeh\\Documents\\AL\\customization\\GKB-Customization",
+      "createdTime": "2024-11-18T10:28:46.000Z",
+      "affinityCookie": "ViysOQxx",
+      "status": 1,
+      "attachKind": 1
+    }
+  }
+]
