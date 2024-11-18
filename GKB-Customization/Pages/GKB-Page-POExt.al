@@ -17,7 +17,7 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
         }
         addafter("Buy-from Address 2")
         {
-            field("Address 3";Rec."Address 3")
+            field("Address 3"; Rec."Address 3")
             {
                 ApplicationArea = all;
             }
@@ -63,6 +63,22 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
                     exit;
                 end;
             end;
+        }
+        addafter(SendApprovalRequest)
+        {
+            action("Send Line Approvals")
+            {
+                Caption = 'Send Line Approvals';
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    LineApproval: Codeunit "Line-Level Approval Manager";
+                begin
+                    LineApproval.ProcessLineApprovals(Rec);
+                    Message('Line-level approvals sent successfully.');
+                end;
+            }
         }
     }
 
