@@ -6,8 +6,9 @@ codeunit 50100 "ReqlineToPo"
         // Check if the fields exist and populate the Job No. field in the Purchase Line
         if RequisitionLine.projectNo <> '' then
             PurchOrderLine."Job No." := RequisitionLine.projectNo;
+        if RequisitionLine."Project Task No" <> '' then
             PurchOrderLine."Job Task No." := RequisitionLine."Project Task No";
-        // PurchaseLine.Validate("Job No.", RequisitionLine.projectNo);
     end;
+
 
 }

@@ -106,15 +106,15 @@ table 70000 "Customer Asset"
         {
             Caption = 'Burner Brand';
             DataClassification = ToBeClassified;
-            OptionCaption = '';
-            OptionMembers = "";
+            OptionCaption = ' ,Saake,Eclipse,Elco,Reillo,American Meter,Weishapht,Nu-Way,REX 35,N/A,Cleaver Brooks,Industrial Combustion,Maxitherm,Eco-Flam,FBR,Dunphy,Baltur,Other';
+            OptionMembers = " ",Saake,Eclipse,Elco,Reillo,"American Meter",Weishapht,"Nu-Way","REX 35","N/A","Cleaver Brooks","Industrial Combustion",Maxitherm,"Eco-Flam",FBR,Dunphy,Baltur,Other;
         }
         field(5017; "Burner Type"; Option)
         {
             Caption = 'Burner Type';
             DataClassification = ToBeClassified;
-            OptionCaption = '';
-            OptionMembers = "";
+            OptionCaption = ' ,Water Tube,Jet,Duo-Bloc,Duct,Pre-Mixed,Integrated,Atmospheric Burner,Pro Mix Burner,Others,N/A,Natural Gas,Int,grated (Packaged),Pro-Mixed,Processed Burner';
+            OptionMembers = " ","Water Tube",Jet,"Duo-Bloc",Duct,"Pre-Mixed",Integrated,"Atmospheric Burner","Pro Mix Burner",Others,"N/A","Natural Gas",Int,"grated (Packaged)","Pro-Mixed","Processed Burner";
         }
         field(5018; "Capacity(KW)"; Text[100])
         {
@@ -176,8 +176,8 @@ table 70000 "Customer Asset"
         {
             Caption = 'Equipment Man';
             DataClassification = ToBeClassified;
-            OptionCaption = '';
-            OptionMembers = "";
+            OptionCaption = ' ALFAREL,ALLIANCE,CLAYTON,CLEAVERBROOKS,EAST COAST STEAM,FLEX,HUNT,MAXITHERM,N/A,OBY BASSO,OBY – 88,OBYALTO,OBYCON,OBYFLAME,OBYGREEN,OBYMAXIMO,OBYONE,OBYPHASE,OBYTRICE,OBYVERT,OTHER,RAYPACK,SUPERIOR,TOMLINSON,TPE,TREVOR,WHB';
+            OptionMembers = " ",ALFAREL,ALLIANCE,CLAYTON,CLEAVERBROOKS,"EAST COAST STEAM",FLEX,HUNT,MAXITHERM,"N/A","OBY BASSO","OBY – 88",OBYALTO,OBYCON,OBYFLAME,OBYGREEN,OBYMAXIMO,OBYONE,OBYPHASE,OBYTRICE,OBYVERT,OTHER,RAYPACK,SUPERIOR,TOMLINSON,TPE,TREVOR,WHB;
         }
         field(5030; "ETC Serial No"; Text[100])
         {
@@ -189,10 +189,18 @@ table 70000 "Customer Asset"
             Caption = 'Floor';
             DataClassification = ToBeClassified;
         }
-        field(5032; "Fuel Type"; Text[100])
+        field(5032; "Fuel Type"; Option)
         {
             Caption = 'Fuel Type';
             DataClassification = ToBeClassified;
+            OptionCaption = 'Biogas,Biomass,Coal,Diesel,Electricity,Natural Gas,Hydrogen,LPG,Waste Oil,N/A';
+            OptionMembers = " ",Biogas,Biomass,Coal,Diesel,Electricity,"Natural Gas",Hydrogen,LPG,"Waste Oil","N/A";
+        }
+        field(5066; "Functional Location"; Code[50])
+        {
+            Caption = 'Functional Location';
+            DataClassification = ToBeClassified;
+            TableRelation = "Ship-to Address";
         }
         field(5033; Manufacture; Code[50])
         {
@@ -259,17 +267,19 @@ table 70000 "Customer Asset"
         {
             Caption = 'Owning Business Unit';
             DataClassification = ToBeClassified;
-            TableRelation = Location;
+            TableRelation = Dimension;
         }
         field(5046; Pressure; Text[100])
         {
             Caption = 'Pressure';
             DataClassification = ToBeClassified;
         }
-        field(5047; "Registration Status"; Boolean)
+        field(5047; "Registration Status"; Option)
         {
             Caption = 'Registration Status';
             DataClassification = ToBeClassified;
+            OptionCaption = ' ,Unknown,Unregistered,In Progress,Registered,Error';
+            OptionMembers = " ",Unknown,Unregistered,"In Progress",Registered,Error;
         }
         field(5048; "Room Location"; Text[100])
         {
@@ -354,7 +364,7 @@ table 70000 "Customer Asset"
         {
             Caption = 'Owner';
             DataClassification = ToBeClassified;
-            TableRelation = Location;
+            TableRelation = Employee;
         }
     }
     keys

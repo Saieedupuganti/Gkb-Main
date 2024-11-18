@@ -67,7 +67,15 @@ tableextension 50210 "Item Creation Power Automate" extends Item
         Response: HttpResponseMessage;
         ResponseText: Text;
         json: JsonObject;
+        responsejson: JsonObject;
         jsontext: Text;
+        tokenvalue: JsonToken;
+        tokenstring: Text;
+        uomRec:Record "Unit of Measure";
+        unitcrmid:Text;
+        unitgroupcrmid:Text;
+        vendorRec:Record Vendor;
+        vendorid:Text;
     begin
         Content.GetHeaders(ContentHeaders);
 
@@ -79,9 +87,22 @@ tableextension 50210 "Item Creation Power Automate" extends Item
 
         // assume that the json parameter contains the following data
         // json.Add('defaultunit', Rec."Base Unit of Measure");
-        
+        vendorid:='';
+        unitcrmid:='';
+        unitgroupcrmid:='';
+        vendorRec.SetFilter("No.",Rec."Vendor No.");
+        if vendorRec.FindFirst() then begin
+            vendorid:=vendorRec."CRM ID";
+        end;
+        uomRec.SetFilter(Code,Rec."Base Unit of Measure");
+        if uomRec.FindFirst() then begin
+            unitcrmid:=uomRec."CRM ID";
+            unitgroupcrmid:=uomRec."Unitgroup CRM ID";
+        end;
         json.Add('bcid', Rec."No.");
-        json.Add('defaultunitid', Rec."Base Unit Of Measure Id");
+        json.Add('crmid', Rec."CRM ID");
+        json.Add('defaultunitid', unitcrmid);
+        json.Add('defaultunitgroupid', unitgroupcrmid);
         json.Add('currencyid', Rec."Currency Id");
         json.Add('name', Rec.Description);
         json.Add('description', Rec.Description);
@@ -93,7 +114,7 @@ tableextension 50210 "Item Creation Power Automate" extends Item
         json.Add('type', Format(Rec.Type));
         json.Add('currentcost', Rec."Unit Cost");
         json.Add('vendorcatalogueno', Rec."Vendor 1 Catalogue Number");
-        json.Add('vendorid', Rec."Vendor Id");
+        json.Add('vendorid', vendorid);
         json.Add('producttype', Rec."Product Type");
         // json.Add('purchasename', Rec."Purchasing Code");
         json.WriteTo(jsontext);
@@ -105,7 +126,36 @@ tableextension 50210 "Item Creation Power Automate" extends Item
 
         Response.Content().ReadAs(ResponseText);
         Message(ResponseText);
+        responsejson.ReadFrom(ResponseText);
+        responsejson.Get('crmid',tokenvalue);
+        tokenstring:=tokenvalue.AsValue().AsText();
+
+        Rec."CRM ID":=Format(tokenstring);
+        Rec.modify(false);
+        
     end;
 
 
+}
+
+pageextension 50303 "Item Ext" extends "Item Card"
+{
+    
+    layout
+    {
+        addafter("D365 Product ID")
+        {
+            field("CRM ID"; Rec."CRM ID")
+            {
+                Caption = 'CRM ID';
+                ApplicationArea = All;
+            }
+            field("UOM"; Rec."Base Unit of Measure")
+            {
+                Caption = 'Base Unit of Measure';
+                ApplicationArea = All;
+                TableRelation="Unit of Measure".Code;
+            }
+        }
+    }
 }

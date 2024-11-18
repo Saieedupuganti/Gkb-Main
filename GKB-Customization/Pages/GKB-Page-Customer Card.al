@@ -103,7 +103,6 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                     ApplicationArea=all;
                     Caption = 'Contact Code';
                 }
-
                 field("Primary Contact CRM ID"; Rec."Primary Contact CRMID")
                 {
                     ApplicationArea = all;
