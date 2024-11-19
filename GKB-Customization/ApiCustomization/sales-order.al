@@ -20,6 +20,14 @@ page 50325 "API Sales Order"
                 {
                     Caption = 'CRM ID';
                 }
+                field(documenttype; Rec."Document Type")
+                {
+                    Caption = 'Document Type';
+                }
+                field(code; Rec."No.")
+                {
+                    Caption = 'Code';
+                }
                 field(customerno; Rec."Sell-to Customer No.")
                 {
                     Caption = 'Customer No.';
@@ -144,6 +152,46 @@ page 50325 "API Sales Order"
                 {
                     Caption = 'Work Order Type';
                 }
+                field(freightamount; Rec."Freight Amount")
+                {
+                    Caption = 'Freight Amount';
+                }
+                field(freightterms; Rec."Freight Terms")
+                {
+                    Caption = 'Freight Terms';
+                }
+                field(creationmethod; Rec."Creation Method")
+                {
+                    Caption = 'Creation Method';
+                }
+                field(shiptocity; Rec."Ship-to City")
+                {
+                    Caption = 'Ship-to City';
+                }
+                field(shiptocountry; Rec."Ship-to Country/Region Code")
+                {
+                    Caption = 'Ship-to Country/Region Code';
+                }
+                field(shiptoname; Rec."Ship-to Name")
+                {
+                    Caption = 'Ship-to Name';
+                }
+                field(shiptopostalcode; Rec."Ship-to Post Code")
+                {
+                    Caption = 'Ship-to Post Code';
+                }
+                field(shiptoaddress; Rec."Ship-to Address")
+                {
+                    Caption = 'Ship-to Address';
+                }
+                field(shiptoaddress2; Rec."Ship-to Address")
+                {
+                    Caption = 'Ship-to Address';
+                }
+                field(shiptoaddress3; Rec."Ship-to Address 3")
+                {
+                    Caption = 'Ship-to Address 3';
+                }
             }
         }
     }
@@ -243,5 +291,30 @@ tableextension 50326 "Sales Header Ext" extends "Sales Header"
             Caption = 'Work Order Type';
             DataClassification = ToBeClassified;
         }
+        field(50120; "Freight Amount"; Text[100])
+        {
+            Caption = 'Freight Amount';
+            DataClassification = ToBeClassified;
+        }
+        field(50121; "Freight Terms"; Option)
+        {
+            Caption = 'Freight Terms';
+            OptionMembers=" ","100000001","100000000","100000002","100000003","100000004","100000005","100000006","100000007","100000008","100000009","100000010","100000011","100000012","100000013","1","2";
+            OptionCaption='-- Select -- ,CIF,CFR,CIP,CPT,DAF,DDP,DDU,DELIVERY,DEQ,DES,EXW,FAS,FCA,PICKUP,FOB,No Charge';
+            DataClassification = ToBeClassified;
+        }
+        field(50122; "Creation Method"; Option)
+        {
+            Caption = 'Creation Method';
+            OptionMembers="776160000","776160001";
+            OptionCaption='Unknown,Win Quote';
+            DataClassification = ToBeClassified;
+        }
+        field(50123; "Ship-to Address 3"; Text[100])
+        {
+            Caption = 'Ship-to Address 3';
+            DataClassification = ToBeClassified;
+        }
     }
 }
+

@@ -184,13 +184,13 @@ tableextension 50210 "Item Creation Power Automate" extends Item
         // json.Add('purchasename', Rec."Purchasing Code");
         json.WriteTo(jsontext);
         Content.WriteFrom(jsontext);
-        Message(jsontext);
+        // Message(jsontext);
 
         IsSuccessful := Client.Post('https://prod-28.australiasoutheast.logic.azure.com:443/workflows/7b639aebf03d48b589cb0cb4e242a43e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CBcPia0oWMebjYN00WLYwLb4Xr-lnSEztYIePQITywc', Content, Response);
 
 
         Response.Content().ReadAs(ResponseText);
-        Message(ResponseText);
+        // Message(ResponseText);
         responsejson.ReadFrom(ResponseText);
         responsejson.Get('crmid',tokenvalue);
         tokenstring:=tokenvalue.AsValue().AsText();
