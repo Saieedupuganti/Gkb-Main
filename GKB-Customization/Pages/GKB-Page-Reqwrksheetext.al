@@ -4,6 +4,7 @@ using Microsoft.Inventory.Requisition;
 using System.Automation;
 using System.Security.User;
 using Microsoft.Purchases.Document;
+using Microsoft.Projects.Project.Job;
 using Microsoft.Inventory.Item;
 
 pageextension 50100 "Req WO" extends "Req. Worksheet"
@@ -22,7 +23,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
         }
         modify("Due Date")
         {
-            Caption = 'Requested by date';
+            Caption = 'Required by date';
             ShowMandatory = true;
         }
         addlast(Control1)
@@ -31,11 +32,26 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             {
                 ApplicationArea = all;
             }
-            field("Project Task No";Rec."Project Task No")
+            field("Project Task No"; Rec."Project Task No")
             {
-                ApplicationArea=all;
+                ApplicationArea = all;
+
+                trigger OnValidate()
+                var
+                    JobTask: Record "Job Task";
+                begin
+                    if JobTask.Get(Rec.projectNo, Rec."Project Task No") then
+                        Rec."Obrien Business Unit Code" := JobTask."Global Dimension 1 Code";
+                    Rec.Modify()
+                end;
             }
+            field("Obrien Business Unit Code"; Rec."Obrien Business Unit Code")
+            {
+                ApplicationArea = all;
+            }
+
         }
+
         addafter("Vendor No.")
         {
             field("Vendor Name"; Rec."Vendor Name")
