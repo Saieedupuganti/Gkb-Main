@@ -37,18 +37,18 @@ pageextension 50149 GKBItemExt extends "Item Card"
                     ApplicationArea = all;
                     Caption = 'SAP ITEM ID';
                 }
-                field(BaseUnitofMeasure;Rec."Base Unit of Measure")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Base Unit of Measure';
-                    Visible=false;
-                }
-                field(Description1;Rec."Description")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Description';
-                    Visible=false;
-                }
+                // field(BaseUnitofMeasure;Rec."Base Unit of Measure")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Base Unit of Measure';
+                //     Visible=false;
+                // }
+                // field(Description1;Rec."Description")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Description';
+                //     Visible=false;
+                // }
                 field(GrossWeight;Rec."Gross Weight")
                 {
                     ApplicationArea = all;

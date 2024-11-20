@@ -333,5 +333,7 @@ tableextension 50326 "Sales Header Ext" extends "Sales Header"
             DataClassification = ToBeClassified;
         }
     }
+
+
 }
 

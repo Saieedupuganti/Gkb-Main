@@ -12,17 +12,4 @@ tableextension 50310 "Item Integration" extends Item
         DataClassification = ToBeClassified;
     }
   }
-  
-  keys
-  {
-    // Add changes to keys here
-  }
-  
-  fieldgroups
-  {
-    // Add changes to field groups here
-  }
-  
-  var
-    myInt: Integer;
 }
