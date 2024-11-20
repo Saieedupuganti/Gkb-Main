@@ -38,6 +38,7 @@ pageextension 50149 GKBItemExt extends "Item Card"
                     ApplicationArea = all;
                     Caption = 'SAP ITEM ID';
                 }
+<<<<<<< HEAD
                 field(BaseUnitofMeasure; Rec."Base Unit of Measure")
                 {
                     ApplicationArea = all;
@@ -60,6 +61,21 @@ pageextension 50149 GKBItemExt extends "Item Card"
                     Caption = 'Description 2';
                 }
                 field(GrossWeight; Rec."Gross Weight")
+=======
+                // field(BaseUnitofMeasure;Rec."Base Unit of Measure")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Base Unit of Measure';
+                //     Visible=false;
+                // }
+                // field(Description1;Rec."Description")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Description';
+                //     Visible=false;
+                // }
+                field(GrossWeight;Rec."Gross Weight")
+>>>>>>> 3517c8b09945ebf0ebb25efff9553e31aaf9dbf0
                 {
                     ApplicationArea = all;
                     Caption = 'Gross Weight';
@@ -78,6 +94,7 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 {
                     ApplicationArea = all;
                     Caption = 'OBSItemName';
+                    Visible=false;
                 }
                 field(StandardCost; Rec."Standard Cost")
                 {
