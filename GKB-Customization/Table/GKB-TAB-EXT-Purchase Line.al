@@ -19,6 +19,12 @@ tableextension 50120 "GKBPurchase LineExt" extends "Purchase Line"
                 item."Vendor 1 Catalogue Number" := Rec.VendorCatalogueNo;
             end;
         }
+        field(50102; "Line Approval Sent"; Boolean)
+        {
+            Caption = 'Approval Sent';
+            Editable = false;
+            DataClassification = ToBeClassified;
+        }
         
     }
 }

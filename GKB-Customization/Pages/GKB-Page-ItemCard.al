@@ -41,21 +41,13 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 {
                     ApplicationArea = all;
                     Caption = 'Base Unit of Measure';
-                }
-                field(D365ProductID;Rec."D365 Product ID")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Base Unit of Measure';
+                    Visible=false;
                 }
                 field(Description1;Rec."Description")
                 {
                     ApplicationArea = all;
                     Caption = 'Description';
-                }
-                field(Description2;Rec."Description 2")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Description 2';
+                    Visible=false;
                 }
                 field(GrossWeight;Rec."Gross Weight")
                 {
@@ -76,6 +68,7 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 {
                     ApplicationArea = all;
                     Caption = 'OBSItemName';
+                    Visible=false;
                 }
                 field(StandardCost;Rec."Standard Cost")
                 {

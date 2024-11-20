@@ -6,7 +6,7 @@
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "INTEGRATION",
+            "environmentName": "Integration",
             "startupObjectId": 291,
             "startupObjectType": "Page",
             "breakOnError": "All",

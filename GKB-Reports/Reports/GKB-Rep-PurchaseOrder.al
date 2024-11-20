@@ -53,6 +53,7 @@ report 60100 "Purchase Order Invoice"
             column(CompanyAddress4; CompanyAddr[4])
             {
             }
+
             column(CompanyAddress5; CompanyAddr[5])
             {
             }
@@ -101,9 +102,13 @@ report 60100 "Purchase Order Invoice"
             column(CompanyBankBranchNo; CompanyInfo."Bank Branch No.")
             {
             }
+            column(Ordered_By; "Ordered By") { }
+            column(Created_By; "Created By") { }
+
             column(CompanyBankBranchNo_Lbl; CompanyInfo.FieldCaption("Bank Branch No."))
             {
             }
+
             column(CompanyBankAccountNo; CompanyInfo."Bank Account No.")
             {
             }
@@ -119,6 +124,9 @@ report 60100 "Purchase Order Invoice"
             column(CompanySWIFT; CompanyInfo."SWIFT Code")
             {
             }
+            column(Shortcut_Dimension_1_Code; "Shortcut Dimension 1 Code") { }
+
+
             column(CompanySWIFT_Lbl; CompanyInfo.FieldCaption("SWIFT Code"))
             {
             }

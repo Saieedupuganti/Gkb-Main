@@ -1,9 +1,12 @@
 page 50556 "Customer Asset Card"
 {
+    Caption = 'Customer Asset Card';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = "Customer Asset";
+    RefreshOnActivate = true;
+    AboutTitle='Customer Asset Card';
     
     layout
     {
@@ -15,7 +18,6 @@ page 50556 "Customer Asset Card"
             }
             group("Asset Details")
             {
-            
             }
             group("Asset Location")
             {

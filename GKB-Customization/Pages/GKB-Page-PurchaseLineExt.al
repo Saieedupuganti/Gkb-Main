@@ -2,7 +2,7 @@ pageextension 50134 PurchlineExt extends "Purchase Lines"
 {
     layout
     {
-        // Add changes to page layout here
+     
     }
 
     actions

@@ -98,7 +98,7 @@ page 50325 "API Sales Order"
                 }
                 field(owner; Rec.Owner)
                 {
-                    Caption = 'Order Type';
+                    Caption = 'Owner';
                 }
                 field(ownercrmid; Rec."Owner CRMID")
                 {
@@ -184,13 +184,25 @@ page 50325 "API Sales Order"
                 {
                     Caption = 'Ship-to Address';
                 }
-                field(shiptoaddress2; Rec."Ship-to Address")
+                field(shiptoaddress2; Rec."Ship-to Address 2")
                 {
-                    Caption = 'Ship-to Address';
+                    Caption = 'Ship-to Address 2';
                 }
                 field(shiptoaddress3; Rec."Ship-to Address 3")
                 {
                     Caption = 'Ship-to Address 3';
+                }
+                field(uom; Rec."Unit of Measure Code")
+                {
+                    Caption = 'Unit of Measure Code';
+                }
+                field(uomcrmid; Rec."Unit of Measure Code CRMID")
+                {
+                    Caption = 'Unit of Measure Code CRMID';
+                }
+                field(unitcostcrmid; Rec."Unit Cost CRMID")
+                {
+                    Caption = 'Unit Cost CRMID';
                 }
             }
         }
@@ -209,6 +221,11 @@ tableextension 50326 "Sales Header Ext" extends "Sales Header"
         field(50103; "Unit of Measure Code CRMID"; Text[100])
         {
             Caption = 'Unit of Measure Code CRMID';
+            DataClassification = ToBeClassified;
+        }
+        field(50126; "Unit of Measure Code"; Text[100])
+        {
+            Caption = 'Unit of Measure Code';
             DataClassification = ToBeClassified;
         }
         field(50104; "Unit Cost CRMID"; Text[100])

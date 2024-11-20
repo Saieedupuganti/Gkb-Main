@@ -18,9 +18,7 @@ codeunit 50301 "Get Customer by CRMid"
                   if ContactRec.FindFirst() then begin
                       if CustomerRec."Primary Contact" <> ContactRec."No." then begin
                           CustomerRec."Primary Contact" := ContactRec."No.";
-                          // Message('Modified');
                       end;
-                    // Message('ID Match found');
                   end;
                 end;
 
@@ -32,11 +30,10 @@ codeunit 50301 "Get Customer by CRMid"
                   if territoryRec.FindFirst() then begin
                       if CustomerRec.Territory <> territoryRec.Code then begin
                           CustomerRec.Territory := territoryRec.Code;
-                        //   CustomerRec.Modify(false);
-                          // Message('Modified');
                       end;
                   end;
                 end;
+
 
                 if CustomerRec."Dimension ID"<>'' then begin
                   dimensionRec.Reset();
@@ -45,13 +42,11 @@ codeunit 50301 "Get Customer by CRMid"
                   if dimensionRec.FindFirst() then begin
                       if CustomerRec.Dimension <> dimensionRec.Code then begin
                           CustomerRec.Dimension := dimensionRec.Code;
-                        //   CustomerRec.Modify(false);
-                          // Message('Modified');
                       end;
                   end;
                 end;
 
-                          CustomerRec.Modify(false);
+                CustomerRec.Modify(false);
 
             until CustomerRec.Next() = 0;
         end;
@@ -96,7 +91,7 @@ codeunit 50302 "Get Vendor by CRMid"
 
         if VendorRec.FindSet() then begin
             repeat
-            Message('Hello'+VendorRec."Dimension ID");
+            // Message('Hello'+VendorRec."Dimension ID");
                 if VendorRec."Primary Contact No Id"<>'' then begin
                   ContactRec.Reset();
                   ContactRec.SetRange("crm id", VendorRec."Primary Contact No Id");
@@ -129,14 +124,14 @@ codeunit 50302 "Get Vendor by CRMid"
                   dimensionRec.SetRange("crm id", VendorRec."Dimension ID");
 
                   if dimensionRec.FindFirst() then begin
-                        Message(dimensionRec.Code);
+                        // Message(dimensionRec.Code);
                       if VendorRec.Dimension <> dimensionRec.Code then begin
                           VendorRec.Dimension := dimensionRec.Code;
                           VendorRec.Modify(false);
                           // Message('Modified');
                       end;
                   end else begin
-                    Message('Not-Found');
+                    // Message('Not-Found');
                   end;
                 end;
 
