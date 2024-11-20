@@ -223,6 +223,12 @@ table 70000 "Customer Asset"
             Caption = 'Manufacture Detail';
             DataClassification = ToBeClassified;
         }
+         field(5070; "Manufacture Serial No."; Text[100])
+        {
+            Caption = 'Manufacture Detail';
+            DataClassification = ToBeClassified;
+        }
+
         field(5037; "Manufacturing Date"; Text[100])
         {
             Caption = 'Manufacturing Date';

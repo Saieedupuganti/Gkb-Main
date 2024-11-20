@@ -73,9 +73,9 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
 
                 trigger OnAction()
                 var
-                    LineApproval: Codeunit "Line-Level Approval Manager";
+                    LineApproval: Codeunit "Lines Instruction Mgt.";
                 begin
-                    LineApproval.ProcessLineApprovals(Rec);
+                    LineApproval.PurchaseCheckAllLinesHaveQuantityAssigned(Rec);
                     Message('Line-level approvals sent successfully.');
                 end;
             }
