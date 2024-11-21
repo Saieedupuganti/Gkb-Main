@@ -26,7 +26,7 @@ page 50307 "API Contact"
                 }
                 field(type; Rec.Type)
                 {
-                    Caption = 'Company Name';
+                    Caption = 'Type';
                 }
                 field(CompanyID; Rec."Company No.")
                 {
@@ -80,23 +80,19 @@ page 50307 "API Contact"
                 {
                     Caption = 'PostCode';
                 }
-                field(CurrencyCode; Rec."Currency Code")
+                field(Currency; Rec."Currency Code")
                 {
                     Caption = 'Currency Code';
                 }
-                field(CurrencyCodeid; Rec."Currency Code Id")
+                field(Currencycrmid; Rec."Currency CRM Id")
                 {
-                    Caption = 'Currency Code Id';
+                    Caption = 'Currency CRM Id';
                 }
                 field(Faxno; Rec."Fax No.")
                 {
                     Caption = 'Fax No';
                 }
                 field(Name; Rec.Name)
-                {
-                    Caption = 'Name';
-                }
-                field(businessrelation; Rec."Contact Business Relation")
                 {
                     Caption = 'Name';
                 }
@@ -168,10 +164,66 @@ tableextension 50311 "API Contact CRM Field" extends Contact
             DataClassification = ToBeClassified;
             TableRelation = Dimension.Code;
         }
-        field(50135; "Currency Code Id"; Text[100])
+        field(50135; "Currency CRM Id"; Text[100])
         {
-            Caption = 'Currency Code Id';
+            Caption = 'Currency CRM Id';
             DataClassification = ToBeClassified;
         }
     }
+
+
+
+    trigger OnAfterModify()
+    var
+        dimRec: Record Dimension;
+        customerRec: Record Customer;
+        currencyRec: Record Currency;
+        dimensionCode: text;
+        customerCode: text;
+        modified:Integer;
+    begin
+        
+        modified:=0;
+
+        // Check if field has changed and is not empty
+        if (Rec."Currency CRM Id"<>'') and (xRec."Currency CRM ID" <>Rec."Currency CRM ID") then begin
+            currencyRec.SetFilter("CRM ID",Rec."Currency CRM ID");
+            if currencyRec.FindFirst() then begin
+                Rec."Currency Code" := currencyRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Check if field has changed and is not empty
+        if (Rec."Dimension ID"<>'') and (xRec."Dimension ID" <>Rec."Dimension ID") then begin
+            dimRec.SetFilter("CRM ID",Rec."Dimension ID");
+            if dimRec.FindFirst() then begin
+                Rec.Dimension := dimRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Modify only if found atleast 1 CRM - BC match
+        if modified>0 then begin
+            Rec.Modify(false);
+        end;
+    end;
+}
+
+
+
+
+pageextension 50311 "Contact Card Ext" extends "Contact Card"
+{
+    layout
+    {
+        addafter("Contact ID")
+        {
+            field("Description"; Rec.Description)
+            {
+                Caption='Description';
+                ApplicationArea=All;
+            }
+        }
     }
+}

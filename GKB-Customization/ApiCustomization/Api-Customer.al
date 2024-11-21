@@ -232,6 +232,14 @@ page 50321 "API Customer"
                 {
                     Caption = 'Contact Code';
                 }
+                field("parentaccount"; Rec."Parent Account")
+                {
+                    Caption = 'Parent Account';
+                }
+                field(parentaccountcrmid; Rec."Parent Account CRM ID")
+                {
+                    Caption = 'Parent Account CRM ID';
+                }
             }
         }
     }
@@ -310,5 +318,74 @@ tableextension 50321 "API Customer" extends Customer
             Caption = 'Currency Code Id';
             DataClassification = ToBeClassified;
         }
+        field(50143; "Parent Account"; Text[100])
+        {
+            Caption = 'Parent Account';
+            DataClassification = ToBeClassified;
+        }
+        field(50144; "Parent Account CRM ID"; Text[100])
+        {
+            Caption = 'Parent Account CRM ID';
+            DataClassification = ToBeClassified;
+        }
     }
+
+
+
+
+    trigger OnAfterModify()
+    var
+        dimRec: Record Dimension;
+        customerRec: Record Customer;
+        currencyRec: Record Currency;
+        contactRec: Record Contact;
+        territoryRec: Record Territory;
+        modified:Integer;
+    begin
+        
+        modified:=0;
+        // Check if field has changed and is not empty
+        if (Rec."Primary Contact CRMID"<>'') and (xRec."Primary Contact CRMID"<>Rec."Primary Contact CRMID") then begin
+            contactRec.SetFilter("CRM ID",Rec."Primary Contact CRMID");
+            if contactRec.FindFirst() then begin
+                Rec."Primary Contact" := contactRec."No.";
+                Rec."Primary Contact No." := contactRec."No.";
+                modified:=modified+1;
+            end;
+        end;
+        
+        // Check if field has changed and is not empty
+        if (Rec."Currency Code Id"<>'') and (xRec."Currency Code Id"<>Rec."Currency Code Id") then begin
+            currencyRec.SetFilter("CRM ID",Rec."Currency Code Id");
+            if currencyRec.FindFirst() then begin
+                Rec."Currency Code" := currencyRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Check if field has changed and is not empty
+        if (Rec."Dimension ID"<>'') and (xRec."Dimension ID" <>Rec."Dimension ID") then begin
+            dimRec.SetFilter("CRM ID",Rec."Dimension ID");
+            if dimRec.FindFirst() then begin
+                Rec.Dimension := dimRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Check if field has changed and is not empty
+        if (Rec."Territory Code ID"<>'') and (xRec."Territory Code ID" <>Rec."Territory Code ID") then begin
+            territoryRec.SetFilter("CRM ID",Rec."Territory Code ID");
+            if territoryRec.FindFirst() then begin
+                Rec."Territory Code" := territoryRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Nodify only if found atleast 1 CRM - BC match
+        if modified>0 then begin
+            Rec.Modify(false);
+        end;
+    end;
+
+
 }

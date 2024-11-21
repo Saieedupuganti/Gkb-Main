@@ -70,7 +70,7 @@ page 50325 "API Sales Order"
                 }
                 field(currency; Rec."Currency Code")
                 {
-                    Caption = 'Currency';
+                    Caption = 'Currency'; 
                 }
                 field(currencycrmid; Rec."Currency CRM ID")
                 {
@@ -317,7 +317,7 @@ tableextension 50326 "Sales Header Ext" extends "Sales Header"
         {
             Caption = 'Freight Terms';
             OptionMembers=" ","100000001","100000000","100000002","100000003","100000004","100000005","100000006","100000007","100000008","100000009","100000010","100000011","100000012","100000013","1","2";
-            OptionCaption='-- Select -- ,CIF,CFR,CIP,CPT,DAF,DDP,DDU,DELIVERY,DEQ,DES,EXW,FAS,FCA,PICKUP,FOB,No Charge';
+            OptionCaption=' ,CIF,CFR,CIP,CPT,DAF,DDP,DDU,DELIVERY,DEQ,DES,EXW,FAS,FCA,PICKUP,FOB,No Charge';
             DataClassification = ToBeClassified;
         }
         field(50122; "Creation Method"; Option)
@@ -334,6 +334,49 @@ tableextension 50326 "Sales Header Ext" extends "Sales Header"
         }
     }
 
+    trigger OnAfterModify()
+    var
+        dimRec: Record Dimension;
+        customerRec: Record Customer;
+        currencyRec: Record Currency;
+        dimensionCode: text;
+        customerCode: text;
+        modified:Integer;
+    begin
+        
+        modified:=0;
+        // Check if field has changed and is not empty
+        if (Rec."Customer CRMID"<>'') and (xRec."Customer CRMID"<>Rec."Customer CRMID") then begin
+            customerRec.SetFilter("CRM ID",Rec."Customer CRMID");
+            if customerRec.FindFirst() then begin
+                Rec."Sell-to Customer No." := customerRec."No.";
+                modified:=modified+1;
+            end;
+        end;
+        
+        // Check if field has changed and is not empty
+        if (Rec."Dimension CRM ID"<>'') and (xRec."Dimension CRM ID"<>Rec."Dimension CRM ID") then begin
+            dimRec.SetFilter("CRM ID",Rec."Dimension CRM ID");
+            if dimRec.FindFirst() then begin
+                Rec."Sell-to Customer No." := dimRec.Code;
+                modified:=modified+1;
+            end;
+        end;
 
+        // Check if field has changed and is not empty
+        if (Rec."Currency CRM ID"<>'') and (xRec."Currency CRM ID" <>Rec."Currency CRM ID") then begin
+            currencyRec.SetFilter("CRM ID",Rec."Currency CRM ID");
+            if currencyRec.FindFirst() then begin
+                Rec."Currency Code" := currencyRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Nodify only if found atleast 1 CRM - BC match
+        if modified>0 then begin
+            Rec.Modify(false);
+        end;
+    end;
+            
 }
 
