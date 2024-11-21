@@ -35,6 +35,14 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
             TableRelation = "Job Task"."Job Task No.";
             Caption = 'Project Task No';
             DataClassification = ToBeClassified;
+
+        }
+        field(50108; "Obrien Business Unit Code"; Code[30])
+        {
+            TableRelation = "Job Task"."Global Dimension 1 Code";
+            Caption = 'Obrien Business Unit Code';
+            DataClassification = ToBeClassified;
+
         }
     }
 

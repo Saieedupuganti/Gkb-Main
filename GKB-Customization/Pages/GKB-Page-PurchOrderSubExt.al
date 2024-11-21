@@ -9,6 +9,7 @@ pageextension 50118 PurchOrderSubExt extends "Purchase Order Subform"
                 Caption = 'Vendor Catologue No';
                 ApplicationArea = all;
             }
+            
         }
 
         //     modify("VAT Bus. Posting Group")
