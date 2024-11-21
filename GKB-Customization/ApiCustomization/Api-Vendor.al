@@ -148,11 +148,11 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Payment Terms Code';
                 }
-                field("PrimaryContactNo"; Rec."Primary Contact No.")   //lookup
+                field("primarycontact"; Rec."Primary Contact No.")   //lookup
                 {
                     Caption = 'primary Contact No.';
                 }
-                field("PrimaryContactNoId"; Rec."Primary Contact No Id")
+                field("primarycontactcrmid"; Rec."Primary Contact No Id")
                 {
                     Caption = 'Primary Contact No Id';
                 }
@@ -228,8 +228,14 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Owner ID';
                 }
-               
-
+                field("parentaccount"; Rec."Parent Account")
+                {
+                    Caption = 'Parent Account';
+                }
+                field(parentaccountcrmid; Rec."Parent Account CRM ID")
+                {
+                    Caption = 'Parent Account CRM ID';
+                }
             }
         }
     }
@@ -290,6 +296,16 @@ tableextension 50340 "Api vendor" extends Vendor
         field(50141; "Owner"; Code[30])
         {
             Caption = 'Owner';
+            DataClassification = ToBeClassified;
+        }
+        field(50143; "Parent Account CRM ID"; Text[100])
+        {
+            Caption = 'Parent Account CRM ID';
+            DataClassification = ToBeClassified;
+        }
+        field(50145; "Parent Account"; Text[100])
+        {
+            Caption = 'Parent Account';
             DataClassification = ToBeClassified;
         }
     }
