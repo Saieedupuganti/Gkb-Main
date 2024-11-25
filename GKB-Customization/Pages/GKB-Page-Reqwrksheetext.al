@@ -30,8 +30,21 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
         {
             field(projectNo; Rec.projectNo)
             {
+
                 ApplicationArea = all;
+
+                // trigger OnValidate()
+                // var
+                //     JobTask: Record "Job Task";
+                // begin
+                //     if not JobTask.Get(Rec.projectNo, Rec."Project Task No") then
+                //         Error('The Project Task No. %1 does not exist for Project No. %2.', Rec."Project Task No", Rec.projectNo);
+
+                //     Rec."Shortcut Dimension 1 Code" := JobTask."Global Dimension 1 Code";
+                //     Rec.Modify();
+                // end;
             }
+
             field("Project Task No"; Rec."Project Task No")
             {
                 ApplicationArea = all;
@@ -39,15 +52,23 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 trigger OnValidate()
                 var
                     JobTask: Record "Job Task";
+                //JobTaskDimension: Record "Job Task Dimension";
                 begin
-                    if JobTask.Get(Rec.projectNo, Rec."Project Task No") then
-                        Rec."Obrien Business Unit Code" := JobTask."Global Dimension 1 Code";
-                    Rec.Modify()
+                    if not JobTask.Get(Rec.projectNo, Rec."Project Task No") then
+                        Error('The Project Task No. %1 does not exist for Project No. %2.', Rec.projectNo, Rec."Project Task No");
+
+                    // Rec."Shortcut Dimension 1 Code" := JobTaskDimension."Dimension Value Code";
+                    Rec."Shortcut Dimension 1 Code" := JobTask."Global Dimension 1 Code";
+
+                    Rec.Modify();
                 end;
             }
+
+
             field("Obrien Business Unit Code"; Rec."Obrien Business Unit Code")
             {
                 ApplicationArea = all;
+                Visible = false;
             }
 
         }

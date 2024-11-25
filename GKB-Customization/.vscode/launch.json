@@ -6,11 +6,7 @@
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-<<<<<<< HEAD
-            "environmentName": "ObrienDEV",
-=======
-            "environmentName": "Integration",
->>>>>>> 3517c8b09945ebf0ebb25efff9553e31aaf9dbf0
+            "environmentName": "ObrienUAT",
             "startupObjectId": 291,
             "startupObjectType": "Page",
             "breakOnError": "All",
