@@ -25,6 +25,12 @@ tableextension 50120 "GKBPurchase LineExt" extends "Purchase Line"
             Editable = false;
             DataClassification = ToBeClassified;
         }
+        field(50103;"Obrien_Business_Unit";Code[40])
+        {
+            Caption = 'Obrien_Business_Unit_Code';
+            DataClassification = ToBeClassified;
+            TableRelation = "Dimension Value";
+        }
         
     }
 }
