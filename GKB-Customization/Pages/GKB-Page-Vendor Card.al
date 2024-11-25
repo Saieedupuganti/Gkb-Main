@@ -105,6 +105,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 {
                     ApplicationArea = all;
                     Caption = 'Dimension';
+                    TableRelation=Dimension.Code;
                 }
                 field(Description; Rec.Description)
                 {
