@@ -23,7 +23,19 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
                 // }
                 field("Primary Contact"; Rec."Primary Contact")
                 {
-                    Caption = 'Primary Caption';
+                    ApplicationArea = All;
+                    Caption = 'Primary Contact';
+                }
+                field("Dimension"; Rec.Dimension)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Dimension';
+                    TableRelation="Dimension Value".Code;
+                }
+                field("Dimension Crm Id"; Rec."Dimension ID")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Dimension ID';
                 }
             
             }
@@ -45,6 +57,19 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
             }
             
 
+        }
+        addafter("Contact ID")
+        {
+            field("Description"; Rec.Description)
+            {
+                Caption='Description';
+                ApplicationArea=All;
+            }
+            field("CRM Id"; Rec."CRM ID")
+            {
+                Caption='CRM Id';
+                ApplicationArea=All;
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 page 50305 "API Currency"
 {
     PageType = API;
-    Caption = 'API UOM';
+    Caption = 'API Currency';
     APIPublisher = 'integration';
     APIGroup = 'api';
     APIVersion = 'v2.0', 'v1.0';
@@ -9,7 +9,7 @@ page 50305 "API Currency"
     EntitySetName = 'currency';
     SourceTable = "Currency";
     DelayedInsert = true;
-    
+
     layout
     {
         area(Content)
@@ -24,49 +24,12 @@ page 50305 "API Currency"
                 {
                     Caption = 'CRM ID';
                 }
-                field(description; Rec.Description)
+                field(exchangerate; Rec."Custom Exchange Amount")
                 {
-                    Caption = 'Description';
+                    Caption = 'Exchange Rate';
                 }
             }
         }
     }
 }
 
-
-tableextension 50305 "API currency" extends "Currency"
-{
-    fields
-    {
-        field(50101; "CRM ID"; Text[100])
-        {
-            Caption = 'CRM ID';
-            DataClassification = ToBeClassified;
-        }
-        field(50102; "Custom Exchange Amount"; Decimal)
-        {
-            Caption = 'Custom Exchange Amount';
-            DataClassification = ToBeClassified;
-        }
-    }
-}
-
-pageextension 50306 "Currencies Page Ext" extends Currencies
-{
-  layout
-  {
-    addafter(ExchangeRateAmt)
-    {
-      field("Custom Exchange Amount";Rec."Custom Exchange Amount")
-      {
-        ApplicationArea=All;
-        Caption='Custom Exchange Amount';
-      }
-      field("CRM ID";Rec."CRM ID")
-      {
-        ApplicationArea=All;
-        Caption='CRM ID';
-      }
-    }
-  }
-}

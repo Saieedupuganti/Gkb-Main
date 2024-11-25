@@ -116,6 +116,143 @@ tableextension 50100 "Customer Ext" extends Customer
             DataClassification = ToBeClassified;
             TableRelation= Contact;
         }
-
+        field(50500; "Dimension"; Code[20])
+        {
+            Caption = 'Dimension';
+            DataClassification = ToBeClassified;
+        }
+        field(50501; "Dimension ID"; Text[100])
+        {
+            Caption = 'Dimension ID';
+            DataClassification = ToBeClassified;
+        }
+        field(50502; "Customer Price Group Id"; Text[100])
+        {
+            Caption = 'Customer Price Group Id';
+            DataClassification = ToBeClassified;
+        }
+        field(50503; "Custom Contact Id"; Text[100])
+        {
+            Caption = 'Custom Contact Id';
+            DataClassification = ToBeClassified;
+        }
+        field(50504; Territory; Code[20])
+        {
+            Caption = 'Territory';
+            DataClassification = ToBeClassified;
+        }
+        field(50505; "Territory Code ID"; Text[100])
+        {
+            Caption = 'Territory Code ID';
+            DataClassification = ToBeClassified;
+        }
+        field(50506; "Territory Id"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50133; "Primary Contact"; Text[100])
+        {
+            Caption = 'Primary Contact';
+            DataClassification = ToBeClassified;
+            TableRelation = Contact."No.";
+        }
+        field(50134; "Primary Contact CRMID"; Text[100])
+        {
+            Caption = 'Primary Contact CRMID';
+            DataClassification = ToBeClassified;
+        }
+        field(50136; "Address Name"; Text[100])
+        {
+            Caption = 'Address Name';
+            DataClassification = ToBeClassified;
+        }
+        field(50139; "Website"; Code[30])
+        {
+            Caption = 'Website';
+            DataClassification = ToBeClassified;
+        }
+        field(50140; "Owner Id"; Text[100])
+        {
+            Caption = 'Owner Id';
+            DataClassification = ToBeClassified;
+        }
+        field(50141; "Owner"; Code[30])
+        {
+            Caption = 'Owner';
+            DataClassification = ToBeClassified;
+        }
+        field(50142; "Currency Code Id"; Text[100])
+        {
+            Caption = 'Currency Code Id';
+            DataClassification = ToBeClassified;
+        }
+        field(50143; "Parent Account"; Text[100])
+        {
+            Caption = 'Parent Account';
+            DataClassification = ToBeClassified;
+        }
+        field(50144; "Parent Account CRM ID"; Text[100])
+        {
+            Caption = 'Parent Account CRM ID';
+            DataClassification = ToBeClassified;
+        }
     }
+
+
+
+
+    trigger OnAfterModify()
+    var
+        dimRec: Record "Dimension Value";
+        customerRec: Record Customer;
+        currencyRec: Record Currency;
+        contactRec: Record Contact;
+        territoryRec: Record Territory;
+        modified:Integer;
+    begin
+        
+        modified:=0;
+        // Check if field has changed and is not empty
+        if (Rec."Primary Contact CRMID"<>'') and (xRec."Primary Contact CRMID"<>Rec."Primary Contact CRMID") then begin
+            contactRec.SetFilter("CRM ID",Rec."Primary Contact CRMID");
+            if contactRec.FindFirst() then begin
+                Rec."Primary Contact" := contactRec."No.";
+                Rec."Primary Contact No." := contactRec."No.";
+                modified:=modified+1;
+            end;
+        end;
+        
+        // Check if field has changed and is not empty
+        if (Rec."Currency Code Id"<>'') and (xRec."Currency Code Id"<>Rec."Currency Code Id") then begin
+            currencyRec.SetFilter("CRM ID",Rec."Currency Code Id");
+            if currencyRec.FindFirst() then begin
+                Rec."Currency Code" := currencyRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Check if field has changed and is not empty
+        if (Rec."Dimension ID"<>'') and (xRec."Dimension ID" <>Rec."Dimension ID") then begin
+            dimRec.SetFilter("CRM ID",Rec."Dimension ID");
+            if dimRec.FindFirst() then begin
+                Rec.Dimension := dimRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Check if field has changed and is not empty
+        if (Rec."Territory Code ID"<>'') and (xRec."Territory Code ID" <>Rec."Territory Code ID") then begin
+            territoryRec.SetFilter("CRM ID",Rec."Territory Code ID");
+            if territoryRec.FindFirst() then begin
+                Rec."Territory Code" := territoryRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Nodify only if found atleast 1 CRM - BC match
+        if modified>0 then begin
+            Rec.Modify(false);
+        end;
+    end;
+
 }

@@ -1,4 +1,3 @@
-
 codeunit 50301 "Get Customer by CRMid"
 {
     procedure GetCustomerByCRMid()
@@ -6,7 +5,7 @@ codeunit 50301 "Get Customer by CRMid"
         ContactRec: Record Contact;
         CustomerRec: Record Customer;
         territoryRec: Record Territory;
-        dimensionRec: Record Dimension;
+        dimensionRec: Record "Dimension Value";
     begin
 
         if CustomerRec.FindSet() then begin
@@ -37,7 +36,7 @@ codeunit 50301 "Get Customer by CRMid"
 
                 if CustomerRec."Dimension ID"<>'' then begin
                   dimensionRec.Reset();
-                  dimensionRec.SetRange("crm id", CustomerRec."Dimension ID");
+                  dimensionRec.SetRange("CRM ID", CustomerRec."Dimension ID");
 
                   if dimensionRec.FindFirst() then begin
                       if CustomerRec.Dimension <> dimensionRec.Code then begin

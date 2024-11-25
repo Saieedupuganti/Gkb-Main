@@ -40,5 +40,70 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
         {
             Caption = 'Address 3 Street 3';
         }
+        field(50131; "CRM ID"; Text[100])
+        {
+            Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
+        field(50132; "Dimension ID"; Text[100])
+        {
+            Caption = 'Dimension ID';
+            DataClassification = ToBeClassified;
+        }
+        field(50133; "Primary Contact"; Text[100])
+        {
+            Caption = 'Primary Contact';
+            DataClassification = ToBeClassified;
+            TableRelation = Contact."No.";
+        }
+        field(50134; "Dimension"; Text[100])
+        {
+            Caption = 'Dimension';
+            DataClassification = ToBeClassified;
+        }
+        field(50135; "Currency CRM Id"; Text[100])
+        {
+            Caption = 'Currency CRM Id';
+            DataClassification = ToBeClassified;
+        }
     }
+
+
+
+
+    trigger OnAfterModify()
+    var
+        dimRec: Record "Dimension Value";
+        customerRec: Record Customer;
+        currencyRec: Record Currency;
+        dimensionCode: text;
+        customerCode: text;
+        modified:Integer;
+    begin
+        
+        modified:=0;
+
+        // Check if field has changed and is not empty
+        if (Rec."Currency CRM Id"<>'') and (xRec."Currency CRM ID" <>Rec."Currency CRM ID") then begin
+            currencyRec.SetFilter("CRM ID",Rec."Currency CRM ID");
+            if currencyRec.FindFirst() then begin
+                Rec."Currency Code" := currencyRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Check if field has changed and is not empty
+        if (Rec."Dimension ID"<>'') and (xRec."Dimension ID" <>Rec."Dimension ID") then begin
+            dimRec.SetFilter("CRM ID",Rec."Dimension ID");
+            if dimRec.FindFirst() then begin
+                Rec.Dimension := dimRec.Code;
+                modified:=modified+1;
+            end;
+        end;
+
+        // Modify only if found atleast 1 CRM - BC match
+        if modified>0 then begin
+            Rec.Modify(false);
+        end;
+    end;
 }
