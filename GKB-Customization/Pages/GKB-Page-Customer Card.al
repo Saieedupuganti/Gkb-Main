@@ -88,20 +88,42 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 {
                     ApplicationArea = all;
                 }
-                field("Primary Contact 2"; Rec."Primary Contact")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Primary Contact';
-                }
                 field(WEB; Rec.WEB)
                 {
                     ApplicationArea = all;
                     Caption = 'WEB';
                 }
+                field(Dimension; Rec.Dimension)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Dimension';
+                    TableRelation="Dimension Value".Code;
+                }
+                field("Dimension Crm Id"; Rec."Dimension ID")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Dimension Crm Id';
+                }
+                field("Territory"; Rec."Territory Code")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Territory';
+                    TableRelation=Territory.Code;
+                }
+                field("Territory Crm Id"; Rec."Territory Code Id")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Territory Crm Id';
+                }
                 field("Contact Code";Rec."Contact Code")
                 {
                     ApplicationArea=all;
                     Caption = 'Contact Code';
+                }
+                field("Primary Contact"; Rec."Primary Contact")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Primary Contact';
                 }
                 field("Primary Contact CRM ID"; Rec."Primary Contact CRMID")
                 {

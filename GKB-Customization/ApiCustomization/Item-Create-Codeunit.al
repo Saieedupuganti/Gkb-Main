@@ -1,3 +1,5 @@
+// Code to Sync Data frombBC to Dynamics by triggering Power Automate using URL
+
 tableextension 50210 "Item Creation Power Automate" extends Item
 {
 
@@ -47,7 +49,7 @@ tableextension 50210 "Item Creation Power Automate" extends Item
         end;
         uomRec.SetFilter(Code,Rec."Base Unit of Measure");
         if uomRec.FindFirst() then begin
-            if (uomRec."CRM ID"<>'') and (Rec."Base Unit Of Measure Id"<>'') then begin
+            if (uomRec."CRM ID"<>'') then begin
                 unitcrmid:='/uoms('+uomRec."CRM ID"+')';
             end;
             if (uomRec."Unitgroup CRM ID"<>'') then begin

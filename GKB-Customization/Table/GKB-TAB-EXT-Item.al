@@ -93,9 +93,21 @@ tableextension 50102 GKBItemExt extends Item
         {
             DataClassification=ToBeClassified;
         }
+        field(50301; "Unit"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Unit of Measure".Code;
+        }
+        field(50509; "Vendor Id CRM"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 }
+
+
+
 tableextension 50351 "ItemExt" extends Item
 {
     // fields
