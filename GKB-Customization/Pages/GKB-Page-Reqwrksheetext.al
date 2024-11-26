@@ -32,22 +32,13 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             {
 
                 ApplicationArea = all;
-
-                // trigger OnValidate()
-                // var
-                //     JobTask: Record "Job Task";
-                // begin
-                //     if not JobTask.Get(Rec.projectNo, Rec."Project Task No") then
-                //         Error('The Project Task No. %1 does not exist for Project No. %2.', Rec."Project Task No", Rec.projectNo);
-
-                //     Rec."Shortcut Dimension 1 Code" := JobTask."Global Dimension 1 Code";
-                //     Rec.Modify();
-                // end;
+                ShowMandatory = true;
             }
 
             field("Project Task No"; Rec."Project Task No")
             {
                 ApplicationArea = all;
+                ShowMandatory = true;
 
                 trigger OnValidate()
                 var

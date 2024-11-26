@@ -2,6 +2,7 @@ pageextension 50149 GKBItemExt extends "Item Card"
 {
     layout
     {
+
         addafter("Attached Documents")
         {
             part(qrcode; "Qr Code")
@@ -112,11 +113,16 @@ pageextension 50149 GKBItemExt extends "Item Card"
 
         addafter("Vendor Item No.")
         {
+    
             field("Vendor Item Name"; Rec."Vendor Item Name")
             {
-                Caption = 'Vendor Item Name';
+                Caption = 'Vendor Name';
                 ApplicationArea = All;
             }
+        }
+        modify("Vendor Item No.")
+        {
+            ToolTip = 'SAP Vendor Item No.';
         }
     }
 }

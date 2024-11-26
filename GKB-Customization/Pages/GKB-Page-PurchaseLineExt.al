@@ -10,6 +10,7 @@ pageextension 50134 PurchlineExt extends "purchase lines"
                 Visible = false;
             }
         }
+        
     }
 
     actions
