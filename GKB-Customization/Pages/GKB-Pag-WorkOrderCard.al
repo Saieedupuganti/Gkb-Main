@@ -5,6 +5,8 @@ page 70004 "Work Order Card"
     SourceTable = "Work Order";
     UsageCategory = Administration;
     Caption = 'Work Order Card';
+    AboutTitle = 'Work Order Card';
+    RefreshOnActivate = true;
 
     layout
     {
@@ -36,6 +38,16 @@ page 70004 "Work Order Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Agreement';
+                }
+                field("Project No";Rec."Project No")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Project No.';
+                }
+                field("Project Task No";Rec."Project Task No")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Project Task No.';
                 }
                 field("Billing Account"; Rec."Billing Account")
                 {

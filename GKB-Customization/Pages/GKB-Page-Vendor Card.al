@@ -105,12 +105,13 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 {
                     ApplicationArea = all;
                     Caption = 'Dimension';
-                    TableRelation="Dimension Value".Code;
+                    TableRelation = "Dimension Value".Code;
                 }
                 field("Dimension Crm Id"; Rec."Dimension ID")
                 {
                     ApplicationArea = all;
-                    Caption = 'Dimension Crm Id';
+                    Caption = 'D365 Id';
+
                 }
                 field(Description; Rec.Description)
                 {
@@ -126,7 +127,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 {
                     ApplicationArea = all;
                     Caption = 'Primary Contact';
-                    TableRelation=Contact."No.";
+                    TableRelation = Contact."No.";
                 }
                 field("Primary Contact CRM ID"; Rec."Primary Contact No Id")
                 {
@@ -137,7 +138,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 {
                     ApplicationArea = all;
                     Caption = 'Territory Code';
-                    TableRelation=Territory.Code;
+                    TableRelation = Territory.Code;
                 }
                 field("Territory Crm Id"; Rec."Territory Code Id")
                 {

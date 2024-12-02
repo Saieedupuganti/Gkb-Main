@@ -9,7 +9,7 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
         }
         field(50103; "AlternateVendorNo."; Code[30])
         {
-            Caption = 'Vendor Name';
+            Caption = 'Vendor No';
             TableRelation = Vendor;
         }
         field(50104; "VendorName"; Text[100])
@@ -42,6 +42,11 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
             TableRelation = "Job Task"."Global Dimension 1 Code";
             Caption = 'Obrien Business Unit Code';
             DataClassification = ToBeClassified;
+        }
+        field(50109;"Work Order No";Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Work Order";
         }
     }
 

@@ -223,7 +223,7 @@ table 70000 "Customer Asset"
             Caption = 'Manufacture Detail';
             DataClassification = ToBeClassified;
         }
-         field(5070; "Manufacture Serial No."; Text[100])
+        field(5070; "Manufacture Serial No."; Text[100])
         {
             Caption = 'Manufacture Detail';
             DataClassification = ToBeClassified;
@@ -301,8 +301,8 @@ table 70000 "Customer Asset"
         {
             Caption = 'Status';
             DataClassification = ToBeClassified;
-            OptionCaption = '';
-            OptionMembers = "";
+            OptionCaption = ' ,Active,InActive';
+            OptionMembers = " ",Active,InActive;
         }
         field(5051; "Status reason"; Text[100])
         {
@@ -318,8 +318,8 @@ table 70000 "Customer Asset"
         {
             Caption = 'warrenty';
             DataClassification = ToBeClassified;
-            OptionCaption = '';
-            OptionMembers = "";
+            OptionCaption = ' ,Yes,No';
+            OptionMembers = " ",YES,NO;
         }
         field(5054; "Budgeted hours 3 Monthly"; Integer)
         {
@@ -372,7 +372,7 @@ table 70000 "Customer Asset"
             DataClassification = ToBeClassified;
             TableRelation = Employee;
         }
-         field(5064;Notes; Text[100])
+        field(5064; Notes; Text[100])
         {
             Caption = 'Notes';
             DataClassification = ToBeClassified;

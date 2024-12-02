@@ -28,6 +28,10 @@ page 50312 "API Items"
                 {
                     Caption = 'Base Unit Of Measure';
                 }
+                field("PostingGroup";Rec."Posting Group")
+                {
+                    Caption = 'Posting Group';
+                }
                 field(Description; Rec.Description)
                 {
                     Caption = 'Name';

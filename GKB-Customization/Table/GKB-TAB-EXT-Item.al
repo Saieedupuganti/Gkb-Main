@@ -36,62 +36,71 @@ tableextension 50102 GKBItemExt extends Item
             FieldClass = FlowField;
             CalcFormula = Lookup("Vendor".Name WHERE("No." = FIELD("Vendor No.")));
         }
-        field(50103;QrCode;Blob)
+        field(50103; QrCode; Blob)
         {
-            DataClassification=ToBeClassified;  
+            DataClassification = ToBeClassified;
         }
-        field(50104;SAPITEMID;Code[100])
+        field(50104; SAPITEMID; Code[100])
         {
-            DataClassification=ToBeClassified;  
+            DataClassification = ToBeClassified;
         }
-        field(50105;"CRM ID"; Text[100])
+        field(50105; "CRM ID"; Text[100])
         {
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
         }
-        field(50106;Currency;Code[30])              //lookup
+        field(50106; Currency; Code[30])              //lookup
         {
-        DataClassification = ToBeClassified;
-        TableRelation = Currency;
+            DataClassification = ToBeClassified;
+            TableRelation = Currency;
         }
-        field(50107;"Posting Group";Option)
+        field(50107; "Posting Group"; Option)
         {
             DataClassification = ToBeClassified;
             OptionMembers = "Sample1;Sample";
             OptionCaption = 'Sample1,Sample2';
         }
-        field(50108;"Vendor Id";Code[30])   //lookup
+        field(50108; "Vendor Id"; Text[100])   //lookup
         {
-            DataClassification= ToBeClassified;
-            TableRelation = Vendor;
+
+            DataClassification = ToBeClassified;
+            // TableRelation = Vendor."Dimension ID" WHERE("No." = FIELD("Vendor Id"));
+            trigger OnLookup()
+            var
+                vendor: Record Vendor;
+            begin
+                vendor.Reset();
+                if page.RunModal(page::"Vendor Card", vendor) = Action::LookupOK then
+                    "Vendor Id" := vendor."Dimension ID";
+            end;
         }
-        field(50109;"Product Type";Option)
+        field(50109; "Product Type"; Option)
         {
             DataClassification = ToBeClassified;
             OptionMembers = " ;1;2;3;4";
             OptionCaption = ' ,Sales Inventory,Miscellaneous Charges,Services,Flat Fees';
         }
-        field(50110;"Product Structure";Option)
+        field(50110; "Product Structure"; Option)
         {
             DataClassification = ToBeClassified;
             OptionMembers = "Sample1;Sample";
             OptionCaption = 'Sample1,Sample2';
         }
-        field(50102;Status;Boolean)
+        field(50102; Status; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(50112;"Currency Id";Text[100])
+        field(50112; "Currency Id"; Text[100])
         {
             DataClassification = ToBeClassified;
         }
-        field(50113;"Custom Vendor Id";Text[100])
+        field(50113; "Custom Vendor Id"; Text[100])
         {
             DataClassification = ToBeClassified;
         }
-        field(50114;"Base Unit Of Measure Id";Text[100])
+        field(50114; "Base Unit Of Measure Id"; Text[100])
         {
-            DataClassification=ToBeClassified;
+            DataClassification = ToBeClassified;
         }
         field(50301; "Unit"; Code[30])
         {
