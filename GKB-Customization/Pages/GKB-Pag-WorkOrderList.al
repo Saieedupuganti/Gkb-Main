@@ -3,8 +3,12 @@ page 70002 "Work Order List"
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
+    CardPageId = "Work Order Card";
     SourceTable = "Work Order";
     Caption = 'Work Order List';
+    Editable = false;
+    QueryCategory = 'Work Order List';
+
 
     layout
     {
@@ -51,6 +55,14 @@ page 70002 "Work Order List"
                 field("Time Window End"; rec."Time Window End")
                 {
                     ApplicationArea = All;
+                }
+                field("Project No"; Rec."Project No")
+                {
+                    ApplicationArea = all;
+                }
+                field("Project Task No"; Rec."Project Task No")
+                {
+                    ApplicationArea = all;
                 }
                 field("Status"; rec.Status)
                 {

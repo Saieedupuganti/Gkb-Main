@@ -1,8 +1,6 @@
 namespace Proejct.Proejct;
 
-
 using Microsoft.Inventory.Item;
-
 
 page 50103 "Req Work FactBox"
 {

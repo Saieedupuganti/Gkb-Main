@@ -18,8 +18,8 @@ table 70001 "Work Order"
         field(50002; "System Status"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers =" ",Cancelled,Completed,"In-Progress",Invoiced,Scheduled,Unscheduled;
-            OptionCaption =' ,Cancelled,Completed,In-Progress,Invoiced,Scheduled,Unscheduled'; 
+            OptionMembers = " ",Cancelled,Completed,"In-Progress",Invoiced,Scheduled,Unscheduled;
+            OptionCaption = ' ,Cancelled,Completed,In-Progress,Invoiced,Scheduled,Unscheduled';
         }
         field(50003; "Substatus"; Text[100])
         {
@@ -38,7 +38,7 @@ table 70001 "Work Order"
         field(50006; "Billing Type"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = " ",ChargeUp, Quoted;
+            OptionMembers = " ",ChargeUp,Quoted;
             OptionCaption = ' ,ChargeUp,Quoted';
         }
         field(50007; "Case"; Text[100])
@@ -62,7 +62,7 @@ table 70001 "Work Order"
         field(50011; "Fix Type"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = Repair, Replace, Other;
+            OptionMembers = Repair,Replace,Other;
             OptionCaption = ' ,Repair,Replace,Other';
         }
         field(50012; "Functional Location"; Code[20])
@@ -79,7 +79,7 @@ table 70001 "Work Order"
             DataClassification = CustomerContent;
             TableRelation = "Sales Order Entity Buffer"; // Replace with the related table
         }
-        field(50029;"Sales Order"; Code[20])
+        field(50029; "Sales Order"; Code[20])
         {
             DataClassification = CustomerContent;
             TableRelation = "Sales Header"; // Replace with the related table
@@ -97,13 +97,13 @@ table 70001 "Work Order"
         field(50018; "Taxable"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = Yes, No;
+            OptionMembers = Yes,No;
         }
-        field(50019; "Time Window Start"; DateTime)
+        field(50019; "Time Window Start"; Date)
         {
             DataClassification = CustomerContent;
         }
-        field(50020; "Time Window End"; DateTime)
+        field(50020; "Time Window End"; Date)
         {
             DataClassification = CustomerContent;
         }
@@ -118,13 +118,13 @@ table 70001 "Work Order"
         field(50024; "Work Location"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = Onsite, Remote;
+            OptionMembers = Onsite,Remote;
             OptionCaption = ' ,Onsite,Remote';
         }
-        field(50025; "Work Order Type"; Code[20])
+        field(50025; "Work Order Type"; Text[100])
         {
             DataClassification = CustomerContent;
-            TableRelation = "Work Order"; // Replace with the related table
+            // TableRelation = "Work Order"; // Replace with the related table
         }
         field(50026; "Work Order Summary"; Text[250])
         {
@@ -133,17 +133,51 @@ table 70001 "Work Order"
         field(50027; "Status"; Option)
         {
             DataClassification = CustomerContent;
-          
+
             OptionMembers = Active,InActive;
             OptionCaption = 'Active,InActive';
+        }
+        field(50028; "Project No"; Code[20])
+        {
+            DataClassification = CustomerContent;
+            TableRelation = "Job Task"; // Replace with the related table
+        }
+        field(50030; "Project Task No"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Job Task"."Job Task No.";
         }
     }
 
     keys
     {
-        key(PK; "Work Order Number")
+        key(PK1; "Work Order Number", "Project No")
         {
             Clustered = true;
         }
+        key(PK2; "Work Order Type")
+        {
+        }
     }
+    trigger OnInsert()
+    begin
+        CopyRows();
+    end;
+
+    local procedure CopyRows()
+    var
+        WO: Record "Work Order";
+        Job: Record Job;
+    begin
+        if WO.FindSet() then
+            repeat
+                Job."No." := Rec."Project No";
+                Job.Description := WO."Work Description";
+                Job."Starting Date" := Rec."Time Window Start";
+                Job."Currency Code" := wo.Currency;
+
+                Job.Insert();
+            until WO.Next() = 0;
+    end;
+
 }

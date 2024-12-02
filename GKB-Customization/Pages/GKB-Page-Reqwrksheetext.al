@@ -28,6 +28,12 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
         }
         addlast(Control1)
         {
+            field("Work Order No"; Rec."Work Order No")
+            {
+                Caption = 'Work Order No.';
+                ApplicationArea = all;
+                ShowMandatory = true;
+            }
             field(projectNo; Rec.projectNo)
             {
 
@@ -77,6 +83,24 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 Visible = true;
             }
         }
+        // modify("No.")
+        // {
+        //     trigger OnbeforeValidate()
+        //     var
+        //         Item: Record Item;
+        //     begin
+        //         if Item.Type = Item.Type::Inventory then begin
+        //             // Automatically populate Vendor No. from Item Card
+        //             Rec."Vendor No." := Item."Vendor No.";
+        //         end else begin
+        //             // Allow manual entry for Non-Inventory item type
+        //             Rec."Vendor No." := '';
+        //         end;
+        //     end;
+        // For Non-Inventory or Service items, do not populate
+
+        //}
+
         addafter("Replenishment System")
         {
             field("Requested By Name"; Rec."Requested By Name")
@@ -159,4 +183,5 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             }
         }
     }
+
 }

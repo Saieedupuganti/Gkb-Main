@@ -72,7 +72,7 @@ page 50556 "Customer Asset Card"
                 field("Boiler Type"; Rec."Boiler Type")
                 {
                     ApplicationArea = all;
-                    Caption = 'Asset Location';
+                    Caption = 'Boiler Type';
                 }
                 field("Capacity(KW)"; Rec."Capacity(KW)")
                 {
@@ -207,7 +207,7 @@ page 50556 "Customer Asset Card"
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = all;
-                    Caption = 'manufacture';
+                    Caption = 'Status';
                 }
                 field("Status reason"; Rec."Status reason")
                 {
@@ -275,7 +275,7 @@ page 50556 "Customer Asset Card"
                 field("Manufacture Detail"; Rec."Manufacture Detail")
                 {
                     ApplicationArea = all;
-                    Caption = 'Manufacture Deatails';
+                    Caption = 'Manufacture Details';
                 }
                 field("Manufacture Serial No."; Rec."Manufacture Serial No.")
                 {

@@ -33,8 +33,6 @@ tableextension 50210 "Item Creation Power Automate" extends Item
         if not ContentHeaders.Contains('Content-Encoding') then
             ContentHeaders.Add('Content-Encoding', 'UTF8');
 
-        // assume that the json parameter contains the following data
-        // json.Add('defaultunit', Rec."Base Unit of Measure");
         vendorid:='';
         unitcrmid:='';
         unitgroupcrmid:='';
@@ -125,6 +123,9 @@ tableextension 50210 "Item Creation Power Automate" extends Item
         end else begin
             json.Add('producttype', '1');
         end;
+
+
+        
         // json.Add('purchasename', Rec."Purchasing Code");
         json.WriteTo(jsontext);
         Content.WriteFrom(jsontext);

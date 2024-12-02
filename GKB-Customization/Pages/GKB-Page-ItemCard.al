@@ -16,25 +16,30 @@ pageextension 50149 GKBItemExt extends "Item Card"
         {
             group("D365 Custom Fields")
             {
-                field("OBS Item Name"; Rec."OBS Item Name")
-                {
-                    Caption = 'OBS Item Name';
-                    ApplicationArea = All;
-                }
-                field("D365 Product ID"; Rec."D365 Product ID")
+                // field("OBS Item Name"; Rec."OBS Item Name")
+                // {
+                //     Caption = 'OBS Item Name';
+                //     ApplicationArea = All;
+                // }
+                field("D365 Product ID"; Rec."D365 Product ID")          //Custom
                 {
                     ApplicationArea = all;
                     Caption = 'D365 Product Id';
                 }
-                field("Vendor 1 Catalogue Number"; Rec."Vendor 1 Catalogue Number")
+                field("Vendor 1 Catalogue Number"; Rec."Vendor 1 Catalogue Number")          //custom
                 {
                     ApplicationArea = all;
                 }
-                field("Trade Type"; Rec."Trade Type")
+                field("Vendor Id"; Rec."Vendor Id")                   //custom
                 {
+                    Caption = 'Vendor Id';
                     ApplicationArea = all;
                 }
-                field(SAPITEMID; Rec.SAPITEMID)
+                // field("Trade Type"; Rec."Trade Type")
+                // {
+                //     ApplicationArea = all;
+                // }
+                field(SAPITEMID; Rec.SAPITEMID)                  //custom
                 {
                     ApplicationArea = all;
                     Caption = 'SAP ITEM ID';
@@ -51,69 +56,69 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 //     Caption = 'Description';
                 //     Visible=false;
                 // }
-                field(GrossWeight; Rec."Gross Weight")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Gross Weight';
-                }
-                field(Inventor; Rec."Inventory")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Inventory';
-                }
-                field(No; Rec."No.")
-                {
-                    ApplicationArea = all;
-                    Caption = 'No .';
-                }
-                field(OBSItemName; Rec."OBS Item Name")
+                // field(GrossWeight; Rec."Gross Weight")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Gross Weight';
+                // }
+                // field(Inventor; Rec."Inventory")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Inventory';
+                // }
+                // field(No; Rec."No.")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'No .';
+                // }
+                field(OBSItemName; Rec."OBS Item Name")                    //custom
                 {
                     ApplicationArea = all;
                     Caption = 'OBSItemName';
                     Visible = false;
                 }
-                field(StandardCost; Rec."Standard Cost")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Standard Cost';
-                }
-                field(Tradetype; Rec."Trade Type")
+                // field(StandardCost; Rec."Standard Cost")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Standard Cost';
+                // }
+                field(Tradetype; Rec."Trade Type")                         //custom
                 {
                     ApplicationArea = all;
                     Caption = 'Trade Type';
                 }
-                field(Types; Rec.Type)
-                {
-                    ApplicationArea = all;
-                    Caption = 'Type';
-                }
-                field(UnitCost; Rec."Unit Cost")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Unit Cost';
-                }
-                field(UnitPrice; Rec."Unit Price")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Unit Price';
-                }
-                field(UnitVolume; Rec."Unit Volume")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Unit Volume';
-                }
-                field(Vendor1CatalogueNumber; Rec."Vendor 1 Catalogue Number")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Vendor 1 Catalogue Number';
-                }
+                // field(Types; Rec.Type)
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Type';
+                // }
+                // field(UnitCost; Rec."Unit Cost")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Unit Cost';
+                // }
+                // field(UnitPrice; Rec."Unit Price")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Unit Price';
+                // }
+                // field(UnitVolume; Rec."Unit Volume")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Unit Volume';
+                // }
+                // field(Vendor1CatalogueNumber; Rec."Vendor 1 Catalogue Number")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Vendor 1 Catalogue Number';
+                // }
 
             }
         }
 
         addafter("Vendor Item No.")
         {
-    
+
             field("Vendor Item Name"; Rec."Vendor Item Name")
             {
                 Caption = 'Vendor Name';
