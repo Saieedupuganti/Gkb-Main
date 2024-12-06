@@ -8,6 +8,12 @@ table 50150 "Work Order Type"
         {
             DataClassification = ToBeClassified;  
         }
+        field(2;Status; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "Open","Closed","In Progress";
+            OptionCaption = 'Open,Closed,"In-Progress"';
+        }
     }
     
     keys

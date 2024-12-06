@@ -1,9 +1,9 @@
-page 50151 "WorkOrderTypeCard"
+page 50156 "WorkOrderSubstatusCard"
 {
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "Work Order Type";
+    SourceTable = "Work Order Substatus";
 
     layout
     {
@@ -11,14 +11,19 @@ page 50151 "WorkOrderTypeCard"
         {
             group(General)
             {
-                field("Work Order Name"; Rec."Work Order Name")
+                field("Work Order Name"; Rec."Name")
                 {
                     ApplicationArea = all;
-                    Caption = 'Work Order Type Name';
+                    Caption = 'Name';
                 }
-                field(Status;Rec.Status)
+                field("System Substatus"; Rec."System Substatus")
                 {
-                    ApplicationArea =all;
+                    ApplicationArea = all;
+                    Caption = 'System Substatus';
+                }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = all;
                     Caption = 'Status';
                 }
             }

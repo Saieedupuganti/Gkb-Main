@@ -18,11 +18,13 @@ page 70004 "Work Order Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Work Order Number';
+                    ShowMandatory = true;
                 }
                 field("Service Account"; rec."Service Account")
                 {
                     ApplicationArea = All;
                     Caption = 'Service Account';
+                    ShowMandatory = true;
                 }
                 field("System Status"; Rec."System Status")
                 {
@@ -39,12 +41,12 @@ page 70004 "Work Order Card"
                     ApplicationArea = All;
                     Caption = 'Agreement';
                 }
-                field("Project No";Rec."Project No")
+                field("Project No"; Rec."Project No")
                 {
                     ApplicationArea = all;
                     Caption = 'Project No.';
                 }
-                field("Project Task No";Rec."Project Task No")
+                field("Project Task No"; Rec."Project Task No")
                 {
                     ApplicationArea = all;
                     Caption = 'Project Task No.';
@@ -128,6 +130,7 @@ page 70004 "Work Order Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Topic';
+                    ShowMandatory = true;
                 }
                 field("Work Description"; rec."Work Description")
                 {
@@ -143,6 +146,7 @@ page 70004 "Work Order Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Work Order Type';
+                    ShowMandatory = true;
                 }
                 field("Work Order Summary"; rec."Work Order Summary")
                 {
@@ -153,6 +157,11 @@ page 70004 "Work Order Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Status';
+                }
+                field("Job Created"; Rec."Job Created")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Job Created';
                 }
             }
         }
@@ -166,14 +175,4 @@ page 70004 "Work Order Card"
             }
         }
     }
-
-    actions
-    {
-        area(Processing)
-    {
-    }
-    }
-
-    var
-        myBool: Boolean;
 }

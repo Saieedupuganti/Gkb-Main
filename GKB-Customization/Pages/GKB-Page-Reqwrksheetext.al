@@ -33,10 +33,23 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 Caption = 'Work Order No.';
                 ApplicationArea = all;
                 ShowMandatory = true;
+
+                trigger OnValidate()
+                var
+                WorkOrder : Record "Work Order";
+                begin
+                    if xRec."Work Order No" <> Rec."Work Order No" then begin
+                        WorkOrder.Reset();
+                        if WorkOrder.Get(Rec."Work Order No") then begin
+                            Rec."Project Task No" := WorkOrder."Project Task No";
+                            Rec.projectNo := WorkOrder."Project No";
+                            Rec."Shortcut Dimension 1 Code" := WorkOrder."Owning Business Unit";
+                    end;
+                end;
+            end;
             }
             field(projectNo; Rec.projectNo)
             {
-
                 ApplicationArea = all;
                 ShowMandatory = true;
             }
@@ -46,21 +59,20 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 ApplicationArea = all;
                 ShowMandatory = true;
 
-                trigger OnValidate()
-                var
-                    JobTask: Record "Job Task";
-                //JobTaskDimension: Record "Job Task Dimension";
-                begin
-                    if not JobTask.Get(Rec.projectNo, Rec."Project Task No") then
-                        Error('The Project Task No. %1 does not exist for Project No. %2.', Rec.projectNo, Rec."Project Task No");
+                // trigger OnValidate()
+                // var
+                //     JobTask: Record "Job Task";
+                // //JobTaskDimension: Record "Job Task Dimension";
+                // begin
+                //     if not JobTask.Get(Rec.projectNo, Rec."Project Task No") then
+                //         Error('The Project Task No. %1 does not exist for Project No. %2.', Rec.projectNo, Rec."Project Task No");
 
-                    // Rec."Shortcut Dimension 1 Code" := JobTaskDimension."Dimension Value Code";
-                    Rec."Shortcut Dimension 1 Code" := JobTask."Global Dimension 1 Code";
+                //     // Rec."Shortcut Dimension 1 Code" := JobTaskDimension."Dimension Value Code";
+                //     Rec."Shortcut Dimension 1 Code" := JobTask."Global Dimension 1 Code";
 
-                    Rec.Modify();
-                end;
+                //     Rec.Modify();
+                // end;
             }
-
 
             field("Obrien Business Unit Code"; Rec."Obrien Business Unit Code")
             {

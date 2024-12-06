@@ -1,9 +1,9 @@
-page 50150 "Work Order Type"
+page 50154 "Work Order Substatus Type"
 {
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
-    SourceTable = "Work Order Type";
+    SourceTable = "Work Order Substatus";
 
     layout
     {
@@ -11,9 +11,14 @@ page 50150 "Work Order Type"
         {
             repeater(GroupName)
             {
-                field("Work Order Name"; Rec."Work Order Name")
+                field("Name"; Rec."Name")
                 {
-                    Caption = 'Work Order Type Name';
+                    Caption = 'Name';
+                    ApplicationArea = all;
+                }
+                field("System Substatus"; Rec."System Substatus")
+                {
+                    Caption = 'System Substatus';
                     ApplicationArea = all;
                 }
                 field(Status; Rec.Status)

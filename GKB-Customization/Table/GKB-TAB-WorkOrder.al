@@ -9,6 +9,7 @@ table 70001 "Work Order"
         field(50000; "Work Order Number"; Text[50])
         {
             DataClassification = CustomerContent;
+
         }
         field(50001; "Service Account"; Code[20])
         {
@@ -73,6 +74,7 @@ table 70001 "Work Order"
         field(50013; "Opportunity"; Text[100])
         {
             DataClassification = CustomerContent;
+            TableRelation = Opportunity;
         }
         field(50014; "Owner"; Code[20])
         {
@@ -124,7 +126,7 @@ table 70001 "Work Order"
         field(50025; "Work Order Type"; Text[100])
         {
             DataClassification = CustomerContent;
-            // TableRelation = "Work Order"; // Replace with the related table
+            TableRelation = "Work Order Type";
         }
         field(50026; "Work Order Summary"; Text[250])
         {
@@ -140,18 +142,23 @@ table 70001 "Work Order"
         field(50028; "Project No"; Code[20])
         {
             DataClassification = CustomerContent;
-            TableRelation = "Job Task"; // Replace with the related table
+            TableRelation = "Job"; // Replace with the related table
         }
         field(50030; "Project Task No"; Code[30])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Job Task"."Job Task No.";
         }
+        field(50032; "Job Created"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     keys
     {
-        key(PK1; "Work Order Number", "Project No")
+        key(PK1; "Work Order Number")
         {
             Clustered = true;
         }
@@ -159,25 +166,87 @@ table 70001 "Work Order"
         {
         }
     }
-    trigger OnInsert()
-    begin
-        CopyRows();
-    end;
 
-    local procedure CopyRows()
-    var
-        WO: Record "Work Order";
-        Job: Record Job;
-    begin
-        if WO.FindSet() then
-            repeat
-                Job."No." := Rec."Project No";
-                Job.Description := WO."Work Description";
-                Job."Starting Date" := Rec."Time Window Start";
-                Job."Currency Code" := wo.Currency;
+    //trigger OnInsert()
+    // var
+    //     WO: Record "Work Order"; // Work Order
+    // begin
+    //     // Filter Work Orders where "Job Created" is false
+    //     WO.SetRange("Job Created", false);
+    //     if WO.IsEmpty then
+    //         exit;
 
-                Job.Insert();
-            until WO.Next() = 0;
-    end;
+    //     if WO.FindSet() then
+    //         repeat
+    //             // Check and create Job and Job Task if not already existing
+    //             if JobNotExistForWO(WO) then
+    //                 CreateJobFromWO(WO); // Create Job and Task line
+    //         until WO.Next() = 0;
+    // end;
+
+    // local procedure JobNotExistForWO(var WO: Record "Work Order"): Boolean
+    // var
+    //     Job: Record Job;
+    //     JobTask: Record "Job Task";
+    // begin
+    //     // Filter Job records based on "Service Account" and "Work Order Type"
+    //     Job.SetRange("Service Account", WO."Service Account");
+    //     Job.SetRange("Work Order Type", WO."Work Order Type");
+
+    //     if not Job.FindFirst() then
+    //         exit(true); // No Job exists for this WO, proceed to create one
+
+    //     // Check if a Job Task exists for the specific Job and Work Order Number
+    //     JobTask.SetRange("Job No.", Job."No.");
+    //     JobTask.SetRange("Job Task No.", JobTask."Job Task No.");
+    //     if not JobTask.FindFirst() then begin
+    //         // No Job Task exists, create one
+    //         JobTask.Init();
+    //         JobTask."Job No." := Job."No.";
+    //         JobTask."Job Task No." := WO."Work Order Number"; // Link Work Order Number
+    //         JobTask.Description := WO."Topic"; // Use Work Order Topic
+    //         JobTask.Insert();
+
+    //         // Update WO fields from Job and Task
+    //         if WO."Project No" = '' then
+    //             WO."Project No" := Job."No.";
+    //         WO."Project Task No" := JobTask."Job Task No.";
+    //         WO."Job Created" := true;
+    //         WO.Modify();
+    //     end;
+
+    //     // If Job and Job Task exist, no need to create a new Job
+    //     exit(false);
+    // end;
+
+    // local procedure CreateJobFromWO(WO: Record "Work Order")
+    // var
+    //     Job: Record Job;
+    //     JobTask: Record "Job Task";
+    //     NoSeriesMgt: Codeunit "No. Series";
+    // begin
+    //     // Create Job from WO fields if it does not already exist
+    //     Job.Init();
+    //     Job."No." := NoSeriesMgt.GetNextNo('JOB', 0D, true);
+    //     Job.Description := WO."Service Account" + ' - ' + WO."Work Order Type";
+    //     Job."Service Account" := WO."Service Account";
+    //     Job."Work Order Type" := WO."Work Order Type";
+    //     Job.Insert();
+
+    //     // Create Job Task for the new Job
+    //     JobTask.Init();
+    //     JobTask."Job No." := Job."No.";
+    //     JobTask."Job Task No." := WO."Work Order Number"; // Link Work Order Number
+    //     JobTask.Description := WO."Topic"; // Use Work Order Topic
+    //     JobTask.Insert();
+
+    //     // Update WO fields with Job and Task information
+    //     if WO."Project No" = '' then
+    //         WO."Project No" := Job."No.";
+    //     WO."Project Task No" := JobTask."Job Task No.";
+    //     WO."Job Created" := true;
+    //     WO.Modify();
+    // end;
 
 }
+
