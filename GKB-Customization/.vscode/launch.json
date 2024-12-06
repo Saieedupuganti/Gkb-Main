@@ -6,12 +6,12 @@
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "INTEGRATION",
-            "startupObjectId": 50150,
+            "environmentName": "ObrienDev",
+            "startupObjectId": 70002,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
-            "schemaUpdateMode":"ForceSync",
+            "schemaUpdateMode":"Synchronize",
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true
         }

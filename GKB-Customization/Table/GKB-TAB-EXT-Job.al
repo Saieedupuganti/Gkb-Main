@@ -7,5 +7,21 @@ tableextension 50145 GKBJobExt extends Job
             Caption = 'Comments2';
             DataClassification = ToBeClassified;
         }
+        field(50010; Name; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50001; "Service Account"; Code[20])
+        {
+            DataClassification = CustomerContent;
+            TableRelation = "Customer"; // Replace with the related table if different
+        }
+         field(50025; "Work Order Type"; Text[100])
+        {
+            DataClassification = CustomerContent;
+            TableRelation = "Work Order Type";
+        }
     }
+    //trigger OnInsert()
+
 }
