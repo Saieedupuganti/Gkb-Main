@@ -17,6 +17,16 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
             Caption = 'Vendor Name';
             TableRelation = Vendor.Name;
             ValidateTableRelation = false;
+            trigger OnValidate()
+            var
+                    Vendor: Record Vendor;
+                begin
+                    if Rec."Vendor Name" <> ''then begin
+                        if Vendor.Get(Rec."No.") then begin
+                            Rec."Vendor No." := Vendor."No.";
+                        end;
+                    end;
+                end;
         }
         field(50105; "Vendor Name"; Text[100])
         {
