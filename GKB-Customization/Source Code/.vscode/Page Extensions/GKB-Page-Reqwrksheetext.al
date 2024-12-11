@@ -6,6 +6,7 @@ using System.Security.User;
 using Microsoft.Purchases.Document;
 using Microsoft.Projects.Project.Job;
 using Microsoft.Inventory.Item;
+using Microsoft.Purchases.Vendor;
 
 pageextension 50100 "Req WO" extends "Req. Worksheet"
 {
@@ -36,7 +37,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
 
                 trigger OnValidate()
                 var
-                WorkOrder : Record "Work Order";
+                    WorkOrder: Record "Work Order";
                 begin
                     if xRec."Work Order No" <> Rec."Work Order No" then begin
                         WorkOrder.Reset();
@@ -44,9 +45,9 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                             Rec."Project Task No" := WorkOrder."Project Task No";
                             Rec.projectNo := WorkOrder."Project No";
                             Rec."Shortcut Dimension 1 Code" := WorkOrder."Owning Business Unit";
+                        end;
                     end;
                 end;
-            end;
             }
             field(projectNo; Rec.projectNo)
             {
@@ -84,41 +85,41 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
 
         addafter("Vendor No.")
         {
-            field("Vendor Name"; Rec."Vendor Name")
-            {
-                ApplicationArea = all;
-                Visible = false;
-            }
+            // field("Vendor Name"; Rec."Vendor Name")
+            // {
+            //     ApplicationArea = all;
+            //     Visible = false;
+            //     trigger OnValidate()
+            //     var
+            //         item: Record Item;
+            //         vendor: Record Vendor;
+            //     begin
+            //         if Rec."Type" = Rec."Type"::Item then begin
+            //             if Item.Type = Item.Type::"Non-Inventory" then begin
+            //                 if Vendor.Get(Rec."Vendor Name") then
+            //                     Rec."Vendor No." := Vendor."No.";
+            //             end;
+            //         end;
+            //     end;
+            // }
             field(VendorName; Rec.VendorName)
             {
                 ApplicationArea = all;
                 Visible = true;
             }
         }
-        // modify("No.")
-        // {
-        //     trigger OnbeforeValidate()
-        //     var
-        //         Item: Record Item;
-        //     begin
-        //         if Item.Type = Item.Type::Inventory then begin
-        //             // Automatically populate Vendor No. from Item Card
-        //             Rec."Vendor No." := Item."Vendor No.";
-        //         end else begin
-        //             // Allow manual entry for Non-Inventory item type
-        //             Rec."Vendor No." := '';
-        //         end;
-        //     end;
-        // For Non-Inventory or Service items, do not populate
-
-        //}
-
-        addafter("Replenishment System")
+        modify("Vendor No.")
         {
-            field("Requested By Name"; Rec."Requested By Name")
-            {
-                ApplicationArea = all;
-            }
+
+            trigger OnBeforeValidate()
+            var
+                item: Record Item;
+            begin
+                if item.Type = "Item Type"::Inventory then
+                    VendorNoForInventory()
+                else
+                    VendorNoForNonInventory();
+            end;
         }
         addafter(Control1903326807)
         {
@@ -195,5 +196,34 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             }
         }
     }
+    procedure VendorNoForInventory()
+    var
+        Vendor: Record Vendor;
+        item: Record Item;
+    begin
+        if item.Type = "Item Type"::Inventory then begin
+            // Assuming you have a way to determine the Vendor No. and Vendor Name
+            Vendor.Get(Rec."Vendor No.");
+            rec."Vendor No." := Vendor."No.";
+            rec.VendorName := Vendor.Name;
+        end;
+    end;
 
+    procedure VendorNoForNonInventory()
+    var
+        item: Record Item;
+        vendor: Record Vendor;
+    begin
+        if item.Type <> "Item Type"::Inventory then begin
+            // Vendor No. should be populated when Vendor Name is selected manually
+            // Assuming you have a way to determine the Vendor No. based on Vendor Name
+            if rec.VendorName <> '' then begin
+                // Logic to find and set Vendor No. based on Vendor Name
+                // Example:
+                Vendor.Get(Rec.VendorName);
+                rec."Vendor No." := Vendor."No.";
+            end;
+        end;
+    end;
 }
+
