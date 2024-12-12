@@ -5,7 +5,6 @@ page 50702 "CDS Account List"
     SourceTable = "CDS Account";
     ApplicationArea = All;
     UsageCategory = Lists;
-
     layout
     {
         area(content)
@@ -191,38 +190,38 @@ page 50702 "CDS Account List"
             }
         }
     }
-    actions
-    {
-        area(processing)
-        {
-            action(CreateFromCDS)
-            {
-                ApplicationArea = All;
-                Caption = 'Create in Business Central';
-                Promoted = true;
-                PromotedCategory = Process;
-                ToolTip = 'Generate the table from the coupled Microsoft Dataverse lab book.';
-                trigger OnAction()
-                var
-                    CDSLabBook: Record "CDS Account";
-                    CRMIntegrationManagement: Codeunit "CRM Integration Management";
-                begin
-                    CurrPage.SetSelectionFilter(CDSLabBook);
-                    CRMIntegrationManagement.CreateNewRecordsFromCRM(CDSLabBook);
-                end;
-            }
-        }
-    }
-    var
-        CurrentlyCoupledCDSAccount: Record "CDS Account";
+    // actions
+    // {
+    //     area(processing)
+    //     {
+    //         action(CreateFromCDS)
+    //         {
+    //             ApplicationArea = All;
+    //             Caption = 'Create in Business Central';
+    //             Promoted = true;
+    //             PromotedCategory = Process;
+    //             ToolTip = 'Generate the table from the coupled Microsoft Dataverse lab book.';
+    //             trigger OnAction()
+    //             var
+    //                 CDSLabBook: Record "CDS Account";
+    //                 CRMIntegrationManagement: Codeunit "CRM Integration Management";
+    //             begin
+    //                 CurrPage.SetSelectionFilter(CDSLabBook);
+    //                 CRMIntegrationManagement.CreateNewRecordsFromCRM(CDSLabBook);
+    //             end;
+    //         }
+    //     }
+    // }
+    // var
+    //     CurrentlyCoupledCDSAccount: Record "CDS Account";
 
-    trigger OnInit()
-    begin
-        Codeunit.Run(Codeunit::"CRM Integration Management");
-    end;
+    // trigger OnInit()
+    // begin
+    //     Codeunit.Run(Codeunit::"CRM Integration Management");
+    // end;
 
-    procedure SetCurrentlyCoupledCDSAccount(CDSAccount: Record "CDS Account")
-    begin
-        CurrentlyCoupledCDSAccount := CDSAccount;
-    end;
+    // procedure SetCurrentlyCoupledCDSAccount(CDSAccount: Record "CDS Account")
+    // begin
+    //     CurrentlyCoupledCDSAccount := CDSAccount;
+    // end;
 }
