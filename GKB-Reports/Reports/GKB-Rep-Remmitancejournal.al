@@ -12,7 +12,7 @@ using System.Utilities;
 report 60120 "Remittance Advice - Journal"
 {
     DefaultLayout = Word;
-    WordLayout = './Purchases/Reports/RemittanceAdviceJournal.Docx';
+    RDLCLayout = './Purchases/Reports/RemittanceAdviceJournal.rdlc';
     Caption = 'Remittance Advice - Journal';
     WordMergeDataItem = VendLoop;
 
