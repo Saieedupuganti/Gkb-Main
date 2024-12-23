@@ -3,7 +3,6 @@ page 70004 "Work Order Card"
     PageType = Card;
     ApplicationArea = All;
     SourceTable = "Work Order";
-    UsageCategory = Administration;
     Caption = 'Work Order Card';
     AboutTitle = 'Work Order Card';
     RefreshOnActivate = true;
@@ -30,6 +29,10 @@ page 70004 "Work Order Card"
                 {
                     ApplicationArea = All;
                     Caption = 'System Status';
+                }
+                field("CRM ID"; Rec."CRM ID")
+                {
+                    ApplicationArea = all;
                 }
                 field("Substatus"; Rec.Substatus)
                 {
@@ -81,6 +84,14 @@ page 70004 "Work Order Card"
                     ApplicationArea = All;
                     Caption = 'Currency';
                 }
+            }
+            part("Lines"; "Work Order Lines ListPart")
+            {
+                ApplicationArea = basic, suite;
+                SubPageLink = "Work Order No." = FIELD("Work Order Number");
+            }
+            group(Billing)
+            {
                 field("Fix Type"; rec."Fix Type")
                 {
                     ApplicationArea = All;
@@ -173,6 +184,7 @@ page 70004 "Work Order Card"
                 ApplicationArea = All;
                 Caption = 'Attachments';
             }
+
         }
     }
 }

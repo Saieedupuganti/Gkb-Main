@@ -699,6 +699,14 @@
       Description = '';
       Caption = 'QR Code Pixel Size';
     }
+    field(50105; "CRM ID"; GUID)
+{
+    ExternalName = 'crm_id';
+    ExternalType = 'Lookup';
+    Description = '';
+    Caption = 'CRM ID';
+    TableRelation = "CDS Account".AccountId;
+}
   }
   keys
   {

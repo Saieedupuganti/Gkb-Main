@@ -153,6 +153,11 @@ table 70001 "Work Order"
         {
             DataClassification = ToBeClassified;
         }
+        field(50105; "CRM ID"; Text[100])
+        {
+            Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
 
     }
 
@@ -194,6 +199,7 @@ table 70001 "Work Order"
         Job.SetRange("Work Order Type", WO."Work Order Type");
 
         if not Job.FindFirst() then
+        
             exit(true); // No Job exists for this WO, proceed to create one
 
         // Check if a Job Task exists for the specific Job and Work Order Number

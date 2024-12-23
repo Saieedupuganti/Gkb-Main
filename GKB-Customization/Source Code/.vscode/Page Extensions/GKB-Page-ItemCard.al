@@ -16,11 +16,6 @@ pageextension 50149 GKBItemExt extends "Item Card"
         {
             group("D365 Custom Fields")
             {
-                // field("OBS Item Name"; Rec."OBS Item Name")
-                // {
-                //     Caption = 'OBS Item Name';
-                //     ApplicationArea = All;
-                // }
                 field("D365 Product ID"; Rec."D365 Product ID")          //Custom
                 {
                     ApplicationArea = all;
@@ -35,14 +30,21 @@ pageextension 50149 GKBItemExt extends "Item Card"
                     Caption = 'Vendor Id';
                     ApplicationArea = all;
                 }
-                // field("Trade Type"; Rec."Trade Type")
-                // {
-                //     ApplicationArea = all;
-                // }
+               field(Tradetype; Rec."Trade Type")                         //custom
+                {
+                    ApplicationArea = all;
+                    Caption = 'Trade Type';
+                }
                 field(SAPITEMID; Rec.SAPITEMID)                  //custom
                 {
                     ApplicationArea = all;
                     Caption = 'SAP ITEM ID';
+                }
+                field(OBSItemName; Rec."OBS Item Name")                    //custom
+                {
+                    ApplicationArea = all;
+                    Caption = 'OBSItemName';
+                    Visible = false;
                 }
                 // field(BaseUnitofMeasure;Rec."Base Unit of Measure")
                 // {
@@ -71,22 +73,13 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 //     ApplicationArea = all;
                 //     Caption = 'No .';
                 // }
-                field(OBSItemName; Rec."OBS Item Name")                    //custom
-                {
-                    ApplicationArea = all;
-                    Caption = 'OBSItemName';
-                    Visible = false;
-                }
+                
                 // field(StandardCost; Rec."Standard Cost")
                 // {
                 //     ApplicationArea = all;
                 //     Caption = 'Standard Cost';
                 // }
-                field(Tradetype; Rec."Trade Type")                         //custom
-                {
-                    ApplicationArea = all;
-                    Caption = 'Trade Type';
-                }
+                
                 // field(Types; Rec.Type)
                 // {
                 //     ApplicationArea = all;

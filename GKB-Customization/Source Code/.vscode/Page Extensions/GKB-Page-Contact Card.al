@@ -2,42 +2,21 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
 {
     layout
     {
+
         addafter(General)
         {
             group("D365 CUSTOM FIELDS")
             {
-                field("Contact ID"; Rec."Contact ID")
+                field("D365 Contact ID"; Rec."D365 Contact ID")
                 {
                     ApplicationArea = All;
-                    Caption = 'Contact ID';
+                    Caption = 'D365 Contact ID';
                 }
                 field("E-Mail Group Code"; Rec."E-Mail Group Code")
                 {
                     ApplicationArea = All;
                     Caption = 'E-Mail Group Code';
                 }
-                // field("Description";Rec."Description")
-                // {
-                //     ApplicationArea = All;
-                //     Caption = 'Description';
-                // }
-                field("Primary Contact"; Rec."Primary Contact")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Primary Contact';
-                }
-                field("Dimension"; Rec.Dimension)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Dimension';
-                    TableRelation="Dimension Value".Code;
-                }
-                field("Dimension Crm Id"; Rec."Dimension ID")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Dimension ID';
-                }
-            
             }
         }
         addbefore(Address)
@@ -55,21 +34,51 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
             {
                 ApplicationArea = all;
             }
-            
+
 
         }
-        addafter("Contact ID")
+        addafter("D365 Contact ID")
         {
             field("Description"; Rec.Description)
             {
-                Caption='Description';
-                ApplicationArea=All;
+                Caption = 'Description';
+                ApplicationArea = All;
             }
             field("CRM Id"; Rec."CRM ID")
             {
-                Caption='CRM Id';
-                ApplicationArea=All;
+                Caption = 'CRM Id';
+                ApplicationArea = All;
+            }
+            field("D365 State"; Rec."D365 State")
+            {
+                ApplicationArea = All;
+                Caption = 'State';
+            }
+
+            field("D365 Country"; Rec."D365 Country")
+            {
+                ApplicationArea = All;
+                Caption = 'Country';
+            }
+
+            field("D365 City"; Rec."D365 City")
+            {
+                ApplicationArea = All;
+                Caption = 'City';
+            }
+
+            field("D365 Postal Code"; Rec."D365 Postal Code")
+            {
+                ApplicationArea = All;
+                Caption = 'PostCode';
             }
         }
     }
 }
+
+
+
+
+
+
+

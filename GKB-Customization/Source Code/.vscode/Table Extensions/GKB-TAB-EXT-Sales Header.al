@@ -22,6 +22,10 @@ tableextension 50125 "GKBSales HeaderExt" extends "Sales Header"
         {
             Caption = 'Address 3';
         }
+        field(50203; "Sales Order Name";Text[100])
+        {
+            Caption = 'Sales Order Name';
+        }
     }
 
     var

@@ -6,9 +6,7 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
     {
       group("Dynamics")
       {
-        // Editable = true;
-        // Enabled = true;
-        // Visible = true;
+        
         Caption='Dynamics';
         
         field("CRM ID";Rec."CRM ID")
@@ -16,16 +14,6 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
           ApplicationArea=All;
           Caption='CRM ID';
         }
-        // field("Unit of Measure";Rec."Unit of Measure Code"){
-        //   ApplicationArea=All;
-        //   Caption='Unit of Measure Code';
-        //   TableRelation="Unit of Measure".Code;
-        // }
-        // field("Unit of Measure Code CRMID";Rec."Unit of Measure Code CRMID")
-        // {
-        //   ApplicationArea=All;
-        //   Caption='Unit of Measure Code CRMID';
-        // }
         field("Owner";Rec."Owner")
         {
           ApplicationArea=All;

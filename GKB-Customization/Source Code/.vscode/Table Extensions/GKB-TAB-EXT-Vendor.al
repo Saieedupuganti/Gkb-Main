@@ -2,6 +2,30 @@ tableextension 50142 "Vendor Ext" extends Vendor
 {
     fields
     {
+        field(50149; "D365 State"; Text[100])
+        {
+            Caption = 'State';
+            DataClassification = ToBeClassified;
+        }
+
+        field(50148; "D365 Country"; Text[100])
+        {
+            Caption = 'Country';
+            DataClassification = ToBeClassified;
+        }
+
+        field(50147; "D365 City"; Text[100])
+        {
+            Caption = 'City';
+            DataClassification = ToBeClassified;
+        }
+
+        field(50146; "D365 Postal Code"; Text[100])
+        {
+            Caption = 'PostCode';
+            DataClassification = ToBeClassified;
+        }
+
         field(50142; "Vendor Profile"; Option)
         {
             Caption = 'Vendor Profile';
@@ -68,23 +92,12 @@ tableextension 50142 "Vendor Ext" extends Vendor
             OptionCaption = ' ,Competitor,Consultant,Customer,Influencer,Investor,Manufacturer,Partner,Press,Prospect,Reseller,Sub Contractor,Vendor,Others';
             OptionMembers = " ",Competitor,Consultant,Customer,Influencer,Investor,Manufacturer,Partner,Press,Prospect,Reseller,"Sub Contractor",Vendor,Others;
         }
-        // field(50112; "Credit Hold"; Option)
-        // {
-        //     Caption = 'Credit Hold';
-        //     DataClassification = ToBeClassified;
-        //     OptionCaption = 'Option1,Option2';
-        //     OptionMembers = "Option1","Option2";
-        // }
         field(50112; "Credit Hold"; Boolean)
         {
             Caption = 'Credit Hold';
             DataClassification = ToBeClassified;
         }
-        field(50113; "SAP Vendor No"; Text[100])
-        {
-            Caption = 'SAP Vendor No';
-            DataClassification = ToBeClassified;
-        }
+
         field(50115; "Owner Ship"; Option)
         {
             Caption = 'Owner Ship';
@@ -100,11 +113,7 @@ tableextension 50142 "Vendor Ext" extends Vendor
         {
             Caption = 'Address 3';
         }
-        field(50117; "Contact Code"; Code[30])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = Contact;
-        }
+
         field(50118; State; Text[100])
         {
             DataClassification = ToBeClassified;
@@ -116,22 +125,12 @@ tableextension 50142 "Vendor Ext" extends Vendor
         }
         field(50120; "Dimension"; Text[100])
         {
-            Caption = 'Description';
+            Caption = 'Dimension';
             DataClassification = ToBeClassified;
         }
         field(50121; WEB; Text[100])
         {
             DataClassification = ToBeClassified;
-        }
-        field(50122; "Sales Person Code"; Code[30])
-        {
-            DataClassification = ToBeClassified;
-            //TableRelation = 
-        }
-        field(50123; "Customer Price Group"; Code[30])
-        {
-            DataClassification = ToBeClassified;
-            //TableRelation = 
         }
         field(50124; "Address Name"; Text[100])
         {
@@ -139,8 +138,13 @@ tableextension 50142 "Vendor Ext" extends Vendor
         }
         field(50501; "Primary Contact No Id"; Text[100])
         {
-            Caption = 'Customer Price Group Id';
             DataClassification = ToBeClassified;
+        }
+        field(50150; "Company Conatct"; Code[30])
+        {
+
+            FieldClass = FlowField;
+            CalcFormula = Lookup("Contact"."No." WHERE("Name" = FIELD(Name)));
         }
         field(50503; "Currency Code Id"; Text[100])
         {
@@ -161,20 +165,12 @@ tableextension 50142 "Vendor Ext" extends Vendor
         {
             DataClassification = ToBeClassified;
         }
-        field(50507; "CRM ID"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
         field(50510; "Dimension ID"; Text[100])
         {
             Caption = 'Dimension ID';
             DataClassification = ToBeClassified;
         }
-        field(50511; "Customer Price Group Id"; Text[100])
-        {
-            Caption = 'Customer Price Group Id';
-            DataClassification = ToBeClassified;
-        }
+
         field(50512; "Custom Contact Id"; Text[100])
         {
             Caption = 'Custom Contact Id';
@@ -202,10 +198,6 @@ tableextension 50142 "Vendor Ext" extends Vendor
         }
     }
 
-
-
-
-    
     trigger OnAfterModify()
     var
         dimRec: Record "Dimension Value";
@@ -213,49 +205,48 @@ tableextension 50142 "Vendor Ext" extends Vendor
         currencyRec: Record Currency;
         contactRec: Record Contact;
         territoryRec: Record Territory;
-        modified:Integer;
+        modified: Integer;
     begin
-        
-        modified:=0;
+
+        modified := 0;
         // Check if field has changed and is not empty
-        if (Rec."Primary Contact No Id"<>'') and (xRec."Primary Contact No Id"<>Rec."Primary Contact No Id") then begin
-            contactRec.SetFilter("CRM ID",Rec."Primary Contact No Id");
+        if (Rec."Primary Contact No Id" <> '') and (xRec."Primary Contact No Id" <> Rec."Primary Contact No Id") then begin
+            contactRec.SetFilter("CRM ID", Rec."Primary Contact No Id");
             if contactRec.FindFirst() then begin
                 Rec."Primary Contact No." := contactRec."No.";
-                // Rec."Primary Contact No." := contactRec."No.";
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
-        
+
         // Check if field has changed and is not empty
-        if (Rec."Currency Code Id"<>'') and (xRec."Currency Code Id"<>Rec."Currency Code Id") then begin
-            currencyRec.SetFilter("CRM ID",Rec."Currency Code Id");
+        if (Rec."Currency Code Id" <> '') and (xRec."Currency Code Id" <> Rec."Currency Code Id") then begin
+            currencyRec.SetFilter("CRM ID", Rec."Currency Code Id");
             if currencyRec.FindFirst() then begin
                 Rec."Currency Code" := currencyRec.Code;
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
 
         // Check if field has changed and is not empty
-        if (Rec."Dimension ID"<>'') and (xRec."Dimension ID" <>Rec."Dimension ID") then begin
-            dimRec.SetFilter("CRM ID",Rec."Dimension ID");
+        if (Rec."Dimension ID" <> '') and (xRec."Dimension ID" <> Rec."Dimension ID") then begin
+            dimRec.SetFilter("CRM ID", Rec."Dimension ID");
             if dimRec.FindFirst() then begin
                 Rec.Dimension := dimRec.Code;
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
 
         // Check if field has changed and is not empty
-        if (Rec."Territory Code ID"<>'') and (xRec."Territory Code ID" <>Rec."Territory Code ID") then begin
-            territoryRec.SetFilter("CRM ID",Rec."Territory Code ID");
+        if (Rec."Territory Code ID" <> '') and (xRec."Territory Code ID" <> Rec."Territory Code ID") then begin
+            territoryRec.SetFilter("CRM ID", Rec."Territory Code ID");
             if territoryRec.FindFirst() then begin
                 Rec."Territory Code" := territoryRec.Code;
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
 
         // Nodify only if found atleast 1 CRM - BC match
-        if modified>0 then begin
+        if modified > 0 then begin
             Rec.Modify(false);
         end;
     end;

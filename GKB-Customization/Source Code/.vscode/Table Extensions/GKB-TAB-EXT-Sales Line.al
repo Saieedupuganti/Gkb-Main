@@ -28,6 +28,11 @@ tableextension 50128 "GKBSales LineExt" extends "Sales Line"
             DataClassification = ToBeClassified;
             TableRelation = Item."No.";
         }
+        field(50107; "CRM ID"; Text[100])
+        {
+            Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
     }
 
 }

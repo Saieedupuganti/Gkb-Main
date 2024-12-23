@@ -2,6 +2,7 @@ namespace Proejct.Proejct;
 
 using Microsoft.Inventory.Requisition;
 using System.Automation;
+using Microsoft.Integration.Dataverse;
 using System.Security.User;
 using Microsoft.Purchases.Document;
 using Microsoft.Projects.Project.Job;
@@ -85,42 +86,33 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
 
         addafter("Vendor No.")
         {
-            // field("Vendor Name"; Rec."Vendor Name")
-            // {
-            //     ApplicationArea = all;
-            //     Visible = false;
-            //     trigger OnValidate()
-            //     var
-            //         item: Record Item;
-            //         vendor: Record Vendor;
-            //     begin
-            //         if Rec."Type" = Rec."Type"::Item then begin
-            //             if Item.Type = Item.Type::"Non-Inventory" then begin
-            //                 if Vendor.Get(Rec."Vendor Name") then
-            //                     Rec."Vendor No." := Vendor."No.";
-            //             end;
-            //         end;
-            //     end;
-            // }
             field(VendorName; Rec.VendorName)
             {
                 ApplicationArea = all;
                 Visible = true;
+                trigger OnValidate()
+                var
+                    VendorRec: Record Vendor;
+                begin
+                    if VendorRec.Get(Rec."Vendor Name") then
+                        Rec."Vendor No." := VendorRec."No.";
+                end;
+
             }
         }
-        modify("Vendor No.")
-        {
+        // modify("Vendor No.")
+        // {
 
-            trigger OnBeforeValidate()
-            var
-                item: Record Item;
-            begin
-                if item.Type = "Item Type"::Inventory then
-                    VendorNoForInventory()
-                else
-                    VendorNoForNonInventory();
-            end;
-        }
+        //     trigger OnBeforeValidate()
+        //     var
+        //         item: Record Item;
+        //     begin
+        //         if item.Type = "Item Type"::Inventory then
+        //             VendorNoForInventory()
+        //         else
+        //             VendorNoForNonInventory();
+        //     end;
+        // }
         addafter(Control1903326807)
         {
             part(ItemAvailability; "Req WO FactBox")
@@ -185,6 +177,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 Promoted = true;
                 PromotedCategory = Process;
                 AccessByPermission = tabledata 454 = rim;
+                Visible = false;
 
 
                 trigger OnAction()
@@ -194,8 +187,8 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
 
                 end;
             }
+            }
         }
-    }
     procedure VendorNoForInventory()
     var
         Vendor: Record Vendor;
@@ -225,5 +218,10 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             end;
         end;
     end;
+
+    var
+        CurrentlyCoupledCDSSalesadi_PurchaseRequest: Record "CDS adigkb_PurchaseRequest";
+
 }
+
 

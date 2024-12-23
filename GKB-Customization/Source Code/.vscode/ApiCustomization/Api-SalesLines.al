@@ -18,6 +18,10 @@ page 50330 "API Sales Lines"
         {
             group(GroupName)
             {
+                field("CRMID";Rec."CRM ID")
+                {
+                    Caption = 'CRM ID';
+                }
                 field(Quantity; Rec.Quantity)
                 {
                     Caption = 'Quantity';

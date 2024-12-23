@@ -58,4 +58,27 @@ pageextension 50123 "GKB customer list EXT" extends "Customer List"
             }
         }
     }
+    actions
+    {
+        addafter(Dimensions)
+        {
+            action(DeletingShiptoaddress)
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                trigger OnAction()
+                var
+                    ManINt: Record 5384;
+                begin
+                    ManINt.Reset();
+                    ManINt.SetRange("Table Field No.", 102);
+                    ManINt.SetRange("Integration Table Field No.", 49);
+                    if ManINt.FindFirst() then
+                     ManINt.Delete();  
+                end;
+            }
+        }
+    }
 }

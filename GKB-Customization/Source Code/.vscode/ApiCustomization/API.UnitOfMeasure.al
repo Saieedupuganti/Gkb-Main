@@ -14,7 +14,7 @@ page 50304 "API UOM"
     {
         area(Content)
         {
-            repeater(GroupName)
+            repeater(General)
             {
                 field(code; Rec."Code")
                 {
