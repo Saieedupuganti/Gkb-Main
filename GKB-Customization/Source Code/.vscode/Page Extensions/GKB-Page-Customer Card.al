@@ -9,7 +9,22 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
             Visible = true;
             ShowMandatory = true;
         }
-
+        modify("Post Code")
+        {
+            Visible = false;
+        }
+        modify("Country/Region Code")
+        {
+            Visible = false;
+        }
+        modify(City)
+        {
+            Visible = false;
+        }
+        // modify("Primary Contact No.")
+        // {
+        //  CalcFormula = Lookup(Contact."No." WHERE ("CRM ID" = Field("Primary Contact CRMID")));
+        // }
         addafter(General)
         {
             group("D365 CUSTOM FIELDS")
@@ -26,7 +41,6 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                     Caption = 'Supplier account Group';
                     ShowMandatory = true;
                     Editable = true;
-                    //Enabled = false;
                     Visible = true;
                 }
                 field("D365 Account ID"; Rec."D365 Account ID")
@@ -48,7 +62,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Account Contract Manager';
-                    //look up 
+
                 }
                 field("Capex From"; Rec."Capex From")
                 {
@@ -83,6 +97,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 field("Owner Ship"; Rec."Owner Ship")
                 {
                     ApplicationArea = all;
+                    Visible = false;
                 }
                 field("crmid"; Rec."CRM ID")
                 {
@@ -91,45 +106,51 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 field(WEB; Rec.WEB)
                 {
                     ApplicationArea = all;
-                    Caption = 'WEB';
+                    Caption = 'Web';
                 }
                 field(Dimension; Rec.Dimension)
                 {
                     ApplicationArea = all;
                     Caption = 'Dimension';
-                    TableRelation="Dimension Value".Code;
-                }
-                field("Dimension Crm Id"; Rec."Dimension ID")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Dimension Crm Id';
+                    TableRelation = "Dimension Value".Code;
                 }
                 field("Territory"; Rec."Territory Code")
                 {
                     ApplicationArea = all;
                     Caption = 'Territory';
-                    TableRelation=Territory.Code;
-                }
-                field("Territory Crm Id"; Rec."Territory Code Id")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Territory Crm Id';
-                }
-                field("Contact Code";Rec."Contact Code")
-                {
-                    ApplicationArea=all;
-                    Caption = 'Contact Code';
+                    TableRelation = Territory.Code;
                 }
                 field("Primary Contact"; Rec."Primary Contact")
                 {
                     ApplicationArea = all;
-                    Caption = 'Primary Contact';
+                    Caption = 'Company Contact';
                 }
-                field("Primary Contact CRM ID"; Rec."Primary Contact CRMID")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Primary Contact CRM ID';
-                }
+            }
+        }
+        addlast("Address & Contact")
+        {
+            field("D365 State"; Rec."D365 State")
+            {
+                ApplicationArea = All;
+                Caption = 'State';
+            }
+
+            field("D365 Country"; Rec."D365 Country")
+            {
+                ApplicationArea = All;
+                Caption = 'Country';
+            }
+
+            field("D365 City"; Rec."D365 City")
+            {
+                ApplicationArea = All;
+                Caption = 'City';
+            }
+
+            field("D365 PostCode"; Rec."D365 PostCode")
+            {
+                ApplicationArea = All;
+                Caption = 'PostCode';
             }
         }
         addafter("Address 2")
@@ -145,15 +166,6 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
             {
                 ApplicationArea = all;
             }
-        }
-
-        addafter("IRD No.")
-        {
-            // field("ABN No."; Rec."ABN No.")
-            // {
-            //     ApplicationArea = All;
-            //     ShowMandatory = true;
-            // }
         }
 
     }

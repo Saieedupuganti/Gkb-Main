@@ -1,4 +1,13 @@
-// codeunit 50550 "InsertJobRecordFromWorkOrder"
+codeunit 50550 "InsertJobRecordFromWorkOrder"
+{
+    [EventSubscriber(ObjectType::Page, Page::"Contact Card", OnBeforeOnNewRecord, '', true, true)]
+    local procedure OnBeforeOnOpenPage(var Contact: Record Contact)
+    begin
+        if Contact.Type = Contact.Type::Company then
+            Contact.Type := Contact.Type::Person;
+    end;
+}
+
 // {
 // trigger OnRun()
 //     var

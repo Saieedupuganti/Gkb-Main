@@ -14,6 +14,11 @@ table 50150 "Work Order Type"
             OptionMembers = "Open","Closed","In Progress";
             OptionCaption = 'Open,Closed,"In-Progress"';
         }
+        field(50105; "CRM ID"; Text[100])
+        {
+            Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
     }
     
     keys

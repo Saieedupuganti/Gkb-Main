@@ -9,6 +9,18 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
             Visible = true;
             ShowMandatory = true;
         }
+        modify("Post Code")
+        {
+            Visible = false;
+        }
+        modify("Country/Region Code")
+        {
+            Visible = false;
+        }
+        modify(City)
+        {
+            Visible = false;
+        }
         addafter(General)
         {
             group("D365 CUSTOM FIELDS")
@@ -16,7 +28,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 field("Vendor Profile"; Rec."Vendor Profile")
                 {
                     ApplicationArea = All;
-                    Caption = 'Vendor Profile';
+                    Caption = 'Customer Profile';
                 }
                 field("D365 Account ID"; Rec."D365 Account ID")
                 {
@@ -61,12 +73,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Credit Hold';
-                    Visible = false;
-                }
-                field("SAP Vendor No"; Rec."SAP Vendor No")
-                {
-                    ApplicationArea = All;
-                    Caption = 'SAP Vendor No';
+
                 }
                 field("Owner Ship"; Rec."Owner Ship")
                 {
@@ -76,21 +83,6 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 {
                     ApplicationArea = all;
                 }
-                field(State; Rec.State)
-                {
-                    ApplicationArea = all;
-                    Caption = 'State';
-                }
-                field("Sales Person Code"; Rec."Sales Person Code")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Sales Person Code';
-                }
-                field("Contact Code"; Rec."Contact Code")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Contact Code';
-                }
                 field("Supplier account Group"; Rec."Supplier account Group")
                 {
                     ApplicationArea = all;
@@ -99,7 +91,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 field(WEB; Rec.WEB)
                 {
                     ApplicationArea = all;
-                    Caption = 'WEB';
+                    Caption = 'Web';
                 }
                 field(Dimension; Rec.Dimension)
                 {
@@ -107,32 +99,20 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                     Caption = 'Dimension';
                     TableRelation = "Dimension Value".Code;
                 }
-                field("Dimension Crm Id"; Rec."Dimension ID")
-                {
-                    ApplicationArea = all;
-                    Caption = 'D365 Id';
-
-                }
                 field(Description; Rec.Description)
                 {
                     ApplicationArea = all;
                     Caption = 'Description';
                 }
-                field("Customer Price Group"; Rec."Customer Price Group")
+                field("Company Conatct";Rec."Company Conatct")
                 {
                     ApplicationArea = all;
-                    Caption = 'Customer Price Group';
-                }
-                field("Primary Contact"; Rec."Primary Contact No.")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Primary Contact';
-                    TableRelation = Contact."No.";
+                    Caption = 'Company Contact';
                 }
                 field("Primary Contact CRM ID"; Rec."Primary Contact No Id")
                 {
                     ApplicationArea = all;
-                    Caption = 'Primary Contact CRM ID';
+                    Caption = 'CRM ID';
                 }
                 field("Territory"; Rec."Territory Code")
                 {
@@ -140,22 +120,9 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                     Caption = 'Territory Code';
                     TableRelation = Territory.Code;
                 }
-                field("Territory Crm Id"; Rec."Territory Code Id")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Territory Code Id';
-                }
-
             }
         }
-        addafter("IRD No.")
-        {
-            // field("ABN No."; Rec."ABN No.")
-            // {
-            //     ApplicationArea = All;
-            //     ShowMandatory = true;
-            // }
-        }
+
         addafter("Address 2")
         {
             field("Address 3"; Rec."Address 3")
@@ -168,6 +135,32 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
             field("Address Name"; Rec."Address Name")
             {
                 ApplicationArea = all;
+            }
+        }
+        addlast("Address & Contact")
+        {
+            field("D365 State"; Rec."D365 State")
+            {
+                ApplicationArea = All;
+                Caption = 'State';
+            }
+
+            field("D365 Country"; Rec."D365 Country")
+            {
+                ApplicationArea = All;
+                Caption = 'Country';
+            }
+
+            field("D365 City"; Rec."D365 City")
+            {
+                ApplicationArea = All;
+                Caption = 'City';
+            }
+
+            field("D365 Postal Code"; Rec."D365 Postal Code")
+            {
+                ApplicationArea = All;
+                Caption = 'PostCode';
             }
         }
     }

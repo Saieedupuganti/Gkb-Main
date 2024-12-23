@@ -2,7 +2,7 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
 {
     layout
     {
-        addafter(Status) // Adds the new field after the 'Status' field
+        addafter(Status) 
         {
             field("Percentage"; Rec.Percentage)
             {
@@ -11,7 +11,6 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
             }
         }
     }
-
     actions
     {
         addafter("Archi&ve Document")

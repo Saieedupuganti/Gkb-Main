@@ -28,10 +28,6 @@ page 50321 "API Customer"
                 {
                     Caption = 'no';
                 }
-                field(primarycontactid; Rec."Primary Contact CRMID")
-                {
-                    Caption = 'Primary Contact CRMID';
-                }
                 field("PhoneNo"; Rec."Phone No.")
                 {
                     Caption = 'Phone No.';
@@ -203,10 +199,6 @@ page 50321 "API Customer"
                 field(supplieraccountgroup; Rec."Supplier Account Group")
                 {
                     Caption = 'Supplier Account Group';
-                }
-                field(website; Rec.Website)
-                {
-                    Caption = 'Website';
                 }
                 field("BlockPaymentTolerance"; Rec."Block Payment Tolerance")
                 {

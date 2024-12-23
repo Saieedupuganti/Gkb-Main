@@ -9,12 +9,6 @@ pageextension 50138 GKBVendorExt extends "Vendor List"
                 ApplicationArea = All;
                 Caption = 'Vendor Profile';
             }
-            // field("Supplier account Group"; Rec."Supplier account Group")
-            // {
-            //     ApplicationArea = All;
-            //     Caption = 'Supplier account Group';
-            //     ShowMandatory = false;
-            // }
             field("D365 Account ID"; Rec."D365 Account ID")
             {
                 ApplicationArea = All;
@@ -54,7 +48,7 @@ pageextension 50138 GKBVendorExt extends "Vendor List"
                 Visible = true;
                 ShowMandatory = true;
             }
-            
+
         }
     }
 }

@@ -23,9 +23,9 @@ page 50340 "API Vendor"
                 {
                     Caption = 'no';
                 }
-                field("crmid"; Rec."CRM ID")
+                field("PrimaryContactNoId";Rec."Primary Contact No Id")
                 {
-                    Caption = 'BC ID';
+                    Caption = 'CRM Id';
                 }
                 field(Address; Rec.Address)
                 {
@@ -176,10 +176,6 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Address Name';
                 }
-                field("ContactCode"; Rec."Contact Code")
-                {
-                    Caption = 'Contact Code';
-                }
                 field(State; Rec.State)
                 {
                     Caption = 'State';
@@ -204,18 +200,7 @@ page 50340 "API Vendor"
                 {
                     Caption = 'WEB';
                 }
-                field("CustomerPriceGroup"; Rec."Customer Price Group")
-                {
-                    Caption = 'Customer Price Group';
-                }
-                field("CustomerPriceGroupId"; Rec."Customer Price Group Id")
-                {
-                    Caption = 'Customer Price Group Id';
-                }
-                field("SalesPersonCode"; Rec."Sales Person Code")
-                {
-                    Caption = 'Sales Person Code';
-                }
+                
                 field("OwnerShip"; Rec."Owner Ship")
                 {
                     Caption = 'Owner Ship';

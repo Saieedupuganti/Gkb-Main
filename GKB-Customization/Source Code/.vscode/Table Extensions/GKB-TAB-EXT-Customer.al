@@ -2,6 +2,29 @@ tableextension 50100 "Customer Ext" extends Customer
 {
     fields
     {
+        field(50149; "D365 State"; Text[100])
+        {
+            Caption = 'State';
+            DataClassification = ToBeClassified;
+        }
+
+        field(50150; "D365 Country"; Text[100])
+        {
+            Caption = 'Country';
+            DataClassification = ToBeClassified;
+        }
+
+        field(50145; "D365 City"; Text[100])
+        {
+            Caption = 'City';
+            DataClassification = ToBeClassified;
+        }
+
+        field(50146; "D365 PostCode"; Text[100])
+        {
+            Caption = 'PostCode';
+            DataClassification = ToBeClassified;
+        }
         field(50101; "Customer Profile"; Option)
         {
             Caption = 'Customer Profile';
@@ -37,6 +60,8 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'Account Contract Manager';
             DataClassification = ToBeClassified;
+            TableRelation = Employee;
+
         }
         field(50107; "Capex From"; Date)
         {
@@ -93,7 +118,7 @@ tableextension 50100 "Customer Ext" extends Customer
             OptionCaption = 'Sample1,Sample2';
             OptionMembers = Sample1,Sample2;
         }
-        field(50117; "Address 3";Text[100])
+        field(50117; "Address 3"; Text[100])
         {
             Caption = 'Address 3';
         }
@@ -107,14 +132,14 @@ tableextension 50100 "Customer Ext" extends Customer
             Caption = 'Account Contract Manager ID';
             DataClassification = ToBeClassified;
         }
-        field(50137;WEB;Text[100])
+        field(50137; WEB; Text[100])
         {
             DataClassification = ToBeClassified;
         }
-        field(50138;"Contact Code";Code[30])
+        field(50138; "Contact Code"; Code[30])
         {
             DataClassification = ToBeClassified;
-            TableRelation= Contact;
+            TableRelation = Contact;
         }
         field(50500; "Dimension"; Code[20])
         {
@@ -152,23 +177,13 @@ tableextension 50100 "Customer Ext" extends Customer
         }
         field(50133; "Primary Contact"; Text[100])
         {
-            Caption = 'Primary Contact';
-            DataClassification = ToBeClassified;
-            TableRelation = Contact."No.";
-        }
-        field(50134; "Primary Contact CRMID"; Text[100])
-        {
-            Caption = 'Primary Contact CRMID';
-            DataClassification = ToBeClassified;
+            Caption = 'Company Contact';
+            FieldClass = FlowField;
+            CalcFormula = Lookup("Contact"."No." WHERE("Name" = FIELD(Name)));
         }
         field(50136; "Address Name"; Text[100])
         {
             Caption = 'Address Name';
-            DataClassification = ToBeClassified;
-        }
-        field(50139; "Website"; Code[30])
-        {
-            Caption = 'Website';
             DataClassification = ToBeClassified;
         }
         field(50140; "Owner Id"; Text[100])
@@ -199,8 +214,6 @@ tableextension 50100 "Customer Ext" extends Customer
     }
 
 
-
-
     trigger OnAfterModify()
     var
         dimRec: Record "Dimension Value";
@@ -208,49 +221,49 @@ tableextension 50100 "Customer Ext" extends Customer
         currencyRec: Record Currency;
         contactRec: Record Contact;
         territoryRec: Record Territory;
-        modified:Integer;
+        modified: Integer;
     begin
-        
-        modified:=0;
+
+        modified := 0;
         // Check if field has changed and is not empty
-        if (Rec."Primary Contact CRMID"<>'') and (xRec."Primary Contact CRMID"<>Rec."Primary Contact CRMID") then begin
-            contactRec.SetFilter("CRM ID",Rec."Primary Contact CRMID");
+        if (Rec."CRM ID" <> '') and (xRec."CRM ID" <> Rec."CRM ID") then begin
+            contactRec.SetFilter("CRM ID", Rec."CRM ID");
             if contactRec.FindFirst() then begin
-                Rec."Primary Contact" := contactRec."No.";
+                // Rec."Primary Contact" := contactRec."No.";
                 Rec."Primary Contact No." := contactRec."No.";
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
-        
+
         // Check if field has changed and is not empty
-        if (Rec."Currency Code Id"<>'') and (xRec."Currency Code Id"<>Rec."Currency Code Id") then begin
-            currencyRec.SetFilter("CRM ID",Rec."Currency Code Id");
+        if (Rec."Currency Code Id" <> '') and (xRec."Currency Code Id" <> Rec."Currency Code Id") then begin
+            currencyRec.SetFilter("CRM ID", Rec."Currency Code Id");
             if currencyRec.FindFirst() then begin
                 Rec."Currency Code" := currencyRec.Code;
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
 
         // Check if field has changed and is not empty
-        if (Rec."Dimension ID"<>'') and (xRec."Dimension ID" <>Rec."Dimension ID") then begin
-            dimRec.SetFilter("CRM ID",Rec."Dimension ID");
+        if (Rec."Dimension ID" <> '') and (xRec."Dimension ID" <> Rec."Dimension ID") then begin
+            dimRec.SetFilter("CRM ID", Rec."Dimension ID");
             if dimRec.FindFirst() then begin
                 Rec.Dimension := dimRec.Code;
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
 
         // Check if field has changed and is not empty
-        if (Rec."Territory Code ID"<>'') and (xRec."Territory Code ID" <>Rec."Territory Code ID") then begin
-            territoryRec.SetFilter("CRM ID",Rec."Territory Code ID");
+        if (Rec."Territory Code ID" <> '') and (xRec."Territory Code ID" <> Rec."Territory Code ID") then begin
+            territoryRec.SetFilter("CRM ID", Rec."Territory Code ID");
             if territoryRec.FindFirst() then begin
                 Rec."Territory Code" := territoryRec.Code;
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
 
         // Nodify only if found atleast 1 CRM - BC match
-        if modified>0 then begin
+        if modified > 0 then begin
             Rec.Modify(false);
         end;
     end;

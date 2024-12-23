@@ -20,6 +20,11 @@ table 50152 "Work Order Substatus"
             OptionMembers = Active,InActive;
             OptionCaption = 'Active,InActive';
         }
+        field(50105; "CRM ID"; Text[100])
+        {
+            Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

@@ -2,7 +2,30 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
 {
     fields
     {
-        field(50100; "Contact ID"; Text[100])
+        field(50149; "D365 State"; Text[100])
+        {
+            Caption = 'State';
+            DataClassification = ToBeClassified;
+        }
+
+        field(50148; "D365 Country"; Text[100])
+        {
+            Caption = 'Country';
+            DataClassification = ToBeClassified;
+        }
+
+        field(50147; "D365 City"; Text[100])
+        {
+            Caption = 'City';
+            DataClassification = ToBeClassified;
+        }
+
+        field(50146; "D365 Postal Code"; Text[100])
+        {
+            Caption = 'PostCode';
+            DataClassification = ToBeClassified;
+        }
+        field(50100; "D365 Contact ID"; Text[100])
         {
             Caption = 'Contact ID';
             DataClassification = ToBeClassified;
@@ -25,7 +48,7 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
         }
         field(70104; "Adress Name"; Text[100])
         {
-            // Caption = 'Adress Name';
+            
             DataClassification = ToBeClassified;
         }
         field(70107; "Address 2 Street1"; Text[100])
@@ -50,11 +73,11 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             Caption = 'Dimension ID';
             DataClassification = ToBeClassified;
         }
-        field(50133; "Primary Contact"; Text[100])
+        field(50133; "Company Contact"; Text[100])
         {
-            Caption = 'Primary Contact';
+            Caption = 'Company Contact';
             DataClassification = ToBeClassified;
-            TableRelation = Contact."No.";
+            //TableRelation = Contact."No.";
         }
         field(50134; "Dimension"; Text[100])
         {
@@ -67,10 +90,6 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             DataClassification = ToBeClassified;
         }
     }
-
-
-
-
     trigger OnAfterModify()
     var
         dimRec: Record "Dimension Value";
@@ -78,32 +97,34 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
         currencyRec: Record Currency;
         dimensionCode: text;
         customerCode: text;
-        modified:Integer;
+        modified: Integer;
     begin
-        
-        modified:=0;
+
+        modified := 0;
 
         // Check if field has changed and is not empty
-        if (Rec."Currency CRM Id"<>'') and (xRec."Currency CRM ID" <>Rec."Currency CRM ID") then begin
-            currencyRec.SetFilter("CRM ID",Rec."Currency CRM ID");
+        if (Rec."Currency CRM Id" <> '') and (xRec."Currency CRM ID" <> Rec."Currency CRM ID") then begin
+            currencyRec.SetFilter("CRM ID", Rec."Currency CRM ID");
             if currencyRec.FindFirst() then begin
                 Rec."Currency Code" := currencyRec.Code;
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
 
         // Check if field has changed and is not empty
-        if (Rec."Dimension ID"<>'') and (xRec."Dimension ID" <>Rec."Dimension ID") then begin
-            dimRec.SetFilter("CRM ID",Rec."Dimension ID");
+        if (Rec."Dimension ID" <> '') and (xRec."Dimension ID" <> Rec."Dimension ID") then begin
+            dimRec.SetFilter("CRM ID", Rec."Dimension ID");
             if dimRec.FindFirst() then begin
                 Rec.Dimension := dimRec.Code;
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
 
         // Modify only if found atleast 1 CRM - BC match
-        if modified>0 then begin
+        if modified > 0 then begin
             Rec.Modify(false);
         end;
     end;
+
+    
 }
