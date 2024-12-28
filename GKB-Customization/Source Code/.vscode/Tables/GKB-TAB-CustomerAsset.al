@@ -79,6 +79,11 @@ table 70000 "Customer Asset"
             DataClassification = ToBeClassified;
             TableRelation = Location;
         }
+         field(50131; "CRM ID"; Text[100])
+        {
+            Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
         field(5012; "Agreement"; Code[50])
         {
             Caption = 'Agreement';

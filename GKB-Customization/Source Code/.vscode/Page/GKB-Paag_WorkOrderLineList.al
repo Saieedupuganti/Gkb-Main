@@ -14,6 +14,10 @@ page 50152 "Work Order Lines List"
         {
             repeater(Group)
             {
+                field("Line No.";Rec."Line No.")
+                {
+                    Caption = 'Line No. ';
+                }
                 field("Work Order No"; Rec."Work Order No.")
                 {
                     Caption = 'Work Order No.';

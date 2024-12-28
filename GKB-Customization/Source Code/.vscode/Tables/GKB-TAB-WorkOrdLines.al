@@ -3,12 +3,12 @@ table 50151 "Work Order Lines"
     DataClassification = ToBeClassified;
     fields
     {
-        field(44; "Line No."; Code[30])
+        field(44; "Line No."; Integer)
         {
             Caption = 'Line No.';
             DataClassification = ToBeClassified;
         }
-        field(1000; "Work Order No."; Code[20])
+        field(1000; "Work Order No."; Code[30])
         {
             Caption = 'Work Order No.';
             TableRelation = "Work Order";
@@ -80,7 +80,7 @@ table 50151 "Work Order Lines"
     }
     keys
     {
-        key(key1; "Line No.", "Work Order No.")
+        key(Key1; "Line No.")
         {
             Clustered = true;
         }
@@ -89,4 +89,30 @@ table 50151 "Work Order Lines"
 
         }
     }
+    trigger OnInsert()
+    begin
+        if ("Project code" <> '') and ("Project Task code" <> '') then
+            LinkToProjectPlanningLines();
+    end;
+
+    procedure LinkToProjectPlanningLines()
+    var
+        ProjectPlanningLine: Record "job Planning Line";
+    begin
+        // Set filters to locate the corresponding Project Planning Line
+        ProjectPlanningLine.SetRange("job No.", Rec."Project code");
+        ProjectPlanningLine.SetRange("job Task No.", Rec."Project Task code");
+
+        // Check if the Project Planning Line exists
+        if ProjectPlanningLine.FindFirst() then begin
+            // Create a new line in Project Planning Lines
+            ProjectPlanningLine.Init();
+            ProjectPlanningLine."job No." := Rec."Project code";
+            ProjectPlanningLine."job Task No." := Rec."Project Task code";
+            // Set other fields as necessary
+            ProjectPlanningLine.Insert();
+        end else
+            Error('Project Planning Line not found for Project No. %1 and Project Task No. %2', Rec."Project code", Rec."Project Task code");
+    end;
 }
+

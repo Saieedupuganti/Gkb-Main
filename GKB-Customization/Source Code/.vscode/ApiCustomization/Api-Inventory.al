@@ -16,6 +16,7 @@ page 50320 "API Inventory"
         {
             group(GroupName)
             {
+                field("CRMID";Rec."CRM ID"){}
                 field(Description;Rec.Description)
                 {
                     Caption = 'Description';

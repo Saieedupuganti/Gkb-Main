@@ -9,61 +9,70 @@ page 50308 "Req.Worksheet API"
     EntitySetName = 'PurcchaseRequest';
     SourceTable = "Requisition Line";
     DelayedInsert = true;
-    
+
     layout
     {
         area(Content)
         {
             repeater(General)
             {
-                field("VendorItemNo";Rec."Vendor Item No.")
+                field("CrmId"; Rec."Crm Id")
                 {
-                    Caption = 'fieldCaption';                   
+                    Caption = 'Crm Id';
                 }
-                field(Type;Rec.Type)
+                field("VendorItemNo"; Rec."Vendor Item No.")
+                {
+                    Caption = 'fieldCaption';
+                }
+                field(Type; Rec.Type)
                 {
                     Caption = 'Type';
                 }
-                field("No";Rec."No.")
+                field("No"; Rec."No.")
                 {
                     Caption = 'No.';
                 }
-                field(Description;Rec.Description){
+                field(Description; Rec.Description)
+                {
                     Caption = 'Description';
                 }
-                field("ObrienBusinessUnitCode";Rec."Obrien Business Unit Code")
+                field("ObrienBusinessUnitCode"; Rec."Obrien Business Unit Code")
                 {
                     Caption = 'Obrien Business Unit Code';
                 }
-                field("LocationCode";Rec."Location Code")
+                field("LocationCode"; Rec."Location Code")
                 {
                     Caption = 'Location Code';
                 }
-                field("VendorNo";Rec."Vendor No.")
+                field("VendorNo"; Rec."Vendor No.")
                 {
                     Caption = 'Vendor No.';
                 }
-                field(Quantity;Rec.Quantity)
+                field(Quantity; Rec.Quantity)
                 {
                     Caption = 'Quantity';
                 }
-                field("UnitofMeasureCode";Rec."Unit of Measure Code")
+                field("UnitofMeasureCode"; Rec."Unit of Measure Code")
                 {
                     Caption = 'Unit of Measure Code';
                 }
-                field("DueDate";Rec."Due Date")
+                field("WorkOrderNo"; Rec."Work Order No")
+                {
+                    Caption = 'Work Order No.';
+                }
+                field("DueDate"; Rec."Due Date")
                 {
                     Caption = 'Due Date';
                 }
-                field("DirectUnitCost";Rec."Direct Unit Cost")
+                field("DirectUnitCost"; Rec."Direct Unit Cost")
                 {
                     Caption = 'Direct Unit Cost';
                 }
-                field(VendorName;Rec.VendorName)
+                field(VendorName; Rec.VendorName)
                 {
                     Caption = 'Vendor Name';
                 }
-                field(projectNo;Rec.projectNo)
+                field(projectNo; Rec.projectNo)
                 {
                     Caption = 'Project No.';
                 }
