@@ -1,4 +1,4 @@
-page 50325 "API Sales Order"
+page 50322 "API Sales Order"
 {
     PageType = API;
     Caption = 'API Sales Order';

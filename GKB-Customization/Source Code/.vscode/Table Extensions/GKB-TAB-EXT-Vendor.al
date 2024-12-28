@@ -186,6 +186,11 @@ tableextension 50142 "Vendor Ext" extends Vendor
             Caption = 'Owner';
             DataClassification = ToBeClassified;
         }
+        field(50170; "CRM ID"; Text[100])
+        {
+            Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
         field(50143; "Parent Account CRM ID"; Text[100])
         {
             Caption = 'Parent Account CRM ID';

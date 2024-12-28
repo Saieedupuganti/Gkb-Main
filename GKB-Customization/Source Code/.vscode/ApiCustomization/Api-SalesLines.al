@@ -1,14 +1,11 @@
 page 50330 "API Sales Lines"
 {
     PageType = API;
-    Caption = 'API Sales Line';
-    ApplicationArea = All;
     APIPublisher = 'integration';
-    APIGroup = 'Api';
+    APIGroup = 'api';
     APIVersion = 'v2.0', 'v1.0';
     EntityName = 'SalesLines';
     EntitySetName = 'SalesLines';
-    UsageCategory = Administration;
     SourceTable = "Sales Line";
     DelayedInsert = true;
 
@@ -16,9 +13,9 @@ page 50330 "API Sales Lines"
     {
         area(Content)
         {
-            group(GroupName)
+            repeater(General)
             {
-                field("CRMID";Rec."CRM ID")
+                field("CRMID"; Rec."CRM ID")
                 {
                     Caption = 'CRM ID';
                 }

@@ -5,11 +5,11 @@ page 60033 "Work Order Lines API"
     SourceTable = "Work Order Lines";
     APIPublisher = 'integration';
     APIGroup = 'api';
-    APIVersion = 'v2.0','v1.0';
+    APIVersion = 'v2.0', 'v1.0';
     EntityName = 'WorkOrderLine';
     EntitySetName = 'WorkOrderLines';
     DelayedInsert = true;
-    
+
 
     layout
     {
@@ -17,6 +17,9 @@ page 60033 "Work Order Lines API"
         {
             repeater(Group)
             {
+                field("CRMID"; Rec."CRM ID")
+                {
+                }
                 field("WorkOrderNo"; Rec."Work Order No.")
                 {
                 }
@@ -61,6 +64,6 @@ page 60033 "Work Order Lines API"
                 }
             }
         }
-    }   
+    }
 }
 

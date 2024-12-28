@@ -31,6 +31,11 @@ tableextension 50120 "GKBPurchase LineExt" extends "Purchase Line"
             DataClassification = ToBeClassified;
             TableRelation = "Dimension Value";
         }
+         field(50107; "CRM ID"; Text[100])
+        {
+            Caption = 'CRM ID';
+            DataClassification = ToBeClassified;
+        }
         
     }
 }

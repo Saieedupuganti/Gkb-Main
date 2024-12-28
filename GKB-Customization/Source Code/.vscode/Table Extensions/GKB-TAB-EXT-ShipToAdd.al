@@ -15,6 +15,10 @@ tableextension 50250 "ShipToAddExt" extends "Ship-to Address"
         {
             DataClassification = ToBeClassified;
         }
+        field(50103;"Crm Id";Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

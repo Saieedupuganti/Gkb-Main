@@ -23,7 +23,7 @@ page 50340 "API Vendor"
                 {
                     Caption = 'no';
                 }
-                field("PrimaryContactNoId";Rec."Primary Contact No Id")
+                field("CrmId";Rec."Primary Contact No Id")
                 {
                     Caption = 'CRM Id';
                 }

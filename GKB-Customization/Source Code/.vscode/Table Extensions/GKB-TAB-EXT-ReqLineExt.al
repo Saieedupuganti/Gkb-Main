@@ -12,6 +12,11 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
             Caption = 'Vendor No';
             TableRelation = Vendor;
         }
+        field(50130; "Crm Id"; Text[100])
+        {
+            Caption = 'Crm Id';
+            DataClassification = ToBeClassified;
+        }
         field(50104; "VendorName"; Text[100])
         {
             Caption = 'Vendor Name';
@@ -19,14 +24,14 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
             ValidateTableRelation = false;
             trigger OnValidate()
             var
-                    Vendor: Record Vendor;
-                begin
-                    if Rec."Vendor Name" <> ''then begin
-                        if Vendor.Get(Rec."No.") then begin
-                            Rec."Vendor No." := Vendor."No.";
-                        end;
+                Vendor: Record Vendor;
+            begin
+                if Rec."Vendor Name" <> '' then begin
+                    if Vendor.Get(Rec."No.") then begin
+                        Rec."Vendor No." := Vendor."No.";
                     end;
                 end;
+            end;
         }
         field(50105; "Vendor Name"; Text[100])
         {
@@ -53,7 +58,7 @@ tableextension 50150 "Requesion Line Ext" extends "Requisition Line"
             Caption = 'Obrien Business Unit Code';
             DataClassification = ToBeClassified;
         }
-        field(50109;"Work Order No";Code[30])
+        field(50109; "Work Order No"; Code[30])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Work Order";

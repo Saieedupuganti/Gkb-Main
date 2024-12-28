@@ -7,5 +7,10 @@ tableextension 50127 "GKBSales Invoice LineExt" extends "Sales Invoice Line"
             Caption = 'Comments2';
             DataClassification = ToBeClassified;
         }
+        field(50101;"Crm Id";Text[100])
+        {
+            Caption = 'Crm Id';
+            DataClassification = ToBeClassified;
+        }
     }
 }
