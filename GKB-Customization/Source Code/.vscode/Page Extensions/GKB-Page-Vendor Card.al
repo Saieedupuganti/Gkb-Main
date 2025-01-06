@@ -21,6 +21,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
         {
             Visible = false;
         }
+
         addafter(General)
         {
             group("D365 CUSTOM FIELDS")
@@ -93,18 +94,13 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                     ApplicationArea = all;
                     Caption = 'Web';
                 }
-                field(Dimension; Rec.Dimension)
-                {
-                    ApplicationArea = all;
-                    Caption = 'Dimension';
-                    TableRelation = "Dimension Value".Code;
-                }
+
                 field(Description; Rec.Description)
                 {
                     ApplicationArea = all;
                     Caption = 'Description';
                 }
-                field("Company Conatct";Rec."Company Conatct")
+                field("Company Conatct"; Rec."Company Conatct")
                 {
                     ApplicationArea = all;
                     Caption = 'Company Contact';
@@ -135,6 +131,17 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
             field("Address Name"; Rec."Address Name")
             {
                 ApplicationArea = all;
+            }
+            field(Dimension; Rec.Dimension)
+            {
+                ApplicationArea = all;
+                Caption = 'Dimension';
+                TableRelation = "Dimension Value".Code;
+            }
+            field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+            {
+                ApplicationArea = all;
+                Caption = 'Global Dimension 1 Code';
             }
         }
         addlast("Address & Contact")

@@ -7,7 +7,7 @@ page 50342 "API WorkOrderSubStatus"
     APIVersion = 'v2.0', 'v1.0';
     APIPublisher = 'integration';
     DelayedInsert = true;
-    SourceTable = "Work Order Substatus";
+    SourceTable = "GKB Work Order Substatus";
 
     layout
     {

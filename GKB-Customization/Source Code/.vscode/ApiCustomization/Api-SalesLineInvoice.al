@@ -4,10 +4,9 @@ page 50104 "SalesInvoiceLineAPI"
     APIGroup = 'api';
     APIPublisher = 'integration';
     APIVersion = 'v2.0','v1.0';
-    SourceTable = "Sales Invoice Line";
+    SourceTable = "Sales Line";
     EntityName = 'SalesInvoiceLine';
     EntitySetName = 'SalesInvoiceLines';
-    Caption = 'Sales Invoice Line';
     DelayedInsert = true;
 
     layout
@@ -16,7 +15,8 @@ page 50104 "SalesInvoiceLineAPI"
         {
             repeater(General)
             {
-                field("CrmId";Rec."Crm Id"){
+                field("CrmId";Rec."Crm Id")
+                {
                     Caption = 'Crm Id';
                 }
                 field("SellToCustomerNo"; Rec."Sell-to Customer No.")
@@ -146,14 +146,6 @@ page 50104 "SalesInvoiceLineAPI"
                 field("ShipmentLineNo"; Rec."Shipment Line No.")
                 {
                     Caption = 'Shipment Line No.';
-                }
-                field("OrderNo"; Rec."Order No.")
-                {
-                    Caption = 'Order No.';
-                }
-                field("OrderLineNo"; Rec."Order Line No.")
-                {
-                    Caption = 'Order Line No.';
                 }
                 field("BillToCustomerNo"; Rec."Bill-to Customer No.")
                 {

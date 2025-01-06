@@ -6,7 +6,7 @@ page 50308 "Req.Worksheet API"
     APIGroup = 'api';
     APIVersion = 'v2.0';
     EntityName = 'PurchaseRequest';
-    EntitySetName = 'PurcchaseRequest';
+    EntitySetName = 'PurchaseRequest';
     SourceTable = "Requisition Line";
     DelayedInsert = true;
 
@@ -20,10 +20,10 @@ page 50308 "Req.Worksheet API"
                 {
                     Caption = 'Crm Id';
                 }
-                field("VendorItemNo"; Rec."Vendor Item No.")
-                {
-                    Caption = 'fieldCaption';
-                }
+                field("LineNo"; Rec."Line No.") { }
+                field("WorksheetTemplateName"; Rec."Worksheet Template Name") { }
+                field("JournalBatchName"; Rec."Journal Batch Name") { }
+
                 field(Type; Rec.Type)
                 {
                     Caption = 'Type';
@@ -36,7 +36,7 @@ page 50308 "Req.Worksheet API"
                 {
                     Caption = 'Description';
                 }
-                field("ObrienBusinessUnitCode"; Rec."Obrien Business Unit Code")
+                field("ObrienBusinessUnitCode"; Rec."Dimension Value")
                 {
                     Caption = 'Obrien Business Unit Code';
                 }
@@ -44,7 +44,7 @@ page 50308 "Req.Worksheet API"
                 {
                     Caption = 'Location Code';
                 }
-                field("VendorNo"; Rec."Vendor No.")
+                field("VendorNo"; Rec."Vendor No.")  
                 {
                     Caption = 'Vendor No.';
                 }
@@ -56,6 +56,7 @@ page 50308 "Req.Worksheet API"
                 {
                     Caption = 'Unit of Measure Code';
                 }
+                field("BaseUnitOfMeasure"; Item."Base Unit of Measure") { }   //From item Table.
                 field("WorkOrderNo"; Rec."Work Order No")
                 {
                     Caption = 'Work Order No.';
@@ -64,19 +65,9 @@ page 50308 "Req.Worksheet API"
                 {
                     Caption = 'Due Date';
                 }
-                field("DirectUnitCost"; Rec."Direct Unit Cost")
-                {
-                    Caption = 'Direct Unit Cost';
-                }
-                field(VendorName; Rec.VendorName)
-                {
-                    Caption = 'Vendor Name';
-                }
-                field(projectNo; Rec.projectNo)
-                {
-                    Caption = 'Project No.';
-                }
             }
         }
     }
+    var
+        Item: Record Item;
 }

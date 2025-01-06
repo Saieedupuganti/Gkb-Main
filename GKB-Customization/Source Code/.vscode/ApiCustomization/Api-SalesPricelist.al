@@ -18,9 +18,9 @@ page 57016 "Sales Price List API"
             repeater(General)
             {
                 field("CrmId";Rec."Crm Id")
-            {
+                {
                 Caption = 'Crm ID';
-            }
+                }
                 field(Code; Rec.Code)
                 {
                     Caption = 'Code';

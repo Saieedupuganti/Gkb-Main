@@ -6,7 +6,7 @@ page 50227 "CustomerAssetAPI"
     APIVersion = 'v2.0', 'v1.0';
     EntityName = 'CustomerAsset';
     EntitySetName = 'CustomerAssets';
-    SourceTable = "Customer Asset";
+    SourceTable = "GKB Customer Asset";
     DelayedInsert = true;
 
     // Define the fields to be included in the API

@@ -2,7 +2,7 @@ page 60033 "Work Order Lines API"
 {
     PageType = API;
     ApplicationArea = All;
-    SourceTable = "Work Order Lines";
+    SourceTable = "GKB Work Order Lines";
     APIPublisher = 'integration';
     APIGroup = 'api';
     APIVersion = 'v2.0', 'v1.0';
@@ -56,10 +56,10 @@ page 60033 "Work Order Lines API"
                 field("TotalAmount"; Rec."Total Amount")
                 {
                 }
-                field("ProjectCode"; Rec."Project Code")
+                field("ProjectCode"; Rec."Job No.")
                 {
                 }
-                field("ProjectTaskCode"; Rec."Project Task Code")
+                field("ProjectTaskCode"; Rec."Work OrDER No.")
                 {
                 }
             }
