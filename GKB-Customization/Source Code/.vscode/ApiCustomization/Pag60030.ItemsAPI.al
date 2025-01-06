@@ -180,31 +180,31 @@
 //                         RegisterFieldSet(Rec.FieldNo("Tax Group Id"));
 //                     end;
 //                 }
-//                 field(taxGroupCode; Rec."Tax Group Code")
-//                 {
-//                     Caption = 'Tax Group Code';
+                // field(taxGroupCode; Rec."Tax Group Code")
+                // {
+                //     Caption = 'Tax Group Code';
 
-//                     trigger OnValidate()
-//                     begin
-//                         if TaxGroup.Code <> '' then begin
-//                             if TaxGroup.Code <> Rec."Tax Group Code" then
-//                                 Error(TaxGroupValuesDontMatchErr);
-//                             exit;
-//                         end;
+                //     trigger OnValidate()
+                //     begin
+                //         if TaxGroup.Code <> '' then begin
+                //             if TaxGroup.Code <> Rec."Tax Group Code" then
+                //                 Error(TaxGroupValuesDontMatchErr);
+                //             exit;
+                //         end;
 
-//                         if Rec."Tax Group Code" = '' then
-//                             Rec."Tax Group Id" := BlankGUID
-//                         else begin
-//                             if not TaxGroup.Get(Rec."Tax Group Code") then
-//                                 Error(TaxGroupCodeDoesNotMatchATaxGroupErr);
+                //         if Rec."Tax Group Code" = '' then
+                //             Rec."Tax Group Id" := BlankGUID
+                //         else begin
+                //             if not TaxGroup.Get(Rec."Tax Group Code") then
+                //                 Error(TaxGroupCodeDoesNotMatchATaxGroupErr);
 
-//                             Rec."Tax Group Id" := TaxGroup.SystemId;
-//                         end;
+                //             Rec."Tax Group Id" := TaxGroup.SystemId;
+                //         end;
 
-//                         RegisterFieldSet(Rec.FieldNo("Tax Group Code"));
-//                         RegisterFieldSet(Rec.FieldNo("Tax Group Id"));
-//                     end;
-//                 }
+                //         RegisterFieldSet(Rec.FieldNo("Tax Group Code"));
+                //         RegisterFieldSet(Rec.FieldNo("Tax Group Id"));
+                //     end;
+                // }
 //                 field(baseUnitOfMeasureId; Rec."Unit of Measure Id")
 //                 {
 //                     Caption = 'Base Unit Of Measure Id';

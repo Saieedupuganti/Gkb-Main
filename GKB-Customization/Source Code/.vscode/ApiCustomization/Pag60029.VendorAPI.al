@@ -94,29 +94,29 @@
 //                 //             RegisterFieldSet(Rec.FieldNo("Post Code"));
 //                 //         end;
 //                 //     }
-//                 field("State"; Rec."State1")
-//                 {
-//                     ApplicationArea = All;
-//                     Caption = 'State';
-//                 }
+//                 // field("State"; Rec."State1")
+//                 // {
+//                 //     ApplicationArea = All;
+//                 //     Caption = 'State';
+//                 // }
 
-//                 field("Country"; Rec."Country1")
-//                 {
-//                     ApplicationArea = All;
-//                     Caption = 'Country';
-//                 }
+//                 // field("Country"; Rec."Country1")
+//                 // {
+//                 //     ApplicationArea = All;
+//                 //     Caption = 'Country';
+//                 // }
 
-//                 field("City1"; Rec."City1")
-//                 {
-//                     ApplicationArea = All;
-//                     Caption = 'City';
-//                 }
+//                 // field("City1"; Rec."City1")
+//                 // {
+//                 //     ApplicationArea = All;
+//                 //     Caption = 'City';
+//                 // }
 
-//                 field("PostCode"; Rec."PostCode1")
-//                 {
-//                     ApplicationArea = All;
-//                     Caption = 'PostCode';
-//                 }
+//                 // field("PostCode"; Rec."PostCode1")
+//                 // {
+//                 //     ApplicationArea = All;
+//                 //     Caption = 'PostCode';
+//                 // }
 //                 field(phoneNumber; Rec."Phone No.")
 //                 {
 //                     Caption = 'Phone No.';

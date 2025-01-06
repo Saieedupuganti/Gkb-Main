@@ -7,7 +7,7 @@ page 50341 "API WorkOrderType"
     APIVersion = 'v2.0', 'v1.0';
     APIPublisher = 'integration';
     DelayedInsert = true;
-    SourceTable = "Work Order Type";
+    SourceTable = "GKB Work Order Type";
 
     layout
     {
@@ -23,7 +23,7 @@ page 50341 "API WorkOrderType"
                 {
                     Caption = 'Status';
                 }
-                field("WorkOrderName"; Rec."Work Order Name")
+                field("WorkOrderName"; Rec."Work Order Type Name")
                 {
                     Caption = 'Work Order Name';
                 }

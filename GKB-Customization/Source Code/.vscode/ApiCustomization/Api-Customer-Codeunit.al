@@ -10,9 +10,9 @@
 
 //         if CustomerRec.FindSet() then begin
 //             repeat
-//                 if CustomerRec."Primary Contact CRMID"<>'' then begin
+//                 if CustomerRec."CRM ID"<>'' then begin
 //                   ContactRec.Reset();
-//                   ContactRec.SetRange("crm id", CustomerRec."Primary Contact CRMID");
+//                   ContactRec.SetRange("crm id", CustomerRec."CRM ID");
 
 //                   if ContactRec.FindFirst() then begin
 //                       if CustomerRec."Primary Contact" <> ContactRec."No." then begin
@@ -21,7 +21,7 @@
 //                   end;
 //                 end;
 
-                
+
 //                 if CustomerRec."Territory Id"<>'' then begin
 //                   territoryRec.Reset();
 //                   territoryRec.SetRange("crm id", CustomerRec."Territory Id");
@@ -104,7 +104,7 @@
 //                   end;
 //                 end;
 
-                
+
 //                 if VendorRec."Territory Code Id"<>'' then begin
 //                   territoryRec.Reset();
 //                   territoryRec.SetRange("crm id", VendorRec."Territory Code Id");
@@ -123,9 +123,10 @@
 //                   dimensionRec.SetRange("crm id", VendorRec."Dimension ID");
 
 //                   if dimensionRec.FindFirst() then begin
-//                         // Message(dimensionRec.Code);
-//                       if VendorRec.Dimension <> dimensionRec.Code then begin
-//                           VendorRec.Dimension := dimensionRec.Code;
+//                         // Message(dimensionRec.Code); 
+//                         //Here Changed the Dimension(Custom) to Global Dimension 1 code(Base)
+//                       if VendorRec."Global Dimension 1 Code" <> dimensionRec.Code then begin
+//                           VendorRec."Global Dimension 1 Code" := dimensionRec.Code;
 //                           VendorRec.Modify(false);
 //                           // Message('Modified');
 //                       end;

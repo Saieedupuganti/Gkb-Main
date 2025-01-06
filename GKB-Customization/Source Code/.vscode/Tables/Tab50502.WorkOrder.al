@@ -92,7 +92,7 @@ table 50502 "Work Order1"
         field(50016; "Parent Work Order"; Code[20])
         {
             DataClassification = CustomerContent;
-            TableRelation = "Work Order";
+            TableRelation = "GKB Work Order";
         }
         field(50018; "Taxable"; Option)
         {

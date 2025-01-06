@@ -1,7 +1,7 @@
 page 50321 "API Customer"
 {
     PageType = API;
-    Caption = 'API Employee';
+    Caption = 'API Customer';
     APIPublisher = 'integration';
     APIGroup = 'api';
     APIVersion = 'v2.0', 'v1.0';
@@ -24,7 +24,7 @@ page 50321 "API Customer"
                 {
                     Caption = 'no';
                 }
-                field(primarycontact; Rec."Primary Contact No.")
+                field(primarycontact; Rec."Primary Contact No.")   // base Fld
                 {
                     Caption = 'no';
                 }
@@ -39,14 +39,6 @@ page 50321 "API Customer"
                 field(ABN; Rec.ABN)
                 {
                     Caption = 'ABN';
-                }
-                field("AccountContractManager"; Rec."Account Contract Manager")
-                {
-                    Caption = 'Account Contract Manager';
-                }
-                field("AccountContractManagerid"; Rec."Account Contract Manager ID")
-                {
-                    Caption = 'Account Contract Manager ID';
                 }
                 field(Addressname; Rec."Address Name")
                 {
@@ -72,18 +64,7 @@ page 50321 "API Customer"
                 {
                     Caption = 'Capex To';
                 }
-                field("CountryRegionCode"; Rec."Country/Region Code")
-                {
-                    Caption = 'Country/Region Code';
-                }
-                field(Contact; Rec.Contact)
-                {
-                    Caption = 'Contact';
-                }
-                field("ContactGroup"; Rec."Contact Group")
-                {
-                    Caption = 'Contact Group';
-                }
+
                 field("CreditHold"; Rec."Credit Hold")
                 {
                     Caption = 'Credit Hold';
@@ -100,10 +81,6 @@ page 50321 "API Customer"
                 {
                     Caption = 'Currency Code';
                 }
-                field("CurrencyCodeid"; Rec."Currency Code Id")
-                {
-                    Caption = 'Currency Code Id';
-                }
                 field("Customergroup"; Rec."Customer group")
                 {
                     Caption = 'Customer Group';
@@ -112,13 +89,13 @@ page 50321 "API Customer"
                 {
                     Caption = 'Customer Price Group';
                 }
+                field("CustomerPriceGroupId"; Rec."Customer Price Group Id")
+                {
+                    Caption = 'Customer Price Group Id';
+                }
                 field("CustomerProfile"; Rec."Customer Profile")
                 {
                     Caption = 'Customer Profile';
-                }
-                field("OwnerShip"; Rec."Owner Ship")
-                {
-                    Caption = 'Owner Ship';
                 }
                 field("PaymentMethodCode"; Rec."Payment Method Code")
                 {
@@ -128,13 +105,9 @@ page 50321 "API Customer"
                 {
                     Caption = 'Payment Terms Code';
                 }
-                field("city"; Rec.City)
+                field("city"; rec."D365 City")
                 {
                     Caption = 'City';
-                }
-                field("SalespersonCode"; Rec."Salesperson Code")
-                {
-                    Caption = 'Sales person Code';
                 }
                 field(Description; Rec.Description)
                 {
@@ -156,11 +129,15 @@ page 50321 "API Customer"
                 {
                     Caption = 'Territory Code';
                 }
+                field("TerritoryCodeID"; Rec."Territory Code ID")
+                {
+                    Caption = 'Territory Code Id';
+                }
                 field(Name; Rec.Name)
                 {
                     Caption = 'Name';
                 }
-                field("PostCode"; Rec."Post Code")
+                field("PostCode"; Rec."D365 PostCode")
                 {
                     Caption = 'Postal Code';
                 }
@@ -175,18 +152,6 @@ page 50321 "API Customer"
                 field("DimensionId"; Rec."Dimension Id")
                 {
                     Caption = 'Dimension Id';
-                }
-                field("CustomContactId"; Rec."Custom Contact Id")
-                {
-                    Caption = 'Contact Id';
-                }
-                field("TerritoryCodeID"; Rec."Territory Code ID")
-                {
-                    Caption = 'Territory Code Id';
-                }
-                field("CustomerPriceGroupId"; Rec."Customer Price Group Id")
-                {
-                    Caption = 'Customer Price Group Id';
                 }
                 field(owner; Rec."Owner")
                 {
@@ -212,17 +177,49 @@ page 50321 "API Customer"
                 {
                     Caption = 'Privacy Blocked';
                 }
-                field("ContactCode"; Rec."Contact Code")
+                // field("ContactCode"; Rec."Contact Code")
+                // {
+                //     Caption = 'Contact Code';
+                // }
+                // field("parentaccount"; Rec."Parent Account")
+                // {
+                //     Caption = 'Parent Account';
+                // }
+                // field(parentaccountcrmid; Rec."Parent Account CRM ID")
+                // {
+                //     Caption = 'Parent Account CRM ID';
+                // }
+                // field("AccountContractManager"; Rec."Account Contract Manager")
+                // {
+                //     Caption = 'Account Contract Manager';
+                // }
+                // field("AccountContractManagerid"; Rec."Account Contract Manager ID")
+                // {
+                //     Caption = 'Account Contract Manager ID';
+                // }
+                // field("SalespersonCode"; Rec."Salesperson Code")
+                // {
+                //     Caption = 'Sales person Code';
+                // }
+                // field("OwnerShip"; Rec."Owner Ship")
+                // {
+                //     Caption = 'Owner Ship';
+                // }
+                // field("CustomContactId"; Rec."Custom Contact Id")
+                // {
+                //     Caption = 'Contact Id';
+                // } 
+                // field("CurrencyCodeid"; Rec."Currency Code Id")
+                // {
+                //     Caption = 'Currency Code Id';
+                // }
+                // field("CountryRegionCode"; Rec."Country/Region Code")
+                // {
+                //     Caption = 'Country/Region Code';
+                // }
+                field("ContactGroup"; Rec."Contact Group")
                 {
-                    Caption = 'Contact Code';
-                }
-                field("parentaccount"; Rec."Parent Account")
-                {
-                    Caption = 'Parent Account';
-                }
-                field(parentaccountcrmid; Rec."Parent Account CRM ID")
-                {
-                    Caption = 'Parent Account CRM ID';
+                    Caption = 'Contact Group';
                 }
             }
         }

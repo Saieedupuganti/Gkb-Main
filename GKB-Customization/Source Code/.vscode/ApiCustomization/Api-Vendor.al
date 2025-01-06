@@ -15,15 +15,11 @@ page 50340 "API Vendor"
         {
             repeater(GroupName)
             {
-                field("EMail"; Rec."E-Mail")
-                {
-                    Caption = 'Email';
-                }
                 field("code"; Rec."No.")
                 {
                     Caption = 'no';
                 }
-                field("CrmId";Rec."Primary Contact No Id")
+                field("CrmId"; Rec."CRM ID")
                 {
                     Caption = 'CRM Id';
                 }
@@ -63,7 +59,7 @@ page 50340 "API Vendor"
                 {
                     Caption = 'City';
                 }
-                field("CountryRegionCode"; Rec."Country/Region Code")
+                field("CountryRegionCode"; Rec."D365 Country")
                 {
                     Caption = 'Region Code';
                 }
@@ -75,18 +71,18 @@ page 50340 "API Vendor"
                 {
                     Caption = 'ABN';
                 }
-                field("ABNNo"; Rec."ABN No.")
-                {
-                    Caption = 'ABN No.';
-                }
-                field("AccountContractManager"; Rec."Account Contract Manager")   //lookup
-                {
-                    Caption = 'Account Contract Manager';
-                }
-                field("AccountContractManagerId"; Rec."Account Contract Manager Id")
-                {
-                    Caption = 'Account Contract Manager Id';
-                }
+                // field("ABNNo"; Rec."ABN No.")
+                // {
+                //     Caption = 'ABN No.';
+                // }
+                // field("AccountContractManager"; Rec."Account Contract Manager")   //lookup
+                // {
+                //     Caption = 'Account Contract Manager';
+                // }
+                // field("AccountContractManagerId"; Rec."Account Contract Manager Id")
+                // {
+                //     Caption = 'Account Contract Manager Id';
+                // }
                 field(Name; Rec.Name)
                 {
                     Caption = 'Name';
@@ -103,18 +99,23 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Address 3';
                 }
-                field(Contact; Rec.Contact)
+                field("EMail"; Rec."E-Mail")
                 {
-                    Caption = 'Contact';
+                    Caption = 'Email';
                 }
+                // field(Contact; Rec.Contact)
+                // {
+                //     Caption = 'Contact';
+                // }
+                field("PrimaryContactNo"; Rec."Primary Contact No.") { }
                 field("ContactGroup"; Rec."Contact Groups")
                 {
                     Caption = 'Contact Group';
                 }
-                field("BalanceDueLCY"; Rec."Balance Due (LCY)")
-                {
-                    Caption = 'Balance Due';
-                }
+                // field("BalanceDueLCY"; Rec."Balance Due (LCY)")
+                // {
+                //     Caption = 'Balance Due';
+                // }
                 field("Currency"; Rec."Currency Code")  //llokup
                 {
                     Caption = 'Currency Code';
@@ -132,10 +133,10 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Vendor Profile';
                 }
-                field("PurchaserCode"; Rec."Purchaser Code")
-                {
-                    Caption = 'Purchaser Code';
-                }
+                // field("PurchaserCode"; Rec."Purchaser Code")
+                // {
+                //     Caption = 'Purchaser Code';
+                // }
                 field("BlockPaymentTolerance"; Rec."Block Payment Tolerance")
                 {
                     Caption = 'Block Payment Tolarence';
@@ -148,13 +149,9 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Payment Terms Code';
                 }
-                field("primarycontact"; Rec."Primary Contact No.")   //lookup
-                {
-                    Caption = 'primary Contact No.';
-                }
                 field("primarycontactcrmid"; Rec."Primary Contact No Id")
                 {
-                    Caption = 'Primary Contact No Id';
+                    Caption = 'Primary Contact Crm Id';
                 }
                 field("ServiceAgreement"; Rec."Service Agreement")
                 {
@@ -184,7 +181,7 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Description';
                 }
-                field(Dimension; Rec.Dimension)
+                field(Dimension; Rec.Dimension)//lookup
                 {
                     Caption = 'Dimension';
                 }
@@ -200,7 +197,6 @@ page 50340 "API Vendor"
                 {
                     Caption = 'WEB';
                 }
-                
                 field("OwnerShip"; Rec."Owner Ship")
                 {
                     Caption = 'Owner Ship';
@@ -212,14 +208,6 @@ page 50340 "API Vendor"
                 field(ownerid; Rec."Owner Id")
                 {
                     Caption = 'Owner ID';
-                }
-                field("parentaccount"; Rec."Parent Account")
-                {
-                    Caption = 'Parent Account';
-                }
-                field(parentaccountcrmid; Rec."Parent Account CRM ID")
-                {
-                    Caption = 'Parent Account CRM ID';
                 }
             }
         }
