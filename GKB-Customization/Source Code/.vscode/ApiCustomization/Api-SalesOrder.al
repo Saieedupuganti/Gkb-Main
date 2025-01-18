@@ -28,7 +28,7 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Code';
                 }
-                field(customerno; Rec."Sell-to Customer No.")
+                field(customerno; Rec."Bill-to Customer No.")
                 {
                     Caption = 'Customer No.';
                 }
@@ -36,31 +36,32 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Customer No.';
                 }
-                field(addressname; Rec."Address Name")
+                field(addressname; Rec."Bill-to address name")             //Custom 
                 {
                     Caption = 'Address Name';
                 }
-                field(city; Rec."Sell-to City")
+                field(city; Rec."Bill-to City")            //   default 
                 {
                     Caption = 'City';
                 }
-                field(country; Rec."D365 Country")            // Create Custom
+                field(country; Rec."D365 Bill-to country")            // Custom
                 {
                     Caption = 'Country';
                 }
-                field(postcode; Rec."D365 Sell to Post Code")               // Sell to Post
+                field(State;Rec."Bill-to County"){}
+                field(postcode; Rec."D365 Bill-to Post Code")               // Custom
                 {
                     Caption = 'Sell-to Post Code';
                 }
-                field(address; Rec."Sell-to Address")
+                field(address; Rec."Bill-to Address")           //default
                 {
                     Caption = 'Address';
                 }
-                field(address2; Rec."Sell-to Address 2")
+                field(address2; Rec."Bill-to Address 2")                //default
                 {
                     Caption = 'Address 2';
                 }
-                field(address3; Rec."Address 3")
+                field(address3; Rec."D365 Bill-to Address 3")               //custom
                 {
                     Caption = 'Address 3';
                 }
@@ -79,18 +80,6 @@ page 60322 "API Sales Order"
                 field(email; Rec."Sell-to E-Mail")
                 {
                     Caption = 'Work Description';
-                }
-                field(ordertype; Rec."Order Type")
-                {
-                    Caption = 'Order Type';
-                }
-                field(owner; Rec.Owner)
-                {
-                    Caption = 'Owner';
-                }
-                field(ownercrmid; Rec."Owner CRMID")
-                {
-                    Caption = 'Owner CRMID';
                 }
                 field(dimension; Rec.Dimension)
                 {
@@ -124,13 +113,9 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Requested Delivery Date';
                 }
-                field(status; Rec.Status)
+                field(status; Rec.Status)            // Need to be Cross check
                 {
                     Caption = 'Status';
-                }
-                field(totaldetailamount; Rec."Amount Including VAT")
-                {
-                    Caption = 'Amount Including VAT';
                 }
                 field(leadtype; Rec."Lead Type")
                 {
@@ -148,7 +133,8 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Ship-to City';
                 }
-                field(shiptocountry; Rec."Ship-to Country/Region Code")  //Create Custom
+                field(ShipToState;Rec."Ship-to County"){}
+                field(shiptocountry; Rec."D365 ShiptoCountry/RegionCode")  //Create Custom
                 {
                     Caption = 'Ship-to Country/Region Code';
                 }
@@ -156,7 +142,7 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Ship-to Name';
                 }
-                field(shiptopostalcode; Rec."Ship-to Post Code")    //Create Custom
+                field(shiptopostalcode; Rec."D365 Ship-to Post Code")    // Custom
                 {
                     Caption = 'Ship-to Post Code';
                 }
@@ -172,10 +158,10 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Ship-to Address 3';
                 }
-                field(uom; Rec."Unit of Measure Code")
-                {
-                    Caption = 'Unit of Measure Code';
-                }
+                // field(uom; Rec."Unit of Measure Code")
+                // {
+                //     Caption = 'Unit of Measure Code';
+                // }
                 // field(uomcrmid; Rec."Unit of Measure Code CRMID")
                 // {
                 //     Caption = 'Unit of Measure Code CRMID';
@@ -203,6 +189,18 @@ page 60322 "API Sales Order"
                 // field(invoicediscountamount; Rec."Invoice Discount Amount")
                 // {
                 //     Caption = 'Invoice Discount Amount';
+                // }
+                // field(owner; Rec.Owner)
+                // {
+                //     Caption = 'Owner';
+                // }
+                // field(ownercrmid; Rec."Owner CRMID")
+                // {
+                //     Caption = 'Owner CRMID';
+                // }
+                // field(totaldetailamount; Rec."Amount Including VAT")
+                // {
+                //     Caption = 'Amount Including VAT';
                 // }
             }
         }

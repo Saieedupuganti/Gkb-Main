@@ -105,10 +105,12 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                     ApplicationArea = all;
                     Caption = 'Company Contact';
                 }
-                field("Primary Contact CRM ID"; Rec."Primary Contact No Id")
+                field("CRM ID"; Rec."CRM Id")
                 {
                     ApplicationArea = all;
                     Caption = 'CRM ID';
+                    Editable = false;
+                    ToolTip = 'Specifies the CRM ID for this vendor';
                 }
                 field("Territory"; Rec."Territory Code")
                 {
@@ -171,6 +173,51 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
             }
         }
     }
+
+    actions
+    {
+        addlast(navigation)
+        {
+            action(SyncWithCRM)
+            {
+                Caption = 'Update To CRM';
+                Image = UpdateXML;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    VendorCRMIntegration: Codeunit "Vendor CRM Integration";
+                    ConfirmQst: Label 'Do you want to sync this vendor with CRM?';
+                    SuccessMsg: Label 'Vendor successfully %1 in CRM.';
+                begin
+                    if not Confirm(ConfirmQst) then
+                        exit;
+
+                    if Rec.Blocked <> Rec.Blocked::" " then
+                        Error('Cannot sync blocked vendors with CRM');
+
+                    if Rec."CRM ID" = '' then begin
+                        // Create new record in CRM
+                        if VendorCRMIntegration.CreateVendorInCRM(Rec) then
+                            Message(SuccessMsg, 'created')
+                        else
+                            Error('Failed to create vendor in CRM');
+                    end else begin
+                        // Update existing record in CRM
+                        if VendorCRMIntegration.UpdateVendorInCRM(Rec) then
+                            Message(SuccessMsg, 'updated')
+                        else
+                            Error('Failed to update vendor in CRM');
+                    end;
+                end;
+            }
+        }
+    }
+
+
     trigger OnOpenPage();
     var
         UserSetupRec: Record "User Setup";

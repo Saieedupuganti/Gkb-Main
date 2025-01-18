@@ -27,7 +27,7 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             Caption = 'Customer CRMID';
             DataClassification = ToBeClassified;
         }
-        field(50106; "Address Name"; Text[100])
+        field(50106; "Bill-to address name"; Text[100])
         {
             Caption = 'Address Name';
             DataClassification = ToBeClassified;
@@ -35,11 +35,6 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         field(50107; "Currency CRM ID"; Text[100])
         {
             Caption = 'Currency CRM ID';
-            DataClassification = ToBeClassified;
-        }
-        field(50108; "Order Type"; Text[100])
-        {
-            Caption = 'Order Type';
             DataClassification = ToBeClassified;
         }
         field(50109; Owner; Text[100])
@@ -87,10 +82,11 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             Caption = 'Opportunity CRM ID';
             DataClassification = ToBeClassified;
         }
-        field(50118; "Lead Type"; Text[100])
+        field(50118; "Lead Type"; Option)
         {
             Caption = 'Lead Type';
             DataClassification = ToBeClassified;
+            OptionMembers = "Service/Parts",Training,Energy,Sales,"N/A";
         }
         field(50119; "Work Order Type"; Code[30])
         {
@@ -106,15 +102,15 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         field(50121; "Freight Terms"; Option)
         {
             Caption = 'Freight Terms';
-            OptionMembers=" ","100000001","100000000","100000002","100000003","100000004","100000005","100000006","100000007","100000008","100000009","100000010","100000011","100000012","100000013","1","2";
-            OptionCaption=' ,CIF,CFR,CIP,CPT,DAF,DDP,DDU,DELIVERY,DEQ,DES,EXW,FAS,FCA,PICKUP,FOB,No Charge';
+            OptionMembers = " ","100000001","100000000","100000002","100000003","100000004","100000005","100000006","100000007","100000008","100000009","100000010","100000011","100000012","100000013","1","2";
+            OptionCaption = ' ,CIF,CFR,CIP,CPT,DAF,DDP,DDU,DELIVERY,DEQ,DES,EXW,FAS,FCA,PICKUP,FOB,No Charge';
             DataClassification = ToBeClassified;
         }
         field(50122; "Creation Method"; Option)
         {
             Caption = 'Creation Method';
-            OptionMembers="776160000","776160001";
-            OptionCaption='Unknown,Win Quote';
+            OptionMembers = "776160000","776160001";
+            OptionCaption = 'Unknown,Win Quote';
             DataClassification = ToBeClassified;
         }
         field(50123; "Ship-to Address 3"; Text[100])
@@ -122,12 +118,12 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             Caption = 'Ship-to Address 3';
             DataClassification = ToBeClassified;
         }
-        field(50149; "D365 Sell To Country"; Text[100])
+        field(50149; "D365 Bill-To State"; Text[100])
         {
             Caption = 'State';
             DataClassification = ToBeClassified;
         }
-        field(50150; "D365 Country"; Text[100])
+        field(50150; "D365 Bill-to country"; Text[100])
         {
             Caption = 'Country';
             DataClassification = ToBeClassified;
@@ -137,10 +133,47 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             Caption = 'City';
             DataClassification = ToBeClassified;
         }
-        field(50146; "D365 Sell to Post Code"; Text[100])
+        field(50146; "D365 Bill-to Post Code"; Text[100])
         {
-            Caption = 'Sell To Post Code';
+            Caption = 'Bill-To Post Code';
             DataClassification = ToBeClassified;
+        }
+        field(50147; "D365 ShiptoCountry/RegionCode"; Text[50])
+        {
+            Caption = 'Ship-to Country/Region Code';
+            TableRelation = "Country/Region";
+        }
+        field(50148; "D365 Ship-to Post Code"; Text[100])
+        {
+            Caption = 'Ship-to Post Code';
+            TableRelation = if ("Ship-to Country/Region Code" = const('')) "Post Code"
+            else
+            if ("Ship-to Country/Region Code" = filter(<> '')) "Post Code" where("Country/Region Code" = field("Ship-to Country/Region Code"));
+            ValidateTableRelation = false;
+        }
+        field(50100; Comments2; Text[100])
+        {
+            Caption = 'Comments2';
+            DataClassification = ToBeClassified;
+        }
+        field(50101; "Work Details"; Blob)
+        {
+            Caption = 'Work Details';
+            DataClassification = ToBeClassified;
+            // ExtendedDatatype= RichContent
+        }
+        field(50200; RichText; Blob)
+        {
+            Caption = 'Rich Text';
+            DataClassification = CustomerContent;
+        }
+        field(50202; "D365 Bill-to Address 3";Text[100])
+        {
+            Caption = 'Address 3';
+        }
+        field(50203; "Sales Order Name";Text[100])
+        {
+            Caption = 'Sales Order Name';
         }
     }
 
@@ -151,42 +184,65 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         currencyRec: Record Currency;
         dimensionCode: text;
         customerCode: text;
-        modified:Integer;
+        modified: Integer;
     begin
-        
-        modified:=0;
+
+        modified := 0;
         // Check if field has changed and is not empty
-        if (Rec."Customer CRMID"<>'') and (xRec."Customer CRMID"<>Rec."Customer CRMID") then begin
-            customerRec.SetFilter("CRM ID",Rec."Customer CRMID");
+        if (Rec."Customer CRMID" <> '') and (xRec."Customer CRMID" <> Rec."Customer CRMID") then begin
+            customerRec.SetFilter("CRM ID", Rec."Customer CRMID");
             if customerRec.FindFirst() then begin
-                Rec."Sell-to Customer No." := customerRec."No.";
-                modified:=modified+1;
-            end;
-        end;
-        
-        // Check if field has changed and is not empty
-        if (Rec."Dimension CRM ID"<>'') and (xRec."Dimension CRM ID"<>Rec."Dimension CRM ID") then begin
-            dimRec.SetFilter("CRM ID",Rec."Dimension CRM ID");
-            if dimRec.FindFirst() then begin
-                Rec.Dimension := dimRec.Code;
-                modified:=modified+1;
+                Rec."Bill-to Customer No." := customerRec."No.";
+                modified := modified + 1;
             end;
         end;
 
         // Check if field has changed and is not empty
-        if (Rec."Currency CRM ID"<>'') and (xRec."Currency CRM ID" <>Rec."Currency CRM ID") then begin
-            currencyRec.SetFilter("CRM ID",Rec."Currency CRM ID");
+        if (Rec."Dimension CRM ID" <> '') and (xRec."Dimension CRM ID" <> Rec."Dimension CRM ID") then begin
+            dimRec.SetFilter("CRM ID", Rec."Dimension CRM ID");
+            if dimRec.FindFirst() then begin
+                Rec.Dimension := dimRec.Code;
+                modified := modified + 1;
+            end;
+        end;
+
+        // Check if field has changed and is not empty
+        if (Rec."Currency CRM ID" <> '') and (xRec."Currency CRM ID" <> Rec."Currency CRM ID") then begin
+            currencyRec.SetFilter("CRM ID", Rec."Currency CRM ID");
             if currencyRec.FindFirst() then begin
                 Rec."Currency Code" := currencyRec.Code;
-                modified:=modified+1;
+                modified := modified + 1;
             end;
         end;
 
         // Nodify only if found atleast 1 CRM - BC match
-        if modified>0 then begin
+        if modified > 0 then begin
             Rec.Modify(false);
         end;
     end;
-            
+    
+    var
+        Readdataskippedmsg: Label 'Loading Field %1 Will be skipped because there was an error when reading tha date.';
+
+    procedure SetRichText(RichText1: Text)
+    var
+        OutStream: OutStream;
+    begin
+        Clear(RichText);
+        RichText.CreateOutStream(OutStream, TextEncoding::UTF8);
+        OutStream.WriteText(RichText1);
+        Modify();
+    end;
+
+    procedure GetRichText() TermConditions: Text
+    var
+        InStream: Instream;
+        typehelper: Codeunit "Type Helper";
+    begin
+        CalcFields(RichText);
+        RichText.CreateInStream(InStream, TextEncoding::UTF8);
+        if not typehelper.TryReadAsTextWithSeparator(InStream, typehelper.LFSeparator(), TermConditions) then
+            Message(Readdataskippedmsg, FieldCaption(RichText));
+    end;
 }
 

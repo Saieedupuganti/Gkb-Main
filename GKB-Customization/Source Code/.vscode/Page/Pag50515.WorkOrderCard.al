@@ -1,4 +1,4 @@
-page 50515 "Work Order Card"
+page 50515 "GKB Work Order Card"
 {
     PageType = Card;
     ApplicationArea = All;
@@ -59,6 +59,10 @@ page 50515 "Work Order Card"
                     ApplicationArea = All;
                     Caption = 'Billing Account';
                 }
+                field("Customer PO Number";Rec."Customer PO Number")
+                {
+                    ApplicationArea = all;
+                }
                 field("Billing Type"; rec."Billing Type")
                 {
                     ApplicationArea = All;
@@ -69,7 +73,7 @@ page 50515 "Work Order Card"
                     ApplicationArea = All;
                     Caption = 'Case';
                 }
-                field("Job Created";Rec."Job Created")
+                field("Job Created"; Rec."Job Created")
                 {
                     ApplicationArea = all;
                     Caption = 'Job Created';
@@ -107,9 +111,9 @@ page 50515 "Work Order Card"
                     ApplicationArea = All;
                     Caption = 'Functional Location';
                 }
-                field("Shortcut Dimension 1 Code";Rec."Shortcut Dimension 1 Code")
+                field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
                 {
-                   
+
                     ApplicationArea = all;
                 }
                 field("Opportunity"; rec.Opportunity)

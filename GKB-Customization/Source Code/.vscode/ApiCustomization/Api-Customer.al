@@ -177,6 +177,10 @@ page 50321 "API Customer"
                 {
                     Caption = 'Privacy Blocked';
                 }
+                field("ContactGroup"; Rec."Contact Group")
+                {
+                    Caption = 'Contact Group';
+                }
                 // field("ContactCode"; Rec."Contact Code")
                 // {
                 //     Caption = 'Contact Code';
@@ -217,10 +221,6 @@ page 50321 "API Customer"
                 // {
                 //     Caption = 'Country/Region Code';
                 // }
-                field("ContactGroup"; Rec."Contact Group")
-                {
-                    Caption = 'Contact Group';
-                }
             }
         }
     }

@@ -1,8 +1,8 @@
 table 50502 "Work Order1"
 {
     DataClassification = CustomerContent;
-    DrillDownPageId = "Work Order List";
-    LookupPageId = "Work Order Card";
+    DrillDownPageId = "GKB Work Order List";
+    LookupPageId = "GKB Work Order Card";
 
     fields
     {

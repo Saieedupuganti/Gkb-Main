@@ -1,8 +1,8 @@
 table 50107 "GKB Work Order"
 {
     DataClassification = CustomerContent;
-    DrillDownPageId = "Work Order List";
-    LookupPageId = "Work Order Card";
+    DrillDownPageId = "GKB Work Order List";
+    LookupPageId = "GKB Work Order Card";
 
     fields
     {
@@ -78,7 +78,7 @@ table 50107 "GKB Work Order"
         field(50014; "Owner"; Code[20])
         {
             DataClassification = CustomerContent;
-            TableRelation = "Sales Order Entity Buffer";
+            TableRelation = Employee;
         }
         field(50029; "Sales Order"; Code[20])
         {
@@ -165,6 +165,12 @@ table 50107 "GKB Work Order"
             Caption = 'job Created';
             DataClassification = ToBeClassified;
         }
+        field(50032; "Customer PO Number"; Text[100])
+        {
+            Caption = 'Customer PO Number';
+            DataClassification = ToBeClassified;
+        }
+
 
     }
 
@@ -179,8 +185,6 @@ table 50107 "GKB Work Order"
         {
         }
     }
-
-
     trigger OnInsert()
     var
         WO: Record "GKB Work Order"; // Work Order
@@ -256,6 +260,5 @@ table 50107 "GKB Work Order"
         WO."Job Created" := true;
         WO.Modify();
     end;
-
 }
 
