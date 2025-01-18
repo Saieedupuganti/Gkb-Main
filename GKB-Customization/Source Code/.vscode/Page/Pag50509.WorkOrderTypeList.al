@@ -4,6 +4,7 @@ page 50509 "Work Order Type"
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = "GKB Work Order Type";
+    CardPageId = "WorkOrderTypeCard";
 
     layout
     {

@@ -1,13 +1,13 @@
-page 50513 "Work Order List"
+page 50513 "GKB Work Order List"
 {
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
-    CardPageId = "Work Order Card";
+    CardPageId = "GKB Work Order Card";
     SourceTable = "GKB Work Order";
-    Caption = 'Work Order List';
+    Caption = 'Work Order';
     Editable = false;
-    QueryCategory = 'Work Order List';
+    QueryCategory = 'Work Order';
 
 
     layout
@@ -84,7 +84,7 @@ page 50513 "Work Order List"
 
                 trigger OnAction()
                 begin
-                    PAGE.RunModal(PAGE::"Work Order Card");
+                    PAGE.RunModal(PAGE::"GKB Work Order Card");
                 end;
             }
         }
@@ -99,7 +99,7 @@ page 50513 "Work Order List"
 
                 trigger OnAction()
                 begin
-                    PAGE.Run(PAGE::"Work Order Card");
+                    PAGE.Run(PAGE::"GKB Work Order Card");
                 end;
             }
         }

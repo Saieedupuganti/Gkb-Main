@@ -149,7 +149,7 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Payment Terms Code';
                 }
-                field("primarycontactcrmid"; Rec."Primary Contact No Id")
+                field("primarycontactcrmid"; Rec."CRM Id")
                 {
                     Caption = 'Primary Contact Crm Id';
                 }

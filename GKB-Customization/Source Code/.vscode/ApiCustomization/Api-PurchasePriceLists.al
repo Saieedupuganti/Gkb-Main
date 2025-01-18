@@ -134,14 +134,3 @@ page 50115 "PurchPrcListLines API"
     }
 }
 
-tableextension 50215 "PurchPrclistLine" extends "Price List Line"
-{
-    fields
-    {
-        field(50000; "Crm Id"; Text[100])
-        {
-            Caption = 'Crm Id';
-            DataClassification = ToBeClassified;
-        }
-    }
-}

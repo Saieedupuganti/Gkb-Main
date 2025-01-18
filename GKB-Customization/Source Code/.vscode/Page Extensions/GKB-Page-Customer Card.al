@@ -169,6 +169,35 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         }
 
     }
+
+    actions
+    {
+        addlast(navigation)
+        {
+            action(UpadateCRM)
+            {
+                Caption = 'Update To CRM';
+                ApplicationArea = All;
+                Image = UpdateDescription;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Update this to CRM';
+
+                trigger OnAction()
+                var
+                    CustomerRec: Record Customer;
+                begin
+                    CurrPage.SetSelectionFilter(CustomerRec);
+                    if CustomerRec.FindSet() then
+                        repeat
+                            CustomerRec.UpdateCRMAccount();
+                        until CustomerRec.Next() = 0;
+                end;
+            }
+        }
+    }   
+
     trigger OnOpenPage();
     var
         UserSetupRec: Record "User Setup";

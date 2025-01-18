@@ -16,14 +16,14 @@ tableextension 50210 "Item Creation Power Automate" extends Item
         jsontext: Text;
         tokenvalue: JsonToken;
         tokenstring: Text;
-        uomRec:Record "Unit of Measure";
-        unitcrmid:Text;
-        unitgroupcrmid:Text;
-        vendorRec:Record Vendor;
-        vendorid:Text;
-        fieldservicetype:Text;
-        producttype:Text;
-        tradetype:Text;
+        uomRec: Record "Unit of Measure";
+        unitcrmid: Text;
+        unitgroupcrmid: Text;
+        vendorRec: Record Vendor;
+        vendorid: Text;
+        fieldservicetype: Text;
+        producttype: Text;
+        tradetype: Text;
     begin
         Content.GetHeaders(ContentHeaders);
 
@@ -33,38 +33,38 @@ tableextension 50210 "Item Creation Power Automate" extends Item
         if not ContentHeaders.Contains('Content-Encoding') then
             ContentHeaders.Add('Content-Encoding', 'UTF8');
 
-        vendorid:='';
-        unitcrmid:='';
-        unitgroupcrmid:='';
-        fieldservicetype:=Format(Rec.Type);
-        producttype:=Format(Rec."Product Type");
+        vendorid := '';
+        unitcrmid := '';
+        unitgroupcrmid := '';
+        fieldservicetype := Format(Rec.Type);
+        producttype := Format(Rec."Product Type");
 
-        vendorRec.SetFilter("No.",Rec."Vendor No.");
+        vendorRec.SetFilter("No.", Rec."Vendor No.");
         if vendorRec.FindFirst() then begin
-            if Rec."Vendor No."<>'' then begin
-                vendorid:='/accounts('+vendorRec."CRM ID"+')';
+            if Rec."Vendor No." <> '' then begin
+                vendorid := '/accounts(' + vendorRec."CRM ID" + ')';
             end;
         end;
-        uomRec.SetFilter(Code,Rec."Base Unit of Measure");
+        uomRec.SetFilter(Code, Rec."Base Unit of Measure");
         if uomRec.FindFirst() then begin
-            if (uomRec."CRM ID"<>'') then begin
-                unitcrmid:='/uoms('+uomRec."CRM ID"+')';
+            if (uomRec."CRM ID" <> '') then begin
+                unitcrmid := '/uoms(' + uomRec."CRM ID" + ')';
             end;
-            if (uomRec."Unitgroup CRM ID"<>'') then begin
-                unitgroupcrmid:='/uomschedules('+uomRec."Unitgroup CRM ID"+')';
+            if (uomRec."Unitgroup CRM ID" <> '') then begin
+                unitgroupcrmid := '/uomschedules(' + uomRec."Unitgroup CRM ID" + ')';
             end;
             // unitcrmid:=uomRec."CRM ID";
             // unitgroupcrmid:=uomRec."Unitgroup CRM ID";
         end;
 
-        if fieldservicetype='Inventory' then begin
-            fieldservicetype:='690970000';
-        end else if fieldservicetype='Non-Inventory' then begin
-            fieldservicetype:='690970001';
-        end else if fieldservicetype='Service' then begin
-            fieldservicetype:='690970002';
+        if fieldservicetype = 'Inventory' then begin
+            fieldservicetype := '690970000';
+        end else if fieldservicetype = 'Non-Inventory' then begin
+            fieldservicetype := '690970001';
+        end else if fieldservicetype = 'Service' then begin
+            fieldservicetype := '690970002';
         end else begin
-            fieldservicetype:='';
+            fieldservicetype := '';
         end;
 
         // if producttype='Sales Inventory' then begin
@@ -78,23 +78,20 @@ tableextension 50210 "Item Creation Power Automate" extends Item
         // end else begin
         //     producttype:='';
         // end;
-        
-        if tradetype='Service Engineer Dual Trade' then begin
-            tradetype:='888880000';
-        end else if tradetype='First-Year Apprentice' then begin
-            tradetype:='888880001';
-        end else if tradetype='Second-Year Apprenctice' then begin
-            tradetype:='888880002';
-        end else if tradetype='Third-Year Apprenctice' then begin
-            tradetype:='888880003';
-        end else if tradetype='Fourth-Year Apprenctice' then begin
-            tradetype:='888880004';
+
+        if tradetype = 'Service Engineer Dual Trade' then begin
+            tradetype := '888880000';
+        end else if tradetype = 'First-Year Apprentice' then begin
+            tradetype := '888880001';
+        end else if tradetype = 'Second-Year Apprenctice' then begin
+            tradetype := '888880002';
+        end else if tradetype = 'Third-Year Apprenctice' then begin
+            tradetype := '888880003';
+        end else if tradetype = 'Fourth-Year Apprenctice' then begin
+            tradetype := '888880004';
         end else begin
-            tradetype:='888880000';
+            tradetype := '888880000';
         end;
-
-        
-
 
         json.Add('bcid', Rec."No.");
         json.Add('crmid', Rec."CRM ID");
@@ -113,8 +110,8 @@ tableextension 50210 "Item Creation Power Automate" extends Item
         json.Add('vendorcatalogueno', Rec."Vendor 1 Catalogue Number");
         json.Add('vendorid', vendorid);
 
-        if (Format(Rec."Product Type")<>'') and (Format(Rec."Product Type")<>'0') then begin
-            if Format(Rec."Product Type")=' ' then begin
+        if (Format(Rec."Product Type") <> '') and (Format(Rec."Product Type") <> '0') then begin
+            if Format(Rec."Product Type") = ' ' then begin
                 json.Add('producttype', '1');
             end else begin
                 json.Add('producttype', Rec."Product Type");
@@ -124,35 +121,28 @@ tableextension 50210 "Item Creation Power Automate" extends Item
             json.Add('producttype', '1');
         end;
 
-
-        
-        // json.Add('purchasename', Rec."Purchasing Code");
         json.WriteTo(jsontext);
         Content.WriteFrom(jsontext);
-        // Message(jsontext);
 
-        IsSuccessful := Client.Post('https://prod-28.australiasoutheast.logic.azure.com:443/workflows/7b639aebf03d48b589cb0cb4e242a43e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CBcPia0oWMebjYN00WLYwLb4Xr-lnSEztYIePQITywc', Content, Response);
+        IsSuccessful := Client.Get('https://prod-28.australiasoutheast.logic.azure.com:443/workflows/7b639aebf03d48b589cb0cb4e242a43e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CBcPia0oWMebjYN00WLYwLb4Xr-lnSEztYIePQITywc', Response);
 
         if IsSuccessful then begin
             Response.Content().ReadAs(ResponseText);
             // Message(ResponseText);
             responsejson.ReadFrom(ResponseText);
             if responsejson.Contains('crmid') then begin
-                responsejson.Get('crmid',tokenvalue);
-                tokenstring:=tokenvalue.AsValue().AsText();
-                Rec."CRM ID":=Format(tokenstring);
+                responsejson.Get('crmid', tokenvalue);
+                tokenstring := tokenvalue.AsValue().AsText();
+                Rec."CRM ID" := Format(tokenstring);
                 Rec.modify(false);
             end;
         end;
-        
     end;
-
-
 }
 
 pageextension 50303 "Item Ext" extends "Item Card"
 {
-    
+
     layout
     {
         addafter("D365 Product ID")

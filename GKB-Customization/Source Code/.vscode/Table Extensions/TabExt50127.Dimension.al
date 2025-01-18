@@ -8,7 +8,7 @@ tableextension 50127 "Dimension Values CRM" extends "Dimension Value"
         }
     }
 }
-pageextension 50500 MyExtension extends "Dimension Values"
+pageextension 50500 "DimensionValExt" extends "Dimension Values"
 {
     layout
     {
@@ -25,7 +25,6 @@ pageextension 50500 MyExtension extends "Dimension Values"
     {
         // Add changes to page actions here
     }
-
     var
         myInt: Integer;
 }

@@ -3,7 +3,7 @@ page 50118 "Work Order Lines List"
     PageType = List;
     ApplicationArea = All;
     SourceTable = "GKB Work Order Lines";
-    Caption = 'Work Order Lines List';
+    Caption = 'Work Order Lines';
     UsageCategory = Lists;
     //CardPageId = "Work Order Line Card";
     AboutTitle = 'About Customer Asset';

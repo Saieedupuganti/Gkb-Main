@@ -1,94 +1,102 @@
 pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
 {
-  layout
-  {
-    addafter(General)
+    layout
     {
-      group("Dynamics")
-      {
-        
-        Caption='Dynamics';
-        
-        field("CRM ID";Rec."CRM ID")
+        addafter(General)
         {
-          ApplicationArea=All;
-          Caption='CRM ID';
+            group("Dynamics")
+            {
+
+                Caption = 'Dynamics';
+
+                field("CRM ID"; Rec."CRM ID")
+                {
+                    ApplicationArea = All;
+                    Caption = 'CRM ID';
+                }
+                field("Owner"; Rec."Owner")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Owner';
+                }
+                field("Owner CRMID"; Rec."Owner CRMID")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Owner CRMID';
+                }
+                field("Dimension"; Rec."Dimension")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Dimension';
+                }
+                field("Dimension CRM ID"; Rec."Dimension CRM ID")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Dimension CRM ID';
+                }
+                field("Price List"; Rec."Price List")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Price List';
+                }
+                field("Quote"; Rec."Quote")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Quote';
+                }
+                field("Opportunity"; Rec."Opportunity")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Opportunity';
+                }
+                field("Freight Amount"; Rec."Freight Amount")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Freight Amount';
+                }
+                field("Freight Terms"; Rec."Freight Terms")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Freight Terms';
+                }
+                field("Creation Method"; Rec."Creation Method")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Creation Method';
+                }
+            }
         }
-        field("Owner";Rec."Owner")
+        addafter("Ship-to Address 2")
         {
-          ApplicationArea=All;
-          Caption='Owner';
+            field("Ship-to Address 3"; Rec."Ship-to Address 3")
+            {
+                ApplicationArea = All;
+                Caption = 'Ship-to Address 3';
+            }
         }
-        field("Owner CRMID";Rec."Owner CRMID")
+        addbefore("Sell-to Address")
         {
-          ApplicationArea=All;
-          Caption='Owner CRMID';
+            field("Address Name"; Rec."Bill-to address name")
+            {
+                ApplicationArea = All;
+                Caption = 'Address Name';
+            }
         }
-        field("Dimension";Rec."Dimension")
+        addafter("Currency Code")
         {
-          ApplicationArea=All;
-          Caption='Dimension';
+            field("Currency CRM ID"; Rec."Currency CRM ID")
+            {
+                ApplicationArea = All;
+                Caption = 'Currency CRM ID';
+            }
         }
-        field("Dimension CRM ID";Rec."Dimension CRM ID")
+        addafter("Sell-to Customer Name")
         {
-          ApplicationArea=All;
-          Caption='Dimension CRM ID';
+            field("Customer CRMID"; Rec."Customer CRMID")
+            {
+                ApplicationArea = All;
+                Caption = 'Customer CRMID';
+            }
         }
-        field("Price List";Rec."Price List")
-        {
-          ApplicationArea=All;
-          Caption='Price List';
-        }
-        field("Quote";Rec."Quote")
-        {
-          ApplicationArea=All;
-          Caption='Quote';
-        }
-        field("Opportunity";Rec."Opportunity")
-        {
-          ApplicationArea=All;
-          Caption='Opportunity';
-        }
-        field("Freight Amount";Rec."Freight Amount")
-        {
-          ApplicationArea=All;
-          Caption='Freight Amount';
-        }
-        field("Freight Terms";Rec."Freight Terms")
-        {
-          ApplicationArea=All;
-          Caption='Freight Terms';
-        }
-        field("Creation Method";Rec."Creation Method")
-        {
-          ApplicationArea=All;
-          Caption='Creation Method';
-        }
-      }
     }
-    addafter("Ship-to Address 2"){
-      field("Ship-to Address 3";Rec."Ship-to Address 3"){
-        ApplicationArea=All;
-        Caption='Ship-to Address 3';
-      }
-    }
-    addbefore("Sell-to Address"){
-      field("Address Name";Rec."Address Name"){
-        ApplicationArea=All;
-        Caption='Address Name';
-      }
-    }
-    addafter("Currency Code"){
-      field("Currency CRM ID";Rec."Currency CRM ID"){
-        ApplicationArea=All;
-        Caption='Currency CRM ID';
-      }
-    }
-    addafter("Sell-to Customer Name"){
-      field("Customer CRMID";Rec."Customer CRMID"){
-        ApplicationArea=All;
-        Caption='Customer CRMID';
-      }
-    }
-  }
 }

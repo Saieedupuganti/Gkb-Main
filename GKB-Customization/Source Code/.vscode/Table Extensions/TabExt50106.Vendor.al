@@ -97,7 +97,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
             Caption = 'Credit Hold';
             DataClassification = ToBeClassified;
         }
-
         field(50115; "Owner Ship"; Option)
         {
             Caption = 'Owner Ship';
@@ -113,7 +112,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
         {
             Caption = 'Address 3';
         }
-
         field(50118; State; Text[100])
         {
             DataClassification = ToBeClassified;
@@ -136,7 +134,7 @@ tableextension 50106 "Vendor Ext" extends Vendor
         {
             DataClassification = ToBeClassified;
         }
-        field(50501; "Primary Contact No Id"; Text[100])
+        field(50501; "CRM Id"; Text[100])
         {
             DataClassification = ToBeClassified;
         }
@@ -186,16 +184,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
             Caption = 'Owner';
             DataClassification = ToBeClassified;
         }
-        field(50170; "CRM ID"; Text[100])
-        {
-            Caption = 'CRM ID';
-            DataClassification = ToBeClassified;
-        }
-        field(50143; "Primary Contact CRM ID"; Text[100])
-        {
-            Caption = 'Primary Contact CRM ID';
-            DataClassification = ToBeClassified;
-        }
         field(50145; "Parent Account"; Text[100])
         {
             Caption = 'Parent Account';
@@ -216,8 +204,8 @@ tableextension 50106 "Vendor Ext" extends Vendor
 
         modified := 0;
         // Check if field has changed and is not empty
-        if (Rec."Primary Contact No Id" <> '') and (xRec."Primary Contact No Id" <> Rec."Primary Contact No Id") then begin
-            contactRec.SetFilter("CRM ID", Rec."Primary Contact No Id");
+        if (Rec."CRM Id" <> '') and (xRec."CRM Id" <> Rec."CRM Id") then begin
+            contactRec.SetFilter("CRM ID", Rec."CRM Id");
             if contactRec.FindFirst() then begin
                 Rec."Primary Contact No." := contactRec."No.";
                 modified := modified + 1;
@@ -250,7 +238,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
                 modified := modified + 1;
             end;
         end;
-
         // Nodify only if found atleast 1 CRM - BC match
         if modified > 0 then begin
             Rec.Modify(false);

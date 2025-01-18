@@ -7,19 +7,16 @@ tableextension 50100 "Customer Ext" extends Customer
             Caption = 'State';
             DataClassification = ToBeClassified;
         }
-
         field(50150; "D365 Country"; Text[100])
         {
             Caption = 'Country';
             DataClassification = ToBeClassified;
         }
-
         field(50145; "D365 City"; Text[100])
         {
             Caption = 'City';
             DataClassification = ToBeClassified;
         }
-
         field(50146; "D365 PostCode"; Text[100])
         {
             Caption = 'PostCode';
@@ -61,7 +58,6 @@ tableextension 50100 "Customer Ext" extends Customer
             Caption = 'Account Contract Manager';
             DataClassification = ToBeClassified;
             TableRelation = Employee;
-
         }
         field(50107; "Capex From"; Date)
         {
@@ -212,8 +208,6 @@ tableextension 50100 "Customer Ext" extends Customer
             DataClassification = ToBeClassified;
         }
     }
-
-
     trigger OnAfterModify()
     var
         dimRec: Record "Dimension Value";
@@ -229,43 +223,163 @@ tableextension 50100 "Customer Ext" extends Customer
         if (Rec."CRM ID" <> '') and (xRec."CRM ID" <> Rec."CRM ID") then begin
             contactRec.SetFilter("CRM ID", Rec."CRM ID");
             if contactRec.FindFirst() then begin
-                // Rec."Primary Contact" := contactRec."No.";
                 Rec."Primary Contact No." := contactRec."No.";
                 modified := modified + 1;
             end;
-        end;
-
-        // Check if field has changed and is not empty
+        end;        
         if (Rec."Currency Code Id" <> '') and (xRec."Currency Code Id" <> Rec."Currency Code Id") then begin
             currencyRec.SetFilter("CRM ID", Rec."Currency Code Id");
             if currencyRec.FindFirst() then begin
                 Rec."Currency Code" := currencyRec.Code;
                 modified := modified + 1;
             end;
-        end;
-
-        // Check if field has changed and is not empty
+        end;        
         if (Rec."Dimension ID" <> '') and (xRec."Dimension ID" <> Rec."Dimension ID") then begin
             dimRec.SetFilter("CRM ID", Rec."Dimension ID");
             if dimRec.FindFirst() then begin
                 Rec.Dimension := dimRec.Code;
                 modified := modified + 1;
             end;
-        end;
-
-        // Check if field has changed and is not empty
+        end;      
         if (Rec."Territory Code ID" <> '') and (xRec."Territory Code ID" <> Rec."Territory Code ID") then begin
             territoryRec.SetFilter("CRM ID", Rec."Territory Code ID");
             if territoryRec.FindFirst() then begin
                 Rec."Territory Code" := territoryRec.Code;
                 modified := modified + 1;
             end;
-        end;
-
-        // Nodify only if found atleast 1 CRM - BC match
+        end;        
         if modified > 0 then begin
             Rec.Modify(false);
         end;
     end;
 
+    procedure UpdateCRMAccount()
+    var
+        Client: HttpClient;
+        Content: HttpContent;
+        ContentHeaders: HttpHeaders;
+        IsSuccessful: Boolean;
+        Response: HttpResponseMessage;
+        ResponseText: Text;
+        customerJson: JsonObject;
+        responseJson: JsonObject;
+        jsonText: Text;
+        tokenValue: JsonToken;
+        tokenString: Text;
+        MaxRetries: Integer;
+        RetryCount: Integer;
+        TimeoutMs: Integer;
+        ErrorMsg: Text;
+    begin
+
+        MaxRetries := 3;
+        RetryCount := 0;
+        TimeoutMs := 120000; 
+
+        Client.Timeout(TimeoutMs);
+
+
+        Content.GetHeaders(ContentHeaders);
+        ContentHeaders.Clear();
+        ContentHeaders.Add('Content-Type', 'application/json');
+        ContentHeaders.Add('Content-Encoding', 'UTF8');
+
+        Clear(customerJson);
+        customerJson.Add('bcid', Format(Rec."No."));
+        customerJson.Add('crmid', Rec."CRM ID");
+        customerJson.Add('name', Rec.Name);
+        customerJson.Add('phoneNo', Rec."Phone No.");
+        customerJson.Add('email', Rec."E-Mail");
+        customerJson.Add('address', Rec.Address);
+        customerJson.Add('address2', Rec."Address 2");
+        customerJson.Add('address3', Rec."Address 3");
+        customerJson.Add('addressName', Rec."Address Name");
+        customerJson.Add('city', Rec."D365 City");
+        customerJson.Add('state', Rec."D365 State");
+        customerJson.Add('country', Rec."D365 Country");
+        customerJson.Add('postCode', Rec."D365 PostCode");
+        customerJson.Add('customerProfile', Format(Rec."Customer Profile"));
+        customerJson.Add('customerGroup', Format(Rec."Customer group"));
+        customerJson.Add('contactGroup', Format(Rec."Contact Group"));
+        customerJson.Add('primaryContact', Rec."Primary Contact No.");
+        customerJson.Add('creditHold', Rec."Credit Hold");
+        customerJson.Add('creditLimit', Rec."Credit Limit (LCY)");
+        customerJson.Add('currencyCode', Rec."Currency Code");
+        customerJson.Add('paymentTerms', Rec."Payment Terms Code");
+        customerJson.Add('paymentMethod', Rec."Payment Method Code");
+        customerJson.Add('territoryCode', Rec."Territory Code");
+        customerJson.Add('dimension', Rec.Dimension);
+        customerJson.Add('sapCustomerNumber', Rec."SAP Customer Number");
+        customerJson.Add('abn', Rec."ABN No.");
+        customerJson.Add('web', Rec.WEB);
+        customerJson.Add('description', Rec.Description);
+        customerJson.Add('ownerId', Rec."Owner Id");
+        customerJson.WriteTo(jsonText);
+        Content.WriteFrom(jsonText);
+
+        repeat
+            RetryCount += 1;
+            Clear(Response);
+
+            IsSuccessful := Client.Post('https://prod-06.australiasoutheast.logic.azure.com:443/workflows/8419dbcb99664b739f1ab25cb78b83c1/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=pEF7rVaGAGNPhvxBo5axltUyLdDFcomOMiGiouvMBvY', Content, Response);
+
+            if IsSuccessful then begin
+                Response.Content().ReadAs(ResponseText);
+
+                if ResponseText <> '' then begin
+                    if responseJson.ReadFrom(ResponseText) then begin
+                       
+                        if ParseErrorMessage(ResponseText, ErrorMsg) then
+                            Error('API Error: %1', ErrorMsg);
+
+                        if responseJson.Get('crmid', tokenValue) then begin
+                            if tokenValue.IsValue then begin
+                                tokenString := tokenValue.AsValue().AsText();
+                                Rec."CRM ID" := CopyStr(tokenString, 1, MaxStrLen(Rec."CRM ID"));
+                                Rec.Modify(false);
+                                exit; 
+                            end;
+                        end;
+                        Error('Response does not contain valid CRM ID. Full response: %1', ResponseText);
+                    end;
+                    Error('Invalid JSON response: %1', ResponseText);
+                end;
+                Error('Empty response received from the server.');
+            end else
+                Error('HTTP request failed. Status code: %1', Response.HttpStatusCode);
+
+            if RetryCount < MaxRetries then
+                Sleep(100 * RetryCount);
+
+        until (RetryCount >= MaxRetries);
+
+        Error('Failed to update CRM ID after %1 attempts. Last response: %2', MaxRetries, ResponseText);
+    end;
+
+    local procedure ParseErrorMessage(ResponseText: Text; var ErrorMessage: Text): Boolean
+    var
+        JsonObject: JsonObject;
+        ErrorToken: JsonToken;
+        ErrorObject: JsonObject;
+        MessageToken: JsonToken;
+    begin
+        if JsonObject.ReadFrom(ResponseText) then begin
+            if JsonObject.Get('error', ErrorToken) then begin
+                if ErrorToken.IsObject then begin
+                    ErrorObject := ErrorToken.AsObject();
+                    if ErrorObject.Get('message', MessageToken) then begin
+                        if MessageToken.IsValue then begin
+                            ErrorMessage := MessageToken.AsValue().AsText();
+                            exit(true);
+                        end;
+                    end;
+
+                    ErrorObject.WriteTo(ErrorMessage);
+                    exit(true);
+                end;
+            end;
+        end;
+        ErrorMessage := ResponseText;  
+        exit(false);
+    end;
 }
