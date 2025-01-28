@@ -28,7 +28,7 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Code';
                 }
-                field(customerno; Rec."Bill-to Customer No.")
+                field(customerno; Rec."Sell-to Customer No.")
                 {
                     Caption = 'Customer No.';
                 }
@@ -48,7 +48,7 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Country';
                 }
-                field(State;Rec."Bill-to County"){}
+                field(State; Rec."Bill-to County") { }
                 field(postcode; Rec."D365 Bill-to Post Code")               // Custom
                 {
                     Caption = 'Sell-to Post Code';
@@ -113,10 +113,6 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Requested Delivery Date';
                 }
-                field(status; Rec.Status)            // Need to be Cross check
-                {
-                    Caption = 'Status';
-                }
                 field(leadtype; Rec."Lead Type")
                 {
                     Caption = 'Lead Type';
@@ -133,7 +129,7 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Ship-to City';
                 }
-                field(ShipToState;Rec."Ship-to County"){}
+                field(ShipToState; Rec."Ship-to County") { }
                 field(shiptocountry; Rec."D365 ShiptoCountry/RegionCode")  //Create Custom
                 {
                     Caption = 'Ship-to Country/Region Code';

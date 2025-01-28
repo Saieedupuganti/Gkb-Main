@@ -10,9 +10,25 @@ tableextension 50112 "ShipToAddExt" extends "Ship-to Address"
         field(50101; "Postal Code"; Text[50])
         {
             DataClassification = ToBeClassified;
+            Caption = 'Postal Code';
         }
-        field(50102; "Street 3"; Text[100])
+        field(50102; "Address 3"; Text[100])
         {
+            DataClassification = ToBeClassified;
+        }
+         field(50149; "D365 State"; Text[100])
+        {
+            Caption = 'State';
+            DataClassification = ToBeClassified;
+        }
+        field(50150; "D365 Country"; Text[100])
+        {
+            Caption = 'Country';
+            DataClassification = ToBeClassified;
+        }
+        field(50145; "D365 City"; Text[100])
+        {
+            Caption = 'City';
             DataClassification = ToBeClassified;
         }
         field(50103;"Crm Id";Text[100])
@@ -20,17 +36,4 @@ tableextension 50112 "ShipToAddExt" extends "Ship-to Address"
             DataClassification = ToBeClassified;
         }
     }
-
-    keys
-    {
-        // Add changes to keys here
-    }
-
-    fieldgroups
-    {
-        // Add changes to field groups here
-    }
-
-    var
-        myInt: Integer;
 }

@@ -24,6 +24,14 @@ page 50515 "GKB Work Order Card"
                     ApplicationArea = All;
                     Caption = 'Service Account';
                     ShowMandatory = true;
+                    NotBlank = true;
+                }
+                field("Work Order Type"; rec."Work Order Type")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Work Order Type';
+                    ShowMandatory = true;
+                    NotBlank = true;
                 }
                 field("System Status"; Rec."System Status")
                 {
@@ -59,7 +67,7 @@ page 50515 "GKB Work Order Card"
                     ApplicationArea = All;
                     Caption = 'Billing Account';
                 }
-                field("Customer PO Number";Rec."Customer PO Number")
+                field("Customer PO Number"; Rec."Customer PO Number")
                 {
                     ApplicationArea = all;
                 }
@@ -130,6 +138,7 @@ page 50515 "GKB Work Order Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Owning Business Unit';
+                    Visible = false;
                 }
                 field("Parent Work Order"; rec."Parent Work Order")
                 {
@@ -166,12 +175,6 @@ page 50515 "GKB Work Order Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Work Location';
-                }
-                field("Work Order Type"; rec."Work Order Type")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Work Order Type';
-                    ShowMandatory = true;
                 }
                 field("Work Order Summary"; rec."Work Order Summary")
                 {

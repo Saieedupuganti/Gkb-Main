@@ -47,16 +47,9 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
         }
         field(50107; "Project Task No"; Code[30])
         {
-
             Caption = 'Project Task No';
             DataClassification = ToBeClassified;
             TableRelation = "Job Task"."Job Task No." WHERE("Job No." = FIELD(projectNo));
-        }
-        field(50108; "Dimension Value"; Code[30])
-        {
-            TableRelation = "Dimension Value";
-            Caption = 'Dimension Value';
-            DataClassification = ToBeClassified;
         }
         field(50109; "Work Order No"; Code[30])
         {

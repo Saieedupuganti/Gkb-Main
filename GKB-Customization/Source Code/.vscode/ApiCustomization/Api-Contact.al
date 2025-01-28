@@ -20,7 +20,7 @@ page 50307 "API Contact"
                 {
                     Caption = 'CRM ID';
                 }
-                field(CompanyName; Rec."Company Name")
+                field(CompanyID; Rec."Company Name")
                 {
                     Caption = 'Company Name';
                 }
@@ -28,14 +28,14 @@ page 50307 "API Contact"
                 {
                     Caption = 'Type';
                 }
-                field(CompanyID; Rec."Company No.")
+                field(CompanyContactID; Rec."Company No.")
                 {
                     Caption = 'Company ID';
                 }
-                field(ContactBusinessRelation; Rec."Contact Business Relation")
-                {
-                    Caption = 'Contact Business Relation';
-                }
+                // field(NoOfBusinessRelations; Rec."No. of Business Relations")
+                // {
+                //     Caption = 'Contact Business Relation';
+                // }
                 field(FirstName; Rec."First Name")
                 {
                     Caption = 'First Name';
@@ -48,35 +48,33 @@ page 50307 "API Contact"
                 {
                     Caption = 'Surname';
                 }
-                field(Address; Rec."Address")
-                {
-                    Caption = 'Address';
-                }
-                field("Address2Street1";Rec."Address 2 Street1")
+                field("AddressName"; Rec."Address Name") { }
+                field("Address"; Rec.Address)
                 {
                     Caption = 'Address 2 Street 1';
                 }
-                field(Address2Street2;Rec."Address 2 Street 2")
+                field(Address2; Rec."Address 2")
                 {
                     Caption = 'Address 2 Street 2';
                 }
-                field(Address2Street3;Rec."Address 2 Street 3")
+                field(Address3; Rec."Address 3")
                 {
                     Caption = 'Address 2 Street 3';
                 }
-                field(City; Rec."City")
+                field(City; Rec."D365 City")
                 {
                     Caption = 'City';
                 }
+                field("State"; Rec."D365 State") { }
                 field(County; Rec.County)
                 {
                     Caption = 'County';
                 }
-                field(CountryRegionCode; Rec."Country/Region Code")
+                field(Country; Rec."D365 Country")
                 {
-                    Caption = 'Country/RegionCode';
+                    Caption = 'Country';
                 }
-                field(PostCode; Rec."Post Code")
+                field(PostCode; Rec."D365 Postal Code")
                 {
                     Caption = 'PostCode';
                 }
@@ -88,6 +86,7 @@ page 50307 "API Contact"
                 {
                     Caption = 'Currency CRM Id';
                 }
+                field(Description;Rec.Description){}
                 field(Faxno; Rec."Fax No.")
                 {
                     Caption = 'Fax No';
@@ -99,10 +98,6 @@ page 50307 "API Contact"
                 field(JobTitle; Rec."Job Title")
                 {
                     Caption = 'Job Title';
-                }
-                field(SalutationCode; Rec."Salutation Code")
-                {
-                    Caption = 'Salutation Code';
                 }
                 field(PhoneNo; Rec."Phone No.")
                 {
@@ -124,10 +119,6 @@ page 50307 "API Contact"
                 {
                     Caption = 'Dimension';
                 }
-                field(Description; Rec.Description)
-                {
-                    Caption = 'Description';
-                }
                 field("EMailGroupCode"; Rec."E-Mail Group Code")
                 {
                     Caption = 'Email Group Code';
@@ -136,5 +127,19 @@ page 50307 "API Contact"
         }
     }
 }
+
+// codeunit 50113 "Contact Handler"
+// {
+//     [EventSubscriber(ObjectType::Table, Database::Contact, OnBeforeOnInsert, '', false, false)]
+//     local procedure OnBeforeInsertContact(var Contact: Record Contact)
+//     begin
+//         SetBusinessRelationsToZero(Contact);
+//     end;
+
+//     local procedure SetBusinessRelationsToZero(var Contact: Record Contact)
+//     begin
+//         Contact.Validate("No. of Business Relations", 0);
+//     end;
+// }
 
 

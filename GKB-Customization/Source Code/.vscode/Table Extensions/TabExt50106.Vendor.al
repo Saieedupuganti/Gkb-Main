@@ -7,25 +7,21 @@ tableextension 50106 "Vendor Ext" extends Vendor
             Caption = 'State';
             DataClassification = ToBeClassified;
         }
-
         field(50148; "D365 Country"; Text[100])
         {
             Caption = 'Country';
             DataClassification = ToBeClassified;
         }
-
         field(50147; "D365 City"; Text[100])
         {
             Caption = 'City';
             DataClassification = ToBeClassified;
         }
-
         field(50146; "D365 Postal Code"; Text[100])
         {
             Caption = 'PostCode';
             DataClassification = ToBeClassified;
         }
-
         field(50142; "Vendor Profile"; Option)
         {
             Caption = 'Vendor Profile';
@@ -103,11 +99,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
             OptionCaption = ' ,Private,Public,Subsidary,Others';
             OptionMembers = " ",Private,Public,Subsidary,Others;
         }
-        field(50114; "Credit Holds"; Boolean)
-        {
-            Caption = 'Credit Holds';
-            DataClassification = ToBeClassified;
-        }
         field(50116; "Address 3"; Text[100])
         {
             Caption = 'Address 3';
@@ -116,7 +107,7 @@ tableextension 50106 "Vendor Ext" extends Vendor
         {
             DataClassification = ToBeClassified;
         }
-        field(50119; "Description"; Text[100])
+        field(50119; "Description"; Text[1000])
         {
             Caption = 'Description';
             DataClassification = ToBeClassified;
@@ -140,7 +131,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
         }
         field(50150; "Company Conatct"; Code[30])
         {
-
             FieldClass = FlowField;
             CalcFormula = Lookup("Contact"."No." WHERE("Name" = FIELD(Name)));
         }
@@ -168,7 +158,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
             Caption = 'Dimension ID';
             DataClassification = ToBeClassified;
         }
-
         field(50512; "Custom Contact Id"; Text[100])
         {
             Caption = 'Custom Contact Id';
@@ -189,7 +178,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
             Caption = 'Parent Account';
             DataClassification = ToBeClassified;
         }
-
     }
 
     trigger OnAfterModify()

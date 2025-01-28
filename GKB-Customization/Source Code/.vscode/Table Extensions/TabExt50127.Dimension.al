@@ -20,11 +20,4 @@ pageextension 50500 "DimensionValExt" extends "Dimension Values"
             }
         }
     }
-
-    actions
-    {
-        // Add changes to page actions here
-    }
-    var
-        myInt: Integer;
 }

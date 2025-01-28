@@ -26,6 +26,9 @@ page 60033 "Work Order Lines API"
                 field(Code; Rec.Code)
                 {
                 }
+                field("LineType"; Rec."Line Type") { }
+                field(Type; Rec.Type) { }
+                field(Name; Rec.Name) { }
                 field("UnitCode"; Rec."Unit Code")
                 {
                 }
@@ -51,15 +54,6 @@ page 60033 "Work Order Lines API"
                 {
                 }
                 field("UnitAmount"; Rec."Unit Amount")
-                {
-                }
-                field("TotalAmount"; Rec."Total Amount")
-                {
-                }
-                field("ProjectCode"; Rec."Job No.")
-                {
-                }
-                field("ProjectTaskCode"; Rec."Work OrDER No.")
                 {
                 }
             }

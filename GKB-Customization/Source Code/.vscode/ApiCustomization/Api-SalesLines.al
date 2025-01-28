@@ -19,6 +19,9 @@ page 50330 "API Sales Lines"
                 {
                     Caption = 'CRM ID';
                 }
+                field("DocumentNo";Rec."Document No."){}
+                field("DocumentType";Rec."Document Type"){}
+                field(Type; Rec.Type) { }
                 field(Quantity; Rec.Quantity)
                 {
                     Caption = 'Quantity';
@@ -35,7 +38,7 @@ page 50330 "API Sales Lines"
                 {
                     Caption = 'Amount';
                 }
-                field("DimensionSetID"; Rec."Dimension Set ID")
+                field("Dimension"; Rec."Shortcut Dimension 1 Code")
                 {
                     Caption = 'Dimension';
                 }

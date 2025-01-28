@@ -62,7 +62,6 @@ tableextension 50103 GKBItemExt extends Item
         }
         field(50108; "Vendor Id"; Text[100])   //lookup
         {
-
             DataClassification = ToBeClassified;
             // TableRelation = Vendor."Dimension ID" WHERE("No." = FIELD("Vendor Id"));
             trigger OnLookup()
@@ -112,4 +111,124 @@ tableextension 50103 GKBItemExt extends Item
             DataClassification = ToBeClassified;
         }
     }
+    trigger OnAfterModify()
+    var
+        Client: HttpClient;
+        RequestContent: HttpContent;
+        ContentHeaders: HttpHeaders;
+        IsSuccessful: Boolean;
+        Response: HttpResponseMessage;
+        ResponseText: Text;
+        JObject: JsonObject;
+        ResponseJObject: JsonObject;
+        JsonText: Text;
+        TokenValue: JsonToken;
+        TokenString: Text;
+        uomRec: Record "Unit of Measure";
+        unitcrmid: Text;
+        unitgroupcrmid: Text;
+        vendorRec: Record Vendor;
+        vendorid: Text;
+        fieldservicetype: Text;
+        producttype: Text;
+        tradetype: Text;
+    begin
+        // Initialize request content and headers
+        RequestContent.WriteFrom('');
+        RequestContent.GetHeaders(ContentHeaders);
+        ContentHeaders.Clear();
+        ContentHeaders.Add('Content-Type', 'application/json');
+
+        Client.DefaultRequestHeaders.Add('Accept', 'application/json');
+
+        Clear(vendorid);
+        Clear(unitcrmid);
+        Clear(unitgroupcrmid);
+        fieldservicetype := Format(Rec.Type);
+        producttype := Format(Rec."Product Type");
+
+        if Rec."Vendor No." <> '' then begin
+            if vendorRec.Get(Rec."Vendor No.") then
+                if vendorRec."CRM ID" <> '' then
+                    vendorid := '/accounts(' + vendorRec."CRM ID" + ')';
+        end;
+
+        if Rec."Base Unit of Measure" <> '' then begin
+            if uomRec.Get(Rec."Base Unit of Measure") then begin
+                if uomRec."CRM ID" <> '' then
+                    unitcrmid := '/uoms(' + uomRec."CRM ID" + ')';
+                if uomRec."Unitgroup CRM ID" <> '' then
+                    unitgroupcrmid := '/uomschedules(' + uomRec."Unitgroup CRM ID" + ')';
+            end;
+        end;
+
+        case fieldservicetype of
+            Format(Rec.Type::Inventory):
+                fieldservicetype := '690970000';
+            Format(Rec.Type::"Non-Inventory"):
+                fieldservicetype := '690970001';
+            Format(Rec.Type::Service):
+                fieldservicetype := '690970002';
+            else
+                fieldservicetype := '';
+        end;
+
+        case tradetype of
+            'Service Engineer Dual Trade':
+                tradetype := '888880000';
+            'First-Year Apprentice':
+                tradetype := '888880001';
+            'Second-Year Apprenctice':
+                tradetype := '888880002';
+            'Third-Year Apprenctice':
+                tradetype := '888880003';
+            'Fourth-Year Apprenctice':
+                tradetype := '888880004';
+            else
+                tradetype := '888880000';
+        end;
+
+        Clear(JObject);
+        JObject.Add('bcid', Rec."No.");
+        JObject.Add('crmid', Rec."CRM ID");
+        JObject.Add('defaultunitid', unitcrmid);
+        JObject.Add('defaultunitgroupid', unitgroupcrmid);
+        JObject.Add('currencyid', Rec."Currency Id");
+        JObject.Add('name', Rec.Description);
+        JObject.Add('description', Rec.Description);
+        JObject.Add('internalproductname', Rec."OBS Item Name");
+        JObject.Add('postinggroup', Rec."Posting Group");
+        JObject.Add('standardcost', Rec."Standard Cost");
+        JObject.Add('tradetype', tradetype);
+        JObject.Add('type', fieldservicetype);
+        JObject.Add('currentcost', Rec."Unit Cost");
+        JObject.Add('vendorcatalogueno', Rec."Vendor 1 Catalogue Number");
+        JObject.Add('vendorid', vendorid);
+
+        if (Format(Rec."Product Type") <> '') and (Format(Rec."Product Type") <> '0') then begin
+            if Format(Rec."Product Type") = ' ' then
+                JObject.Add('producttype', '1')
+            else
+                JObject.Add('producttype', Format(Rec."Product Type"));
+        end else
+            JObject.Add('producttype', '1');
+
+        JObject.WriteTo(JsonText);
+        RequestContent.WriteFrom(JsonText);
+
+        IsSuccessful := Client.Post('https://prod-28.australiasoutheast.logic.azure.com:443/workflows/7b639aebf03d48b589cb0cb4e242a43e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CBcPia0oWMebjYN00WLYwLb4Xr-lnSEztYIePQITywc', RequestContent, Response);
+
+        if IsSuccessful then begin
+            Response.Content().ReadAs(ResponseText);
+            if ResponseJObject.ReadFrom(ResponseText) then begin
+                if ResponseJObject.Contains('crmid') then begin
+                    ResponseJObject.Get('crmid', TokenValue);
+                    TokenString := TokenValue.AsValue().AsText();
+                    Rec."CRM ID" := CopyStr(TokenString, 1, 100);
+                    Rec.Modify(false);
+                end;
+            end;
+        end;
+    end;
+
 }

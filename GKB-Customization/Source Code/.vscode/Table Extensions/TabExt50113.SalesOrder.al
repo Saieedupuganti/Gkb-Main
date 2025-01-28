@@ -86,7 +86,7 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         {
             Caption = 'Lead Type';
             DataClassification = ToBeClassified;
-            OptionMembers = "Service/Parts",Training,Energy,Sales,"N/A";
+            OptionMembers = " ","Service/Parts",Training,Energy,Sales,"N/A";
         }
         field(50119; "Work Order Type"; Code[30])
         {
@@ -109,8 +109,8 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         field(50122; "Creation Method"; Option)
         {
             Caption = 'Creation Method';
-            OptionMembers = "776160000","776160001";
-            OptionCaption = 'Unknown,Win Quote';
+            OptionMembers = " ","776160000","776160001";
+            OptionCaption = ' ,Unknown,Win Quote';
             DataClassification = ToBeClassified;
         }
         field(50123; "Ship-to Address 3"; Text[100])
@@ -141,15 +141,15 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         field(50147; "D365 ShiptoCountry/RegionCode"; Text[50])
         {
             Caption = 'Ship-to Country/Region Code';
-            TableRelation = "Country/Region";
+            //TableRelation = "Country/Region";
         }
         field(50148; "D365 Ship-to Post Code"; Text[100])
         {
             Caption = 'Ship-to Post Code';
-            TableRelation = if ("Ship-to Country/Region Code" = const('')) "Post Code"
-            else
-            if ("Ship-to Country/Region Code" = filter(<> '')) "Post Code" where("Country/Region Code" = field("Ship-to Country/Region Code"));
-            ValidateTableRelation = false;
+            // TableRelation = if ("Ship-to Country/Region Code" = const('')) "Post Code"
+            // else
+            // if ("Ship-to Country/Region Code" = filter(<> '')) "Post Code" where("Country/Region Code" = field("Ship-to Country/Region Code"));
+            // ValidateTableRelation = false;
         }
         field(50100; Comments2; Text[100])
         {
@@ -167,11 +167,11 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             Caption = 'Rich Text';
             DataClassification = CustomerContent;
         }
-        field(50202; "D365 Bill-to Address 3";Text[100])
+        field(50202; "D365 Bill-to Address 3"; Text[100])
         {
             Caption = 'Address 3';
         }
-        field(50203; "Sales Order Name";Text[100])
+        field(50203; "Sales Order Name"; Text[100])
         {
             Caption = 'Sales Order Name';
         }
@@ -220,7 +220,7 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             Rec.Modify(false);
         end;
     end;
-    
+
     var
         Readdataskippedmsg: Label 'Loading Field %1 Will be skipped because there was an error when reading tha date.';
 
