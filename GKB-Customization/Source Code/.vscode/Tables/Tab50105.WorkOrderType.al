@@ -11,8 +11,8 @@ table 50105 "GKB Work Order Type"
         field(2; Status; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "Open","Closed","In Progress";
-            OptionCaption = 'Open,Closed,"In-Progress"';
+            OptionMembers = " ",Open,Closed,"In Progress";
+            OptionCaption = ' ,Open,Closed,"In-Progress"';
         }
         field(50105; "CRM ID"; Text[100])
         {

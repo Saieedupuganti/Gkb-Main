@@ -80,10 +80,6 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 {
                     ApplicationArea = all;
                 }
-                field("Credit Holds"; Rec."Credit Holds")
-                {
-                    ApplicationArea = all;
-                }
                 field("Supplier account Group"; Rec."Supplier account Group")
                 {
                     ApplicationArea = all;
@@ -109,7 +105,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 {
                     ApplicationArea = all;
                     Caption = 'CRM ID';
-                    Editable = false;
+                    Editable = true;
                     ToolTip = 'Specifies the CRM ID for this vendor';
                 }
                 field("Territory"; Rec."Territory Code")

@@ -20,9 +20,7 @@ page 50100 "WorkOrderAPI"
 
                 field("WorkOrderNumber"; rec."Work Order No.") { }
                 field(crmid; Rec."CRM ID")
-                {
-                    Caption = 'CRM ID';
-                }
+                { Caption = 'CRM ID'; }
                 field("ServiceAccount"; rec."Service Account") { }
                 field("SystemStatus"; rec."System Status") { }
                 field("Substatus"; rec."Substatus") { }
@@ -33,12 +31,11 @@ page 50100 "WorkOrderAPI"
                 field("Contact"; rec."Contact") { }
                 field("Currency"; rec."Currency") { }
                 field("FixType"; rec."Fix Type") { }
-                field("CustomerPONumber";Rec."Customer PO Number"){}
+                field("CustomerPONumber"; Rec."Customer PO Number") { }
                 field("FunctionalLocation"; rec."Functional Location") { }
                 field("Opportunity"; rec."Opportunity") { }
-                field("Owner"; rec."Owner") { }
                 field("SalesOrder"; rec."Sales Order") { }
-                field("OwningBusinessUnit"; rec."Owning Business Unit") { }
+                field("OwningBusinessUnit"; rec."Shortcut Dimension 1 Code") { }
                 field("ParentWorkOrder"; rec."Parent Work Order") { }
                 field("TimeWindowStart"; rec."Time Window Start") { }
                 field("TimeWindowEnd"; rec."Time Window End") { }

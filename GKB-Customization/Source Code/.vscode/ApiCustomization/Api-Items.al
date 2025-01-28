@@ -16,21 +16,29 @@ page 50312 "API Items"
         {
             repeater(GroupName)
             {
-                field(crmid; Rec."CRM ID")
+                field("BaseUnitofMeasure"; Rec."Base Unit of Measure")   //lookup
                 {
-                    Caption = 'CRM ID';
+                    Caption = 'Base Unit Of Measure';
                 }
                 field(code; Rec."No.")
                 {
                     Caption = 'no';
                 }
-                field("BaseUnitofMeasure"; Rec."Base Unit of Measure")   //lookup
+                field(crmid; Rec."CRM ID")
                 {
-                    Caption = 'Base Unit Of Measure';
+                    Caption = 'CRM ID';
                 }
-                field("PostingGroup";Rec."Posting Group")
+                field(Currency; Rec.Currency)
                 {
-                    Caption = 'Posting Group';
+                    Caption = 'Currency';
+                }
+                field("CurrencyId"; Rec."Currency Id")
+                {
+                    Caption = 'Currency Id';
+                }
+                field("CustomVendorId"; Rec."Custom Vendor Id")
+                {
+                    Caption = 'Custom Vendor Id';
                 }
                 field(Description; Rec.Description)
                 {
@@ -48,9 +56,25 @@ page 50312 "API Items"
                 {
                     Caption = 'OBS Item Name';
                 }
+                field("PostingGroup"; Rec."Posting Group")
+                {
+                    Caption = 'Posting Group';
+                }
+                field("ProductStructure"; Rec."Product Structure")
+                {
+                    Caption = 'Product Structure';
+                }
+                field("ProductType"; Rec."Product Type")
+                {
+                    Caption = 'Product Type';
+                }
                 field("StandardCost"; Rec."Standard Cost")
                 {
                     Caption = 'Standard Cost';
+                }
+                field(Status; Rec.Status)
+                {
+                    Caption = 'Status';
                 }
                 field("TradeType"; Rec."Trade Type")
                 {
@@ -72,33 +96,9 @@ page 50312 "API Items"
                 {
                     Caption = 'Vendor Catalogue Number';
                 }
-                field(Currency; Rec.Currency)
-                {
-                    Caption = 'Currency';
-                }
-                field("CurrencyId"; Rec."Currency Id")
-                {
-                    Caption = 'Currency Id';
-                }
                 field("VendorId"; Rec."Vendor Id")
                 {
                     Caption = 'Vendor Id';
-                }
-                field("CustomVendorId"; Rec."Custom Vendor Id")
-                {
-                    Caption = 'Custom Vendor Id';
-                }
-                field("ProductType"; Rec."Product Type")
-                {
-                    Caption = 'Product Type';
-                }
-                field("ProductStructure"; Rec."Product Structure")
-                {
-                    Caption = 'Product Structure';
-                }
-                field(Status; Rec.Status)
-                {
-                    Caption = 'Status';
                 }
             }
         }

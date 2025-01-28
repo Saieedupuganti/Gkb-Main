@@ -17,7 +17,7 @@ table 50106 "GKB Work Order Substatus"
         field(2; Status; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = Active,InActive;
+            OptionMembers = " ",Active,InActive;
             OptionCaption = 'Active,InActive';
         }
         field(50105; "CRM ID"; Text[100])

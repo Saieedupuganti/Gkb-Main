@@ -11,7 +11,6 @@ codeunit 50102 "Accounts"
         IntegrationFieldMapping.CreateRecord(IntegrationTableMappingName, Customer.FieldNo("Customer Profile"), CRMAccount.FieldNo(adids_CustomerProfile), IntegrationFieldMapping.Direction::Bidirectional, '', true, false);
         IntegrationFieldMapping.CreateRecord(IntegrationTableMappingName, Customer.FieldNo("SAP Customer Number"), CRMAccount.FieldNo(adids_SAPCustomerNumber), IntegrationFieldMapping.Direction::Bidirectional, '', true, false);
         IntegrationFieldMapping.CreateRecord(IntegrationTableMappingName, Customer.FieldNo("Service Agreement"), CRMAccount.FieldNo(adids_TassLevel), IntegrationFieldMapping.Direction::Bidirectional, '', true, false);
-        IntegrationFieldMapping.CreateRecord(IntegrationTableMappingName, Customer.FieldNo("Supplier Account Groups"), CRMAccount.FieldNo(adids_SupplierAccountGroups), IntegrationFieldMapping.Direction::Bidirectional, '', true, false);
       //IntegrationFieldMapping.CreateRecord(IntegrationTableMappingName, Customer.FieldNo("Service Agreement"), CRMAccount.FieldNo(adids_SupplierAccountGroups), IntegrationFieldMapping.Direction::Bidirectional, '', true, false);
     end;
     var

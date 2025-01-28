@@ -3,7 +3,7 @@ page 50104 "SalesInvoiceLineAPI"
     PageType = API;
     APIGroup = 'api';
     APIPublisher = 'integration';
-    APIVersion = 'v2.0','v1.0';
+    APIVersion = 'v2.0', 'v1.0';
     SourceTable = "Sales Line";
     EntityName = 'SalesInvoiceLine';
     EntitySetName = 'SalesInvoiceLines';
@@ -15,7 +15,7 @@ page 50104 "SalesInvoiceLineAPI"
         {
             repeater(General)
             {
-                field("CrmId";Rec."Crm Id")
+                field("CrmId"; Rec."Crm Id")
                 {
                     Caption = 'Crm Id';
                 }
@@ -35,6 +35,7 @@ page 50104 "SalesInvoiceLineAPI"
                 {
                     Caption = 'Type';
                 }
+                field(Topic; Rec.Topic) { }
                 field("No"; Rec."No.")
                 {
                     Caption = 'No.';

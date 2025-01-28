@@ -44,21 +44,17 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
         TimeoutMs: Integer;
         ErrorMsg: Text;
     begin
-        // Initialize retry parameters
+
         MaxRetries := 3;
         RetryCount := 0;
-        TimeoutMs := 120000; // 120 seconds timeout
-
-        // Set timeout for the HTTP client
+        TimeoutMs := 120000;
         Client.Timeout(TimeoutMs);
 
-        // Set Content Headers
         Content.GetHeaders(ContentHeaders);
         ContentHeaders.Clear();
         ContentHeaders.Add('Content-Type', 'application/json');
         ContentHeaders.Add('Content-Encoding', 'UTF8');
 
-        // Validate required records
         if not priceListRec.Get(Rec."Price List Code") then
             Error('Price List Header not found.');
 
@@ -94,7 +90,7 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
         Content.WriteFrom(jsonText);
 
         // Log the request payload
-       // Message('Request Payload: %1', jsonText);
+        // Message('Request Payload: %1', jsonText);
 
         // Retry logic for HTTP request
         repeat
@@ -105,21 +101,18 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
 
             if IsSuccessful then begin
                 Response.Content().ReadAs(ResponseText);
-               // Message('Response: %1', ResponseText);  // Log the full response
 
                 if ResponseText <> '' then begin
                     if responseJson.ReadFrom(ResponseText) then begin
-                        // Check for error object in response
                         if ParseErrorMessage(ResponseText, ErrorMsg) then
                             Error('API Error: %1', ErrorMsg);
 
-                        // Process successful response
                         if responseJson.Get('pricelistitemcrmid', tokenValue) then begin
                             if tokenValue.IsValue then begin
                                 tokenString := tokenValue.AsValue().AsText();
                                 Rec."Crm Id" := CopyStr(tokenString, 1, MaxStrLen(Rec."Crm Id"));
                                 Rec.Modify(false);
-                                exit; // Success - exit the retry loop
+                                exit;
                             end;
                         end;
                         Error('Response does not contain valid pricelistitemcrmid. Full response: %1', ResponseText);
@@ -131,11 +124,10 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
                 Error('HTTP request failed. Status code: %1', Response.HttpStatusCode);
 
             if RetryCount < MaxRetries then
-                Sleep(100 * RetryCount); // Exponential backoff
+                Sleep(100 * RetryCount);
 
         until (RetryCount >= MaxRetries);
 
-        // If we get here, all retries failed
         Error('Failed to update CRM ID after %1 attempts. Last response: %2', MaxRetries, ResponseText);
     end;
 
@@ -156,13 +148,13 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
                             exit(true);
                         end;
                     end;
-                    // If we can't get the message, try to get the entire error object as text
+
                     ErrorObject.WriteTo(ErrorMessage);
                     exit(true);
                 end;
             end;
         end;
-        ErrorMessage := ResponseText;  // Return the entire response if we can't parse it
+        ErrorMessage := ResponseText;
         exit(false);
     end;
 }

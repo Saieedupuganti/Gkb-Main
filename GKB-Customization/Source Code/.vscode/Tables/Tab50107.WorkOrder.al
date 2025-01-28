@@ -10,7 +10,7 @@ table 50107 "GKB Work Order"
         {
             DataClassification = CustomerContent;
         }
-        field(50001; "Service Account"; Code[20])
+        field(50001; "Service Account"; Code[100])
         {
             DataClassification = CustomerContent;
             TableRelation = "Customer";
@@ -30,7 +30,7 @@ table 50107 "GKB Work Order"
         {
             DataClassification = CustomerContent;
         }
-        field(50005; "Billing Account"; Code[20])
+        field(50005; "Billing Account"; Text[100])
         {
             DataClassification = CustomerContent;
             TableRelation = Customer;
@@ -45,9 +45,9 @@ table 50107 "GKB Work Order"
         {
             DataClassification = CustomerContent;
         }
-        field(50008; "Completed On"; DateTime)
+        field(50008; "Completed On"; Date)
         {
-            DataClassification = CustomerContent;
+            DataClassification = ToBeClassified;
         }
         field(50009; "Contact"; Code[30])
         {
@@ -62,20 +62,20 @@ table 50107 "GKB Work Order"
         field(50011; "Fix Type"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = Repair,Replace,Other;
+            OptionMembers = " ",Repair,Replace,Other;
             OptionCaption = ' ,Repair,Replace,Other';
         }
         field(50012; "Functional Location"; Code[20])
         {
             DataClassification = CustomerContent;
-            TableRelation = "Ship-to Address";
+            TableRelation = "Ship-to Address".Code;
         }
         field(50013; "Opportunity"; Text[100])
         {
             DataClassification = CustomerContent;
             TableRelation = Opportunity;
         }
-        field(50014; "Owner"; Code[20])
+        field(50014; "Owner"; Text[100])
         {
             DataClassification = CustomerContent;
             TableRelation = Employee;
@@ -102,11 +102,11 @@ table 50107 "GKB Work Order"
         }
         field(50019; "Time Window Start"; Date)
         {
-            DataClassification = CustomerContent;
+            DataClassification = ToBeClassified;
         }
         field(50020; "Time Window End"; Date)
         {
-            DataClassification = CustomerContent;
+            DataClassification = ToBeClassified;
         }
         field(50021; "Topic"; Text[250])
         {
@@ -126,7 +126,7 @@ table 50107 "GKB Work Order"
         field(50024; "Work Location"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = Onsite,Remote;
+            OptionMembers = " ",Onsite,Remote;
             OptionCaption = ' ,Onsite,Remote';
         }
         field(50025; "Work Order Type"; Text[100])
@@ -142,7 +142,7 @@ table 50107 "GKB Work Order"
         {
             DataClassification = CustomerContent;
 
-            OptionMembers = Active,InActive;
+            OptionMembers = " ",Active,InActive;
             OptionCaption = 'Active,InActive';
         }
         field(50028; "Job No."; Code[20])
@@ -170,10 +170,7 @@ table 50107 "GKB Work Order"
             Caption = 'Customer PO Number';
             DataClassification = ToBeClassified;
         }
-
-
     }
-
 
     keys
     {
@@ -185,10 +182,12 @@ table 50107 "GKB Work Order"
         {
         }
     }
+    
     trigger OnInsert()
     var
-        WO: Record "GKB Work Order"; // Work Order
+        WO: Record "GKB Work Order";
     begin
+
         // Filter Work Orders where "Job Created" is false
         WO.SetRange("Job Created", false);
         if WO.IsEmpty then
@@ -196,7 +195,6 @@ table 50107 "GKB Work Order"
 
         if WO.FindSet() then
             repeat
-
                 if JobNotExistForWO(WO) then
                     CreateJobFromWO(WO);
             until WO.Next() = 0;
@@ -207,11 +205,13 @@ table 50107 "GKB Work Order"
         Job: Record Job;
         JobTask: Record "Job Task";
     begin
+        job.Reset();
         Job.SetRange("Service Account", WO."Service Account");
         Job.SetRange("Work Order Type", WO."Work Order Type");
 
         if not Job.FindFirst() then
             exit(true);
+        JobTask.Reset();
         JobTask.SetRange("Job No.", Job."No.");
         JobTask.SetRange("Job Task No.", JobTask."Job Task No.");
         if not JobTask.FindFirst() then begin
@@ -221,7 +221,6 @@ table 50107 "GKB Work Order"
             JobTask.Description := WO."Topic";
             JobTask.Insert();
 
-            // Update WO fields from Job and Task
             if WO."Job No." = '' then
                 WO."Job No." := Job."No.";
             WO."Project Task No" := JobTask."Job Task No.";
@@ -244,6 +243,7 @@ table 50107 "GKB Work Order"
         Job.Description := WO."Service Account" + ' - ' + WO."Work Order Type";
         Job."Service Account" := WO."Service Account";
         Job."Work Order Type" := WO."Work Order Type";
+        Job."Bill-to Customer No." := WO."Service Account";
         Job.Insert();
         Message('Job card created with no %1', Job."No.");
 

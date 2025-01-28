@@ -2,11 +2,11 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
 {
     layout
     {
-        modify(ABN)
+        modify(ABN)             // Used Custom Field ABN No. instead of ABN
         {
             Editable = true;
             Enabled = true;
-            Visible = true;
+            Visible = false;
             ShowMandatory = true;
         }
         modify("Post Code")
@@ -25,6 +25,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         // {
         //  CalcFormula = Lookup(Contact."No." WHERE ("CRM ID" = Field("Primary Contact CRMID")));
         // }
+
         addafter(General)
         {
             group("D365 CUSTOM FIELDS")
@@ -114,13 +115,13 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                     Caption = 'Dimension';
                     TableRelation = "Dimension Value".Code;
                 }
-                field("Territory"; Rec."Territory Code")
+                field("Territory"; Rec.Territory)
                 {
                     ApplicationArea = all;
                     Caption = 'Territory';
                     TableRelation = Territory.Code;
                 }
-                field("Primary Contact"; Rec."Primary Contact")
+                field("Primary Contact"; Rec."Company Contact")
                 {
                     ApplicationArea = all;
                     Caption = 'Company Contact';
@@ -167,6 +168,15 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 ApplicationArea = all;
             }
         }
+        addbefore("ABN Division Part No.")
+        {
+            field("ABN No."; Rec."ABN No.")
+            {
+                Caption = 'ABN';
+                ApplicationArea = All;
+                ShowMandatory = true;
+            }
+        }
 
     }
 
@@ -196,7 +206,8 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 end;
             }
         }
-    }   
+    }
+
 
     trigger OnOpenPage();
     var

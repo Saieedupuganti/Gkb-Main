@@ -1,13 +1,12 @@
 pageextension 50149 GKBItemExt extends "Item Card"
 {
     layout
-    {
+    { 
         addafter("Attached Documents")
         {
             part(qrcode; "Qr Code")
             {
                 ApplicationArea = all;
-                // Caption = 'Qr Code';
                 SubPageLink = "No." = field("No.");
             }
         }
@@ -37,17 +36,16 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 field(SAPITEMID; Rec.SAPITEMID)                  //custom
                 {
                     ApplicationArea = all;
-                    Caption = 'SAP ITEM ID';
+                    Caption = 'Sap Item Id';
                 }
                 field(OBSItemName; Rec."OBS Item Name")                    //custom
                 {
                     ApplicationArea = all;
-                    Caption = 'OBSItemName';
+                    Caption = 'OBS ItemName';
                     Visible = false;
                 }
             }
         }
-
         addafter("Vendor Item No.")
         {
 

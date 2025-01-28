@@ -20,7 +20,6 @@ page 50308 "Req.Worksheet API"
                 {
                     Caption = 'Crm Id';
                 }
-                field("LineNo"; Rec."Line No.") { }
                 field("WorksheetTemplateName"; Rec."Worksheet Template Name") { }
                 field("JournalBatchName"; Rec."Journal Batch Name") { }
 
@@ -36,7 +35,7 @@ page 50308 "Req.Worksheet API"
                 {
                     Caption = 'Description';
                 }
-                field("ObrienBusinessUnitCode"; Rec."Dimension Value")
+                field("ObrienBusinessUnitCode"; Rec."Shortcut Dimension 1 Code")
                 {
                     Caption = 'Obrien Business Unit Code';
                 }
@@ -44,7 +43,7 @@ page 50308 "Req.Worksheet API"
                 {
                     Caption = 'Location Code';
                 }
-                field("VendorNo"; Rec."Vendor No.")  
+                field("VendorNo"; Rec."Vendor No.")
                 {
                     Caption = 'Vendor No.';
                 }

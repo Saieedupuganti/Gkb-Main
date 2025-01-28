@@ -7,19 +7,16 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             Caption = 'State';
             DataClassification = ToBeClassified;
         }
-
         field(50148; "D365 Country"; Text[100])
         {
             Caption = 'Country';
             DataClassification = ToBeClassified;
         }
-
         field(50147; "D365 City"; Text[100])
         {
             Caption = 'City';
             DataClassification = ToBeClassified;
         }
-
         field(50146; "D365 Postal Code"; Text[100])
         {
             Caption = 'PostCode';
@@ -46,9 +43,8 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
         {
             Caption = 'Address 3';
         }
-        field(70104; "Adress Name"; Text[100])
-        {
-            
+        field(70104; "Address Name"; Text[100])
+        {            
             DataClassification = ToBeClassified;
         }
         field(70107; "Address 2 Street1"; Text[100])
@@ -102,7 +98,6 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
 
         modified := 0;
 
-        // Check if field has changed and is not empty
         if (Rec."Currency CRM Id" <> '') and (xRec."Currency CRM ID" <> Rec."Currency CRM ID") then begin
             currencyRec.SetFilter("CRM ID", Rec."Currency CRM ID");
             if currencyRec.FindFirst() then begin
@@ -111,7 +106,6 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             end;
         end;
 
-        // Check if field has changed and is not empty
         if (Rec."Dimension ID" <> '') and (xRec."Dimension ID" <> Rec."Dimension ID") then begin
             dimRec.SetFilter("CRM ID", Rec."Dimension ID");
             if dimRec.FindFirst() then begin
@@ -120,7 +114,8 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             end;
         end;
 
-        // Modify only if found atleast 1 CRM - BC match
+        
+
         if modified > 0 then begin
             Rec.Modify(false);
         end;

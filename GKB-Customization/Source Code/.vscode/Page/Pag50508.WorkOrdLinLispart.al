@@ -48,6 +48,14 @@ page 50508 "Work Order Lines ListPart"
                 {
                     ApplicationArea = All;
                 }
+                field("Line Type"; Rec."Line Type")
+                {
+                    ApplicationArea = All;
+                }
+                field(Type; Rec.Type)
+                {
+                    ApplicationArea = All;
+                }
                 field("Line Status"; rec."Line Status")
                 {
                     ApplicationArea = All;

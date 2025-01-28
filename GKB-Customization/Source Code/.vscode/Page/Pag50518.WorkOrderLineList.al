@@ -5,8 +5,6 @@ page 50118 "Work Order Lines List"
     SourceTable = "GKB Work Order Lines";
     Caption = 'Work Order Lines';
     UsageCategory = Lists;
-    //CardPageId = "Work Order Line Card";
-    AboutTitle = 'About Customer Asset';
 
     layout
     {
@@ -30,7 +28,7 @@ page 50118 "Work Order Lines List"
                         if xRec."Work Order No." <> Rec."Work Order No." then begin
                             WorkOrder.Reset();
                             if WorkOrder.Get(Rec."Work Order No.") then begin
-                                Rec."Work OrDER No." := WorkOrder."Project Task No";
+                                Rec."Work Order No." := WorkOrder."Project Task No";
                                 Rec."Job No." := WorkOrder."Job No.";
                             end;
                         end;
@@ -41,6 +39,10 @@ page 50118 "Work Order Lines List"
                     ApplicationArea = All;
                 }
                 field(Name; Rec.Name)
+                {
+                    ApplicationArea = all;
+                }
+                field(Type;Rec.Type)
                 {
                     ApplicationArea = all;
                 }
@@ -76,7 +78,7 @@ page 50118 "Work Order Lines List"
                 {
                     ApplicationArea = All;
                 }
-                field("Project Task Code"; rec."Work OrDER No.")
+                field("Project Task Code"; rec."Work Order No.")
                 {
                     ApplicationArea = All;
                 }
@@ -91,13 +93,11 @@ page 50118 "Work Order Lines List"
                 field("Total Amount"; Rec."Total Amount")
                 {
                     ApplicationArea = all;
-
                 }
                 field("Line Created"; Rec."Line Created")
                 {
                     ApplicationArea = all;
                 }
-
             }
         }
     }

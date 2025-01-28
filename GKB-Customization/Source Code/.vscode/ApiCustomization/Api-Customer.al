@@ -16,37 +16,17 @@ page 50321 "API Customer"
         {
             repeater(GroupName)
             {
-                field(crmid; Rec."CRM ID")
-                {
-                    Caption = 'CRM ID';
-                }
-                field(code; Rec."No.")
-                {
-                    Caption = 'no';
-                }
-                field(primarycontact; Rec."Primary Contact No.")   // base Fld
-                {
-                    Caption = 'no';
-                }
-                field("PhoneNo"; Rec."Phone No.")
-                {
-                    Caption = 'Phone No.';
-                }
-                field("D365AccountID"; Rec."D365 Account ID")
-                {
-                    Caption = 'Account Id';
-                }
-                field(ABN; Rec.ABN)
+                field(ABN; Rec."ABN No.")
                 {
                     Caption = 'ABN';
-                }
-                field(Addressname; Rec."Address Name")
-                {
-                    Caption = 'Address Name';
                 }
                 field(Address; Rec.Address)
                 {
                     Caption = 'Address';
+                }
+                field(Addressname; Rec."Address Name")
+                {
+                    Caption = 'Address Name';
                 }
                 field("Address2"; Rec."Address 2")
                 {
@@ -56,6 +36,10 @@ page 50321 "API Customer"
                 {
                     Caption = 'Address 3';
                 }
+                field("BlockPaymentTolerance"; Rec."Block Payment Tolerance")
+                {
+                    Caption = 'Block Payment Tolerence';
+                }
                 field("CapexFrom"; Rec."Capex From")
                 {
                     Caption = 'Capex From';
@@ -64,7 +48,28 @@ page 50321 "API Customer"
                 {
                     Caption = 'Capex To';
                 }
+                field("city"; rec."D365 City")
+                {
+                    Caption = 'City';
+                }
+                field("CompanyContact"; Rec."Company Contact") { }
+                field(code; Rec."No.")
+                {
+                    Caption = 'no';
+                }
 
+                field("ContactGroup"; Rec."Contact Group")
+                {
+                    Caption = 'Contact Group';
+                }
+                field("Country"; Rec."D365 Country")
+                {
+                    Caption = 'Country/Region Code';
+                }
+                field(County; Rec.County)
+                {
+                    Caption = 'County';
+                }
                 field("CreditHold"; Rec."Credit Hold")
                 {
                     Caption = 'Credit Hold';
@@ -73,9 +78,9 @@ page 50321 "API Customer"
                 {
                     Caption = 'Credit Limit';
                 }
-                field(County; Rec.County)
+                field(crmid; Rec."CRM ID")
                 {
-                    Caption = 'County';
+                    Caption = 'CRM ID';
                 }
                 field("CurrencyCode"; Rec."Currency Code")
                 {
@@ -85,7 +90,7 @@ page 50321 "API Customer"
                 {
                     Caption = 'Customer Group';
                 }
-                field("CustomerPriceGroup"; Rec."Customer Price Group")  //lookup
+                field("CustomerPriceGroup"; Rec."Customer Price Group")
                 {
                     Caption = 'Customer Price Group';
                 }
@@ -97,53 +102,9 @@ page 50321 "API Customer"
                 {
                     Caption = 'Customer Profile';
                 }
-                field("PaymentMethodCode"; Rec."Payment Method Code")
-                {
-                    Caption = 'Payment Method Code';
-                }
-                field("PaymentTermsCode"; Rec."Payment Terms Code")
-                {
-                    Caption = 'Payment Terms Code';
-                }
-                field("city"; rec."D365 City")
-                {
-                    Caption = 'City';
-                }
                 field(Description; Rec.Description)
                 {
                     Caption = 'Description';
-                }
-                field("ServiceAgreement"; Rec."Service Agreement")
-                {
-                    Caption = 'Service Agreement';
-                }
-                field("EMail"; Rec."E-Mail")
-                {
-                    Caption = 'Caption';
-                }
-                field("FaxNo"; Rec."Fax No.")
-                {
-                    Caption = 'Fax No';
-                }
-                field("TerritoryCode"; Rec."Territory Code")  //lookup
-                {
-                    Caption = 'Territory Code';
-                }
-                field("TerritoryCodeID"; Rec."Territory Code ID")
-                {
-                    Caption = 'Territory Code Id';
-                }
-                field(Name; Rec.Name)
-                {
-                    Caption = 'Name';
-                }
-                field("PostCode"; Rec."D365 PostCode")
-                {
-                    Caption = 'Postal Code';
-                }
-                field("SAPCustomerNumber"; Rec."SAP Customer Number")
-                {
-                    Caption = 'SAP Customer No.';
                 }
                 field(Dimension; Rec.Dimension)
                 {
@@ -153,6 +114,22 @@ page 50321 "API Customer"
                 {
                     Caption = 'Dimension Id';
                 }
+                field("D365AccountID"; Rec."D365 Account ID")
+                {
+                    Caption = 'Account Id';
+                }
+                field("EMail"; Rec."E-Mail")
+                {
+                    Caption = 'Caption';
+                }
+                field("FaxNo"; Rec."Fax No.")
+                {
+                    Caption = 'Fax No';
+                }
+                field(Name; Rec.Name)
+                {
+                    Caption = 'Name';
+                }
                 field(owner; Rec."Owner")
                 {
                     Caption = 'Owner';
@@ -161,25 +138,57 @@ page 50321 "API Customer"
                 {
                     Caption = 'Owner ID';
                 }
-                field(supplieraccountgroup; Rec."Supplier Account Group")
+                field("PaymentMethodCode"; Rec."Payment Method Code")
                 {
-                    Caption = 'Supplier Account Group';
+                    Caption = 'Payment Method Code';
                 }
-                field("BlockPaymentTolerance"; Rec."Block Payment Tolerance")
+                field("PaymentTermsCode"; Rec."Payment Terms Code")
                 {
-                    Caption = 'Block Payment Tolerence';
+                    Caption = 'Payment Terms Code';
                 }
-                field(WEB; Rec.WEB)
+                field("PhoneNo"; Rec."Phone No.")
                 {
-                    Caption = 'WEB';
+                    Caption = 'Phone No.';
+                }
+                field("PostCode"; Rec."D365 PostCode")
+                {
+                    Caption = 'Postal Code';
                 }
                 field("PrivacyBlocked"; Rec."Privacy Blocked")
                 {
                     Caption = 'Privacy Blocked';
                 }
-                field("ContactGroup"; Rec."Contact Group")
+                field(primarycontact; Rec."Primary Contact No.")
                 {
-                    Caption = 'Contact Group';
+                    Caption = 'no';
+                }
+                field("SAPCustomerNumber"; Rec."SAP Customer Number")
+                {
+                    Caption = 'SAP Customer No.';
+                }
+                field("ServiceAgreement"; Rec."Service Agreement")
+                {
+                    Caption = 'Service Agreement';
+                }
+                field(State; Rec."D365 State")
+                {
+                    Caption = 'State';
+                }
+                field(supplieraccountgroup; Rec."Supplier Account Group")
+                {
+                    Caption = 'Supplier Account Group';
+                }
+                field("TerritoryCode"; Rec.Territory)
+                {
+                    Caption = 'Territory Code';
+                }
+                field("TerritoryCodeID"; Rec."Territory Code ID")
+                {
+                    Caption = 'Territory Code Id';
+                }
+                field(WEB; Rec.WEB)
+                {
+                    Caption = 'WEB';
                 }
                 // field("ContactCode"; Rec."Contact Code")
                 // {
@@ -216,10 +225,6 @@ page 50321 "API Customer"
                 // field("CurrencyCodeid"; Rec."Currency Code Id")
                 // {
                 //     Caption = 'Currency Code Id';
-                // }
-                // field("CountryRegionCode"; Rec."Country/Region Code")
-                // {
-                //     Caption = 'Country/Region Code';
                 // }
             }
         }

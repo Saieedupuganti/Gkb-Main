@@ -30,7 +30,7 @@ table 50104 "GKB Work Order Lines"
         field(4; "Line Status"; Option)
         {
             Caption = 'Line Status';
-            OptionMembers = Open,Closed;
+            OptionMembers = " ",Open,Closed;
         }
         field(5; "Estimate Quantity"; Decimal)
         {
@@ -73,67 +73,25 @@ table 50104 "GKB Work Order Lines"
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
         }
-        field(500115; "Line Created"; Boolean)
+        field(50115; "Line Created"; Boolean)
         {
             Caption = 'Line Created';
             DataClassification = ToBeClassified;
         }
+        field(50116; "Line Type"; Enum "Job Line Type")
+        {
+            Caption = 'Line Type';
+        }
+        field(50117; Type; Enum "Job Journal Line Type")
+        {
+            Caption = 'Type';
+        }
     }
     keys
     {
-
         key(key1; "Job No.", "Work Order No.", "Line No.")
         {
             Clustered = true;
         }
     }
-    trigger OnInsert()
-    var
-        WOL: Record "GKB Work Order Lines";
-    begin
-        // WOL.SetRange("Line Created", false);
-        // if WOL.IsEmpty then
-        //     PlanningLine."Job No." := "Job No.";
-        // PlanningLine."Job Task No." := "Work Order No.";
-        // exit;
-
-        // if WOL.FindSet() then
-        //     repeat
-        //         InsertWorkOrderLineToPlanningLine(WOL);
-        //     until WOL.Next() = 0;
-    end;
-
-    procedure InsertWorkOrderLineToPlanningLine(Var WOL: Record "GKB Work Order Lines");
-    var
-
-        WorkOrderLine: Record "GKB Work Order Lines";
-        JobTask: Record "Job Task";
-    begin
-        JobTask.SetRange("Job No.", "Job No.");
-        JobTask.SetRange("Job Task No.", "Work Order No.");
-        if not JobTask.FindFirst() then
-            exit;
-        PlanningLine.SetRange("Job No.", "Job No.");
-        PlanningLine.SetRange("Job Task No.", "Work Order No.");
-        if PlanningLine.FindFirst() then
-            Error('A planning line with the same Project No. and Task No. already exists.');
-
-        PlanningLine.Init();
-        PlanningLine."Job No." := "Job No.";
-        PlanningLine."Job Task No." := "Work Order No.";
-        PlanningLine."Line Type" := PlanningLine."Line Type"::"Billable";
-        PlanningLine.Description := Description;
-        PlanningLine."Work Type Code" := Name;
-        PlanningLine.Quantity := "Estimate Quantity";
-        PlanningLine."Unit Price" := "Unit amount";
-        PlanningLine.Insert();
-
-        WOL."Line Created" := true;
-        WOL.Modify();
-        Message('Work order line is inserted to %1', PlanningLine."Job Task No.");
-    end;
-
-    var
-        PlanningLine: Record "Job Planning Line";
 }
-

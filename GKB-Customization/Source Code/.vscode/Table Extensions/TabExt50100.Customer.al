@@ -108,12 +108,7 @@ tableextension 50100 "Customer Ext" extends Customer
             OptionCaption = ' ,Private,Public,Subsidary,Others';
             OptionMembers = " ",Private,Public,Subsidary,Others;
         }
-        field(50116; "Supplier Account Groups"; Option)
-        {
-            Caption = 'Supplier Account Groups';
-            OptionCaption = 'Sample1,Sample2';
-            OptionMembers = Sample1,Sample2;
-        }
+
         field(50117; "Address 3"; Text[100])
         {
             Caption = 'Address 3';
@@ -171,7 +166,7 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             DataClassification = ToBeClassified;
         }
-        field(50133; "Primary Contact"; Text[100])
+        field(50133; "Company Contact"; Text[100])
         {
             Caption = 'Company Contact';
             FieldClass = FlowField;
@@ -223,33 +218,93 @@ tableextension 50100 "Customer Ext" extends Customer
         if (Rec."CRM ID" <> '') and (xRec."CRM ID" <> Rec."CRM ID") then begin
             contactRec.SetFilter("CRM ID", Rec."CRM ID");
             if contactRec.FindFirst() then begin
-                Rec."Primary Contact No." := contactRec."No.";
+                Rec."Company Contact" := contactRec."No.";
                 modified := modified + 1;
             end;
-        end;        
+        end;
         if (Rec."Currency Code Id" <> '') and (xRec."Currency Code Id" <> Rec."Currency Code Id") then begin
             currencyRec.SetFilter("CRM ID", Rec."Currency Code Id");
             if currencyRec.FindFirst() then begin
                 Rec."Currency Code" := currencyRec.Code;
                 modified := modified + 1;
             end;
-        end;        
+        end;
         if (Rec."Dimension ID" <> '') and (xRec."Dimension ID" <> Rec."Dimension ID") then begin
             dimRec.SetFilter("CRM ID", Rec."Dimension ID");
             if dimRec.FindFirst() then begin
                 Rec.Dimension := dimRec.Code;
                 modified := modified + 1;
             end;
-        end;      
+        end;
         if (Rec."Territory Code ID" <> '') and (xRec."Territory Code ID" <> Rec."Territory Code ID") then begin
             territoryRec.SetFilter("CRM ID", Rec."Territory Code ID");
             if territoryRec.FindFirst() then begin
-                Rec."Territory Code" := territoryRec.Code;
+                Rec.Territory := territoryRec.Code;
                 modified := modified + 1;
             end;
-        end;        
+        end;
         if modified > 0 then begin
             Rec.Modify(false);
+        end;
+
+    end;
+
+    trigger OnAfterInsert()
+    var
+        Client: HttpClient;
+        RequestContent: HttpContent;
+        ContentHeaders: HttpHeaders;
+        IsSuccessful: Boolean;
+        Response: HttpResponseMessage;
+        ResponseText: Text;
+        JObject: JsonObject;
+        ResponseJObject: JsonObject;
+        JsonText: Text;
+        TokenValue: JsonToken;
+        TokenString: Text;
+        contactRec: Record Contact;
+        contactid: Text;
+        customerRec: Record Customer;
+        customerid: Text;
+    begin
+        // Initialize request content and headers
+        RequestContent.WriteFrom('');
+        RequestContent.GetHeaders(ContentHeaders);
+        ContentHeaders.Clear();
+        ContentHeaders.Add('Content-Type', 'application/json');
+
+        Client.DefaultRequestHeaders.Add('Accept', 'application/json');
+
+        Clear(contactid);
+        Clear(customerid);
+
+        if Rec."No." <> '' then begin
+            if customerRec.Get(Rec."No.") then
+                if customerRec."CRM ID" <> '' then
+                    customerid := '/accounts(' + customerRec."CRM ID" + ')';
+        end;
+
+        Clear(JObject);
+        JObject.Add('bcid', Rec."No.");
+        JObject.Add('crmid', Rec."CRM ID");
+        JObject.Add('telephone1', Rec."Phone No.");
+        JObject.Add('companycontact', Rec."Company Contact"); // Ensure this is the correct field name
+
+        JObject.WriteTo(JsonText);
+        RequestContent.WriteFrom(JsonText);
+
+        IsSuccessful := Client.Post('https://prod-06.australiasoutheast.logic.azure.com:443/workflows/8419dbcb99664b739f1ab25cb78b83c1/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=pEF7rVaGAGNPhvxBo5axltUyLdDFcomOMiGiouvMBvY', RequestContent, Response);
+
+        if IsSuccessful then begin
+            Response.Content().ReadAs(ResponseText);
+            if ResponseJObject.ReadFrom(ResponseText) then begin
+                if ResponseJObject.Contains('crmid') then begin
+                    ResponseJObject.Get('crmid', TokenValue);
+                    TokenString := TokenValue.AsValue().AsText();
+                    Rec."CRM ID" := CopyStr(TokenString, 1, 100);
+                    Rec.Modify(false);
+                end;
+            end;
         end;
     end;
 
@@ -274,7 +329,7 @@ tableextension 50100 "Customer Ext" extends Customer
 
         MaxRetries := 3;
         RetryCount := 0;
-        TimeoutMs := 120000; 
+        TimeoutMs := 120000;
 
         Client.Timeout(TimeoutMs);
 
@@ -328,7 +383,7 @@ tableextension 50100 "Customer Ext" extends Customer
 
                 if ResponseText <> '' then begin
                     if responseJson.ReadFrom(ResponseText) then begin
-                       
+
                         if ParseErrorMessage(ResponseText, ErrorMsg) then
                             Error('API Error: %1', ErrorMsg);
 
@@ -337,7 +392,7 @@ tableextension 50100 "Customer Ext" extends Customer
                                 tokenString := tokenValue.AsValue().AsText();
                                 Rec."CRM ID" := CopyStr(tokenString, 1, MaxStrLen(Rec."CRM ID"));
                                 Rec.Modify(false);
-                                exit; 
+                                exit;
                             end;
                         end;
                         Error('Response does not contain valid CRM ID. Full response: %1', ResponseText);
@@ -379,7 +434,7 @@ tableextension 50100 "Customer Ext" extends Customer
                 end;
             end;
         end;
-        ErrorMessage := ResponseText;  
+        ErrorMessage := ResponseText;
         exit(false);
     end;
 }

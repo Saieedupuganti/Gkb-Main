@@ -17,7 +17,7 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
         field(50202; "Fix Type"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = Repair,Replace,Other;
+            OptionMembers = " ",Repair,Replace,Other;
             OptionCaption = ' ,Repair,Replace,Other';
         }
 
