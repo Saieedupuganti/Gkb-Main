@@ -20,6 +20,7 @@ page 50116 "Locations"
                 {
                     Caption = 'Crm Id';
                 }
+                field("AdjustmentCrmId";Rec."Adjustment Crm Id"){}
                 field("Code"; Rec.Code)
                 {
                     ToolTip = 'Specifies a location code for the warehouse or distribution center where your items are handled and stored before being sold.';

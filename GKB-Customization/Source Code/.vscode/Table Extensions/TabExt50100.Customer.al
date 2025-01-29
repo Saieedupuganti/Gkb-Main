@@ -325,30 +325,85 @@ tableextension 50100 "Customer Ext" extends Customer
         RetryCount: Integer;
         TimeoutMs: Integer;
         ErrorMsg: Text;
+        Currency: Record Currency;
+        Contact: Record Contact;
+        PriceListLine: Record "Price List line";
+        Territory: Record Territory;
+        Dimension: Record "Dimension Value";
     begin
-
         MaxRetries := 3;
         RetryCount := 0;
         TimeoutMs := 120000;
-
         Client.Timeout(TimeoutMs);
-
 
         Content.GetHeaders(ContentHeaders);
         ContentHeaders.Clear();
         ContentHeaders.Add('Content-Type', 'application/json');
         ContentHeaders.Add('Content-Encoding', 'UTF8');
 
+
+        // if not PriceListLine.Get(Rec."Customer Price Group" ) then
+        //     Error('Price List Header not found.');
+
+        // if not Territory.Get(Rec."Territory Code") then
+        // Error('Territory not found.');
+
+        // if not Dimension.Get(Rec."Global Dimension 1 Code") then
+        // Error('Dimension not found.');
+
+        // if not Currency.Get(Rec."Currency Code") then
+        // Error('Currency not found.');
+
+        //Validate required records exist
+        if Rec."Currency Code" <> '' then
+            if not Currency.Get(Rec."Currency Code") then
+                Error('Currency not found.');
+
+        if Rec."Contact Code" <> '' then
+            if not Contact.Get(Rec."Contact Code") then
+                Error('Contact not found.');
+
+        if Rec.Territory <> '' then
+            if not Territory.Get(Rec.Territory) then
+                Error('Territory not found.');
+
+        // if Rec.Dimension <> '' then
+        //     if not Dimension.Get(Rec.Dimension) then
+        //         Error('Dimension not found.');
+
+
+        if Currency."CRM ID" <> '' then
+            customerJson.Add('transactioncurrencyid', '/transactioncurrencies(' + Currency."CRM ID" + ')');
+
+        if Contact."CRM ID" <> '' then
+            customerJson.Add('primarycontactid', '/contacts(' + Contact."CRM ID" + ')');
+
+        if Territory."CRM ID" <> '' then
+            customerJson.Add('territoryid', '/territories(' + Territory."CRM ID" + ')');
+
+        if Dimension."CRM ID" <> '' then
+            customerJson.Add('dimensionid', '/dimensions(' + Dimension."CRM ID" + ')');
+
+        if Rec."Capex From" <> 0D then
+            customerJson.Add('capexfrom', Format(Rec."Capex From", 0, '<Year4>-<Month,2>-<Day,2>'));
+        if Rec."Capex To" <> 0D then
+            customerJson.Add('capexto', Format(Rec."Capex To", 0, '<Year4>-<Month,2>-<Day,2>'));
+
+        // Create JSON object
         Clear(customerJson);
-        customerJson.Add('bcid', Format(Rec."No."));
+
+        customerJson.Add('bcid', Rec."No.");
         customerJson.Add('crmid', Rec."CRM ID");
+        customerJson.Add('d365accountid', Rec."D365 Account ID");
+        customerJson.Add('sapCustomerNumber', Rec."SAP Customer Number");
         customerJson.Add('name', Rec.Name);
-        customerJson.Add('phoneNo', Rec."Phone No.");
-        customerJson.Add('email', Rec."E-Mail");
+        customerJson.Add('phoneno', Rec."Phone No.");
+        customerJson.Add('emailaddress1', Rec."E-Mail");
+        customerJson.Add('web', Rec.WEB);
         customerJson.Add('address', Rec.Address);
         customerJson.Add('address2', Rec."Address 2");
         customerJson.Add('address3', Rec."Address 3");
-        customerJson.Add('addressName', Rec."Address Name");
+        customerJson.Add('addressname', Rec."Address Name");
         customerJson.Add('city', Rec."D365 City");
         customerJson.Add('state', Rec."D365 State");
         customerJson.Add('country', Rec."D365 Country");
@@ -356,19 +411,23 @@ tableextension 50100 "Customer Ext" extends Customer
         customerJson.Add('customerProfile', Format(Rec."Customer Profile"));
         customerJson.Add('customerGroup', Format(Rec."Customer group"));
         customerJson.Add('contactGroup', Format(Rec."Contact Group"));
-        customerJson.Add('primaryContact', Rec."Primary Contact No.");
         customerJson.Add('creditHold', Rec."Credit Hold");
         customerJson.Add('creditLimit', Rec."Credit Limit (LCY)");
-        customerJson.Add('currencyCode', Rec."Currency Code");
         customerJson.Add('paymentTerms', Rec."Payment Terms Code");
         customerJson.Add('paymentMethod', Rec."Payment Method Code");
-        customerJson.Add('territoryCode', Rec."Territory Code");
-        customerJson.Add('dimension', Rec.Dimension);
-        customerJson.Add('sapCustomerNumber', Rec."SAP Customer Number");
-        customerJson.Add('abn', Rec."ABN No.");
-        customerJson.Add('web', Rec.WEB);
+        customerJson.Add('abn', Rec."ABN");
+        customerJson.Add('serviceagreement', Format(Rec."Service Agreement"));
         customerJson.Add('description', Rec.Description);
-        customerJson.Add('ownerId', Rec."Owner Id");
+        customerJson.Add('supplieraccountgroup', Format(Rec."Supplier account Group"));
+        customerJson.Add('dimension', Rec.Dimension);
+        customerJson.Add('dimensionid', Rec."Dimension ID");
+        customerJson.Add('customerpricegroup', Rec."Customer Price Group Id");
+        customerJson.Add('customcontactid', Rec."Custom Contact Id");
+        customerJson.Add('territorycode', Rec.Territory);
+        customerJson.Add('territorycodeid', Rec."Territory Code ID");
+        customerJson.Add('territoryid', Rec."Territory Id");
+        customerJson.Add('currencycodeid', Rec."Currency Code Id");
+
         customerJson.WriteTo(jsonText);
         Content.WriteFrom(jsonText);
 
@@ -383,7 +442,6 @@ tableextension 50100 "Customer Ext" extends Customer
 
                 if ResponseText <> '' then begin
                     if responseJson.ReadFrom(ResponseText) then begin
-
                         if ParseErrorMessage(ResponseText, ErrorMsg) then
                             Error('API Error: %1', ErrorMsg);
 

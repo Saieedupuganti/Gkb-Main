@@ -196,13 +196,11 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                         Error('Cannot sync blocked vendors with CRM');
 
                     if Rec."CRM ID" = '' then begin
-                        // Create new record in CRM
                         if VendorCRMIntegration.CreateVendorInCRM(Rec) then
                             Message(SuccessMsg, 'created')
                         else
                             Error('Failed to create vendor in CRM');
                     end else begin
-                        // Update existing record in CRM
                         if VendorCRMIntegration.UpdateVendorInCRM(Rec) then
                             Message(SuccessMsg, 'updated')
                         else
@@ -219,15 +217,13 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
         UserSetupRec: Record "User Setup";
         IsUserAllowed: Boolean;
     begin
-        // Check if the current user has permission to edit the Vendor Card
         if UserSetupRec.Get(UserId()) then begin
             IsUserAllowed := UserSetupRec."Allow Edit Mode";
         end else begin
             IsUserAllowed := false;
         end;
 
-        // If the user does not have permission, make the fields non-editable
         if not IsUserAllowed then
-            CurrPage.Editable(false);  // Set the entire page to non-editable
+            CurrPage.Editable(false);  
     end;
 }

@@ -27,6 +27,7 @@ codeunit 50116 "Req. Worksheet Vendor Update"
             if Item.Get(Rec."No.") then begin
                 if Item.Type = Item.Type::Inventory then begin
                     Rec."Vendor No." := Item."Vendor No.";
+
                     if Vendor.Get(Item."Vendor No.") then
                         Rec."Vendor Name" := Vendor.Name;
 

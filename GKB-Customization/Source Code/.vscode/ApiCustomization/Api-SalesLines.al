@@ -19,8 +19,11 @@ page 50330 "API Sales Lines"
                 {
                     Caption = 'CRM ID';
                 }
-                field("DocumentNo";Rec."Document No."){}
-                field("DocumentType";Rec."Document Type"){}
+                field("DocumentNo"; Rec."Document No.")
+                {
+                }
+                field("LineNo"; Rec."Line No.") { }
+                field("DocumentType"; Rec."Document Type") { }
                 field(Type; Rec.Type) { }
                 field(Quantity; Rec.Quantity)
                 {
