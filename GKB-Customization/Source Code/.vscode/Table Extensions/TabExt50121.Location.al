@@ -42,6 +42,11 @@ tableextension 50121 GKBLocationExt extends Location
             Caption = 'Address 3';
             DataClassification = ToBeClassified;
         }
+        field(50108; "Adjustment Crm Id"; Text[50])
+        {
+            Caption = 'Adjustment Crm Id';
+            DataClassification = ToBeClassified;
+        }
     }
     trigger OnAfterModify()
     var
@@ -67,6 +72,7 @@ tableextension 50121 GKBLocationExt extends Location
 
         json.Add('locationid', Rec.Code);
         json.Add('crmid', Rec."Crm Id");
+        json.Add('adjustmentcrmid', Rec."Adjustment Crm Id");
         json.Add('name', Rec.Name);
         json.Add('addressname', Rec."Address Name");
         json.Add('address1', Rec."Address");
@@ -91,6 +97,13 @@ tableextension 50121 GKBLocationExt extends Location
                 Rec."Crm Id" := Format(tokenstring);
                 Rec.modify(false);
             end;
+            if responsejson.Contains('adjustmentcrmid') then begin
+                responsejson.Get('adjustmentcrmid', tokenvalue);
+                tokenstring := tokenvalue.AsValue().AsText();
+                Rec."Adjustment Crm Id" := Format(tokenstring);
+                Rec.modify(false);
+            end;
+
         end;
     end;
 }

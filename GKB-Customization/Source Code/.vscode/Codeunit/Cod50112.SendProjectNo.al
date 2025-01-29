@@ -10,7 +10,6 @@ codeunit 50112 "ReqlineToPo"
             if RequisitionLine."Shortcut Dimension 1 Code" <> '' then
                 PurchOrderLine.Validate("Shortcut Dimension 1 Code", RequisitionLine."Shortcut Dimension 1 Code");
 
-
             if RequisitionLine.projectNo <> '' then
                 PurchOrderLine."Job No." := RequisitionLine.projectNo;
 

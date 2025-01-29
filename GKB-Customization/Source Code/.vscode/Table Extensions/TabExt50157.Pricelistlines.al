@@ -61,8 +61,8 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
         if not productRec.Get(Rec."Product No.") then
             Error('Product not found.');
 
-        if not uomRec.Get(Rec."Unit of Measure Code Lookup") then
-            Error('Unit of Measure not found.');
+        // if not uomRec.Get(Rec."Unit of Measure Code Lookup") then
+        //     Error('Unit of Measure not found.');
 
         // Validate CRM IDs
         if priceListRec."Crm Id" = '' then
