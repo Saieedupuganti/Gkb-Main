@@ -25,6 +25,7 @@ page 50330 "API Sales Lines"
                 field("LineNo"; Rec."Line No.") { }
                 field("DocumentType"; Rec."Document Type") { }
                 field(Type; Rec.Type) { }
+                field(systemid; Rec.SystemId) { }
                 field(Quantity; Rec.Quantity)
                 {
                     Caption = 'Quantity';
