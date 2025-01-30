@@ -21,22 +21,10 @@ page 50330 "API Sales Lines"
                 {
                     Caption = 'CRM ID';
                 }
-                field("DocumentNo"; Rec."Document No.")
-                {
-                    trigger OnValidate()
-                    var
-                        SH: Record "Sales Header";
-                    begin
-                        SH.SetFilter("No.", Rec."Document No.");
-                        if SH.FindFirst then begin
-                            rec."Document No.":= SH."No."
-                        end;
-                    end;
-                }
+                field("DocumentNo"; Rec."Document No.") { }
+                field(SystemId; Rec.SystemId) { }
                 field("LineNo"; Rec."Line No.") { }
-                field("DocumentType"; Rec."Document Type")
-                {
-                }
+                field("DocumentType"; Rec."Document Type") { }
                 field(Type; Rec.Type) { }
                 field(Quantity; Rec.Quantity)
                 {

@@ -1,6 +1,6 @@
 codeunit 50116 "Req. Worksheet Vendor Update"
 {
-    
+
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", OnAfterInsertEvent, '', false, false)]
     local procedure UpdateVendorNoOnReqLineInsert(var Rec: Record "Requisition Line")
     var
@@ -18,7 +18,7 @@ codeunit 50116 "Req. Worksheet Vendor Update"
         end;
     end;
 
-    
+
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnAfterValidateEvent', 'No.', false, false)]
     local procedure UpdateVendorDetailsOnItemChange(var Rec: Record "Requisition Line")
     var
@@ -31,14 +31,10 @@ codeunit 50116 "Req. Worksheet Vendor Update"
                     Rec."Vendor No." := Item."Vendor No.";
                     if Vendor.Get(Item."Vendor No.") then
                         Rec."Vendor Name" := Vendor.Name;
-
-                    Rec.Modify(false);
-                end
-                else begin
-                    Rec."Vendor No." := '';
+                    // Rec.Modify(false);
+                end else
+                    rec."Vendor No." := '';
                     Rec."Vendor Name" := '';
-                    Rec.Modify(false);
-                end;
             end;
         end;
     end;

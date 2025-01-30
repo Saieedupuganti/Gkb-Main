@@ -13,40 +13,38 @@ codeunit 50101 "GKB Work Order Mgt."
         Job: Code[20];
         JobTask: Code[20];
     begin
-        CreateJobTaskLinesFromWOLs(Rec, Job, JobTask);
+        CreateJobTaskLinesFromWOLs(Rec);//, Job, JobTask);
     end;
 
-   local procedure CreateJobTaskLinesFromWOLs(var WOLn: Record "GKB Work Order Lines"; var Job: Code[20]; var JobTask: code[20])
-var
-    PlanningLine: Record "Job Planning Line";
-begin
-    WOLn.SetRange(WOLn."Job No.", Job);
-    WOLn.SetRange(WOLn."Work Order No.", JobTask);
-    
-    if WOLn.Find then
-        repeat
-            if WOLn."Line Created" then
-               exit;
+    local procedure CreateJobTaskLinesFromWOLs(var WOLn: Record "GKB Work Order Lines")
+    var
+        PlanningLine: Record "Job Planning Line";
+    begin
+        // WOLn.SetRange(WOLn."Job No.", Job);
+        // WOLn.SetRange(WOLn."Work Order No.", JobTask);
 
-            if WOLn."Job No." = '' then
-                Error('Job No. must be specified for Work Order Line %1', WOLn."Line No.");
+        // if WOLn.Find then
+        //     repeat
+        if WOLn."Line Created" then
+            exit;
 
-            PlanningLine.Init();
-            PlanningLine."Line No." := WOLn."Line No.";
-            PlanningLine."Job No." := WOLn."Job No.";
-            PlanningLine."Job Task No." := WOLn."Work Order No.";
-            PlanningLine.Type := WOLn.Type;
-            PlanningLine."No." := WOLn.Code;
-            PlanningLine.Description := WOLn.Description;
-            PlanningLine."Work Type Code" := WOLn.Name;
-            PlanningLine.Quantity := WOLn."Estimate Quantity";
-            PlanningLine."Unit Price" := WOLn."Unit amount";
+        // if WOLn."Job No." = '' then
+        //     Error('Job No. must be specified for Work Order Line %1', WOLn."Line No.");
 
-            // Ensure that the PlanningLine record is inserted correctly
-            PlanningLine.Insert();
+        PlanningLine.Init();//Init
+        PlanningLine."Line No." := WOLn."Line No.";
+        PlanningLine."Job No." := WOLn."Job No.";
+        PlanningLine."Job Task No." := WOLn."Work Order No.";
+        PlanningLine.Type := WOLn.Type;
+        PlanningLine."No." := WOLn.Code;
+        PlanningLine.Description := WOLn.Description;
+        PlanningLine."Work Type Code" := WOLn.Name;
+        PlanningLine.Quantity := WOLn."Estimate Quantity";
+        PlanningLine."Unit Price" := WOLn."Unit amount";
+        PlanningLine.Insert();//Insert
 
-            WOLn."Line Created" := true;
-            WOLn.Modify();
-        until WOLn.Next() = 0;
-end;
+        WOLn."Line Created" := true;
+        WOLn.Modify();
+        // until WOLn.Next() = 0;
+    end;
 }
