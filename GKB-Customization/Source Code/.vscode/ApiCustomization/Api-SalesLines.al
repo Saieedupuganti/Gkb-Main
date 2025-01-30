@@ -9,6 +9,8 @@ page 50330 "API Sales Lines"
     SourceTable = "Sales Line";
     DelayedInsert = true;
 
+    ODataKeyFields = "Document No.", "Document Type";
+
     layout
     {
         area(Content)
@@ -21,9 +23,20 @@ page 50330 "API Sales Lines"
                 }
                 field("DocumentNo"; Rec."Document No.")
                 {
+                    trigger OnValidate()
+                    var
+                        SH: Record "Sales Header";
+                    begin
+                        SH.SetFilter("No.", Rec."Document No.");
+                        if SH.FindFirst then begin
+                            rec."Document No.":= SH."No."
+                        end;
+                    end;
                 }
                 field("LineNo"; Rec."Line No.") { }
-                field("DocumentType"; Rec."Document Type") { }
+                field("DocumentType"; Rec."Document Type")
+                {
+                }
                 field(Type; Rec.Type) { }
                 field(Quantity; Rec.Quantity)
                 {

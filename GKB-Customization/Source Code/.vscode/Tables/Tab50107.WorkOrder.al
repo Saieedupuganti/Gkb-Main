@@ -182,7 +182,7 @@ table 50107 "GKB Work Order"
         {
         }
     }
-    
+
     trigger OnInsert()
     var
         WO: Record "GKB Work Order";

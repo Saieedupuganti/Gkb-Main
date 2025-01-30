@@ -62,7 +62,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
         }
         modify("Vendor No.")
         {
-            trigger OnBeforeValidate()
+            trigger OnAfterValidate()
             var
                 Item: Record Item;
             begin

@@ -1,6 +1,7 @@
 namespace GKBCustomization.GKBCustomization;
 
 using Microsoft.Projects.Project.Job;
+using Microsoft.Sales.Customer;
 using Microsoft.Projects.Project.Planning;
 using Microsoft.Foundation.NoSeries;
 
@@ -8,48 +9,28 @@ codeunit 50101 "GKB Work Order Mgt."
 {
     [EventSubscriber(ObjectType::Table, Database::"GKB Work Order Lines", 'OnAfterInsertEvent', '', false, false)]
     local procedure OnAfterInsertWOLns(var Rec: Record "GKB Work Order lines"; RunTrigger: Boolean)
+    var
+        Job: Code[20];
+        JobTask: Code[20];
     begin
-        CreateJobTaskLinesFromWOLs(Rec);
+        CreateJobTaskLinesFromWOLs(Rec, Job, JobTask);
     end;
 
-    // local procedure CreateJobTaskFromWO(var WO: Record "GKB Work Order")
-    // var
-    //     Job: Record Job;
-    //     JobTask: Record "Job Task";
-    //     NoSeriesMgt: Codeunit "No. Series";
-    //     JobNo: Code[20];
-    // begin
-    //     if WO."Job No." = '' then begin
-    //         Job.Init();
-    //         Job."No." := NoSeriesMgt.GetNextNo('JOB', 0D, true);
-    //         Job.Description := WO."Service Account" + ' - ' + WO."Work Order Type";
-    //         Job."Service Account" := WO."Service Account";
-    //         Job."Work Order Type" := WO."Work Order Type";
-    //         Job.Insert();
-    //         JobNo := Job."No.";
-    //     end else
-    //         JobNo := WO."Job No.";
+   local procedure CreateJobTaskLinesFromWOLs(var WOLn: Record "GKB Work Order Lines"; var Job: Code[20]; var JobTask: code[20])
+var
+    PlanningLine: Record "Job Planning Line";
+begin
+    WOLn.SetRange(WOLn."Job No.", Job);
+    WOLn.SetRange(WOLn."Work Order No.", JobTask);
+    
+    if WOLn.Find then
+        repeat
+            if WOLn."Line Created" then
+               exit;
 
-    //     // Create Job Task for the new Job
-    //     JobTask.Init();
-    //     JobTask."Job No." := JobNo;
-    //     JobTask."Job Task No." := WO."Work Order No.";
-    //     JobTask.Description := WO."Topic";
-    //     JobTask.Insert();
+            if WOLn."Job No." = '' then
+                Error('Job No. must be specified for Work Order Line %1', WOLn."Line No.");
 
-    //     //Update WO fields with Job and Job task information
-    //     WO."Job No." := JobNo;
-    //     WO."Project Task No" := JobTask."Job Task No.";
-    // end;
-
-    local procedure CreateJobTaskLinesFromWOLs(var WOLn: Record "GKB Work Order Lines")
-    var
-        PlanningLine: Record "Job Planning Line";
-    begin
-        if WOLn."Line Created" then
-            exit;
-
-        if not PlanningLine.Get(WOLn."Job No.", WOLn."Work Order No.", WOLn."Line No.") then begin
             PlanningLine.Init();
             PlanningLine."Line No." := WOLn."Line No.";
             PlanningLine."Job No." := WOLn."Job No.";
@@ -60,9 +41,12 @@ codeunit 50101 "GKB Work Order Mgt."
             PlanningLine."Work Type Code" := WOLn.Name;
             PlanningLine.Quantity := WOLn."Estimate Quantity";
             PlanningLine."Unit Price" := WOLn."Unit amount";
-            PlanningLine.Insert();
-        end;
 
-        WOLn."Line Created" := true;
-    end;
+            // Ensure that the PlanningLine record is inserted correctly
+            PlanningLine.Insert();
+
+            WOLn."Line Created" := true;
+            WOLn.Modify();
+        until WOLn.Next() = 0;
+end;
 }

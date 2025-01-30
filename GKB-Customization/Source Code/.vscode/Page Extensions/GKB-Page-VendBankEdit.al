@@ -1,18 +1,5 @@
 pageextension 50116 VendBankEdit extends "Vendor Bank Account Card"
 {
-    layout
-    {
-
-    }
-
-    actions
-    {
-        // Add changes to page actions h
-    }
-
-    var
-        myInt: Integer;
-
     trigger OnOpenPage();
     var
         UserSetupRec: Record "User Setup";
