@@ -222,7 +222,7 @@ codeunit 50117 "Vendor CRM Integration"
         if VendorRec."Gen. Bus. Posting Group" = '' then
             Error('Gen. Bus. Posting Group is required');
 
-        // Validate related records exist and have CRM IDs
+
         if VendorRec."Currency Code" <> '' then
             if not Currency.Get(VendorRec."Currency Code") then
                 Error('Currency not found.');
