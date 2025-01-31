@@ -2,14 +2,6 @@ pageextension 50149 GKBItemExt extends "Item Card"
 {
     layout
     { 
-        addafter("Attached Documents")
-        {
-            part(qrcode; "Qr Code")
-            {
-                ApplicationArea = all;
-                SubPageLink = "No." = field("No.");
-            }
-        }
         addafter(Item)
         {
             group("D365 Custom Fields")

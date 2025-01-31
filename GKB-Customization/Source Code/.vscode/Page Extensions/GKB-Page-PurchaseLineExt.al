@@ -12,12 +12,4 @@ pageextension 50134 PurchlineExt extends "purchase lines"
         }
         
     }
-
-    actions
-    {
-        // Add changes to page actions here
-    }
-
-    var
-        myInt: Integer;
 }

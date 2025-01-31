@@ -1,4 +1,4 @@
-tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
+tableextension 50118 "Requisition Line Ext" extends "Requisition Line"
 {
     fields
     {
@@ -27,8 +27,10 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
                 Vendor: Record Vendor;
             begin
                 if Rec."Vendor Name" <> '' then begin
-                    if Vendor.Get(Rec."No.") then begin
+                    if Vendor.Get(Rec."Vendor Name") then begin
                         Rec."Vendor No." := Vendor."No.";
+                    end else begin
+                        Rec."Vendor No." := ''; // Clear Vendor No. if Vendor not found
                     end;
                 end;
             end;

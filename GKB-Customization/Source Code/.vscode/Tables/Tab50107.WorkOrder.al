@@ -182,25 +182,25 @@ table 50107 "GKB Work Order"
         {
         }
     }
-    
+
     trigger OnInsert()
     var
         WO: Record "GKB Work Order";
     begin
 
-        // Filter Work Orders where "Job Created" is false
-        WO.SetRange("Job Created", false);
-        if WO.IsEmpty then
-            exit;
+        // // Filter Work Orders where "Job Created" is false
+        // WO.SetRange("Job Created", false);
+        // if WO.IsEmpty then
+        //     exit;
 
-        if WO.FindSet() then
-            repeat
-                if JobNotExistForWO(WO) then
-                    CreateJobFromWO(WO);
-            until WO.Next() = 0;
+        // if WO.FindSet() then
+        //     repeat
+        //         if JobNotExistForWO(WO) then
+        //             CreateJobFromWO(WO);
+        //     until WO.Next() = 0;
     end;
 
-    local procedure JobNotExistForWO(var WO: Record "GKB Work Order"): Boolean
+    procedure JobNotExistForWO(var WO: Record "GKB Work Order"): Boolean
     var
         Job: Record Job;
         JobTask: Record "Job Task";
@@ -232,7 +232,7 @@ table 50107 "GKB Work Order"
         exit(false);
     end;
 
-    local procedure CreateJobFromWO(WO: Record "GKB Work Order")
+    procedure CreateJobFromWO(WO: Record "GKB Work Order")
     var
         Job: Record Job;
         JobTask: Record "Job Task";

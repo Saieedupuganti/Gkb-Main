@@ -20,6 +20,7 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'CRM ID';
                 }
+                field(SystemId; Rec.SystemId) { }
                 field(documenttype; Rec."Document Type")
                 {
                     Caption = 'Document Type';

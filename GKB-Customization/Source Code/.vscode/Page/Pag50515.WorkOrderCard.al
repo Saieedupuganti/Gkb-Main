@@ -197,4 +197,30 @@ page 50515 "GKB Work Order Card"
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action(InsertProjectLines)
+            {
+                trigger OnAction()
+                begin
+                    if Rec.JobNotExistForWO(Rec) then
+                        Rec.CreateJobFromWO(Rec);
+                end;
+            }
+            action(MultipleWOs)
+            {
+                trigger OnAction()
+                begin
+                    // SetSelectionFilter();
+                    // if WO.FindSet() then
+                    //     repeat
+                    //         if JobNotExistForWO(WO) then
+                    //             CreateJobFromWO(WO);
+                    //     until WO.Next() = 0;
+                end;
+            }
+        }
+    }
 }

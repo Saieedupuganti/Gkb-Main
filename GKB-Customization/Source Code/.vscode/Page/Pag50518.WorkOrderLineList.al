@@ -5,6 +5,7 @@ page 50118 "Work Order Lines List"
     SourceTable = "GKB Work Order Lines";
     Caption = 'Work Order Lines';
     UsageCategory = Lists;
+    DelayedInsert = true;
 
     layout
     {
@@ -42,7 +43,7 @@ page 50118 "Work Order Lines List"
                 {
                     ApplicationArea = all;
                 }
-                field(Type;Rec.Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = all;
                 }
