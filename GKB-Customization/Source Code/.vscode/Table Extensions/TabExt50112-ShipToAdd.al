@@ -16,7 +16,7 @@ tableextension 50112 "ShipToAddExt" extends "Ship-to Address"
         {
             DataClassification = ToBeClassified;
         }
-         field(50149; "D365 State"; Text[100])
+        field(50149; "D365 State"; Text[100])
         {
             Caption = 'State';
             DataClassification = ToBeClassified;
@@ -31,8 +31,19 @@ tableextension 50112 "ShipToAddExt" extends "Ship-to Address"
             Caption = 'City';
             DataClassification = ToBeClassified;
         }
-        field(50103;"Crm Id";Text[100])
+        field(50103; "Crm Id"; Text[100])
         {
+            DataClassification = ToBeClassified;
+        }
+        field(50001; "Customer CRM"; Text[204])
+        {
+            Caption = 'Customer CRM';
+            FieldClass = FlowField;
+            CalcFormula = Lookup("Customer"."CRM ID" WHERE("Name" = FIELD(Name)));
+        }
+        field(50002; "JSON Request"; Text[2048])
+        {
+            Caption = 'JSON Request';
             DataClassification = ToBeClassified;
         }
     }
