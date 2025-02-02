@@ -37,6 +37,7 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Customer No.';
                 }
+                field(name;Rec.Name){}
                 field(addressname; Rec."Bill-to address name")             //Custom 
                 {
                     Caption = 'Address Name';
@@ -79,9 +80,7 @@ page 60322 "API Sales Order"
                     Caption = 'Work Description';
                 }
                 field(email; Rec."Sell-to E-Mail")
-                {
-                    Caption = 'Work Description';
-                }
+                {}
                 field(dimension; Rec.Dimension)
                 {
                     Caption = 'Dimension';
@@ -155,50 +154,6 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Ship-to Address 3';
                 }
-                // field(uom; Rec."Unit of Measure Code")
-                // {
-                //     Caption = 'Unit of Measure Code';
-                // }
-                // field(uomcrmid; Rec."Unit of Measure Code CRMID")
-                // {
-                //     Caption = 'Unit of Measure Code CRMID';
-                // }
-                // field(unitcostcrmid; Rec."Unit Cost CRMID")
-                // {
-                //     Caption = 'Unit Cost CRMID';
-                // }
-                // field(customername; Rec."Sell-to Customer Name")
-                // {
-                //     Caption = 'Customer No.';
-                // }
-                // field(freightamount; Rec."Freight Amount")
-                // {
-                //     Caption = 'Freight Amount';
-                // }
-                // field(freightterms; Rec."Freight Terms")
-                // {
-                //     Caption = 'Freight Terms';
-                // }
-                // field(invoicediscountvalue; Rec."Invoice Discount Value")
-                // {
-                //     Caption = 'Invoice Discount Value';
-                // }
-                // field(invoicediscountamount; Rec."Invoice Discount Amount")
-                // {
-                //     Caption = 'Invoice Discount Amount';
-                // }
-                // field(owner; Rec.Owner)
-                // {
-                //     Caption = 'Owner';
-                // }
-                // field(ownercrmid; Rec."Owner CRMID")
-                // {
-                //     Caption = 'Owner CRMID';
-                // }
-                // field(totaldetailamount; Rec."Amount Including VAT")
-                // {
-                //     Caption = 'Amount Including VAT';
-                // }
             }
         }
     }

@@ -9,6 +9,7 @@ pageextension 50150 ItemListExt extends "Item List"
                 Caption = 'Vendor Name';
                 ApplicationArea = All;
             }
+            field("CRM ID";Rec."CRM ID"){ApplicationArea =all;}
         }
     }
 }

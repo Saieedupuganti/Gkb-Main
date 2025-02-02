@@ -6,7 +6,6 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
         {
             group("Dynamics")
             {
-
                 Caption = 'Dynamics';
 
                 field("CRM ID"; Rec."CRM ID")
@@ -14,6 +13,7 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
                     ApplicationArea = All;
                     Caption = 'CRM ID';
                 }
+                field(Name; Rec.Name) { ApplicationArea = all; }
                 field("Owner"; Rec."Owner")
                 {
                     ApplicationArea = All;

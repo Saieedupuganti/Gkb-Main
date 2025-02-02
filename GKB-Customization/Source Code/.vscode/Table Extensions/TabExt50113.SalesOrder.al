@@ -7,6 +7,11 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
         }
+        field(50127; Name ; Text[300])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Name';
+        }
         field(50103; "Unit of Measure Code CRMID"; Text[100])
         {
             Caption = 'Unit of Measure Code CRMID';
