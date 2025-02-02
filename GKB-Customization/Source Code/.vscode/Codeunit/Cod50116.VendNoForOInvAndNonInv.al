@@ -34,7 +34,7 @@ codeunit 50116 "Req. Worksheet Vendor Update"
                     // Rec.Modify(false);
                 end else
                     rec."Vendor No." := '';
-                    Rec."Vendor Name" := '';
+                Rec."Vendor Name" := '';
             end;
         end;
     end;

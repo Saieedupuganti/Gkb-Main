@@ -18,6 +18,7 @@ pageextension 50123 "GKB customer list EXT" extends "Customer List"
                 Enabled = false;
                 Visible = true;
             }
+            field("CRM ID";Rec."CRM ID"){ApplicationArea=all;}
             field("D365 Account ID"; Rec."D365 Account ID")
             {
                 ApplicationArea = All;

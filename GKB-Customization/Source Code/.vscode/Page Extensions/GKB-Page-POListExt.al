@@ -10,6 +10,7 @@ pageextension 50107 "Purchase Order List Ext" extends "Purchase Order List"
                 Caption = 'Amount Excl. GST';
                 Editable = false; // Make it non-editable for display purposes
             }
+            field("CRM ID";Rec."CRM ID"){ApplicationArea=all;}
         }
     }
 

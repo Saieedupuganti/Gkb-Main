@@ -100,6 +100,16 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
         }
     }
 }
+pageextension 50125 MyExtension extends "Contact List"
+{
+    layout
+    {
+        addafter("Currency Code")
+        {
+            field("CRM ID"; Rec."CRM ID") { ApplicationArea = all; }
+        }
+    }
+}
 
 
 

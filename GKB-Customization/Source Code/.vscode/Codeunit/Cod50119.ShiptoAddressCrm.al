@@ -1,6 +1,6 @@
 codeunit 50119 "Ship-To Add Crm Management"
 {
-    procedure UpdateTheRecord()
+    procedure UpdateTheRecord(ShipToAdd: Record "Ship-to Address")
     var
         Client: HttpClient;
         Content: HttpContent;
@@ -13,7 +13,6 @@ codeunit 50119 "Ship-To Add Crm Management"
         tokenValue: JsonToken;
         tokenString: Text;
         Customer: Record Customer;
-        ShipToAdd: Record "Ship-to Address";
         MaxRetries: Integer;
         RetryCount: Integer;
         TimeoutMs: Integer;
@@ -27,30 +26,30 @@ codeunit 50119 "Ship-To Add Crm Management"
         ContentHeaders.Add('Content-Type', 'application/json');
         ContentHeaders.Add('Content-Encoding', 'UTF8');
 
-        ShipToAdd.SetFilter("Customer No.", Customer."No.");
-        Message('Couldnt find the Customer');
+        Message(ShipToAdd.Code);
+        Customer.SetRange("No.",ShipToAdd."Customer No.");
+        if Customer.FindFirst() then begin
+          JObject.Add('customerno', Customer."CRM ID");
+        end else begin
+          JObject.Add('customerno', '');
+        end;
+        Message(ShipToAdd."Customer No.");
 
-        //Clear(JObject);
-        JObject.Add('customerNo', Customer."CRM ID");
-
-        if ShipToAdd.FindFirst() then begin
-            JObject.Add('code', ShipToAdd.Code);
-            JObject.Add('crmid', ShipToAdd."Crm Id");
-            JObject.Add('name', ShipToAdd.Name);
-            JObject.Add('address', ShipToAdd.Address);
-            JObject.Add('address2', ShipToAdd."Address 2");
-            JObject.Add('address3', ShipToAdd."Address 3");
-            JObject.Add('city', ShipToAdd."D365 City");
-            JObject.Add('state', ShipToAdd."D365 State");
-            JObject.Add('postcode', ShipToAdd."Postal Code");
-            JObject.Add('country', ShipToAdd."D365 Country");
-            JObject.Add('phone', ShipToAdd."Phone No.");
-            JObject.Add('email', ShipToAdd."E-Mail");
-        end
-        else
-        Message('Coudnt find the Ship to address for the customer');
+        JObject.Add('code', ShipToAdd.Code);
+        JObject.Add('crmid', ShipToAdd."Crm Id");
+        JObject.Add('name', ShipToAdd.Name);
+        JObject.Add('address', ShipToAdd.Address);
+        JObject.Add('address2', ShipToAdd."Address 2");
+        JObject.Add('address3', ShipToAdd."Address 3");
+        JObject.Add('city', ShipToAdd."D365 City");
+        JObject.Add('state', ShipToAdd."D365 State");
+        JObject.Add('postcode', ShipToAdd."Postal Code");
+        JObject.Add('country', ShipToAdd."D365 Country");
+        JObject.Add('phone', ShipToAdd."Phone No.");
+        JObject.Add('email', ShipToAdd."E-Mail");
 
         JObject.WriteTo(JsonText);
+        Message(JsonText);
         Content.WriteFrom(JsonText);
 
         IsSuccessful := Client.Post(
@@ -62,5 +61,5 @@ codeunit 50119 "Ship-To Add Crm Management"
 
         end else
             Error('HTTP request failed. Status code: %1', Response.HttpStatusCode);
-    end;
+    end;
 }

@@ -14,6 +14,7 @@ pageextension 50138 GKBVendorExt extends "Vendor List"
                 ApplicationArea = All;
                 Caption = 'D365 Account ID';
             }
+            field("CRM Id";Rec."CRM Id"){ApplicationArea=all;}
             field("SAP Vendor Number"; Rec."SAP Vendor Number")
             {
                 ApplicationArea = All;

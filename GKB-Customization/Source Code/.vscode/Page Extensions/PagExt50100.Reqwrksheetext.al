@@ -40,42 +40,71 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 Caption = 'Work Order No.';
                 ApplicationArea = all;
                 ShowMandatory = true;
+
             }
             field(projectNo; Rec.projectNo)
             {
                 ApplicationArea = all;
                 ShowMandatory = true;
             }
+
             field("Project Task No"; Rec."Project Task No")
             {
                 ApplicationArea = all;
                 ShowMandatory = true;
+
+                // trigger OnValidate()
+                // var
+                //     JobTask: Record "Job Task";
+                // //JobTaskDimension: Record "Job Task Dimension";
+                // begin
+                //     if not JobTask.Get(Rec.projectNo, Rec."Project Task No") then
+                //         Error('The Project Task No. %1 does not exist for Project No. %2.', Rec.projectNo, Rec."Project Task No");
+
+                //     // Rec."Shortcut Dimension 1 Code" := JobTaskDimension."Dimension Value Code";
+                //     Rec."Shortcut Dimension 1 Code" := JobTask."Global Dimension 1 Code";
+
+                //     Rec.Modify();
+                // end;
             }
+
+            field("Obrien Business Unit Code"; Rec."Shortcut Dimension 1 Code")
+            {
+                ApplicationArea = all;
+                Visible = false;
+            }
+
         }
+
         addafter("Vendor No.")
         {
-            field(VendorName; Rec."Vendor Name")
+            field(VendorName; Rec.VendorName)
             {
                 ApplicationArea = all;
                 Visible = true;
+                trigger OnValidate()
+                var
+                    VendorRec: Record Vendor;
+                begin
+                    if VendorRec.Get(Rec."Vendor Name") then
+                        Rec."Vendor No." := VendorRec."No.";
+                end;
+
             }
         }
-        modify("Vendor No.")
-        {
-            trigger OnAfterValidate()
-            var
-                Item: Record Item;
-            begin
-                if Item.Get(Rec."No.") then begin
-                    if Item."Vendor No." <> '' then begin
-                        Rec."Vendor No." := Item."Vendor No.";
-                        Rec."Vendor Name" := Item."Vendor Item Name";
-                        Rec.VendorName := Item."Vendor Item Name";
-                        Rec.Modify(false);
-                    end;
-                end;
-            end;
-        }
+        // modify("Vendor No.")
+        // {
+
+        //     trigger OnBeforeValidate()
+        //     var
+        //         item: Record Item;
+        //     begin
+        //         if item.Type = "Item Type"::Inventory then
+        //             VendorNoForInventory()
+        //         else
+        //             VendorNoForNonInventory();
+        //     end;
+        // }
         addafter(Control1903326807)
         {
             part(ItemAvailability; "Req WO FactBox")
@@ -87,6 +116,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
         }
         addafter(Control1)
         {
+
             part(Inventory; "Req WO FactBox")
             {
                 ApplicationArea = Planning;
@@ -102,14 +132,16 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             Caption = 'Create Purchase Order';
             trigger OnBeforeAction()
             var
-                RecTemp: Record "Requisition Line";
-                FirstBusinessUnitCode: Code[20];
+                RecTemp: Record "Requisition Line"; // Temporary variable to store the worksheet records
+                FirstBusinessUnitCode: Code[20];  // To store the first record's Obrien_Business Unit Code
                 IsSame: Boolean;
             begin
                 IsSame := true;
                 if Rec.FindSet then begin
                     FirstBusinessUnitCode := Rec."Shortcut Dimension 1 Code";
 
+                    // Message(FirstBusinessUnitCode);
+                    // Loop through all records to check if the Obrien_Business Unit Code matches the first record
                     repeat
                         if Rec."Shortcut Dimension 1 Code" <> FirstBusinessUnitCode then begin
                             IsSame := false;
@@ -118,6 +150,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                     until Rec.Next() = 0;
                 end;
 
+                // If there's a mismatch, show an error message
                 if not IsSame then begin
                     Error('The Obrien_Business Unit Codes are not the same.');
                     // exit;
@@ -146,6 +179,37 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             }
         }
     }
+    procedure VendorNoForInventory()
+    var
+        Vendor: Record Vendor;
+        item: Record Item;
+    begin
+        if item.Type = "Item Type"::Inventory then begin
+            // Assuming you have a way to determine the Vendor No. and Vendor Name
+            Vendor.Get(Rec."Vendor No.");
+            rec."Vendor No." := Vendor."No.";
+            rec.VendorName := Vendor.Name;
+        end;
+    end;
+
+    procedure VendorNoForNonInventory()
+    var
+        item: Record Item;
+        vendor: Record Vendor;
+    begin
+        if item.Type <> "Item Type"::Inventory then begin
+            // Vendor No. should be populated when Vendor Name is selected manually
+            // Assuming you have a way to determine the Vendor No. based on Vendor Name
+            if rec.VendorName <> '' then begin
+                // Logic to find and set Vendor No. based on Vendor Name
+                // Example:
+                Vendor.Get(Rec.VendorName);
+                rec."Vendor No." := Vendor."No.";
+            end;
+        end;
+    end;
+
     // var
-    //     CurrentlyCoupledCDSSalesadi_PurchaseRequest: Record "CDS adigkb_PurchaseRequest"; 
+    //     CurrentlyCoupledCDSSalesadi_PurchaseRequest: Record "CDS adigkb_PurchaseRequest";
+
 }

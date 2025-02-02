@@ -66,11 +66,9 @@ pageextension 50344 "ShipToAddExt" extends "Ship-to Address"
 
                 trigger OnAction()
                 var
-
-                    ShipToAddr: Record "Ship-to Address";
                     ShipToCRM: Codeunit "Ship-To Add Crm Management";
                 begin
-                    ShipToCRM.UpdateTheRecord();
+                    ShipToCRM.UpdateTheRecord(Rec);
                     Message('Successfully updated in CRM.');
                 end;
             }
