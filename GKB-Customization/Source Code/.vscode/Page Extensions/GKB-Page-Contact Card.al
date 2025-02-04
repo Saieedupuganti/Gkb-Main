@@ -77,6 +77,7 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
                 Caption = 'CRM Id';
                 ApplicationArea = All;
             }
+            field("Company Name Crm"; Rec."Company Name Crm") { ApplicationArea = all; }
             field("D365 State"; Rec."D365 State")
             {
                 ApplicationArea = All;
@@ -96,6 +97,26 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
             {
                 ApplicationArea = All;
                 Caption = 'Post Code';
+            }
+        }
+    }
+    actions
+    {
+        addlast(navigation)
+        {
+            action("Update CRM Address")
+            {
+                ApplicationArea = All;
+                Caption = 'Update Ship-to Address in CRM';
+                Image = UpdateShipment;
+
+                trigger OnAction()
+                var
+                    ContactCrm: Codeunit "Contact Crm Management";
+                begin
+                    ContactCrm.UpadeToCrm(Rec);
+                    Message('Successfully updated in CRM.');
+                end;
             }
         }
     }

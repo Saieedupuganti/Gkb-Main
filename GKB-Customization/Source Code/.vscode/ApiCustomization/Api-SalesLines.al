@@ -9,7 +9,7 @@ page 50330 "API Sales Lines"
     SourceTable = "Sales Line";
     DelayedInsert = true;
 
-    ODataKeyFields = "Document No.", "Document Type";
+    //ODataKeyFields = "Document No.", "Document Type";
 
     layout
     {
@@ -24,6 +24,8 @@ page 50330 "API Sales Lines"
                 field("DocumentNo"; Rec."Document No.") { }
                 field(SystemId; Rec.SystemId) { }
                 field("LineNo"; Rec."Line No.") { }
+                field("ItemNo"; Rec."No.") { }
+                field("ItemDescription"; Rec."Description") { }
                 field("DocumentType"; Rec."Document Type") { }
                 field(Type; Rec.Type) { }
                 field(Quantity; Rec.Quantity)

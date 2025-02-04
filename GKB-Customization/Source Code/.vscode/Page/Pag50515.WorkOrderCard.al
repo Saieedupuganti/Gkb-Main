@@ -201,7 +201,7 @@ page 50515 "GKB Work Order Card"
     {
         area(Processing)
         {
-            action(InsertProjectLines)
+            action(InsertProject)
             {
                 trigger OnAction()
                 begin

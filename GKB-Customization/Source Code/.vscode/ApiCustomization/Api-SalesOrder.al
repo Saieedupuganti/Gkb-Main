@@ -109,10 +109,6 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Opportunity CRM ID';
                 }
-                field(requesteddeliverydate; Rec."Requested Delivery Date")
-                {
-                    Caption = 'Requested Delivery Date';
-                }
                 field(leadtype; Rec."Lead Type")
                 {
                     Caption = 'Lead Type';

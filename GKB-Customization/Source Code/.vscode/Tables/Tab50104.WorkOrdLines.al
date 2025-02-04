@@ -66,7 +66,7 @@ table 50104 "GKB Work Order Lines"
         }
         field(13; "Job No."; Code[20])
         {
-            Caption = 'Project Code';
+            Caption = 'Project No';
         }
         field(50105; "CRM ID"; Text[100])
         {
@@ -82,7 +82,7 @@ table 50104 "GKB Work Order Lines"
         {
             Caption = 'Line Type';
         }
-        field(50117; Type; Enum "Job Journal Line Type")
+        field(50117; Type; Enum "GKB Job Journal Line Type")
         {
             Caption = 'Type';
         }

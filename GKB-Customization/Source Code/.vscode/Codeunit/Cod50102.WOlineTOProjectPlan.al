@@ -5,7 +5,7 @@ using Microsoft.Sales.Customer;
 using Microsoft.Projects.Project.Planning;
 using Microsoft.Foundation.NoSeries;
 
-codeunit 50101 "GKB Work Order Mgt."
+codeunit 50102 "GKB Work Order Mgt."
 {
     [EventSubscriber(ObjectType::Table, Database::"GKB Work Order Lines", 'OnAfterInsertEvent', '', false, false)]
     local procedure OnAfterInsertWOLns(var Rec: Record "GKB Work Order lines"; RunTrigger: Boolean)

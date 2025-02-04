@@ -190,42 +190,6 @@ page 50321 "API Customer"
                 {
                     Caption = 'WEB';
                 }
-                // field("ContactCode"; Rec."Contact Code")
-                // {
-                //     Caption = 'Contact Code';
-                // }
-                // field("parentaccount"; Rec."Parent Account")
-                // {
-                //     Caption = 'Parent Account';
-                // }
-                // field(parentaccountcrmid; Rec."Parent Account CRM ID")
-                // {
-                //     Caption = 'Parent Account CRM ID';
-                // }
-                // field("AccountContractManager"; Rec."Account Contract Manager")
-                // {
-                //     Caption = 'Account Contract Manager';
-                // }
-                // field("AccountContractManagerid"; Rec."Account Contract Manager ID")
-                // {
-                //     Caption = 'Account Contract Manager ID';
-                // }
-                // field("SalespersonCode"; Rec."Salesperson Code")
-                // {
-                //     Caption = 'Sales person Code';
-                // }
-                // field("OwnerShip"; Rec."Owner Ship")
-                // {
-                //     Caption = 'Owner Ship';
-                // }
-                // field("CustomContactId"; Rec."Custom Contact Id")
-                // {
-                //     Caption = 'Contact Id';
-                // } 
-                // field("CurrencyCodeid"; Rec."Currency Code Id")
-                // {
-                //     Caption = 'Currency Code Id';
-                // }
             }
         }
     }

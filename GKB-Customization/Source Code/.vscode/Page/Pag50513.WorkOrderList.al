@@ -8,6 +8,8 @@ page 50513 "GKB Work Order List"
     Caption = 'Work Order';
     Editable = false;
     QueryCategory = 'Work Order';
+    SourceTableView = Sorting("Work Order No.")
+                       order(descending);
 
 
     layout
