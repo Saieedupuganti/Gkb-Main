@@ -9,13 +9,12 @@ codeunit 50133 "Inventory Update Subscribers"
                 SalesLine."No.",
                 SalesLine."Unit of Measure Code",
                 SalesLine."Location Code",
-                SalesLine."Quantity Shipped",
-                'Sales'
+                SalesLine."Quantity Shipped"
             );
         end;
     end;
 
-    local procedure UpdateInventoryRecord(ItemNo: Code[20]; UOMCode: Code[10]; LocationCode: Code[10]; Quantity: Decimal; TransactionType: Text[10])
+    local procedure UpdateInventoryRecord(ItemNo: Code[20]; UOMCode: Code[10]; LocationCode: Code[10]; Quantity: Decimal)
     var
         Client: HttpClient;
         Content: HttpContent;
@@ -42,7 +41,7 @@ codeunit 50133 "Inventory Update Subscribers"
 
         
 
-        if not Item.Get(ItemNo) then
+        if Item.Get(ItemNo) then
             Error('Item %1 not found.', ItemNo);
         if not UnitOfMeasure.Get(UOMCode) then
             Error('Unit of Measure %1 not found.', UOMCode);
@@ -64,7 +63,7 @@ codeunit 50133 "Inventory Update Subscribers"
         InventoryJson.Add('productcrmid', Item."CRM ID");
         InventoryJson.Add('unitcrmid', UnitOfMeasure."CRM ID");
         InventoryJson.Add('quantity', Quantity);
-        InventoryJson.Add('transactiontype', TransactionType);
+
         InventoryJson.WriteTo(JsonText);
 
 

@@ -6,6 +6,8 @@ page 50118 "Work Order Lines List"
     Caption = 'Work Order Lines';
     UsageCategory = Lists;
     DelayedInsert = true;
+    SourceTableView = Sorting("Line No.")
+                       order(ascending);
 
     layout
     {

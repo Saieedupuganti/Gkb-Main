@@ -61,20 +61,11 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
         if not productRec.Get(Rec."Product No.") then
             Error('Product not found.');
 
-        // if not uomRec.Get(Rec."Unit of Measure Code Lookup") then
-        //     Error('Unit of Measure not found.');
-
-        // Validate CRM IDs
         if priceListRec."Crm Id" = '' then
             Error('Price List CRM ID is missing.');
         if productRec."CRM ID" = '' then
             Error('Product CRM ID is missing.');
-        // if uomRec."CRM ID" = '' then
-        //     Error('Unit of Measure CRM ID is missing.');
-        // if uomRec."Unitgroup CRM ID" = '' then
-        //     Error('Unit Group CRM ID is missing.');
 
-        // Create JSON object
         Clear(priceListJson);
         priceListJson.Add('pricelistcrmid', priceListRec."Crm Id");
         priceListJson.Add('pricelistitembcid', Rec."Line No.");
@@ -82,17 +73,11 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
         priceListJson.Add('productcrmid', productRec."CRM ID");
         priceListJson.Add('unitcrmid', uomRec."CRM ID");
         priceListJson.Add('amount', Rec."Unit Price");
-        priceListJson.Add('unitid', '/uoms(' + uomRec."CRM ID" + ')');
-        priceListJson.Add('unitgroupid', '/uomschedules(' + uomRec."Unitgroup CRM ID" + ')');
-        priceListJson.Add('productid', '/items(' + productRec."CRM ID" + ')');
-        priceListJson.Add('pricelistid', '/priceLists(' + priceListRec."Crm Id" + ')');
+        priceListJson.Add('unitgroupid', uomRec."Unitgroup CRM ID");
+        priceListJson.Add('pricelistid', priceListRec."Crm Id");
         priceListJson.WriteTo(jsonText);
         Content.WriteFrom(jsonText);
 
-        // Log the request payload
-        // Message('Request Payload: %1', jsonText);
-
-        // Retry logic for HTTP request
         repeat
             RetryCount += 1;
             Clear(Response);

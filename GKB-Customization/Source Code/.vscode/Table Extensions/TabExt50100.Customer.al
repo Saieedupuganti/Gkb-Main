@@ -373,7 +373,7 @@ tableextension 50100 "Customer Ext" extends Customer
 
 
         if Currency."CRM ID" <> '' then
-            customerJson.Add('transactioncurrencyid', '/transactioncurrencies(' + Currency."CRM ID" + ')');
+            customerJson.Add('currencyid', '/transactioncurrencies(' + Currency."CRM ID" + ')');
 
         if Contact."CRM ID" <> '' then
             customerJson.Add('primarycontactid', '/contacts(' + Contact."CRM ID" + ')');
@@ -395,10 +395,10 @@ tableextension 50100 "Customer Ext" extends Customer
         customerJson.Add('bcid', Rec."No.");
         customerJson.Add('crmid', Rec."CRM ID");
         customerJson.Add('d365accountid', Rec."D365 Account ID");
-        customerJson.Add('sapCustomerNumber', Rec."SAP Customer Number");
+        customerJson.Add('sapcustomernumber', Rec."SAP Customer Number");
         customerJson.Add('name', Rec.Name);
         customerJson.Add('phoneno', Rec."Phone No.");
-        customerJson.Add('emailaddress1', Rec."E-Mail");
+        customerJson.Add('emailaddress', Rec."E-Mail");
         customerJson.Add('web', Rec.WEB);
         customerJson.Add('address', Rec.Address);
         customerJson.Add('address2', Rec."Address 2");
@@ -408,13 +408,13 @@ tableextension 50100 "Customer Ext" extends Customer
         customerJson.Add('state', Rec."D365 State");
         customerJson.Add('country', Rec."D365 Country");
         customerJson.Add('postCode', Rec."D365 PostCode");
-        customerJson.Add('customerProfile', Format(Rec."Customer Profile"));
-        customerJson.Add('customerGroup', Format(Rec."Customer group"));
-        customerJson.Add('contactGroup', Format(Rec."Contact Group"));
-        customerJson.Add('creditHold', Rec."Credit Hold");
-        customerJson.Add('creditLimit', Rec."Credit Limit (LCY)");
-        customerJson.Add('paymentTerms', Rec."Payment Terms Code");
-        customerJson.Add('paymentMethod', Rec."Payment Method Code");
+        customerJson.Add('customerprofile', Format(Rec."Customer Profile"));
+        customerJson.Add('customergroup', Format(Rec."Customer group"));
+        customerJson.Add('contactgroup', Format(Rec."Contact Group"));
+        customerJson.Add('credithold', Rec."Credit Hold");
+        customerJson.Add('creditlimit', Rec."Credit Limit (LCY)");
+        customerJson.Add('paymentterms', Rec."Payment Terms Code");
+        customerJson.Add('paymentmethod', Rec."Payment Method Code");
         customerJson.Add('abn', Rec."ABN");
         customerJson.Add('serviceagreement', Format(Rec."Service Agreement"));
         customerJson.Add('description', Rec.Description);
@@ -426,7 +426,7 @@ tableextension 50100 "Customer Ext" extends Customer
         customerJson.Add('territorycode', Rec.Territory);
         customerJson.Add('territorycodeid', Rec."Territory Code ID");
         customerJson.Add('territoryid', Rec."Territory Id");
-        customerJson.Add('currencycodeid', Rec."Currency Code Id");
+        customerJson.Add('companycontact', Rec."Company Contact");
 
         customerJson.WriteTo(jsonText);
         Content.WriteFrom(jsonText);

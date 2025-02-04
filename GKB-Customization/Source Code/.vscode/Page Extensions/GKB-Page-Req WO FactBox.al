@@ -208,7 +208,6 @@ page 50111 "Req WO FactBox"
         Item.SetRange("Date Filter", 0D, Date);
         Item.SetRange("Variant Filter", VariantCode);
         Item.SetRange("Location Filter", LocationCode);
-        //OnAfterFilterItem(Item, LocationCode, VariantCode, Date);
     end;
 
     var

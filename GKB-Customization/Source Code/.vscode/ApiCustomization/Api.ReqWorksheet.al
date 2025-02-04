@@ -22,6 +22,7 @@ page 50308 "Req.Worksheet API"
                 }
                 field("WorksheetTemplateName"; Rec."Worksheet Template Name") { }
                 field("JournalBatchName"; Rec."Journal Batch Name") { }
+                field("LineNo"; Rec."Line No.") { }
 
                 field(Type; Rec.Type)
                 {

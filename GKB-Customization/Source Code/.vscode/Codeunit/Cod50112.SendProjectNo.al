@@ -18,4 +18,4 @@ codeunit 50112 "ReqlineToPo"
         end;
 
     end;
-}   
+}

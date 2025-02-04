@@ -41,7 +41,6 @@ pageextension 50201 "Sales Order Ext" extends "Sales Order"
         RichTextVar := Rec.GetRichText();
     end;
 
-    // Add an OnAfterValidate trigger for the "Sell-to Customer No." field
     trigger OnAfterGetRecord()
     var
         CustomerRec: Record Customer;

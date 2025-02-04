@@ -261,4 +261,3 @@ table 50107 "GKB Work Order"
         WO.Modify();
     end;
 }
-

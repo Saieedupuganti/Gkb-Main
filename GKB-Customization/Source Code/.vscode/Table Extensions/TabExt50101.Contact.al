@@ -44,7 +44,7 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             Caption = 'Address 3';
         }
         field(70104; "Address Name"; Text[100])
-        {            
+        {
             DataClassification = ToBeClassified;
         }
         field(70107; "Address 2 Street1"; Text[100])
@@ -85,6 +85,12 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             Caption = 'Currency CRM Id';
             DataClassification = ToBeClassified;
         }
+        field(50136; "Company Name Crm"; Text[100])
+        {
+            Caption = 'Company Name Crm';
+            FieldClass = FlowField;
+            CalcFormula = Lookup("Customer"."CRM ID" WHERE("Name" = FIELD("Company Name")));
+        }
     }
     trigger OnAfterModify()
     var
@@ -114,12 +120,12 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             end;
         end;
 
-        
+
 
         if modified > 0 then begin
             Rec.Modify(false);
         end;
     end;
 
-    
+
 }

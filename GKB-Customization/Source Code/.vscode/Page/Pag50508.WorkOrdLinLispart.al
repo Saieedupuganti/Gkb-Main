@@ -20,20 +20,16 @@ page 50508 "Work Order Lines ListPart"
                     var
                         WorkOrder: Record "GKB Work Order";
                     begin
-                        if xRec."Work Order No." <> Rec."Work Order No." then begin
-                            if WorkOrder.Get(Rec."Work Order No.") then begin
-                                Rec."Work OrDER No." := WorkOrder."Project Task No";
-                                Rec."Job No." := WorkOrder."Job No.";
-                            end;
+                        WorkOrder.SetFilter("Job No.", Rec."Job No.");
+                        if WorkOrder.FindFirst() then begin
+                            Rec."Work Order No." := WorkOrder."Project Task No";
+                            Rec."Job No." := WorkOrder."Job No.";
                         end;
                     end;
                 }
                 field("Project Code"; rec."Job No.")
                 {
-                    ApplicationArea = All;
-                }
-                field("Project Task Code"; rec."Work Order No.")
-                {
+                    Caption = 'Project No.';
                     ApplicationArea = All;
                 }
                 field(Code; rec.Code)
@@ -76,7 +72,6 @@ page 50508 "Work Order Lines ListPart"
                 {
                     ApplicationArea = All;
                 }
-
             }
         }
     }
