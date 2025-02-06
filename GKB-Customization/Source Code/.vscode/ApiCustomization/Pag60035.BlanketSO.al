@@ -36,6 +36,8 @@ page 60035 "Api Blanket SO"
                 {
                     Caption = 'Customer No.';
                 }
+                field(SystemId; Rec.SystemId) { }
+                field(Name; Rec.Name) { }
                 field(addressname; Rec."Bill-to address name")             //Custom 
                 {
                     Caption = 'Address Name';

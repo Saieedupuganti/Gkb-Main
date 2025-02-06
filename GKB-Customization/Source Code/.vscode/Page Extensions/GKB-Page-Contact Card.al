@@ -104,18 +104,22 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
     {
         addlast(navigation)
         {
-            action("Update CRM Address")
+            action(UpadateCRM)
             {
+                Caption = 'Update To CRM';
                 ApplicationArea = All;
-                Caption = 'Update Ship-to Address in CRM';
-                Image = UpdateShipment;
+                Image = UpdateDescription;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Update this to CRM';
 
                 trigger OnAction()
                 var
                     ContactCrm: Codeunit "Contact Crm Management";
                 begin
                     ContactCrm.UpadeToCrm(Rec);
-                    Message('Successfully updated in CRM.');
+                    Message('Contact successfully updated in CRM.');
                 end;
             }
         }

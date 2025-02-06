@@ -213,12 +213,12 @@ page 50515 "GKB Work Order Card"
             {
                 trigger OnAction()
                 begin
-                    // SetSelectionFilter();
-                    // if WO.FindSet() then
-                    //     repeat
-                    //         if JobNotExistForWO(WO) then
-                    //             CreateJobFromWO(WO);
-                    //     until WO.Next() = 0;
+                    SetSelectionFilter(rec);
+                    if Rec.FindSet() then
+                        repeat
+                            if rec.JobNotExistForWO(rec) then
+                                rec.CreateJobFromWO(rec);
+                        until rec.Next() = 0;
                 end;
             }
         }

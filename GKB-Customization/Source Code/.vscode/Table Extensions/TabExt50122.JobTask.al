@@ -2,10 +2,10 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
 {
     fields
     {
-        field(50200; "Billing Type"; Code[30])
+        field(50200; "Billing Type"; Option)
         {
             Caption = 'Billing Type';
-            TableRelation = Customer;
+            OptionMembers = " ",Hai;
         }
 
         field(50201; "Contact"; Code[20])

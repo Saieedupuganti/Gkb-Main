@@ -21,7 +21,7 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
                 ApplicationArea = All;
                 Editable=false;
             }
-            field("QuantityShippedtillnow"; Rec."QuantityShippedtillnow")
+             field("QuantityShippedtillnow"; Rec."QuantityShippedtillnow")
             {
                 ApplicationArea = All;
                 Editable=false;

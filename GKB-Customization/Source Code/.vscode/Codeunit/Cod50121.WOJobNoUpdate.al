@@ -5,11 +5,9 @@ codeunit 50121 "JobNoWOlsUpdate"
     var
         WO: Record "GKB Work Order";
     begin
-        If rec."Job No." = '' then begin
-            WO.SetRange("Work Order No.", Rec."Work Order No.");
-            if WO.FindFirst() then begin
-                Rec."Job No." := WO."Job No.";
-            end;
+        WO.SetRange("Work Order No.", Rec."Work Order No.");
+        if WO.FindFirst() then begin
+            Rec."Job No." := WO."Job No.";
         end;
     end;
 }

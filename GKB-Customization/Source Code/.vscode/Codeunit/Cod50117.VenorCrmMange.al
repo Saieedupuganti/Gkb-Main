@@ -1,56 +1,123 @@
 codeunit 50117 "Vendor CRM Integration"
 {
-    procedure CreateVendorInCRM(VendorRec: Record Vendor): Boolean
+    procedure UpdateCRMAccount(Vendor: Record Vendor)
     var
         Client: HttpClient;
         Content: HttpContent;
         ContentHeaders: HttpHeaders;
+        IsSuccessful: Boolean;
         Response: HttpResponseMessage;
         ResponseText: Text;
-        JObject: JsonObject;
-        ResponseJson: JsonObject;
-        JsonText: Text;
-        CRMId: Text;
+        vendorJson: JsonObject;
+        responseJson: JsonObject;
+        jsonText: Text;
+        tokenValue: JsonToken;
+        tokenString: Text;
         MaxRetries: Integer;
         RetryCount: Integer;
         TimeoutMs: Integer;
         ErrorMsg: Text;
+        Currency: Record Currency;
+        Contact: Record Contact;
+        PriceListLine: Record "Price List line";
+        Territory: Record Territory;
+        Dimension: Record "Dimension Value";
     begin
         MaxRetries := 3;
         RetryCount := 0;
         TimeoutMs := 120000;
         Client.Timeout(TimeoutMs);
 
-        // Validate vendor record before creating
-        if not ValidateVendorFields(VendorRec) then
-            exit(false);
-
         Content.GetHeaders(ContentHeaders);
         ContentHeaders.Clear();
         ContentHeaders.Add('Content-Type', 'application/json');
         ContentHeaders.Add('Content-Encoding', 'UTF8');
 
-        JObject := CreateVendorJson(VendorRec);
-        JObject.WriteTo(JsonText);
-        Content.WriteFrom(JsonText);
+        // if not Currency.Get(Vendor."Currency Code") then
+        // Error('Currency not found.');
+
+
+        Contact.SetFilter("No.", vendor."Primary Contact No.");
+        if Contact.FindFirst then begin
+            vendorJson.Add('primarycontactid', Contact."CRM ID");
+        end;
+
+        Dimension.SetFilter(Code, vendor.Dimension);
+        if Dimension.FindFirst then begin
+            vendorJson.Add('dimensionid', Dimension."CRM ID");
+        end;
+
+        Currency.SetFilter(Code, vendor."Currency Code");
+        if Currency.FindFirst then begin
+            vendorJson.Add('currencyid', Currency."CRM ID");
+        end;
+
+        Territory.SetFilter(Code, vendor."Territory Code");
+        if Territory.FindFirst then begin
+            vendorJson.Add('territoryid', Territory."CRM ID");
+        end;
+
+
+        Clear(vendorJson);
+
+        vendorJson.Add('bcid', Vendor."No.");
+        vendorJson.Add('crmid', Vendor."CRM ID");
+        vendorJson.Add('d365accountid', Vendor."D365 Account ID");
+        vendorJson.Add('sapcustomernumber', Vendor."SAP Vendor Number");
+        vendorJson.Add('name', Vendor.Name);
+        vendorJson.Add('primarycontact', Vendor."Primary Contact No.");
+        vendorJson.Add('phoneno', Vendor."Phone No.");
+        vendorJson.Add('emailaddress', Vendor."E-Mail");
+        vendorJson.Add('web', Vendor.WEB);
+        vendorJson.Add('address', Vendor.Address);
+        vendorJson.Add('address2', Vendor."Address 2");
+        vendorJson.Add('address3', Vendor."Address 3");
+        vendorJson.Add('addressname', Vendor."Address Name");
+        vendorJson.Add('city', Vendor."D365 City");
+        vendorJson.Add('state', Vendor."D365 State");
+        vendorJson.Add('country', Vendor."D365 Country");
+        vendorJson.Add('postcode', Vendor."D365 Postal Code");
+        vendorJson.Add('customerprofile', Format(Vendor."Vendor Profile"));
+        vendorJson.Add('customergroup', Format(Vendor."Customer group"));
+        vendorJson.Add('contactgroup', Format(Vendor."Contact Groups"));
+        vendorJson.Add('credithold', Vendor."Credit Hold");
+        vendorJson.Add('creditlimit', Vendor."Credit Amount (LCY)");
+        vendorJson.Add('paymentterms', Vendor."Payment Terms Code");
+        vendorJson.Add('paymentmethod', Vendor."Payment Method Code");
+        vendorJson.Add('abn', Vendor."ABN");
+        vendorJson.Add('faxno', Vendor."Fax No.");
+        vendorJson.Add('capexfrom', Vendor."Capex From");
+        vendorJson.Add('capexto', Vendor."Capex To");
+        vendorJson.Add('serviceagreement', Format(Vendor."Service Agreement"));
+        vendorJson.Add('description', Vendor.Description);
+        vendorJson.Add('supplieraccountgroup', Format(Vendor."Supplier account Group"));
+        vendorJson.Add('customcontactid', Vendor."Custom Contact Id");
+        vendorJson.Add('companycontact', Vendor."Company Conatct");
+
+        vendorJson.WriteTo(jsonText);
+        Content.WriteFrom(jsonText);
 
         repeat
             RetryCount += 1;
             Clear(Response);
 
-            if Client.Post('https://prod-06.australiasoutheast.logic.azure.com:443/workflows/040900aee91d4389a420ea2cde1e195a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=p_lUuXIR8VoTkXY3JYRopM1YwcfgWaoCROZ8i2LNyIA',
-                Content, Response) then begin
+            IsSuccessful := Client.Post('https://prod-06.australiasoutheast.logic.azure.com:443/workflows/040900aee91d4389a420ea2cde1e195a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=p_lUuXIR8VoTkXY3JYRopM1YwcfgWaoCROZ8i2LNyIA', Content, Response);
+
+            if IsSuccessful then begin
                 Response.Content().ReadAs(ResponseText);
 
                 if ResponseText <> '' then begin
-                    if ResponseJson.ReadFrom(ResponseText) then begin
+                    if responseJson.ReadFrom(ResponseText) then begin
                         if ParseErrorMessage(ResponseText, ErrorMsg) then
                             Error('API Error: %1', ErrorMsg);
 
-                        if GetCRMIdFromResponse(ResponseJson, CRMId) then begin
-                            VendorRec."CRM ID" := CRMId;
-                            VendorRec.Modify(true);
-                            exit(true);
+                        if responseJson.Get('crmid', tokenValue) then begin
+                            if tokenValue.IsValue then begin
+                                tokenString := tokenValue.AsValue().AsText();
+                                Vendor."CRM ID" := CopyStr(tokenString, 1, MaxStrLen(Vendor."CRM ID"));
+                                Vendor.Modify(false);
+                                exit;
+                            end;
                         end;
                         Error('Response does not contain valid CRM ID. Full response: %1', ResponseText);
                     end;
@@ -65,192 +132,7 @@ codeunit 50117 "Vendor CRM Integration"
 
         until (RetryCount >= MaxRetries);
 
-        Error('Failed to create vendor in CRM after %1 attempts. Last response: %2', MaxRetries, ResponseText);
-    end;
-
-    procedure UpdateVendorInCRM(VendorRec: Record Vendor): Boolean
-    var
-        Client: HttpClient;
-        Content: HttpContent;
-        ContentHeaders: HttpHeaders;
-        Response: HttpResponseMessage;
-        ResponseText: Text;
-        JObject: JsonObject;
-        ResponseJson: JsonObject;
-        JsonText: Text;
-        MaxRetries: Integer;
-        RetryCount: Integer;
-        TimeoutMs: Integer;
-        ErrorMsg: Text;
-    begin
-        MaxRetries := 3;
-        RetryCount := 0;
-        TimeoutMs := 120000;
-        Client.Timeout(TimeoutMs);
-
-        if not ValidateVendorFields(VendorRec) then
-            exit(false);
-
-        if VendorRec."CRM ID" = '' then
-            Error('CRM ID is required for update operation');
-
-        Content.GetHeaders(ContentHeaders);
-        ContentHeaders.Clear();
-        ContentHeaders.Add('Content-Type', 'application/json');
-        ContentHeaders.Add('Content-Encoding', 'UTF8');
-
-        JObject := CreateVendorJson(VendorRec);
-        JObject.WriteTo(JsonText);
-        Content.WriteFrom(JsonText);
-
-        repeat
-            RetryCount += 1;
-            Clear(Response);
-
-            if Client.Post('https://prod-06.australiasoutheast.logic.azure.com:443/workflows/040900aee91d4389a420ea2cde1e195a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=p_lUuXIR8VoTkXY3JYRopM1YwcfgWaoCROZ8i2LNyIA',
-                Content, Response) then begin
-                Response.Content().ReadAs(ResponseText);
-
-                if ResponseText <> '' then begin
-                    if ResponseJson.ReadFrom(ResponseText) then begin
-                        if ParseErrorMessage(ResponseText, ErrorMsg) then
-                            Error('API Error: %1', ErrorMsg);
-                        exit(true);
-                    end;
-                    Error('Invalid JSON response: %1', ResponseText);
-                end;
-                Error('Empty response received from the server.');
-            end else
-                Error('HTTP request failed. Status code: %1', Response.HttpStatusCode);
-
-            if RetryCount < MaxRetries then
-                Sleep(100 * RetryCount);
-
-        until (RetryCount >= MaxRetries);
-
-        Error('Failed to update vendor in CRM after %1 attempts. Last response: %2', MaxRetries, ResponseText);
-    end;
-
-    local procedure CreateVendorJson(VendorRec: Record Vendor): JsonObject
-    var
-        JObject: JsonObject;
-        Currency: Record Currency;
-        Contact: Record Contact;
-        Territory: Record Territory;
-        Dimension: Record "Dimension Value";
-        Employee: Record Employee;
-    begin
-        Clear(JObject);
-
-        // Basic Identifiers
-        JObject.Add('bcid', VendorRec."No.");
-        JObject.Add('crmid', VendorRec."CRM ID");
-        JObject.Add('d365accountid', VendorRec."D365 Account ID");
-        JObject.Add('sapvendornumber', VendorRec."SAP Vendor Number");
-        JObject.Add('name', VendorRec.Name);
-        JObject.Add('telephone1', VendorRec."Phone No.");
-        JObject.Add('emailaddress1', VendorRec."E-Mail");
-        JObject.Add('websiteurl', VendorRec.WEB);
-        JObject.Add('address1_line1', VendorRec.Address);
-        JObject.Add('address1_line2', VendorRec."Address 2");
-        JObject.Add('address1_line3', VendorRec."Address 3");
-        JObject.Add('address1_name', VendorRec."Address Name");
-        JObject.Add('address1_city', VendorRec."D365 City");
-        JObject.Add('address1_stateorprovince', VendorRec."D365 State");
-        JObject.Add('address1_country', VendorRec."D365 Country");
-        JObject.Add('address1_postalcode', VendorRec."D365 Postal Code");
-
-        // Related Records with CRM IDs
-        if Currency.Get(VendorRec."Currency Code") and (Currency."CRM ID" <> '') then
-            JObject.Add('transactioncurrencyid', '/transactioncurrencies(' + Currency."CRM ID" + ')');
-
-        if Contact.Get(VendorRec."Primary Contact No.") and (Contact."CRM ID" <> '') then
-            JObject.Add('primarycontactid', '/contacts(' + Contact."CRM ID" + ')');
-
-        if Territory.Get(VendorRec."Territory Code") and (Territory."CRM ID" <> '') then
-            JObject.Add('territoryid', '/territories(' + Territory."CRM ID" + ')');
-
-        if Dimension.Get(VendorRec.Dimension) and (Dimension."CRM ID" <> '') then
-            JObject.Add('dimensionid', '/dimensions(' + Dimension."CRM ID" + ')');
-
-        JObject.Add('customergroup', Format(VendorRec."Customer group"));
-        JObject.Add('contactgroup', Format(VendorRec."Contact Groups"));
-        JObject.Add('ownership', Format(VendorRec."Owner Ship"));
-        JObject.Add('credithold', VendorRec."Credit Hold");
-        JObject.Add('creditlimit', VendorRec."Credit Amount (LCY)");
-        JObject.Add('paymenttermscode', VendorRec."Payment Terms Code");
-        JObject.Add('paymentmethodcode', VendorRec."Payment Method Code");
-        JObject.Add('abn', VendorRec."ABN No.");
-
-        JObject.Add('serviceagreement', Format(VendorRec."Service Agreement"));
-        JObject.Add('accountcontractmanager', VendorRec."Account Contract Manager");
-        JObject.Add('accountcontractmanagerid', VendorRec."Account Contract Manager ID");
-
-        if VendorRec."Capex From" <> 0D then
-            JObject.Add('capexfrom', Format(VendorRec."Capex From", 0, '<Year4>-<Month,2>-<Day,2>'));
-        if VendorRec."Capex To" <> 0D then
-            JObject.Add('capexto', Format(VendorRec."Capex To", 0, '<Year4>-<Month,2>-<Day,2>'));
-
-        JObject.Add('description', VendorRec.Description);
-        JObject.Add('supplieraccountgroup', Format(VendorRec."Supplier account Group"));
-        JObject.Add('dimension', VendorRec.Dimension);
-        JObject.Add('dimensionid', VendorRec."Dimension ID");
-        JObject.Add('territorycode', VendorRec."Territory Code");
-        JObject.Add('territorycodeid', VendorRec."Territory Code ID");
-        JObject.Add('currencycodeid', VendorRec."Currency Code Id");
-
-        exit(JObject);
-    end;
-
-    local procedure ValidateVendorFields(VendorRec: Record Vendor): Boolean
-    var
-        Currency: Record Currency;
-        Contact: Record Contact;
-        Territory: Record Territory;
-        Dimension: Record "Dimension Value";
-        Employee: Record Employee;
-    begin
-        if VendorRec."No." = '' then
-            Error('Vendor No. is required');
-
-        if VendorRec.Name = '' then
-            Error('Vendor Name is required');
-
-        if VendorRec."Vendor Posting Group" = '' then
-            Error('Vendor Posting Group is required');
-
-        if VendorRec."Gen. Bus. Posting Group" = '' then
-            Error('Gen. Bus. Posting Group is required');
-
-
-        if VendorRec."Currency Code" <> '' then
-            if not Currency.Get(VendorRec."Currency Code") then
-                Error('Currency not found.');
-
-        if VendorRec."Primary Contact No." <> '' then
-            if not Contact.Get(VendorRec."Primary Contact No.") then
-                Error('Contact not found.');
-
-        if VendorRec."Territory Code" <> '' then
-            if not Territory.Get(VendorRec."Territory Code") then
-                Error('Territory not found.');
-
-        // if VendorRec.Dimension <> '' then
-        //     if not Dimension.Get(VendorRec.Dimension) then
-        //         Error('Dimension not found.');
-
-        exit(true);
-    end;
-
-    local procedure GetCRMIdFromResponse(ResponseJson: JsonObject; var CRMId: Text): Boolean
-    var
-        Token: JsonToken;
-    begin
-        if ResponseJson.Get('crmid', Token) then begin
-            CRMId := Token.AsValue().AsText();
-            exit(true);
-        end;
-        exit(false);
+        Error('Failed to update CRM ID after %1 attempts. Last response: %2', MaxRetries, ResponseText);
     end;
 
     local procedure ParseErrorMessage(ResponseText: Text; var ErrorMessage: Text): Boolean
@@ -270,6 +152,7 @@ codeunit 50117 "Vendor CRM Integration"
                             exit(true);
                         end;
                     end;
+
                     ErrorObject.WriteTo(ErrorMessage);
                     exit(true);
                 end;

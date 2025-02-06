@@ -63,6 +63,7 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
 
         if priceListRec."Crm Id" = '' then
             Error('Price List CRM ID is missing.');
+            
         if productRec."CRM ID" = '' then
             Error('Product CRM ID is missing.');
 
