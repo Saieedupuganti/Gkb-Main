@@ -249,250 +249,63 @@ tableextension 50100 "Customer Ext" extends Customer
 
     end;
 
-    trigger OnAfterInsert()
-    var
-        Client: HttpClient;
-        RequestContent: HttpContent;
-        ContentHeaders: HttpHeaders;
-        IsSuccessful: Boolean;
-        Response: HttpResponseMessage;
-        ResponseText: Text;
-        JObject: JsonObject;
-        ResponseJObject: JsonObject;
-        JsonText: Text;
-        TokenValue: JsonToken;
-        TokenString: Text;
-        contactRec: Record Contact;
-        contactid: Text;
-        customerRec: Record Customer;
-        customerid: Text;
-    begin
-        // Initialize request content and headers
-        RequestContent.WriteFrom('');
-        RequestContent.GetHeaders(ContentHeaders);
-        ContentHeaders.Clear();
-        ContentHeaders.Add('Content-Type', 'application/json');
+    // trigger OnAfterInsert()
+    // var
+    //     Client: HttpClient;
+    //     RequestContent: HttpContent;
+    //     ContentHeaders: HttpHeaders;
+    //     IsSuccessful: Boolean;
+    //     Response: HttpResponseMessage;
+    //     ResponseText: Text;
+    //     JObject: JsonObject;
+    //     ResponseJObject: JsonObject;
+    //     JsonText: Text;
+    //     TokenValue: JsonToken;
+    //     TokenString: Text;
+    //     contactRec: Record Contact;
+    //     contactid: Text;
+    //     customerRec: Record Customer;
+    //     customerid: Text;
+    // begin
+    //     // Initialize request content and headers
+    //     RequestContent.WriteFrom('');
+    //     RequestContent.GetHeaders(ContentHeaders);
+    //     ContentHeaders.Clear();
+    //     ContentHeaders.Add('Content-Type', 'application/json');
 
-        Client.DefaultRequestHeaders.Add('Accept', 'application/json');
+    //     Client.DefaultRequestHeaders.Add('Accept', 'application/json');
 
-        Clear(contactid);
-        Clear(customerid);
+    //     Clear(contactid);
+    //     Clear(customerid);
 
-        if Rec."No." <> '' then begin
-            if customerRec.Get(Rec."No.") then
-                if customerRec."CRM ID" <> '' then
-                    customerid := '/accounts(' + customerRec."CRM ID" + ')';
-        end;
+    //     if Rec."No." <> '' then begin
+    //         if customerRec.Get(Rec."No.") then
+    //             if customerRec."CRM ID" <> '' then
+    //                 customerid := '/accounts(' + customerRec."CRM ID" + ')';
+    //     end;
 
-        Clear(JObject);
-        JObject.Add('bcid', Rec."No.");
-        JObject.Add('crmid', Rec."CRM ID");
-        JObject.Add('telephone1', Rec."Phone No.");
-        JObject.Add('companycontact', Rec."Company Contact"); // Ensure this is the correct field name
+    //     Clear(JObject);
+    //     JObject.Add('bcid', Rec."No.");
+    //     JObject.Add('crmid', Rec."CRM ID");
+    //     JObject.Add('telephone1', Rec."Phone No.");
+    //     JObject.Add('companycontact', Rec."Company Contact"); // Ensure this is the correct field name
 
-        JObject.WriteTo(JsonText);
-        RequestContent.WriteFrom(JsonText);
+    //     JObject.WriteTo(JsonText);
+    //     RequestContent.WriteFrom(JsonText);
 
-        IsSuccessful := Client.Post('https://prod-06.australiasoutheast.logic.azure.com:443/workflows/8419dbcb99664b739f1ab25cb78b83c1/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=pEF7rVaGAGNPhvxBo5axltUyLdDFcomOMiGiouvMBvY', RequestContent, Response);
+    //     IsSuccessful := Client.Post('https://prod-06.australiasoutheast.logic.azure.com:443/workflows/8419dbcb99664b739f1ab25cb78b83c1/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=pEF7rVaGAGNPhvxBo5axltUyLdDFcomOMiGiouvMBvY', RequestContent, Response);
 
-        if IsSuccessful then begin
-            Response.Content().ReadAs(ResponseText);
-            if ResponseJObject.ReadFrom(ResponseText) then begin
-                if ResponseJObject.Contains('crmid') then begin
-                    ResponseJObject.Get('crmid', TokenValue);
-                    TokenString := TokenValue.AsValue().AsText();
-                    Rec."CRM ID" := CopyStr(TokenString, 1, 100);
-                    Rec.Modify(false);
-                end;
-            end;
-        end;
-    end;
+    //     if IsSuccessful then begin
+    //         Response.Content().ReadAs(ResponseText);
+    //         if ResponseJObject.ReadFrom(ResponseText) then begin
+    //             if ResponseJObject.Contains('crmid') then begin
+    //                 ResponseJObject.Get('crmid', TokenValue);
+    //                 TokenString := TokenValue.AsValue().AsText();
+    //                 Rec."CRM ID" := CopyStr(TokenString, 1, 100);
+    //                 Rec.Modify(false);
+    //             end;
+    //         end;
+    //     end;
+    // end;
 
-    procedure UpdateCRMAccount()
-    var
-        Client: HttpClient;
-        Content: HttpContent;
-        ContentHeaders: HttpHeaders;
-        IsSuccessful: Boolean;
-        Response: HttpResponseMessage;
-        ResponseText: Text;
-        customerJson: JsonObject;
-        responseJson: JsonObject;
-        jsonText: Text;
-        tokenValue: JsonToken;
-        tokenString: Text;
-        MaxRetries: Integer;
-        RetryCount: Integer;
-        TimeoutMs: Integer;
-        ErrorMsg: Text;
-        Currency: Record Currency;
-        Contact: Record Contact;
-        PriceListLine: Record "Price List line";
-        Territory: Record Territory;
-        Dimension: Record "Dimension Value";
-    begin
-        MaxRetries := 3;
-        RetryCount := 0;
-        TimeoutMs := 120000;
-        Client.Timeout(TimeoutMs);
-
-        Content.GetHeaders(ContentHeaders);
-        ContentHeaders.Clear();
-        ContentHeaders.Add('Content-Type', 'application/json');
-        ContentHeaders.Add('Content-Encoding', 'UTF8');
-
-
-        // if not PriceListLine.Get(Rec."Customer Price Group" ) then
-        //     Error('Price List Header not found.');
-
-        // if not Territory.Get(Rec."Territory Code") then
-        // Error('Territory not found.');
-
-        // if not Dimension.Get(Rec."Global Dimension 1 Code") then
-        // Error('Dimension not found.');
-
-        // if not Currency.Get(Rec."Currency Code") then
-        // Error('Currency not found.');
-
-        //Validate required records exist
-        if Rec."Currency Code" <> '' then
-            if not Currency.Get(Rec."Currency Code") then
-                Error('Currency not found.');
-
-        if Rec."Contact Code" <> '' then
-            if not Contact.Get(Rec."Contact Code") then
-                Error('Contact not found.');
-
-        if Rec.Territory <> '' then
-            if not Territory.Get(Rec.Territory) then
-                Error('Territory not found.');
-
-        // if Rec.Dimension <> '' then
-        //     if not Dimension.Get(Rec.Dimension) then
-        //         Error('Dimension not found.');
-
-
-        if Currency."CRM ID" <> '' then
-            customerJson.Add('currencyid', '/transactioncurrencies(' + Currency."CRM ID" + ')');
-
-        if Contact."CRM ID" <> '' then
-            customerJson.Add('primarycontactid', '/contacts(' + Contact."CRM ID" + ')');
-
-        if Territory."CRM ID" <> '' then
-            customerJson.Add('territoryid', '/territories(' + Territory."CRM ID" + ')');
-
-        if Dimension."CRM ID" <> '' then
-            customerJson.Add('dimensionid', '/dimensions(' + Dimension."CRM ID" + ')');
-
-        if Rec."Capex From" <> 0D then
-            customerJson.Add('capexfrom', Format(Rec."Capex From", 0, '<Year4>-<Month,2>-<Day,2>'));
-        if Rec."Capex To" <> 0D then
-            customerJson.Add('capexto', Format(Rec."Capex To", 0, '<Year4>-<Month,2>-<Day,2>'));
-
-        // Create JSON object
-        Clear(customerJson);
-
-        customerJson.Add('bcid', Rec."No.");
-        customerJson.Add('crmid', Rec."CRM ID");
-        customerJson.Add('d365accountid', Rec."D365 Account ID");
-        customerJson.Add('sapcustomernumber', Rec."SAP Customer Number");
-        customerJson.Add('name', Rec.Name);
-        customerJson.Add('phoneno', Rec."Phone No.");
-        customerJson.Add('emailaddress', Rec."E-Mail");
-        customerJson.Add('web', Rec.WEB);
-        customerJson.Add('address', Rec.Address);
-        customerJson.Add('address2', Rec."Address 2");
-        customerJson.Add('address3', Rec."Address 3");
-        customerJson.Add('addressname', Rec."Address Name");
-        customerJson.Add('city', Rec."D365 City");
-        customerJson.Add('state', Rec."D365 State");
-        customerJson.Add('country', Rec."D365 Country");
-        customerJson.Add('postCode', Rec."D365 PostCode");
-        customerJson.Add('customerprofile', Format(Rec."Customer Profile"));
-        customerJson.Add('customergroup', Format(Rec."Customer group"));
-        customerJson.Add('contactgroup', Format(Rec."Contact Group"));
-        customerJson.Add('credithold', Rec."Credit Hold");
-        customerJson.Add('creditlimit', Rec."Credit Limit (LCY)");
-        customerJson.Add('paymentterms', Rec."Payment Terms Code");
-        customerJson.Add('paymentmethod', Rec."Payment Method Code");
-        customerJson.Add('abn', Rec."ABN");
-        customerJson.Add('serviceagreement', Format(Rec."Service Agreement"));
-        customerJson.Add('description', Rec.Description);
-        customerJson.Add('supplieraccountgroup', Format(Rec."Supplier account Group"));
-        customerJson.Add('dimension', Rec.Dimension);
-        customerJson.Add('dimensionid', Rec."Dimension ID");
-        customerJson.Add('customerpricegroup', Rec."Customer Price Group Id");
-        customerJson.Add('customcontactid', Rec."Custom Contact Id");
-        customerJson.Add('territorycode', Rec.Territory);
-        customerJson.Add('territorycodeid', Rec."Territory Code ID");
-        customerJson.Add('territoryid', Rec."Territory Id");
-        customerJson.Add('companycontact', Rec."Company Contact");
-
-        customerJson.WriteTo(jsonText);
-        Content.WriteFrom(jsonText);
-
-        repeat
-            RetryCount += 1;
-            Clear(Response);
-
-            IsSuccessful := Client.Post('https://prod-06.australiasoutheast.logic.azure.com:443/workflows/8419dbcb99664b739f1ab25cb78b83c1/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=pEF7rVaGAGNPhvxBo5axltUyLdDFcomOMiGiouvMBvY', Content, Response);
-
-            if IsSuccessful then begin
-                Response.Content().ReadAs(ResponseText);
-
-                if ResponseText <> '' then begin
-                    if responseJson.ReadFrom(ResponseText) then begin
-                        if ParseErrorMessage(ResponseText, ErrorMsg) then
-                            Error('API Error: %1', ErrorMsg);
-
-                        if responseJson.Get('crmid', tokenValue) then begin
-                            if tokenValue.IsValue then begin
-                                tokenString := tokenValue.AsValue().AsText();
-                                Rec."CRM ID" := CopyStr(tokenString, 1, MaxStrLen(Rec."CRM ID"));
-                                Rec.Modify(false);
-                                exit;
-                            end;
-                        end;
-                        Error('Response does not contain valid CRM ID. Full response: %1', ResponseText);
-                    end;
-                    Error('Invalid JSON response: %1', ResponseText);
-                end;
-                Error('Empty response received from the server.');
-            end else
-                Error('HTTP request failed. Status code: %1', Response.HttpStatusCode);
-
-            if RetryCount < MaxRetries then
-                Sleep(100 * RetryCount);
-
-        until (RetryCount >= MaxRetries);
-
-        Error('Failed to update CRM ID after %1 attempts. Last response: %2', MaxRetries, ResponseText);
-    end;
-
-    local procedure ParseErrorMessage(ResponseText: Text; var ErrorMessage: Text): Boolean
-    var
-        JsonObject: JsonObject;
-        ErrorToken: JsonToken;
-        ErrorObject: JsonObject;
-        MessageToken: JsonToken;
-    begin
-        if JsonObject.ReadFrom(ResponseText) then begin
-            if JsonObject.Get('error', ErrorToken) then begin
-                if ErrorToken.IsObject then begin
-                    ErrorObject := ErrorToken.AsObject();
-                    if ErrorObject.Get('message', MessageToken) then begin
-                        if MessageToken.IsValue then begin
-                            ErrorMessage := MessageToken.AsValue().AsText();
-                            exit(true);
-                        end;
-                    end;
-
-                    ErrorObject.WriteTo(ErrorMessage);
-                    exit(true);
-                end;
-            end;
-        end;
-        ErrorMessage := ResponseText;
-        exit(false);
-    end;
 }

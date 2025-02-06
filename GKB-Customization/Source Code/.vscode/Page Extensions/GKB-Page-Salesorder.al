@@ -55,9 +55,6 @@ pageextension 50201 "Sales Order Ext" extends "Sales Order"
         RichTextVar: Text;
 }
 
-
-
-
 //     trigger OnAfterGetRecord()
 //     begin
 //         GetRichText();

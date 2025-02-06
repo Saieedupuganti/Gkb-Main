@@ -12,6 +12,12 @@ codeunit 50120 "Contact Crm Management"
         JsonText: Text;
         Customer: Record Customer;
         Vendor: Record Vendor;
+        responseJson: JsonObject;
+        tokenValue: JsonToken;
+        tokenString: Text;
+        ErrorMsg: Text;
+        RetryCount: Integer;
+        MaxRetries: Integer;
     begin
         // Initialize request content and headers
         Content.GetHeaders(ContentHeaders);
@@ -67,13 +73,69 @@ codeunit 50120 "Contact Crm Management"
         JObject.WriteTo(JsonText);
         Content.WriteFrom(JsonText);
 
-        IsSuccessful := Client.Post(
-            'https://prod-08.australiasoutheast.logic.azure.com:443/workflows/0eed1ce8d1754740895faf0421f02596/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=HIqZ0Gb2XRtPbBBovHxiypoCwyhJfWL4h59KS1SJfmE',
-            Content, Response);
+        repeat
+            RetryCount += 1;
+            Clear(Response);
 
-        if IsSuccessful then begin
-            Response.Content().ReadAs(ResponseText);
-        end else
-            Error('HTTP request failed. Status code: %1', Response.HttpStatusCode);
+            IsSuccessful := Client.Post(
+                'https://prod-08.australiasoutheast.logic.azure.com:443/workflows/0eed1ce8d1754740895faf0421f02596/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=HIqZ0Gb2XRtPbBBovHxiypoCwyhJfWL4h59KS1SJfmE',
+                Content, Response);
+
+            if IsSuccessful then begin
+                Response.Content().ReadAs(ResponseText);
+                if ResponseText <> '' then begin
+                    if responseJson.ReadFrom(ResponseText) then begin
+                        if ParseErrorMessage(ResponseText, ErrorMsg) then
+                            Error('API Error: %1', ErrorMsg);
+
+                        if responseJson.Get('crmid', tokenValue) then begin
+                            if tokenValue.IsValue then begin
+                                tokenString := tokenValue.AsValue().AsText();
+                                Contact."CRM ID" := CopyStr(tokenString, 1, MaxStrLen(Contact."CRM ID"));
+                                Contact.Modify(false);
+                                exit;
+                            end;
+                        end;
+                        Error('Response does not contain valid CRM ID. Full response: %1', ResponseText);
+                    end;
+                    Error('Invalid JSON response: %1', ResponseText);
+                end;
+                Error('Empty response received from the server.');
+            end else
+                Error('HTTP request failed. Status code: %1', Response.HttpStatusCode);
+
+            if RetryCount < MaxRetries then
+                Sleep(100 * RetryCount);
+
+        until (RetryCount >= MaxRetries);
+
+        Error('Failed to update CRM ID after %1 attempts. Last response: %2', MaxRetries, ResponseText);
+    end;
+
+    local procedure ParseErrorMessage(ResponseText: Text; var ErrorMessage: Text): Boolean
+    var
+        JsonObject: JsonObject;
+        ErrorToken: JsonToken;
+        ErrorObject: JsonObject;
+        MessageToken: JsonToken;
+    begin
+        if JsonObject.ReadFrom(ResponseText) then begin
+            if JsonObject.Get('error', ErrorToken) then begin
+                if ErrorToken.IsObject then begin
+                    ErrorObject := ErrorToken.AsObject();
+                    if ErrorObject.Get('message', MessageToken) then begin
+                        if MessageToken.IsValue then begin
+                            ErrorMessage := MessageToken.AsValue().AsText();
+                            exit(true);
+                        end;
+                    end;
+
+                    ErrorObject.WriteTo(ErrorMessage);
+                    exit(true);
+                end;
+            end;
+        end;
+        ErrorMessage := ResponseText;
+        exit(false);
     end;
 }

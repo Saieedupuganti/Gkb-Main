@@ -9,7 +9,6 @@ codeunit 50108 BlanketOrderToInvoice
         SalesInvoiceLine: Record "Sales Line";
         BlanketOrderLine: Record "Sales Line";
     begin
-        // Validate Sell-to Customer No. in the Blanket Order Header
         if BlanketOrderRec."Sell-to Customer No." = '' then
             Error('Sell-to Customer No. is not specified in the Blanket Order.');
 

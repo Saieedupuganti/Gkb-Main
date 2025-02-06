@@ -196,13 +196,10 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
 
                 trigger OnAction()
                 var
-                    CustomerRec: Record Customer;
+                    CustomerCRM : Codeunit "Customer Crm Management";
                 begin
-                    CurrPage.SetSelectionFilter(CustomerRec);
-                    if CustomerRec.FindSet() then
-                        repeat
-                            CustomerRec.UpdateCRMAccount();
-                        until CustomerRec.Next() = 0;
+                    CustomerCRM.UpdateCRMAccount(Rec);
+                    Message('Successfully updated in CRM.');
                 end;
             }
         }
@@ -215,16 +212,14 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         IsUserAllowed: Boolean;
         ContactRec: Record Contact;
     begin
-        // Check if the current user has permission to edit the Vendor Card
         if UserSetupRec.Get(UserId()) then begin
             IsUserAllowed := UserSetupRec."Customer Card";
         end else begin
             IsUserAllowed := false;
         end;
 
-        // If the user does not have permission, make the fields non-editable
         if not IsUserAllowed then
-            CurrPage.Editable(false);  // Set the entire page to non-editable
+            CurrPage.Editable(false);  
     end;
 }
 

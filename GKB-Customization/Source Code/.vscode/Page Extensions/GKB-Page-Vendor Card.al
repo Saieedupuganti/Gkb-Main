@@ -21,6 +21,10 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
         {
             Visible = false;
         }
+        modify(County)
+        {
+            Visible = false;
+        }
 
         addafter(General)
         {
@@ -174,38 +178,22 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
     {
         addlast(navigation)
         {
-            action(SyncWithCRM)
+            action(UpadateCRM)
             {
                 Caption = 'Update To CRM';
-                Image = UpdateXML;
+                ApplicationArea = All;
+                Image = UpdateDescription;
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                ApplicationArea = All;
+                ToolTip = 'Update this to CRM';
 
                 trigger OnAction()
                 var
-                    VendorCRMIntegration: Codeunit "Vendor CRM Integration";
-                    ConfirmQst: Label 'Do you want to sync this vendor with CRM?';
-                    SuccessMsg: Label 'Vendor successfully %1 in CRM.';
+                    VendorCRM: Codeunit "Vendor CRM Integration";
                 begin
-                    if not Confirm(ConfirmQst) then
-                        exit;
-
-                    if Rec.Blocked <> Rec.Blocked::" " then
-                        Error('Cannot sync blocked vendors with CRM');
-
-                    if Rec."CRM ID" = '' then begin
-                        if VendorCRMIntegration.CreateVendorInCRM(Rec) then
-                            Message(SuccessMsg, 'created')
-                        else
-                            Error('Failed to create vendor in CRM');
-                    end else begin
-                        if VendorCRMIntegration.UpdateVendorInCRM(Rec) then
-                            Message(SuccessMsg, 'updated')
-                        else
-                            Error('Failed to update vendor in CRM');
-                    end;
+                    VendorCRM.UpdateCRMAccount(Rec);
+                    Message('Vendor successfully updated in CRM.');
                 end;
             }
         }
@@ -224,6 +212,6 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
         end;
 
         if not IsUserAllowed then
-            CurrPage.Editable(false);  
+            CurrPage.Editable(false);
     end;
 }

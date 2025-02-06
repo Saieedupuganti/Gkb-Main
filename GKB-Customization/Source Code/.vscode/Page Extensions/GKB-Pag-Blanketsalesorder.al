@@ -80,4 +80,5 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
     //     SalesLine.SalesOrderCreated := true;
     //     SalesLine.modify(true);
     // end;
+    
 }

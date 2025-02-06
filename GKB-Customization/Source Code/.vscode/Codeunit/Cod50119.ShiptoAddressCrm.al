@@ -8,6 +8,7 @@ codeunit 50119 "Ship-To Add Crm Management"
         IsSuccessful: Boolean;
         Response: HttpResponseMessage;
         ResponseText: Text;
+        responseJson: JsonObject;
         JObject: JsonObject;
         jsonText: Text;
         tokenValue: JsonToken;
@@ -27,11 +28,11 @@ codeunit 50119 "Ship-To Add Crm Management"
         ContentHeaders.Add('Content-Encoding', 'UTF8');
 
         Message(ShipToAdd.Code);
-        Customer.SetRange("No.",ShipToAdd."Customer No.");
+        Customer.SetRange("No.", ShipToAdd."Customer No.");
         if Customer.FindFirst() then begin
-          JObject.Add('customerno', Customer."CRM ID");
+            JObject.Add('customerno', Customer."CRM ID");
         end else begin
-          JObject.Add('customerno', '');
+            JObject.Add('customerno', '');
         end;
         Message(ShipToAdd."Customer No.");
 
@@ -52,14 +53,70 @@ codeunit 50119 "Ship-To Add Crm Management"
         Message(JsonText);
         Content.WriteFrom(JsonText);
 
-        IsSuccessful := Client.Post(
-            'https://prod-30.australiasoutheast.logic.azure.com:443/workflows/9f3c11f2010d4a9b8bd5fc42a7601768/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=2C7E9P8G3WT18Fi4rP-2nDdXTyGT406DKHQ3cMhN9LI',
-            Content, Response);
+        repeat
+            RetryCount += 1;
+            Clear(Response);
 
-        if IsSuccessful then begin
-            Response.Content().ReadAs(ResponseText);
+            IsSuccessful := Client.Post(
+                'https://prod-30.australiasoutheast.logic.azure.com:443/workflows/9f3c11f2010d4a9b8bd5fc42a7601768/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=2C7E9P8G3WT18Fi4rP-2nDdXTyGT406DKHQ3cMhN9LI',
+                Content, Response);
 
-        end else
-            Error('HTTP request failed. Status code: %1', Response.HttpStatusCode);
-    end;
+            if IsSuccessful then begin
+                Response.Content().ReadAs(ResponseText);
+
+                if ResponseText <> '' then begin
+                    if responseJson.ReadFrom(ResponseText) then begin
+                        if ParseErrorMessage(ResponseText, ErrorMsg) then
+                            Error('API Error: %1', ErrorMsg);
+
+                        if responseJson.Get('crmid', tokenValue) then begin
+                            if tokenValue.IsValue then begin
+                                tokenString := tokenValue.AsValue().AsText();
+                                ShipToAdd."CRM ID" := CopyStr(tokenString, 1, MaxStrLen(ShipToAdd."CRM ID"));
+                                ShipToAdd.Modify(false);
+                                exit;
+                            end;
+                        end;
+                        Error('Response does not contain valid CRM ID. Full response: %1', ResponseText);
+                    end;
+                    Error('Invalid JSON response: %1', ResponseText);
+                end;
+                Error('Empty response received from the server.');
+            end else
+                Error('HTTP request failed. Status code: %1', Response.HttpStatusCode);
+
+            if RetryCount < MaxRetries then
+                Sleep(100 * RetryCount);
+
+        until (RetryCount >= MaxRetries);
+
+        Error('Failed to update CRM ID after %1 attempts. Last response: %2', MaxRetries, ResponseText);
+    end;
+
+    local procedure ParseErrorMessage(ResponseText: Text; var ErrorMessage: Text): Boolean
+    var
+        JsonObject: JsonObject;
+        ErrorToken: JsonToken;
+        ErrorObject: JsonObject;
+        MessageToken: JsonToken;
+    begin
+        if JsonObject.ReadFrom(ResponseText) then begin
+            if JsonObject.Get('error', ErrorToken) then begin
+                if ErrorToken.IsObject then begin
+                    ErrorObject := ErrorToken.AsObject();
+                    if ErrorObject.Get('message', MessageToken) then begin
+                        if MessageToken.IsValue then begin
+                            ErrorMessage := MessageToken.AsValue().AsText();
+                            exit(true);
+                        end;
+                    end;
+
+                    ErrorObject.WriteTo(ErrorMessage);
+                    exit(true);
+                end;
+            end;
+        end;
+        ErrorMessage := ResponseText;
+        exit(false);
+    end;
 }
