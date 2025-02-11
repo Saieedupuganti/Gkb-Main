@@ -22,6 +22,7 @@ codeunit 50123 "Customer Crm Management"
         PriceListLine: Record "Price List line";
         Territory: Record Territory;
         Dimension: Record "Dimension Value";
+        CustPrcGrp: Record "Customer Price Group";
     begin
         MaxRetries := 3;
         RetryCount := 0;
@@ -33,16 +34,6 @@ codeunit 50123 "Customer Crm Management"
         ContentHeaders.Add('Content-Type', 'application/json');
         ContentHeaders.Add('Content-Encoding', 'UTF8');
 
-        // if not Currency.Get(Customer."Currency Code") then
-        // Error('Currency not found.');
-
-        //Validate required records exist
-        // if Customer."Currency Code" <> '' then
-        //     if not Currency.Get(Customer."Currency Code") then
-        //         Error('Currency not found.');
-
-        // getting the crm value from diff records and adding to Json.
- 
         Contact.SetFilter("No.", Customer."Primary Contact No.");
         if Contact.FindFirst then begin
             customerJson.Add('primarycontactid', Contact."CRM ID");
@@ -61,6 +52,11 @@ codeunit 50123 "Customer Crm Management"
         Territory.SetFilter(Code, Customer."Territory Code");
         if Territory.FindFirst then begin
             customerJson.Add('territoryid', Territory."CRM ID");
+        end;
+
+        CustPrcGrp.SetFilter(Code, Customer."Customer Price Group");
+        if CustPrcGrp.FindFirst then begin
+            customerJson.Add('customerpricegroupid', CustPrcGrp."CRM ID");
         end;
 
         // if Dimension."CRM ID" <> '' then
@@ -97,7 +93,6 @@ codeunit 50123 "Customer Crm Management"
         customerJson.Add('serviceagreement', Format(Customer."Service Agreement"));
         customerJson.Add('description', Customer.Description);
         customerJson.Add('supplieraccountgroup', Format(Customer."Supplier account Group"));
-        customerJson.Add('customerpricegroup', Customer."Customer Price Group");
         customerJson.Add('customcontactid', Customer."Custom Contact Id");
         customerJson.Add('companycontact', Customer."Company Contact");
 

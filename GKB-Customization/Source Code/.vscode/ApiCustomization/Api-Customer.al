@@ -16,177 +16,167 @@ page 50321 "API Customer"
         {
             repeater(GroupName)
             {
-                field(ABN; Rec."ABN No.")
+                field(ABN; Rec."ABN No.")//Check
                 {
                     Caption = 'ABN';
                 }
-                field(Address; Rec.Address)
+                field(address; Rec.Address)//Check
                 {
                     Caption = 'Address';
                 }
-                field(Addressname; Rec."Address Name")
+                field(addressname; Rec."Address Name")//Check
                 {
                     Caption = 'Address Name';
                 }
-                field("Address2"; Rec."Address 2")
+                field("address2"; Rec."Address 2")//Check
                 {
                     Caption = 'Address 2';
                 }
-                field("Address3"; Rec."Address 3")
+                field("address3"; Rec."Address 3")//Check
                 {
                     Caption = 'Address 3';
                 }
-                field("BlockPaymentTolerance"; Rec."Block Payment Tolerance")
+                field("BlockPaymentTolerance"; Rec."Block Payment Tolerance")//Check
                 {
                     Caption = 'Block Payment Tolerence';
                 }
-                field("CapexFrom"; Rec."Capex From")
+                field("CapexFrom"; Rec."Capex From")//Check
                 {
                     Caption = 'Capex From';
                 }
-                field("CapexTo"; Rec."Capex To")
+                field("CapexTo"; Rec."Capex To")//Check
                 {
                     Caption = 'Capex To';
                 }
-                field("city"; rec."D365 City")
+                field("city"; rec."D365 City")//Check
                 {
                     Caption = 'City';
                 }
-                field("CompanyContact"; Rec."Company Contact") { }
-                field(code; Rec."No.")
-                {
-                    Caption = 'no';
-                }
-
-                field("ContactGroup"; Rec."Contact Group")
+                field("ContactGroup"; Rec."Contact Group")//Check
                 {
                     Caption = 'Contact Group';
                 }
-                field("Country"; Rec."D365 Country")
+                field("country"; Rec."D365 Country")//Check
                 {
                     Caption = 'Country/Region Code';
                 }
-                field(County; Rec.County)
+                field(county; Rec.County)//Check
                 {
                     Caption = 'County';
                 }
-                field("CreditHold"; Rec."Credit Hold")
+                field("CreditHold"; Rec."Credit Hold")//Check
                 {
                     Caption = 'Credit Hold';
                 }
-                field("CreditLimitLCY"; Rec."Credit Limit (LCY)")
+                field("CreditLimitLCY"; Rec."Credit Limit (LCY)")//Check
                 {
                     Caption = 'Credit Limit';
                 }
-                field(crmid; Rec."CRM ID")
+                field(crmid; Rec."CRM ID")//Check
                 {
                     Caption = 'CRM ID';
                 }
-                field("CurrencyCode"; Rec."Currency Code")
+                field("CurrencyCode"; Rec."Currency Code")//Check
                 {
                     Caption = 'Currency Code';
                 }
-                field("Customergroup"; Rec."Customer group")
+                field("Customergroup"; Rec."Customer group")//Check
                 {
                     Caption = 'Customer Group';
                 }
-                field("CustomerPriceGroup"; Rec."Customer Price Group")
+                field("CustomerPriceGroup"; Rec."Customer Price Group")//Check
                 {
                     Caption = 'Customer Price Group';
                 }
-                field("CustomerPriceGroupId"; Rec."Customer Price Group Id")
+                field("CustomerPriceGroupId"; Rec."Customer Price Group Id")//Check
                 {
                     Caption = 'Customer Price Group Id';
                 }
-                field("CustomerProfile"; Rec."Customer Profile")
+                field("CustomerProfile"; Rec."Customer Profile")//Check
                 {
                     Caption = 'Customer Profile';
                 }
-                field(Description; Rec.Description)
+                field(Description; Rec.Description)//Check
                 {
                     Caption = 'Description';
                 }
-                field(Dimension; Rec.Dimension)
+                field(Dimension; Rec.Dimension)//Check
                 {
                     Caption = 'Dimension';
                 }
-                field("DimensionId"; Rec."Dimension Id")
+                field("DimensionId"; Rec."Dimension Id")//Check
                 {
                     Caption = 'Dimension Id';
                 }
-                field("D365AccountID"; Rec."D365 Account ID")
+                field("d365accountid"; Rec."D365 Account ID")//Check
                 {
                     Caption = 'Account Id';
                 }
-                field("EMail"; Rec."E-Mail")
+                field("EMail"; Rec."E-Mail")//Check
                 {
                     Caption = 'Caption';
                 }
-                field("FaxNo"; Rec."Fax No.")
+                field("FaxNo"; Rec."Fax No.")//Check
                 {
                     Caption = 'Fax No';
                 }
-                field(Name; Rec.Name)
+                field(Name; Rec.Name)//Check
                 {
                     Caption = 'Name';
                 }
-                field(owner; Rec."Owner")
-                {
-                    Caption = 'Owner';
-                }
-                field(ownerid; Rec."Owner Id")
+                field(ownerid; Rec."Owner Id")//Check
                 {
                     Caption = 'Owner ID';
                 }
-                field("PaymentMethodCode"; Rec."Payment Method Code")
+                field("PaymentMethodCode"; Rec."Payment Method Code")//Check
                 {
                     Caption = 'Payment Method Code';
                 }
-                field("PaymentTermsCode"; Rec."Payment Terms Code")
+                field("PaymentTermsCode"; Rec."Payment Terms Code")//Check
                 {
                     Caption = 'Payment Terms Code';
                 }
-                field("PhoneNo"; Rec."Phone No.")
+                field("phoneno"; Rec."Phone No.")//Check
                 {
                     Caption = 'Phone No.';
                 }
-                field("PostCode"; Rec."D365 PostCode")
+                field("postcode"; Rec."D365 PostCode")//Check
                 {
                     Caption = 'Postal Code';
                 }
-                field("PrivacyBlocked"; Rec."Privacy Blocked")
+                field("privacyblocked"; Rec."Privacy Blocked")//Check
                 {
                     Caption = 'Privacy Blocked';
                 }
-                field(primarycontact; Rec."Primary Contact No.")
+                field(primarycontact; Rec."Primary Contact No.")//Check
                 {
                     Caption = 'no';
                 }
-                field("SAPCustomerNumber"; Rec."SAP Customer Number")
+                field("sapcustomernumber"; Rec."SAP Customer Number")//Check
                 {
                     Caption = 'SAP Customer No.';
                 }
-                field("ServiceAgreement"; Rec."Service Agreement")
+                field("ServiceAgreement"; Rec."Service Agreement")//Check
                 {
                     Caption = 'Service Agreement';
                 }
-                field(State; Rec."D365 State")
+                field(state; Rec."D365 State")    //Check
                 {
                     Caption = 'State';
                 }
-                field(supplieraccountgroup; Rec."Supplier Account Group")
+                field(supplieraccountgroup; Rec."Supplier Account Group")//Check
                 {
                     Caption = 'Supplier Account Group';
                 }
-                field("TerritoryCode"; Rec.Territory)
+                field("territorycode"; Rec.Territory)//Check
                 {
                     Caption = 'Territory Code';
                 }
-                field("TerritoryCodeID"; Rec."Territory Code ID")
+                field("territorycodeid"; Rec."Territory Code ID")//Check
                 {
                     Caption = 'Territory Code Id';
                 }
-                field(WEB; Rec.WEB)
+                field(WEB; Rec.WEB)//Check
                 {
                     Caption = 'WEB';
                 }

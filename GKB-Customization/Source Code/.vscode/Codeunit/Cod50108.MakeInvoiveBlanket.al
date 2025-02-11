@@ -32,7 +32,6 @@ codeunit 50108 BlanketOrderToInvoice
 
                 SalesInvoiceLine.Validate("Sell-to Customer No.", SalesInvoiceHeader."Sell-to Customer No.");
 
-                // Copy other relevant fields
                 SalesInvoiceLine.Validate("Type", BlanketOrderLine."Type");
                 SalesInvoiceLine.Validate("No.", BlanketOrderLine."No.");
                 SalesInvoiceLine.Validate(Quantity, BlanketOrderLine.Quantity);
@@ -40,15 +39,5 @@ codeunit 50108 BlanketOrderToInvoice
                 SalesInvoiceLine.Insert(true);
             until BlanketOrderLine.Next() = 0;
         end;
-
-        // No automatic posting, just a message confirming creation
-        //Message('Sales Invoice %1 has been created but not posted.', SalesInvoiceHeader."No.");
     end;
-
-//  procedure PostSalesOrderAsInvoice(SalesOrderHeader: Record "Sales Header")
-//     var
-//         PostSalesOrder: Codeunit "Sales-Post (Yes/No)";
-//     begin
-//         PostSalesOrder.Run(SalesOrderHeader);
-//     end;
 }
