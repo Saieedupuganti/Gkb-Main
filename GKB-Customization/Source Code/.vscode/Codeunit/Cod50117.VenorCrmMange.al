@@ -22,6 +22,7 @@ codeunit 50117 "Vendor CRM Integration"
         PriceListLine: Record "Price List line";
         Territory: Record Territory;
         Dimension: Record "Dimension Value";
+        VendPrcGrp: Record "Customer Price Group";
     begin
         MaxRetries := 3;
         RetryCount := 0;
@@ -57,9 +58,6 @@ codeunit 50117 "Vendor CRM Integration"
             vendorJson.Add('territoryid', Territory."CRM ID");
         end;
 
-
-        Clear(vendorJson);
-
         vendorJson.Add('bcid', Vendor."No.");
         vendorJson.Add('crmid', Vendor."CRM ID");
         vendorJson.Add('d365accountid', Vendor."D365 Account ID");
@@ -78,7 +76,6 @@ codeunit 50117 "Vendor CRM Integration"
         vendorJson.Add('country', Vendor."D365 Country");
         vendorJson.Add('postcode', Vendor."D365 Postal Code");
         vendorJson.Add('customerprofile', Format(Vendor."Vendor Profile"));
-        vendorJson.Add('customergroup', Format(Vendor."Customer group"));
         vendorJson.Add('contactgroup', Format(Vendor."Contact Groups"));
         vendorJson.Add('credithold', Vendor."Credit Hold");
         vendorJson.Add('creditlimit', Vendor."Credit Amount (LCY)");

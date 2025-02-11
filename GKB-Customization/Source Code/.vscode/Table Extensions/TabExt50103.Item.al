@@ -38,7 +38,9 @@ tableextension 50103 GKBItemExt extends Item
         }
         field(50103; QrCode; Blob)
         {
+            Caption = 'Qr Code';
             DataClassification = ToBeClassified;
+            Subtype = Bitmap;
         }
         field(50104; SAPITEMID; Code[100])
         {

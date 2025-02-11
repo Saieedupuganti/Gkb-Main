@@ -15,63 +15,59 @@ page 50340 "API Vendor"
         {
             repeater(GroupName)
             {
-                field(ABN; Rec.ABN)
+                field(abn; Rec.ABN)
                 {
                     Caption = 'ABN';
                 }
-                field(Address; Rec.Address)
+                field(address; Rec.Address)
                 {
                     Caption = 'Address';
                 }
-                field(Addressname; Rec."Address Name")
+                field(addressname; Rec."Address Name")
                 {
                     Caption = 'Address Name';
                 }
-                field("Address2"; Rec."Address 2")
+                field(address2; Rec."Address 2")
                 {
                     Caption = 'Address 2';
                 }
-                field("Address3"; Rec."Address 3")
+                field(address3; Rec."Address 3")
                 {
                     Caption = 'Address 3';
                 }
-                field("BlockPaymentTolerance"; Rec."Block Payment Tolerance")
+                field(blockpaymenttolerance; Rec."Block Payment Tolerance")
                 {
-                    Caption = 'Block Payment Tolerence';
+                    Caption = 'Block Payment Tolerance';
                 }
-                field("CapexFrom"; Rec."Capex From")
+                field(capexfrom; Rec."Capex From")
                 {
                     Caption = 'Capex From';
                 }
-                field("CapexTo"; Rec."Capex To")
+                field(capexto; Rec."Capex To")
                 {
                     Caption = 'Capex To';
                 }
-                field("city"; rec."D365 City")
+                field(city; Rec."D365 City")
                 {
                     Caption = 'City';
                 }
-                field(code; Rec."No.")
-                {
-                    Caption = 'no';
-                }
-                field("ContactGroup"; Rec."Contact Groups")
+                field(contactgroup; Rec."Contact Groups")
                 {
                     Caption = 'Contact Group';
                 }
-                field("Country"; Rec."D365 Country")
+                field(country; Rec."D365 Country")
                 {
                     Caption = 'Country/Region Code';
                 }
-                field(County; Rec.County)
+                field(county; Rec.County)
                 {
                     Caption = 'County';
                 }
-                field("CreditHold"; Rec."Credit Hold")
+                field(credithold; Rec."Credit Hold")
                 {
                     Caption = 'Credit Hold';
                 }
-                field("CreditLimitLCY"; Rec."Credit Amount (LCY)")
+                field(creditlimitlcy; Rec."Credit Amount (LCY)")
                 {
                     Caption = 'Credit Limit';
                 }
@@ -79,53 +75,42 @@ page 50340 "API Vendor"
                 {
                     Caption = 'CRM ID';
                 }
-                field("CurrencyCode"; Rec."Currency Code")
+                field(currencycode; Rec."Currency Code")
                 {
                     Caption = 'Currency Code';
                 }
-                field("Customergroup"; Rec."Customer group")
-                {
-                    Caption = 'Customer Group';
-                }
-                // The below two fields only for the reference with customer
-
-                // field("CustomerPriceGroup"; Rec."Customer Price Group")    //Not in Vendor
-                // {
-                //     Caption = 'Customer Price Group';
-                // }
-                // field("CustomerPriceGroupId"; Rec."Customer Price Group Id")   // NOt In Vendor
-                // {
-                //     Caption = 'Customer Price Group Id';
-                // }
-                field("CustomerProfile"; Rec."Vendor Profile")
+                field(customerprofile; Rec."Vendor Profile")
                 {
                     Caption = 'Customer Profile';
                 }
-                field(Description; Rec.Description)
+                field(description; Rec.Description)
                 {
                     Caption = 'Description';
                 }
-                field(Dimension; Rec.Dimension)
+                field(dimension; Rec.Dimension)
                 {
                     Caption = 'Dimension';
                 }
-                field("DimensionId"; Rec."Dimension Id")
+                field(dimensionid; Rec."Dimension Id")
                 {
                     Caption = 'Dimension Id';
                 }
-                field("D365AccountID"; Rec."D365 Account ID")
+                field(d365accountid; Rec."D365 Account ID")
                 {
                     Caption = 'Account Id';
                 }
-                field("EMail"; Rec."E-Mail")
+                field(email; Rec."E-Mail")
                 {
                     Caption = 'Caption';
                 }
-                field("FaxNo"; Rec."Fax No.")
+                field(faxno; Rec."Fax No.")
                 {
                     Caption = 'Fax No';
                 }
-                field(Name; Rec.Name)
+                field(isalsoacustomer; Rec."Is Also a Customer")
+                {
+                }
+                field(name; Rec.Name)
                 {
                     Caption = 'Name';
                 }
@@ -133,39 +118,39 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Owner ID';
                 }
-                field("PaymentMethodCode"; Rec."Payment Method Code")
+                field(paymentmethodcode; Rec."Payment Method Code")
                 {
                     Caption = 'Payment Method Code';
                 }
-                field("PaymentTermsCode"; Rec."Payment Terms Code")
+                field(paymenttermscode; Rec."Payment Terms Code")
                 {
                     Caption = 'Payment Terms Code';
                 }
-                field("PhoneNo"; Rec."Phone No.")
+                field(phoneno; Rec."Phone No.")
                 {
                     Caption = 'Phone No.';
                 }
-                field("PostCode"; Rec."D365 Postal Code")
+                field(postcode; Rec."D365 Postal Code")
                 {
                     Caption = 'Postal Code';
                 }
-                field("PrivacyBlocked"; Rec."Privacy Blocked")
+                field(privacyblocked; Rec."Privacy Blocked")
                 {
                     Caption = 'Privacy Blocked';
                 }
                 field(primarycontact; Rec."Primary Contact No.")
                 {
-                    Caption = 'no';
+                    Caption = 'No';
                 }
-                field("SAPCustomerNumber"; Rec."SAP Vendor Number")
+                field(sapcustomernumber; Rec."SAP Vendor Number")
                 {
                     Caption = 'SAP Customer No.';
                 }
-                field("ServiceAgreement"; Rec."Service Agreement")
+                field(serviceagreement; Rec."Service Agreement")
                 {
                     Caption = 'Service Agreement';
                 }
-                field(State; Rec."D365 State")
+                field(state; Rec."D365 State")
                 {
                     Caption = 'State';
                 }
@@ -173,18 +158,19 @@ page 50340 "API Vendor"
                 {
                     Caption = 'Supplier Account Group';
                 }
-                field("TerritoryCode"; Rec."Territory Code")
+                field(territorycode; Rec."Territory Code")
                 {
                     Caption = 'Territory Code';
                 }
-                field("TerritoryCodeID"; Rec."Territory Code ID")
+                field(territorycodeid; Rec."Territory Code ID")
                 {
                     Caption = 'Territory Code Id';
                 }
-                field(WEB; Rec.WEB)
+                field(web; Rec.WEB)
                 {
                     Caption = 'WEB';
                 }
+
             }
         }
     }

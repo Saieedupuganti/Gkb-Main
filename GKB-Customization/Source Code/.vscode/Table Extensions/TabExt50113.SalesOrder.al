@@ -7,7 +7,7 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
         }
-        field(50127; Name ; Text[300])
+        field(50127; Name; Text[300])
         {
             DataClassification = ToBeClassified;
             Caption = 'Name';
@@ -146,15 +146,10 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         field(50147; "D365 ShiptoCountry/RegionCode"; Text[50])
         {
             Caption = 'Ship-to Country/Region Code';
-            //TableRelation = "Country/Region";
         }
         field(50148; "D365 Ship-to Post Code"; Text[100])
         {
             Caption = 'Ship-to Post Code';
-            // TableRelation = if ("Ship-to Country/Region Code" = const('')) "Post Code"
-            // else
-            // if ("Ship-to Country/Region Code" = filter(<> '')) "Post Code" where("Country/Region Code" = field("Ship-to Country/Region Code"));
-            // ValidateTableRelation = false;
         }
         field(50100; Comments2; Text[100])
         {
@@ -193,7 +188,6 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
     begin
 
         modified := 0;
-        // Check if field has changed and is not empty
         if (Rec."Customer CRMID" <> '') and (xRec."Customer CRMID" <> Rec."Customer CRMID") then begin
             customerRec.SetFilter("CRM ID", Rec."Customer CRMID");
             if customerRec.FindFirst() then begin
@@ -202,7 +196,6 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             end;
         end;
 
-        // Check if field has changed and is not empty
         if (Rec."Dimension CRM ID" <> '') and (xRec."Dimension CRM ID" <> Rec."Dimension CRM ID") then begin
             dimRec.SetFilter("CRM ID", Rec."Dimension CRM ID");
             if dimRec.FindFirst() then begin
@@ -211,7 +204,6 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             end;
         end;
 
-        // Check if field has changed and is not empty
         if (Rec."Currency CRM ID" <> '') and (xRec."Currency CRM ID" <> Rec."Currency CRM ID") then begin
             currencyRec.SetFilter("CRM ID", Rec."Currency CRM ID");
             if currencyRec.FindFirst() then begin
@@ -220,7 +212,6 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             end;
         end;
 
-        // Nodify only if found atleast 1 CRM - BC match
         if modified > 0 then begin
             Rec.Modify(false);
         end;

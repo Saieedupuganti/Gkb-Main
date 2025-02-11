@@ -79,6 +79,7 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
         {
             Caption = 'Dimension';
             DataClassification = ToBeClassified;
+            TableRelation = "Dimension Value".Code;
         }
         field(50135; "Currency CRM Id"; Text[100])
         {

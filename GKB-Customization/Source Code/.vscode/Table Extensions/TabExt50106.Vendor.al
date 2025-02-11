@@ -178,6 +178,11 @@ tableextension 50106 "Vendor Ext" extends Vendor
             Caption = 'Parent Account';
             DataClassification = ToBeClassified;
         }
+        field(50143;"Is Also a Customer"; Boolean)
+        {
+            Caption = 'Is Also a Customer';
+            DataClassification = ToBeClassified;
+        }
     }
 
     trigger OnAfterModify()

@@ -18,6 +18,7 @@ codeunit 50120 "Contact Crm Management"
         ErrorMsg: Text;
         RetryCount: Integer;
         MaxRetries: Integer;
+        
     begin
         // Initialize request content and headers
         Content.GetHeaders(ContentHeaders);
@@ -38,11 +39,6 @@ codeunit 50120 "Contact Crm Management"
         end;
 
         Contact.Modify();
-        // if not Customer.Get(Contact."CRM ID") then
-        //     Error('Customer not found.');
-
-        // if Customer."Crm Id" = '' then
-        //     Error('Customer CRM ID is missing.');
 
         JObject.Add('crmid', Contact."Crm Id");
         JObject.Add('companycrmid', Contact."Company Name Crm");
@@ -59,14 +55,12 @@ codeunit 50120 "Contact Crm Management"
         JObject.Add('county', Contact.County);
         JObject.Add('country', Contact."D365 Country");
         JObject.Add('postCode', Contact."Post Code");
-        JObject.Add('currencycrmid', Contact."Currency CRM ID");
         JObject.Add('faxno', Contact."Fax No.");
         JObject.Add('name', Contact.Name);
         JObject.Add('jobtitle', Contact."Job Title");
         JObject.Add('phoneno', Contact."Phone No.");
         JObject.Add('email', Contact."E-Mail");
         JObject.Add('mobilephoneno', Contact."Mobile Phone No.");
-        JObject.Add('dimension', Contact.Dimension);
         JObject.Add('dimensionid', Contact."Dimension ID");
         JObject.Add('emailgroupcode', Contact."E-Mail Group Code");
 

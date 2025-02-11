@@ -12,9 +12,6 @@ codeunit 50111 SalesQteToBlanketOrder
         if SalesQuoteRec."Sell-to Customer No." = '' then
             Error('Sell-to Customer No. is not specified on the Sales Quote.');
 
-        // Initialize new Blanket Sales Order Header
-        //Message('Starting the process of converting Sales Quote to Blanket Order.');
-
         BlanketOrderHeader.Init();
         BlanketOrderHeader."Document Type" := BlanketOrderHeader."Document Type"::"Blanket Order";
         BlanketOrderHeader.Validate("Sell-to Customer No.", SalesQuoteRec."Sell-to Customer No.");
@@ -22,7 +19,6 @@ codeunit 50111 SalesQteToBlanketOrder
         BlanketOrderHeader.Insert(true); 
         Message('Blanket Order Header created: %1', BlanketOrderHeader."No.");
 
-        // Copy Sales Quote Lines to Blanket Sales Order Lines
         SalesQuoteLine.SetRange("Document Type", SalesQuoteRec."Document Type"::Quote);
         SalesQuoteLine.SetRange("Document No.", SalesQuoteRec."No.");
 
@@ -34,7 +30,6 @@ codeunit 50111 SalesQteToBlanketOrder
                 BlanketOrderLine."Document Type" := BlanketOrderHeader."Document Type"::"Blanket Order";
                 BlanketOrderLine."Line No." := SalesQuoteLine."Line No.";
 
-                // Ensure the Sell-to Customer No. is inherited for the line
                 BlanketOrderLine.Validate("Sell-to Customer No.", BlanketOrderHeader."Sell-to Customer No.");
 
                 BlanketOrderLine.Validate("Type", SalesQuoteLine."Type");
@@ -42,14 +37,12 @@ codeunit 50111 SalesQteToBlanketOrder
                 BlanketOrderLine.Validate(Quantity, SalesQuoteLine.Quantity);
                 BlanketOrderLine.Validate("Unit Price", SalesQuoteLine."Unit Price");
 
-                // Insert the Blanket Sales Order Line
                 BlanketOrderLine.Insert(true);
             until SalesQuoteLine.Next() = 0;
             Message('Blanket Sales Order created successfully: %1', BlanketOrderHeader."No.");
         end else
             Message('No lines found for the Sales Quote.');
 
-        // Optionally update the status of Sales Quote or take other actions
         SalesQuoteRec.Status := SalesQuoteRec.Status::Open;
         SalesQuoteRec.Modify();
     end;

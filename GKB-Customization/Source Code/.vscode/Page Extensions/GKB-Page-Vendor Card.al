@@ -68,6 +68,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Customer Group';
+                    Visible = false;
                 }
                 field("Contact Groups"; Rec."Contact Groups")
                 {
@@ -120,7 +121,6 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                 }
             }
         }
-
         addafter("Address 2")
         {
             field("Address 3"; Rec."Address 3")
@@ -144,6 +144,7 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
             {
                 ApplicationArea = all;
                 Caption = 'Global Dimension 1 Code';
+                Visible = false;
             }
         }
         addlast("Address & Contact")
@@ -173,7 +174,6 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
             }
         }
     }
-
     actions
     {
         addlast(navigation)
@@ -198,8 +198,6 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
             }
         }
     }
-
-
     trigger OnOpenPage();
     var
         UserSetupRec: Record "User Setup";
