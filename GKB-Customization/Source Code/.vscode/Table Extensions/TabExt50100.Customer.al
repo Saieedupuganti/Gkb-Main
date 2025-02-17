@@ -202,7 +202,32 @@ tableextension 50100 "Customer Ext" extends Customer
             Caption = 'Parent Account CRM ID';
             DataClassification = ToBeClassified;
         }
+        field(50151; "Vendor No."; Code[20])
+        {
+            Caption = 'Vendor No.';
+            TableRelation = Vendor."No.";
+            DataClassification = ToBeClassified;
+        }
     }
+
+    trigger OnModify()
+    begin
+        UpdateStandardFields();
+    end;
+
+    trigger OnInsert()
+    begin
+        UpdateStandardFields();
+    end;
+
+    local procedure UpdateStandardFields()
+    begin
+        "City" := "D365 City";
+        County := "D365 State";
+        "Country/Region Code" := "D365 Country";
+        "Post Code" := "D365 PostCode";
+    end;
+
     trigger OnAfterModify()
     var
         dimRec: Record "Dimension Value";

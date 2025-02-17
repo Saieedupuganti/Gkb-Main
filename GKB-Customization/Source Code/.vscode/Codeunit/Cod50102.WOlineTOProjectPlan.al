@@ -16,16 +16,25 @@ codeunit 50102 "GKB Work Order Mgt."
         CreateJobTaskLinesFromWOLs(Rec);//, Job, JobTask);
     end;
 
-    // [EventSubscriber(ObjectType::Table, Database::"GKB Work Order", 'OnAfterInsertEvent', '', false, false)]
- 
-    // local procedure OnAfterInsertWOs(var Rec: Record "GKB Work Order"; RunTrigger: Boolean)
-    // var
-    // Job: Code[20];
-    // JobTask: Code[20];
-    // begin
-    //    if JobNotExistForWO(Rec) then
-    //          CreateJobFromWO(Rec);
-    // end;
+    [EventSubscriber(ObjectType::Table, Database::"GKB Work Order", 'OnAfterModifyEvent', '', false, false)]
+
+    local procedure OnAfterInsertWOs(var Rec: Record "GKB Work Order"; RunTrigger: Boolean)
+    var
+        Job: Code[20];
+        JobTask: Code[20];
+    begin
+        if Rec."Job Created" then
+            exit;
+            
+        if (Rec."Topic" <> '') and
+           (Rec."Work Order Type" <> '') and
+           (Rec."Work Order No." <> '') and
+           (Rec."Service Account" <> '') then begin
+            if JobNotExistForWO(Rec) then
+                CreateJobFromWO(Rec);
+             
+        end;
+    end;
 
     local procedure CreateJobTaskLinesFromWOLs(var WOLn: Record "GKB Work Order Lines")
     var
@@ -75,8 +84,10 @@ codeunit 50102 "GKB Work Order Mgt."
         JobTask.SetRange("Job Task No.", JobTask."Job Task No.");
         if not JobTask.FindFirst() then begin
             JobTask.Init();
-            JobTask."Job No." := Job."No.";
-            JobTask."Job Task No." := WO."Work Order No.";
+            JobTask.Validate("Job No.", Job."No.");
+            JobTask.Validate("Job Task No.", WO."Work Order No.");
+            //JobTask."Job No." := Job."No.";
+            //JobTask."Job Task No." := WO."Work Order No.";
             JobTask.Description := WO."Topic";
             JobTask.Insert();
 
@@ -102,7 +113,8 @@ codeunit 50102 "GKB Work Order Mgt."
         Job.Description := WO."Service Account" + ' - ' + WO."Work Order Type";
         Job."Service Account" := WO."Service Account";
         Job."Work Order Type" := WO."Work Order Type";
-        Job."Bill-to Customer No." := WO."Service Account";
+        Job."Sell-to Customer No." := WO."Service Account";
+        Job.Validate("Bill-to Customer No.", WO."Service Account");
         Job.Insert();
         Message('Job card created with no %1', Job."No.");
 
@@ -114,7 +126,8 @@ codeunit 50102 "GKB Work Order Mgt."
         JobTask.Insert();
 
         if WO."Job No." = '' then
-            WO."Job No." := Job."No.";
+            //WO."Job No." := Job."No.";               
+            WO.Validate("Job No.", Job."No.");                     //Modified
         WO."Project Task No" := JobTask."Job Task No.";
         WO."Job Created" := true;
         WO.Modify();

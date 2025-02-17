@@ -24,14 +24,12 @@ page 50515 "GKB Work Order Card"
                     ApplicationArea = All;
                     Caption = 'Service Account';
                     ShowMandatory = true;
-                    NotBlank = true;
                 }
                 field("Work Order Type"; rec."Work Order Type")
                 {
                     ApplicationArea = All;
                     Caption = 'Work Order Type';
                     ShowMandatory = true;
-                    NotBlank = true;
                 }
                 field("System Status"; Rec."System Status")
                 {
@@ -223,4 +221,9 @@ page 50515 "GKB Work Order Card"
     //         }
     //     }
     // }
+    trigger OnAfterGetRecord()
+    begin
+        CurrPage.Update(false);
+    end;
+
 }

@@ -10,12 +10,12 @@
             "type": "al",
             "environmentType": "Sandbox",
             "environmentName": "integration",
-            "startupObjectId": 50515,
+            "startupObjectId": 26,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
-            "schemaUpdateMode": "ForceSync",
+            "schemaUpdateMode": "Synchronize",
             "enableSqlInformationDebugger": true
         }
     ]

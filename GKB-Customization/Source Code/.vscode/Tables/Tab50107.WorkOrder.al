@@ -3,12 +3,14 @@ table 50107 "GKB Work Order"
     DataClassification = CustomerContent;
     DrillDownPageId = "GKB Work Order List";
     LookupPageId = "GKB Work Order Card";
+    
 
     fields
     {
         field(50000; "Work Order No."; Text[50])
         {
             DataClassification = CustomerContent;
+            
         }
         field(50001; "Service Account"; Code[100])
         {
@@ -49,12 +51,12 @@ table 50107 "GKB Work Order"
         {
             DataClassification = ToBeClassified;
         }
-        field(50009; "Contact"; Code[30])
+        field(50009; "Contact"; Text[30])
         {
             DataClassification = CustomerContent;
             TableRelation = Contact;
         }
-        field(50010; "Currency"; Code[20])
+        field(50010; "Currency"; Text[20])  //Changed from Code to Text.
         {
             DataClassification = CustomerContent;
             TableRelation = "Currency";
@@ -182,82 +184,4 @@ table 50107 "GKB Work Order"
         {
         }
     }
-
-    trigger OnInsert()
-    var
-        WO: Record "GKB Work Order";
-    begin
-
-        // // Filter Work Orders where "Job Created" is false
-        // WO.SetRange("Job Created", false);
-        // if WO.IsEmpty then
-        //     exit;
-
-        // if WO.FindSet() then
-        //     repeat
-        //         if JobNotExistForWO(WO) then
-        //             CreateJobFromWO(WO);
-        //     until WO.Next() = 0;
-    end;
-
-    procedure JobNotExistForWO(var WO: Record "GKB Work Order"): Boolean
-    var
-        Job: Record Job;
-        JobTask: Record "Job Task";
-    begin
-        job.Reset();
-        Job.SetRange("Service Account", WO."Service Account");
-        Job.SetRange("Work Order Type", WO."Work Order Type");
-
-        if not Job.FindFirst() then
-            exit(true);
-        JobTask.Reset();
-        JobTask.SetRange("Job No.", Job."No.");
-        JobTask.SetRange("Job Task No.", JobTask."Job Task No.");
-        if not JobTask.FindFirst() then begin
-            JobTask.Init();
-            JobTask."Job No." := Job."No.";
-            JobTask."Job Task No." := WO."Work Order No.";
-            JobTask.Description := WO."Topic";
-            JobTask.Insert();
-
-            if WO."Job No." = '' then
-                WO."Job No." := Job."No.";
-            WO."Project Task No" := JobTask."Job Task No.";
-            WO."Job Created" := true;
-            WO.Modify();
-            Message('Job Task Updated %1 to Job %2', WO."Work Order No.", WO."Job No.");
-        end;
-
-        exit(false);
-    end;
-
-    procedure CreateJobFromWO(WO: Record "GKB Work Order")
-    var
-        Job: Record Job;
-        JobTask: Record "Job Task";
-        NoSeriesMgt: Codeunit "No. Series";
-    begin
-        Job.Init();
-        Job."No." := NoSeriesMgt.GetNextNo('JOB', 0D, true);
-        Job.Description := WO."Service Account" + ' - ' + WO."Work Order Type";
-        Job."Service Account" := WO."Service Account";
-        Job."Work Order Type" := WO."Work Order Type";
-        Job."Bill-to Customer No." := WO."Service Account";
-        Job.Insert();
-        Message('Job card created with no %1', Job."No.");
-
-        // Create Job Task for the new Job
-        JobTask.Init();
-        JobTask."Job No." := Job."No.";
-        JobTask."Job Task No." := WO."Work Order No.";
-        JobTask.Description := WO."Topic";
-        JobTask.Insert();
-
-        if WO."Job No." = '' then
-            WO."Job No." := Job."No.";
-        WO."Project Task No" := JobTask."Job Task No.";
-        WO."Job Created" := true;
-        WO.Modify();
-    end;
 }

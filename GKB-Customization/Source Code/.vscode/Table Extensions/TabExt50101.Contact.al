@@ -128,5 +128,21 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
         end;
     end;
 
+    trigger OnModify()
+    begin
+        UpdateStandardFields();
+    end;
 
+    trigger OnInsert()
+    begin
+        UpdateStandardFields();
+    end;
+
+    local procedure UpdateStandardFields()
+    begin
+        "City" := "D365 City";
+        County := "D365 State";
+        "Country/Region Code" := "D365 Country";
+        "Post Code" := "D365 postal Code";
+    end;
 }

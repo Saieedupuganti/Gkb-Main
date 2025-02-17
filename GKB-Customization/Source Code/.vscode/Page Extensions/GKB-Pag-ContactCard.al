@@ -102,7 +102,7 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
     }
     actions
     {
-        addlast(navigation)
+        addlast(processing)
         {
             action(UpadateCRM)
             {
@@ -135,10 +135,3 @@ pageextension 50125 MyExtension extends "Contact List"
         }
     }
 }
-
-
-
-
-
-
-

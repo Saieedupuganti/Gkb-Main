@@ -60,6 +60,28 @@ pageextension 50149 GKBItemExt extends "Item Card"
             }
         }
     }
+    actions
+    {
+        addafter(ApplyTemplate)
+        {
+            action(CustomerCardBarCode)
+            {
+                Caption = 'Item QR Code';
+                ApplicationArea = All;
+                PromotedCategory = Process;
+                Promoted = true;
+                Image = Report;
+
+                trigger OnAction()
+                var
+                    ItemQRCode: Report Item_QRCode;
+                begin
+                    //ItemQRCode.AssignBarcodeURL(Rec."No.", Rec.Description, GetUrl(ClientType::Current, CompanyName, ObjectType::Page, Page::"Customer Card", Rec));
+                    ItemQRCode.Run();
+                end;
+            }
+        }
+    }
     // var
     //     GenerateQR: Label 'Generate QR Code';
 
@@ -71,7 +93,8 @@ pageextension 50149 GKBItemExt extends "Item Card"
         InS: InStream;
         OutS: OutStream;
     begin
-        // Generate QR code only if it doesn't exist
+        if Rec."No." = '' then
+            exit;
         if not Rec.QRCode.HasValue then begin
             URL := 'http://api.qrserver.com/v1/create-qr-code/?data=' + Rec."No." + ' ' + Rec.Description + '&size=200x200';
             if Client.Get(URL, Response) then begin
@@ -105,4 +128,3 @@ page 50400 "Item QR Factbox"
         }
     }
 }
-
