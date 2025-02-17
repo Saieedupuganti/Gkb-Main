@@ -30,6 +30,11 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
         {
             group("D365 CUSTOM FIELDS")
             {
+                field("Is Also a Customer"; Rec."Is Also a Customer")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Is Also a Customer';
+                }
                 field("Vendor Profile"; Rec."Vendor Profile")
                 {
                     ApplicationArea = All;

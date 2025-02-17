@@ -1,5 +1,5 @@
 codeunit 50121 "JobNoWOlsUpdate"
-{
+{   
     [EventSubscriber(ObjectType::Table, Database::"GKB Work Order Lines", 'OnAfterValidateEvent', 'Code', false, false)]
     local procedure UpdateVendorDetailsOnItemChange(var Rec: Record "GKB Work Order Lines")
     var

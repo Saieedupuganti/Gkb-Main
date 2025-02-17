@@ -4,15 +4,17 @@ pageextension 50142 "GKB Job Card" extends "Job Card"
     {
         addafter(Description)
         {
-            field("Work Order Type";Rec."Work Order Type")
+            field("Work Order Type"; Rec."Work Order Type")
             {
                 ApplicationArea = all;
                 Caption = 'Work Order Type';
+                Visible = false;
             }
-            field("Service Account";Rec."Service Account")
+            field("Service Account"; Rec."Service Account")
             {
                 ApplicationArea = all;
                 Caption = 'Service Account';
+                Visible = false;
             }
         }
     }

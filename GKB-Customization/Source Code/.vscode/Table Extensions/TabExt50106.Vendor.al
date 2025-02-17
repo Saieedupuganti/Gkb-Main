@@ -178,10 +178,17 @@ tableextension 50106 "Vendor Ext" extends Vendor
             Caption = 'Parent Account';
             DataClassification = ToBeClassified;
         }
-        field(50143;"Is Also a Customer"; Boolean)
+        field(50143; "Is Also a Customer"; Boolean)
         {
             Caption = 'Is Also a Customer';
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            var
+                CreateCustomerFromVendor: Codeunit CreateCustomerFrmVendor;
+            begin
+                if "Is Also a Customer" then
+                    CreateCustomerFromVendor.HandleVendorModification(Rec, Rec);
+            end;
         }
     }
 
@@ -205,7 +212,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
             end;
         end;
 
-        // Check if field has changed and is not empty
         if (Rec."Currency Code Id" <> '') and (xRec."Currency Code Id" <> Rec."Currency Code Id") then begin
             currencyRec.SetFilter("CRM ID", Rec."Currency Code Id");
             if currencyRec.FindFirst() then begin
@@ -214,7 +220,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
             end;
         end;
 
-        // Check if field has changed and is not empty
         if (Rec."Dimension ID" <> '') and (xRec."Dimension ID" <> Rec."Dimension ID") then begin
             dimRec.SetFilter("CRM ID", Rec."Dimension ID");
             if dimRec.FindFirst() then begin
@@ -223,7 +228,6 @@ tableextension 50106 "Vendor Ext" extends Vendor
             end;
         end;
 
-        // Check if field has changed and is not empty
         if (Rec."Territory Code ID" <> '') and (xRec."Territory Code ID" <> Rec."Territory Code ID") then begin
             territoryRec.SetFilter("CRM ID", Rec."Territory Code ID");
             if territoryRec.FindFirst() then begin
@@ -231,9 +235,27 @@ tableextension 50106 "Vendor Ext" extends Vendor
                 modified := modified + 1;
             end;
         end;
-        // Nodify only if found atleast 1 CRM - BC match
+
         if modified > 0 then begin
             Rec.Modify(false);
         end;
+    end;
+
+    trigger OnModify()
+    begin
+        UpdateStandardFields();
+    end;
+
+    trigger OnInsert()
+    begin
+        UpdateStandardFields();
+    end;
+
+    local procedure UpdateStandardFields()
+    begin
+        "City" := "D365 City";
+        County := "D365 State";
+        "Country/Region Code" := "D365 Country";
+        "Post Code" := "D365 postal Code";
     end;
 }

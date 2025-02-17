@@ -47,7 +47,27 @@ tableextension 50121 GKBLocationExt extends Location
             Caption = 'Adjustment Crm Id';
             DataClassification = ToBeClassified;
         }
+        
     }
+
+    trigger OnModify()
+    begin
+        UpdateStandardFields();
+    end;
+
+    trigger OnInsert()
+    begin
+        UpdateStandardFields();
+    end;
+
+    local procedure UpdateStandardFields()
+    begin
+        "City" := "D365 City";
+        County := "D365 State";
+        "Country/Region Code" := "D365 Country";
+        "Post Code" := "D365 postal Code";
+    end;
+
     trigger OnAfterModify()
     var
         Client: HttpClient;
@@ -103,7 +123,6 @@ tableextension 50121 GKBLocationExt extends Location
                 Rec."Adjustment Crm Id" := Format(tokenstring);
                 Rec.modify(false);
             end;
-
         end;
     end;
 }

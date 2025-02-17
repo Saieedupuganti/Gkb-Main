@@ -152,6 +152,11 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
             {
                 ApplicationArea = All;
                 Caption = 'PostCode';
+                trigger OnValidate()
+                begin
+                    if Rec."D365 PostCode" <> '' then
+                        Rec."Post Code" := Rec."D365 PostCode";
+                end;
             }
         }
         addafter("Address 2")
@@ -196,7 +201,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
 
                 trigger OnAction()
                 var
-                    CustomerCRM : Codeunit "Customer Crm Management";
+                    CustomerCRM: Codeunit "Customer Crm Management";
                 begin
                     CustomerCRM.UpdateCRMAccount(Rec);
                     Message('Successfully updated in CRM.');
@@ -219,7 +224,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         end;
 
         if not IsUserAllowed then
-            CurrPage.Editable(false);  
+            CurrPage.Editable(false);
     end;
 }
 

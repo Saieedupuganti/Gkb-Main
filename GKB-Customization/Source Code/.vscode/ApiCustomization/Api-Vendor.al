@@ -81,7 +81,7 @@ page 50340 "API Vendor"
                 }
                 field(customerprofile; Rec."Vendor Profile")
                 {
-                    Caption = 'Customer Profile';
+                    Caption = 'Vendor Profile';
                 }
                 field(description; Rec.Description)
                 {
@@ -144,7 +144,7 @@ page 50340 "API Vendor"
                 }
                 field(sapcustomernumber; Rec."SAP Vendor Number")
                 {
-                    Caption = 'SAP Customer No.';
+                    Caption = 'SAP Vendor No.';
                 }
                 field(serviceagreement; Rec."Service Agreement")
                 {

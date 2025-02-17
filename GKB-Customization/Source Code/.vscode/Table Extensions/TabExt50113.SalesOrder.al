@@ -175,6 +175,11 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         {
             Caption = 'Sales Order Name';
         }
+         field(50204; "Invoice Created"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Invoice Created';
+        }
     }
 
     trigger OnAfterModify()
