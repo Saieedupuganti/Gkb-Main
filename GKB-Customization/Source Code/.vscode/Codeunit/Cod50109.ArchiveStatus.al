@@ -8,7 +8,7 @@ codeunit 50109 "Archive Status"
         PurchLine: Record "Purchase Line";
     begin
         PurchOrderArchive.Init();
-        //PurchOrderArchive.Copy(Rec);   // for coping all the fields from purchase order to Purchase Archive.
+        //PurchOrderArchive.Copy(Rec);   
         PurchOrderArchive."Document Type" := PurchOrderArchive."Document Type"::Order;
         PurchOrderArchive.Validate("Buy-from Vendor No.", rec."Buy-from Vendor No.");
         PurchOrderArchive."Document Date" := rec."Document Date";

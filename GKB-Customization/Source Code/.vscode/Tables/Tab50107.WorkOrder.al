@@ -143,7 +143,6 @@ table 50107 "GKB Work Order"
         field(50027; "Status"; Option)
         {
             DataClassification = CustomerContent;
-
             OptionMembers = " ",Active,InActive;
             OptionCaption = 'Active,InActive';
         }
