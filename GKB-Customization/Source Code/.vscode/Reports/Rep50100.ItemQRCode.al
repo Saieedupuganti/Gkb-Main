@@ -1,6 +1,7 @@
 namespace GKBCustomization.GKBCustomization;
 
 using Microsoft.Inventory.Item;
+using Microsoft.Foundation.Company;
 using System.Text;
 report 50100 Item_QRCode
 {
@@ -24,14 +25,24 @@ report 50100 Item_QRCode
             var
                 BarcodeSymbology2D: Enum "Barcode Symbology 2D";
                 BarcodeFontProvider2D: Interface "Barcode Font Provider 2D";
+                QRContent: Text;
             begin
-                EncodeStr := "No." + '-' + Description;
+                QRContent := StrSubstNo('Item: %1, Description: %2', Item."No.", Item.Description);
+
                 BarcodeFontProvider2D := Enum::"Barcode Font Provider 2D"::IDAutomation2D;
                 BarcodeSymbology2D := Enum::"Barcode Symbology 2D"::"QR-Code";
-                EncodeStr := BarcodeFontProvider2D.EncodeFont(EncodeStr, BarcodeSymbology2D);
+                EncodeStr := BarcodeFontProvider2D.EncodeFont(QRContent, BarcodeSymbology2D);
             end;
         }
     }
     var
         EncodeStr: Text;
+        ItemNo: Code[20];
+        ItemName: Text[100];
+
+    procedure AssignItemData(ItemNumber: Code[20]; ItemDescr: text[100])
+    begin
+        ItemNo := ItemNumber;
+        ItemName := ItemDescr;
+    end;
 }

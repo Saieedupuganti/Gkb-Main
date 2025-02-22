@@ -46,8 +46,7 @@ tableextension 50121 GKBLocationExt extends Location
         {
             Caption = 'Adjustment Crm Id';
             DataClassification = ToBeClassified;
-        }
-        
+        }    
     }
 
     trigger OnModify()

@@ -74,10 +74,10 @@ pageextension 50149 GKBItemExt extends "Item Card"
 
                 trigger OnAction()
                 var
-                    ItemQRCode: Report Item_QRCode;
+                    RepItemQRCode: Report Item_QRCode;
                 begin
-                    //ItemQRCode.AssignBarcodeURL(Rec."No.", Rec.Description, GetUrl(ClientType::Current, CompanyName, ObjectType::Page, Page::"Customer Card", Rec));
-                    ItemQRCode.Run();
+                    RepItemQRCode.AssignItemData(Rec."No.", Rec.Description);
+                    RepItemQRCode.Run();
                 end;
             }
         }
