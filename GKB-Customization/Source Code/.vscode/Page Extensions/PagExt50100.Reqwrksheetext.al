@@ -63,13 +63,28 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             {
                 ApplicationArea = all;
                 Visible = true;
-                trigger OnValidate()
-                var
-                    VendorRec: Record Vendor;
-                begin
-                    if VendorRec.Get(Rec."Vendor Name") then
-                        Rec."Vendor No." := VendorRec."No.";
-                end;
+                // trigger OnValidate()
+                // var
+                //     VendorRec: Record Vendor;
+                // begin
+                //     if VendorRec.Get(Rec."VendorName") then
+                //         Rec."Vendor No." := VendorRec."No.";
+                // end;
+
+            }
+            field("Requested By Name"; Rec."Requested By Name")
+            {
+                ApplicationArea = all;
+
+            }
+            field("Stock Check"; Rec."Stock Check")
+            {
+                ApplicationArea = all;
+
+            }
+            field("Ship To"; Rec."Ship To")
+            {
+                ApplicationArea = all;
 
             }
         }

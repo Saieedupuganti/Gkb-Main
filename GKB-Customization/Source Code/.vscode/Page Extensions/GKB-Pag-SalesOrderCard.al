@@ -64,6 +64,7 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
                     ApplicationArea = All;
                     Caption = 'Creation Method';
                 }
+              
             }
         }
         addafter("Ship-to Address 2")

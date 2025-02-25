@@ -5,7 +5,8 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
         field(50200; "Billing Type"; Option)
         {
             Caption = 'Billing Type';
-            OptionMembers = " ",Hai;
+            DataClassification = CustomerContent;
+           OptionMembers = "Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
         }
 
         field(50201; "Contact"; Code[20])
@@ -17,8 +18,7 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
         field(50202; "Fix Type"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = " ",Repair,Replace,Other;
-            OptionCaption = ' ,Repair,Replace,Other';
+            OptionMembers = " ","First Time Fix","First Time Fix With Multiple Bookings","Not a First Time Fix";
         }
 
         field(50203; "Functional Location"; Code[20])
@@ -42,6 +42,7 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
         field(50206; "Work Order Type"; Text[100])
         {
             Caption = 'Work Order Type';
+            TableRelation = "GKB Work Order Type";
         }
 
         field(50207; "Work Order Summary"; Text[100])
@@ -61,6 +62,22 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
         {
             DataClassification = CustomerContent;
             TableRelation = Opportunity;
+        }
+         field(50014; "System Status"; Option)
+        {
+            DataClassification = CustomerContent;
+            OptionMembers = " ",Cancelled,Completed,"In-Progress",Invoiced,Scheduled,Unscheduled;
+            OptionCaption = ' ,Cancelled,Completed,In-Progress,Invoiced,Scheduled,Unscheduled';
+        }
+        field(50015;"Substatus"; Code[30])
+        {
+           DataClassification = CustomerContent;
+           TableRelation = "GKB Work Order Substatus";
+        }
+        field(50032; "Customer PO Number"; Text[100])
+        {
+            Caption = 'Customer PO Number';
+            DataClassification = ToBeClassified;
         }
     }
 }

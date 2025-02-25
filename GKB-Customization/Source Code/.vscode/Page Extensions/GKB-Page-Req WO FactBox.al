@@ -2,8 +2,7 @@ namespace Proejct.Proejct;
 
 using Microsoft.Inventory.Requisition;
 using Microsoft.Foundation.Enums;
-using Microsoft.Inventory.Availability;
-using Microsoft.Purchases.Vendor;
+using Microsoft.Inventory.Availability;using Microsoft.Purchases.Vendor;
 using Microsoft.Inventory.Item;
 
 

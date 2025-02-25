@@ -38,6 +38,11 @@ tableextension 50114 "GKBSales LineExt" extends "Sales Line"
             Caption = 'Topic';
             DataClassification = ToBeClassified;
         }
+        field(50204; "Invoice Created"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Invoice Created';
+        }
     }
-
+   
 }

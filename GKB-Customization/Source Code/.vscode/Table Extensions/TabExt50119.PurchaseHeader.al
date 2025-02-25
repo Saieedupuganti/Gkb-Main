@@ -10,13 +10,13 @@ tableextension 50119 "GKBPurchase HeaderExt" extends "Purchase Header"
         field(50101; "Created By"; Code[20])
         {
             Caption = 'Created By';
-            //TableRelation = "User Setup"."User ID";
         }
 
         field(50102; "Ordered By"; Code[20])
         {
             Caption = 'Ordered By';
-            TableRelation = Employee;
+            TableRelation = Employee."First Name";
+            ValidateTableRelation = false;
         }
         field(50103; "Address 3";Text[100])
         {

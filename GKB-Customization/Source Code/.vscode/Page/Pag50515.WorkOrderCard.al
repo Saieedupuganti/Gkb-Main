@@ -84,11 +84,6 @@ page 50515 "GKB Work Order Card"
                     ApplicationArea = all;
                     Caption = 'Job Created';
                 }
-                field("Completed On"; rec."Completed On")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Completed On';
-                }
                 field("Contact"; rec.Contact)
                 {
                     ApplicationArea = All;

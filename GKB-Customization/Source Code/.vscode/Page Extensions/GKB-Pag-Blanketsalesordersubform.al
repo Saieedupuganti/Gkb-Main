@@ -4,13 +4,12 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
     {
         modify(Quantity)
         {
-         Editable = Rec."Outstanding Qty. (Base)" = Rec.Quantity;
+            Editable = Rec."Outstanding Qty. (Base)" = Rec.Quantity;
             trigger OnBeforeValidate()
             begin
                 if Rec."Quantity" <> 0 then begin
                     if Rec."Remaining Quantity" = 0 then
                         Rec."Remaining Quantity" := Rec."Quantity";
-
                 end;
             end;
         }
@@ -19,12 +18,23 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
             field("Remaining Quantity"; Rec."Remaining Quantity")
             {
                 ApplicationArea = All;
-                Editable=false;
+                Editable = false;
             }
-             field("QuantityShippedtillnow"; Rec."QuantityShippedtillnow")
+            field("QuantityShippedtillnow"; Rec."QuantityShippedtillnow")
             {
                 ApplicationArea = All;
-                Editable=false;
+                Editable = false;
+            }
+        }
+        addafter("Location Code")
+        {
+            field("Job No."; Rec."Job No.")
+            {
+                ApplicationArea = All;
+            }
+            field("Job Task No."; Rec."Job Task No.")
+            {
+                ApplicationArea = All;
             }
         }
     }
@@ -61,7 +71,6 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
             //     end;
             // }
         }
-    
     }
 
     local procedure RequestPercentageInput(): Decimal
@@ -102,7 +111,7 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
                 SalesLine.Modify();
             until SalesLine.Next() = 0;
 
-            Message('Quantities updated successfully by %.2f%%.', Percentage);
+            Message('Quantities updated successfully by %1', Percentage);
         end else
             Error('No sales lines found for the specified Blanket Order.');
     end;
@@ -133,6 +142,6 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
             Message('Order created and quantities updated successfully.');
         end else
             Error('No sales lines found for the specified Blanket Order.');
-    end;  
+    end;
 }
 

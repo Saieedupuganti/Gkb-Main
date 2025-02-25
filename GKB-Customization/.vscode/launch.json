@@ -9,7 +9,7 @@
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "integration",
+            "environmentName": "ObrienDev",
             "startupObjectId": 26,
             "startupObjectType": "Page",
             "breakOnError": "All",
