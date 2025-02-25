@@ -11,6 +11,10 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
 
     trigger OnAfterInsert()
     begin
+        // Exit if not a sales price list
+        if not IsSalesPriceList() then
+            exit;
+
         if ("Product No." = '') and ("Unit Price" = 0) then
             exit;
         UpdateTheRecord();
@@ -18,9 +22,22 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
 
     trigger OnAfterModify()
     begin
+        // Exit if not a sales price list
+        if not IsSalesPriceList() then
+            exit;
+
         if (xRec."Product No." <> Rec."Product No.") or (xRec."Unit Price" <> Rec."Unit Price") then begin
             UpdateTheRecord();
         end;
+    end;
+
+    local procedure IsSalesPriceList(): Boolean
+    var
+        PriceListHeader: Record "Price List Header";
+    begin
+        if PriceListHeader.Get(Rec."Price List Code") then
+            exit(PriceListHeader."Price Type" = PriceListHeader."Price Type"::Sale);
+        exit(false);
     end;
 
     procedure UpdateTheRecord()
@@ -44,7 +61,6 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
         TimeoutMs: Integer;
         ErrorMsg: Text;
     begin
-
         MaxRetries := 3;
         RetryCount := 0;
         TimeoutMs := 120000;
@@ -63,7 +79,7 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
 
         if priceListRec."Crm Id" = '' then
             Error('Price List CRM ID is missing.');
-            
+
         if productRec."CRM ID" = '' then
             Error('Product CRM ID is missing.');
 

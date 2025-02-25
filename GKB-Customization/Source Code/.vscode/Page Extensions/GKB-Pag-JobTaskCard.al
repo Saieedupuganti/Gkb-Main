@@ -2,6 +2,11 @@ pageextension 50200 "JobTaskCardExt" extends "Job Task Card"
 {
     layout
     {
+        modify("Bill-to Customer No.")
+        {
+            ApplicationArea = All;
+            Caption = 'Customer No.';
+        }
         addafter(General)
         {
             group("Custom Fields")
@@ -12,7 +17,6 @@ pageextension 50200 "JobTaskCardExt" extends "Job Task Card"
                     ApplicationArea = All;
                     Caption = 'Billing Type';
                 }
-
                 field("Contact"; Rec."Contact")
                 {
                     ApplicationArea = All;
@@ -58,6 +62,21 @@ pageextension 50200 "JobTaskCardExt" extends "Job Task Card"
                 {
                     ApplicationArea = all;
                     Caption = 'Parent Task No.';
+                }
+                field("System Status"; Rec."System Status")
+                {
+                    ApplicationArea = all;
+                    Caption = 'System Status';
+                }
+                field(Substatus; Rec.Substatus)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Substatus';
+                }
+                field("Customer PO Number";Rec."Customer PO Number")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Customer PO Number';
                 }
             }
         }

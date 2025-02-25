@@ -180,6 +180,21 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             DataClassification = ToBeClassified;
             Caption = 'Invoice Created';
         }
+        field(50205; "Sales Order No."; Text[100])
+        {
+            Caption = 'Sales Order No.';
+            TableRelation = "Sales Header";
+        }
+        field(50206; "Job No."; Text[100])
+        {
+            Caption = 'Project No.';
+            TableRelation = Job;
+        }
+        field(50207; "Job Task No."; Text[100])
+        {
+            Caption = 'Task No.';
+            TableRelation = "Job Task";
+        }
     }
 
     trigger OnAfterModify()

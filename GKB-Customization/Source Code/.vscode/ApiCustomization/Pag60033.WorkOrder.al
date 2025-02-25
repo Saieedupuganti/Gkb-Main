@@ -27,7 +27,6 @@ page 50100 "WorkOrderAPI"
                 field("Agreement"; rec."Agreement") { }
                 field("BillingAccount"; rec."Billing Account") { }
                 field("BillingType"; rec."Billing Type") { }
-                field("CompletedOn"; rec."Completed On") { }
                 field("Contact"; rec."Contact") { }
                 field("Currency"; rec."Currency") { }
                 field("FixType"; rec."Fix Type") { }

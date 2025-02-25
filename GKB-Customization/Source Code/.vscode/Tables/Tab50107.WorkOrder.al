@@ -3,14 +3,14 @@ table 50107 "GKB Work Order"
     DataClassification = CustomerContent;
     DrillDownPageId = "GKB Work Order List";
     LookupPageId = "GKB Work Order Card";
-    
+
 
     fields
     {
         field(50000; "Work Order No."; Text[50])
         {
             DataClassification = CustomerContent;
-            
+
         }
         field(50001; "Service Account"; Code[100])
         {
@@ -26,7 +26,7 @@ table 50107 "GKB Work Order"
         field(50003; "Substatus"; Text[100])
         {
             DataClassification = CustomerContent;
-            //TableRelation = "Substatus Table"; 
+            TableRelation = "GKB Work Order Substatus";
         }
         field(50004; "Agreement"; Text[100])
         {
@@ -40,8 +40,7 @@ table 50107 "GKB Work Order"
         field(50006; "Billing Type"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = " ",ChargeUp,Quoted;
-            OptionCaption = ' ,ChargeUp,Quoted';
+            OptionMembers = "Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
         }
         field(50007; "Case"; Text[100])
         {
@@ -64,8 +63,7 @@ table 50107 "GKB Work Order"
         field(50011; "Fix Type"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = " ",Repair,Replace,Other;
-            OptionCaption = ' ,Repair,Replace,Other';
+            OptionMembers = " ","First Time Fix","First Time Fix With Multiple Bookings","Not a First Time Fix";
         }
         field(50012; "Functional Location"; Code[20])
         {
@@ -171,6 +169,16 @@ table 50107 "GKB Work Order"
             Caption = 'Customer PO Number';
             DataClassification = ToBeClassified;
         }
+        field(50205; "Description 2"; Text[100])
+        {
+            Caption = 'Description 2';
+        }
+        field(50206; "Location Code"; Code[30])
+        {
+            Caption = 'Location Code';
+            TableRelation = Location where("Use As In-Transit" = const(false));
+            DataClassification = CustomerContent;
+        }
     }
 
     keys
@@ -180,6 +188,13 @@ table 50107 "GKB Work Order"
             Clustered = true;
         }
         key(PK2; "Work Order Type")
+        {
+        }
+    }
+
+    fieldgroups
+    {
+        fieldgroup(Dropdown; "Work Order No.", "Work Order Type", "Service Account")
         {
         }
     }

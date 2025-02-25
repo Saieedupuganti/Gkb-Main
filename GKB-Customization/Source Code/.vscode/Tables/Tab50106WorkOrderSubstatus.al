@@ -1,7 +1,6 @@
 table 50106 "GKB Work Order Substatus"
 {
     DataClassification = ToBeClassified;
-
     fields
     {
         field(3; Name; Text[50])
@@ -32,6 +31,13 @@ table 50106 "GKB Work Order Substatus"
         key(PK; "Name")
         {
             Clustered = true;
+        }
+    }
+
+    fieldgroups
+    {
+        fieldgroup(DropDown; Name, "System Substatus", Status)
+        {
         }
     }
 }
