@@ -16,6 +16,7 @@ tableextension 50114 "GKBSales LineExt" extends "Sales Line"
         {
             Caption = 'Quantity Shipped till now';
             DataClassification = ToBeClassified;
+            
         }
         field(50104; "SalesOrderCreated"; Boolean)
         {
@@ -43,6 +44,8 @@ tableextension 50114 "GKBSales LineExt" extends "Sales Line"
             DataClassification = ToBeClassified;
             Caption = 'Invoice Created';
         }
+
+    }
     }
    
-}
+
