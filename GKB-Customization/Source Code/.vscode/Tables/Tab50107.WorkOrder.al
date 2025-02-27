@@ -40,7 +40,7 @@ table 50107 "GKB Work Order"
         field(50006; "Billing Type"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = "Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
+            OptionMembers = " ","Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
         }
         field(50007; "Case"; Text[100])
         {

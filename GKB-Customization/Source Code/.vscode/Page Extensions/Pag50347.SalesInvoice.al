@@ -16,12 +16,4 @@ pageextension 50347 "SalesInvExt" extends "Sales Invoice"
             }
         }
     }
-
-    actions
-    {
-        // Add changes to page actions here
-    }
-
-    var
-        myInt: Integer;
 }

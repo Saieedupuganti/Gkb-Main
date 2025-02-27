@@ -6,10 +6,9 @@ page 60036 "API Blanket Lines"
     APIVersion = 'v2.0', 'v1.0';
     EntityName = 'BlanketOrderLine';
     EntitySetName = 'BlanketOrderLines';
+    SourceTableView = where("Document Type" = filter("Blanket Order"));
     SourceTable = "Sales Line";
     DelayedInsert = true;
-
-    //ODataKeyFields = "Document No.", "Document Type";
 
     layout
     {

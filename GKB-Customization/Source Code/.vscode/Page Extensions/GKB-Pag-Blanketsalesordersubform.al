@@ -31,10 +31,12 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
             field("Job No."; Rec."Job No.")
             {
                 ApplicationArea = All;
+                editable = true;
             }
             field("Job Task No."; Rec."Job Task No.")
             {
                 ApplicationArea = All;
+                editable = true;
             }
         }
     }
@@ -59,18 +61,8 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
                         UpdateQuantityToShipByPercentage(Percentage);
                 end;
             }
-
-            // action(MakeOrder)
-            // {
-            //     ApplicationArea = All;
-            //     Caption = 'Make Order';
-            //     Image = CreateOrder;
-            //     trigger OnAction();
-            //     begin
-            //         MakeOrderAndUpdateQuantities();
-            //     end;
-            // }
         }
+        
     }
 
     local procedure RequestPercentageInput(): Decimal
