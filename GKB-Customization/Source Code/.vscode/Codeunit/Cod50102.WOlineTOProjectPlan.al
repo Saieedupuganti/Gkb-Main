@@ -16,14 +16,14 @@ codeunit 50102 "GKB Work Order Mgt."
         CreateJobTaskLinesFromWOLs(Rec);//, Job, JobTask);
     end;
 
-    [EventSubscriber(ObjectType::Table, Database::"GKB Work Order Lines", 'OnAfterModifyEvent', '', false, false)]
-    local procedure OnAftermodifyWOLns(var Rec: Record "GKB Work Order lines"; RunTrigger: Boolean)
-    var
-        Job: Code[20];
-        JobTask: Code[20];
-    begin
-        CreateJobTaskLinesFromWOLs(Rec);//, Job, JobTask);
-    end;
+    // [EventSubscriber(ObjectType::Table, Database::"GKB Work Order Lines", 'OnAfterModifyEvent', '', false, false)]
+    // local procedure OnAftermodifyWOLns(var Rec: Record "GKB Work Order lines"; RunTrigger: Boolean)
+    // var
+    //     Job: Code[20];
+    //     JobTask: Code[20];
+    // begin
+    //     CreateJobTaskLinesFromWOLs(Rec);//, Job, JobTask);
+    // end;
 
     [EventSubscriber(ObjectType::Table, Database::"GKB Work Order", 'OnAfterInsertEvent', '', false, false)]
 
@@ -43,23 +43,23 @@ codeunit 50102 "GKB Work Order Mgt."
         end;
     end;
 
-    [EventSubscriber(ObjectType::Table, Database::"GKB Work Order", 'OnAfterModifyEvent', '', false, false)]
+    // [EventSubscriber(ObjectType::Table, Database::"GKB Work Order", 'OnAfterModifyEvent', '', false, false)]
 
-    local procedure OnAfterModifyWOs(var Rec: Record "GKB Work Order"; RunTrigger: Boolean)
-    var
-        Job: Code[20];
-        JobTask: Code[20];
-    begin
-        if Rec."Job Created" then
-            exit;
-        if (Rec."Topic" <> '') and
-           (Rec."Work Order Type" <> '') and
-           (Rec."Work Order No." <> '') and
-           (Rec."Service Account" <> '') then begin
-            // if JobNotExistForWO(Rec) then
-            CreateJobFromWO(Rec);
-        end;
-    end;
+    // local procedure OnAfterModifyWOs(var Rec: Record "GKB Work Order"; RunTrigger: Boolean)
+    // var
+    //     Job: Code[20];
+    //     JobTask: Code[20];
+    // begin
+    //     if Rec."Job Created" then
+    //         exit;
+    //     if (Rec."Topic" <> '') and
+    //        (Rec."Work Order Type" <> '') and
+    //        (Rec."Work Order No." <> '') and
+    //        (Rec."Service Account" <> '') then begin
+    //         // if JobNotExistForWO(Rec) then
+    //         CreateJobFromWO(Rec);
+    //     end;
+    // end;
 
     local procedure CreateJobTaskLinesFromWOLs(var WOLn: Record "GKB Work Order Lines")
     var
@@ -83,8 +83,7 @@ codeunit 50102 "GKB Work Order Mgt."
                 exit;
         end;
         PlanningLine."No." := WOLn.Code;
-        PlanningLine.Description := WOLn.Description;
-        PlanningLine."Work Type Code" := WOLn.Name;
+        PlanningLine.Description := WOLn.Name;
         PlanningLine.Quantity := WOLn."Estimate Quantity";
         PlanningLine.Validate("Unit Price", WOLn."Unit amount");
         PlanningLine.Insert();//Insert

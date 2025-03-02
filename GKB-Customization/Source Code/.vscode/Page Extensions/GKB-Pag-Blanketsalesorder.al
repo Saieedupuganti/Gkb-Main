@@ -10,30 +10,41 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                 Caption = 'Percentage to Update';
                 Visible = false;                 // Remove this field when you see.
             }
-            field("Percentage To Invoice"; Rec."Percentage To Invoice")
+            field("Work Order Type";Rec."Work Order Type")
             {
                 ApplicationArea = All;
-                ToolTip = 'Specifies the percentage of the total amount to be invoiced in the current cycle.';
+                Caption = 'Work Order Type';
+            }
+            
+        }
+        addafter(General)
+        {
+            group("Milestone Details")
+            {
+               field("Percentage To Invoice"; Rec."Percentage To Invoice")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Specifies the % of the total amount to be invoiced in the current cycle.';
             }
 
             field("Invoiced Percentage"; Rec."Invoiced Percentage")
             {
                 ApplicationArea = All;
-                ToolTip = 'Specifies the cumulative percentage of the total amount that has been invoiced.';
+                ToolTip = 'Specifies the cumulative % of the total amount that has been invoiced.';
                 Editable = false;
             }
 
             field("Remaining Percentage"; Rec."Remaining Percentage")
             {
                 ApplicationArea = All;
-                ToolTip = 'Specifies the percentage of the total amount that remains to be invoiced.';
+                ToolTip = 'Specifies the % of the total amount that remains to be invoiced.';
                 Editable = false;
             }
 
             field("Invoicing Amount"; Rec."Invoicing Amount")
             {
                 ApplicationArea = All;
-                ToolTip = 'Specifies the amount to be invoiced in the current cycle based on the Percentage To Invoice.';
+                ToolTip = 'Specifies the amount to be invoiced in the current cycle based on the % To Invoice.';
                 Editable = false;
             }
 
@@ -49,6 +60,7 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                 ApplicationArea = All;
                 ToolTip = 'Specifies the amount that remains to be invoiced.';
                 Editable = false;
+            } 
             }
         }
     }
@@ -86,48 +98,5 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                 end;
             }
         }
-
-        // modify(MakeOrder)
-        // {
-        //     Visible = true;
-
-        //     trigger OnBeforeAction()
-        //     begin
-        //         MakeOrderAndUpdateQuantities();
-        //     end;
-        // }
     }
-
-    // local procedure MakeOrderAndUpdateQuantities()
-    // var
-    //     SalesLine: Record "Sales Line";
-    // begin
-    //     if Rec."Document Type" <> Rec."Document Type"::"Blanket Order" then
-    //         Error('This is not a Blanket Order.');
-
-
-    //     SalesLine.SetRange("Document Type", SalesLine."Document Type"::"Blanket Order");
-    //     SalesLine.SetRange("Document No.", Rec."No.");
-
-    //     if SalesLine.FindSet(True) then begin
-    //         repeat
-
-    //             SalesLine."Remaining Quantity" := SalesLine."Remaining Quantity" - SalesLine."Qty. to Ship";
-    //             if SalesLine."Remaining Quantity" < 0 then
-    //                 SalesLine."Remaining Quantity" := 0;
-
-    //             SalesLine."QuantityShippedtillnow" := SalesLine.Quantity - SalesLine."Remaining Quantity";
-
-    //             SalesLine.Modify();
-    //         until SalesLine.Next() = 0;
-
-
-    //         Message('Order created and quantities updated successfully.');
-    //     end else
-    //         Error('No sales lines found for the specified Blanket Order.');
-    // end;
-
-
-
-
 }

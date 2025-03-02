@@ -246,7 +246,7 @@ tableextension 50106 "Vendor Ext" extends Vendor
         UpdateStandardFields();
     end;
 
-    trigger OnInsert()
+    trigger OnAfterInsert()
     begin
         UpdateStandardFields();
     end;

@@ -1,5 +1,6 @@
 tableextension 50113 "Sales Header Ext" extends "Sales Header"
 {
+
     fields
     {
         field(50102; "CRM ID"; Text[100])
@@ -183,58 +184,33 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         field(50205; "Sales Order No."; Text[100])
         {
             Caption = 'Sales Order No.';
-            TableRelation = "Sales Header";
+            TableRelation = "Sales Header"."No." WHERE("Document Type" = CONST(Order));
         }
         field(50206; "Job No."; Text[100])
         {
             Caption = 'Project No.';
             TableRelation = Job;
         }
-        field(50207; "Job Task No."; Text[100])
+        field(50207; "Job Task No"; Code[30])
         {
-            Caption = 'Task No.';
-            TableRelation = "Job Task";
+            Caption = 'Project Task No';
+            DataClassification = ToBeClassified;
+            TableRelation = "Job Task"."Job Task No." WHERE("Job No." = FIELD("Job No."));
         }
 
         // Fields are created for the Blanket Sales Order To SALES INVOICE
 
         field(50208; "Percentage To Invoice"; Decimal)
         {
-            Caption = 'Percentage To Invoice';
+            Caption = '% To Invoice';
             MinValue = 0;
             MaxValue = 100;
             DecimalPlaces = 0 : 2;
-
-            // trigger OnValidate()
-            // var
-            //     RemainingPct: Decimal;
-            // begin
-            //     if "Document Type" <> "Document Type"::"Blanket Order" then
-            //         exit;
-
-            //     if "Invoiced Percentage" < 0 then
-            //         Error('Invoiced Percentage cannot be negative.');
-
-            //     if "Invoiced Percentage" > 100 then
-            //         Error('Invoiced Percentage cannot exceed 100%.');
-
-            //     RemainingPct := 100 - "Invoiced Percentage";
-            //     if "Percentage To Invoice" > RemainingPct then
-            //         Error('Percentage To Invoice cannot exceed %1%, which is the remaining percentage available.', RemainingPct);
-
-            //     if "Percentage To Invoice" <= 0 then
-            //         Error('Percentage To Invoice must be greater than 0.');
-
-            //     CalcFields(Amount);
-            //     "Invoicing Amount" := (Amount * "Percentage To Invoice") / 100;
-            //     "Remaining Percentage" := 100 - ("Invoiced Percentage" + "Percentage To Invoice");
-            //     "Remaining Amount" := Amount - "Amount Invoiced" - "Invoicing Amount";
-            // end;
         }
 
         field(50209; "Invoiced Percentage"; Decimal)
         {
-            Caption = 'Invoiced Percentage';
+            Caption = 'Invoiced %';
             Editable = false;
             MinValue = 0;
             MaxValue = 100;
@@ -243,7 +219,7 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
 
         field(50210; "Remaining Percentage"; Decimal)
         {
-            Caption = 'Remaining Percentage';
+            Caption = 'Remaining %';
             Editable = false;
             MinValue = 0;
             MaxValue = 100;
@@ -280,27 +256,22 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         TotalAmount: Decimal;
         SalesLine: Record "Sales Line";
     begin
-        // Only process percentage calculations for Blanket Orders
         if Rec."Document Type" = Rec."Document Type"::"Blanket Order" then begin
-            // Get the Amount Including VAT from the sales line table
             SalesLine.SetRange("Document Type", Rec."Document Type");
             SalesLine.SetRange("Document No.", Rec."No.");
             if SalesLine.FindSet() then begin
                 repeat
-                    TotalAmount += SalesLine."Amount Including VAT";
+                    TotalAmount += SalesLine.Amount;
                 until SalesLine.Next() = 0;
             end;
 
-            // Calculate percentages
             Rec."Invoiced Percentage" := Rec."Invoiced Percentage" + Rec."Percentage To Invoice";
             Rec."Remaining Percentage" := 100 - Rec."Invoiced Percentage";
 
-            // Calculate amounts using the retrieved TotalAmount
             Rec."Invoicing Amount" := Round((Rec."Percentage To Invoice" / 100) * TotalAmount, 0.01);
             Rec."Amount Invoiced" := Round((Rec."Invoiced Percentage" / 100) * TotalAmount, 0.01);
             Rec."Remaining Amount" := Round((Rec."Remaining Percentage" / 100) * TotalAmount, 0.01);
 
-            // Validate total percentage doesn't exceed 100%
             if Rec."Remaining Percentage" < 0 then
                 Error('Invoicing exceeds the total allowed percentage.');
         end;

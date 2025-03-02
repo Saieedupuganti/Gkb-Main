@@ -20,8 +20,7 @@ table 50107 "GKB Work Order"
         field(50002; "System Status"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = " ",Cancelled,Completed,"In-Progress",Invoiced,Scheduled,Unscheduled;
-            OptionCaption = ' ,Cancelled,Completed,In-Progress,Invoiced,Scheduled,Unscheduled';
+            OptionMembers = " ",Unscheduled,Scheduled,"In Progress",Completed,Invoiced,Canceled;
         }
         field(50003; "Substatus"; Text[100])
         {
