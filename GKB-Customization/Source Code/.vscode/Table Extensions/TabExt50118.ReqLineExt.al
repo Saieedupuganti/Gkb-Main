@@ -17,31 +17,6 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
             Caption = 'Crm Id';
             DataClassification = ToBeClassified;
         }
-        // field(50104; "VendorName"; Text[100])
-        // {
-        //     Caption = 'Vendor Name';
-        //     TableRelation = Vendor.Name;
-        //     ValidateTableRelation = false;
-        //     trigger OnValidate()
-        //     var
-        //         Vendor: Record Vendor;
-        //         VendorRecRef: RecordRef;
-        //         VendorNameField: FieldRef;
-        //     begin
-        //         if Rec."VendorName" = '' then begin
-        //             Rec."Vendor No." := '';
-        //             exit;
-        //         end;
-
-        //         Vendor.Reset();
-        //         Vendor.SetCurrentKey(Name);  
-        //         Vendor.SetFilter(Name, Rec."VendorName");
-
-        //         if Vendor.FindFirst() then begin
-        //             Rec."Vendor No." := Vendor."No.";
-        //         end 
-        //     end;
-        // }
 
         field(50104; "VendorName"; Text[100])
         {
@@ -67,7 +42,6 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
                     end;
                 end;
 
-                // For Non-Inventory items or when No. is empty, allow manual vendor selection
                 Vendor.Reset();
                 Vendor.SetCurrentKey(Name);
                 Vendor.SetRange(Name, Rec."VendorName");
@@ -93,7 +67,6 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
         }
         field(50107; "Project Task No"; Code[30])
         {
-
             Caption = 'Project Task No';
             DataClassification = ToBeClassified;
             TableRelation = "Job Task"."Job Task No." WHERE("Job No." = FIELD(projectNo));
@@ -132,6 +105,19 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
             Caption = 'Ship To';
             DataClassification = ToBeClassified;
             OptionMembers = "Customer","Warehouse";
+        }
+        field(50112; "Alternate Vendor For Item"; Boolean)
+        {
+            Caption = 'Alternate Vendor For Item';
+            DataClassification = CustomerContent;
+            Editable = false;
+        }
+        field(50113; "Item Availability By Location"; Decimal)
+        {
+            Caption = 'Item Availability By Location';
+            DataClassification = CustomerContent;
+            Editable = false;
+            DecimalPlaces = 0 : 5;
         }
     }
 

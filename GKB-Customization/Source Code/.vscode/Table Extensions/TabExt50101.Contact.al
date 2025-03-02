@@ -133,7 +133,7 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
         UpdateStandardFields();
     end;
 
-    trigger OnInsert()
+trigger OnAfterInsert()
     begin
         UpdateStandardFields();
     end;

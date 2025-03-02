@@ -214,11 +214,12 @@ tableextension 50100 "Customer Ext" extends Customer
     begin
         UpdateStandardFields();
     end;
-
-    trigger OnInsert()
+   
+    trigger OnAfterInsert()
     begin
         UpdateStandardFields();
     end;
+    
 
     local procedure UpdateStandardFields()
     begin
@@ -237,7 +238,6 @@ tableextension 50100 "Customer Ext" extends Customer
         territoryRec: Record Territory;
         modified: Integer;
     begin
-
         modified := 0;
         // Check if field has changed and is not empty
         if (Rec."CRM ID" <> '') and (xRec."CRM ID" <> Rec."CRM ID") then begin
@@ -271,6 +271,6 @@ tableextension 50100 "Customer Ext" extends Customer
         if modified > 0 then begin
             Rec.Modify(false);
         end;
-
     end;
+
 }

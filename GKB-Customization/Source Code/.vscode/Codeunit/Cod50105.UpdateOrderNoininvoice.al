@@ -13,7 +13,7 @@ codeunit 50105 "Sales Order No. Management"
     procedure UpdateProjectTaskNo(var SalesInvoiceHeader: Record "Sales Header"; ProjectTaskNo: Code[20])
     begin
         if SalesInvoiceHeader."Document Type" = SalesInvoiceHeader."Document Type"::Invoice then begin
-            SalesInvoiceHeader."Job Task No." := ProjectTaskNo;
+            SalesInvoiceHeader."Job Task No" := ProjectTaskNo;
             SalesInvoiceHeader.Modify(true);
         end;
     end;
@@ -41,7 +41,7 @@ codeunit 50105 "Sales Order No. Management"
         SalesHeader.SetRange("No.", JobPlanningLineInvoice."Document No.");
 
         if SalesHeader.FindFirst() then begin
-            SalesHeader."Job Task No." := JobPlanningLineInvoice."Job Task No.";
+            SalesHeader."Job Task No" := JobPlanningLineInvoice."Job Task No.";
             SalesHeader.Modify();
         end;
     end;

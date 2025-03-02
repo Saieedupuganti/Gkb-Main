@@ -80,7 +80,13 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             field("Stock Check"; Rec."Stock Check")
             {
                 ApplicationArea = all;
+                ToolTip = 'Checks item is in stock or not';
 
+            }
+            field("Alternate Vendor For Item"; Rec."Alternate Vendor For Item")
+            {
+                ApplicationArea = all;
+                ToolTip = 'Checks item has alternate vendor or not';
             }
             field("Ship To"; Rec."Ship To")
             {
@@ -104,6 +110,13 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 ApplicationArea = Planning;
                 SubPageLink = "Worksheet Template Name" = field("Worksheet Template Name"), "Journal Batch Name" = field("Journal Batch Name"), "Line No." = field("Line No.");
                 Visible = false;
+            }
+        }
+        addafter("Location Code")
+        {
+            field("Item Availability By Location";Rec."Item Availability By Location")
+            {
+                ApplicationArea = all;
             }
         }
     }

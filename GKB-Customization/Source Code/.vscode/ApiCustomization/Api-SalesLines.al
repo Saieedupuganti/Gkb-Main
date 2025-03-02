@@ -7,8 +7,9 @@ page 50330 "API Sales Lines"
     EntityName = 'SalesLines';
     EntitySetName = 'SalesLines';
     SourceTable = "Sales Line";
-    SourceTableView = where("Document Type" = filter("Blanket Order"));
     DelayedInsert = true;
+
+    //ODataKeyFields = "Document No.", "Document Type";
 
     layout
     {
@@ -21,18 +22,16 @@ page 50330 "API Sales Lines"
                     Caption = 'CRM ID';
                 }
                 field("DocumentNo"; Rec."Document No.") { }
-                field(Type; Rec.Type) { }
+                field(SystemId; Rec.SystemId) { }
                 field("LineNo"; Rec."Line No.") { }
                 field("ItemNo"; Rec."No.") { }
-                field(SystemId; Rec.SystemId) { }
                 field("ItemDescription"; Rec."Description") { }
-
-
+                field("DocumentType"; Rec."Document Type") { }
+                field(Type; Rec.Type) { }
                 field(Quantity; Rec.Quantity)
                 {
                     Caption = 'Quantity';
                 }
-                field("UnitPrice"; Rec."Unit Price") { }
                 field("UnitofMeasure"; Rec."Unit of Measure")
                 {
                     Caption = 'Unit Of Measure';
