@@ -7,5 +7,23 @@ tableextension 50146 "GKBSales Invoice HeaderExt" extends "Sales Invoice Header"
             Caption = 'Comments2';
             DataClassification = ToBeClassified;
         }
+        field(50032; "Customer PO Number"; Text[100])
+        {
+            Caption = 'Customer PO Number';
+            DataClassification = ToBeClassified;
+        }
+    }
+}
+pageextension 50349 "Posted Sale Inv Ext" extends "Posted Sales Invoice"
+{
+    layout
+    {
+        addlast(General)
+        {
+            field("Customer PO Number";Rec."Customer PO Number")
+            {
+                ApplicationArea = All;
+            }
+        }
     }
 }

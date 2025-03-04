@@ -6,7 +6,7 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
         {
             Caption = 'Billing Type';
             DataClassification = CustomerContent;
-           OptionMembers = "Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
+            OptionMembers = "Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
         }
 
         field(50201; "Contact"; Code[20])
@@ -21,10 +21,11 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
             OptionMembers = " ","First Time Fix","First Time Fix With Multiple Bookings","Not a First Time Fix";
         }
 
-        field(50203; "Functional Location"; Code[20])
+        field(50203; "Functional Location"; Code[50])
         {
             Caption = 'Functional Location';
-            TableRelation = "Ship-to Address";
+            TableRelation = "Ship-to Address".Name;
+            ValidateTableRelation = false;
         }
 
         field(50204; "Sales Order"; Code[20])
@@ -63,16 +64,16 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
             DataClassification = CustomerContent;
             TableRelation = Opportunity;
         }
-         field(50014; "System Status"; Option)
+        field(50014; "System Status"; Option)
         {
             DataClassification = CustomerContent;
             OptionMembers = " ",Cancelled,Completed,"In-Progress",Invoiced,Scheduled,Unscheduled;
             OptionCaption = ' ,Cancelled,Completed,In-Progress,Invoiced,Scheduled,Unscheduled';
         }
-        field(50015;"Substatus"; Code[30])
+        field(50015; "Substatus"; Code[30])
         {
-           DataClassification = CustomerContent;
-           TableRelation = "GKB Work Order Substatus";
+            DataClassification = CustomerContent;
+            TableRelation = "GKB Work Order Substatus";
         }
         field(50032; "Customer PO Number"; Text[100])
         {

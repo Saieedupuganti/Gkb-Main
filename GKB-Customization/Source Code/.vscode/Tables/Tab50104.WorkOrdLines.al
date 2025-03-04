@@ -14,7 +14,7 @@ table 50104 "GKB Work Order Lines"
             Caption = 'Work Order No.';
             TableRelation = "GKB Work Order";
         }
-        field(2; Code; Code[20])
+        field(2; Code; Code[100])
         {
             Caption = 'Product No.';
             TableRelation = Item;
@@ -23,7 +23,7 @@ table 50104 "GKB Work Order Lines"
         {
             Caption = 'Name';
         }
-        field(3; "Unit Code"; Code[20])
+        field(3; "Unit Code"; Code[100])
         {
             Caption = 'Unit Code';
         }
@@ -40,7 +40,7 @@ table 50104 "GKB Work Order Lines"
         {
             Caption = 'Quantity to Build';
         }
-        field(7; "Location Code"; Code[20])
+        field(7; "Location Code"; Code[100])
         {
             Caption = 'Location Code';
         }
@@ -64,7 +64,7 @@ table 50104 "GKB Work Order Lines"
         {
             Caption = 'Total Amount';
         }
-        field(13; "Job No."; Code[20])
+        field(13; "Job No."; Code[100])
         {
             Caption = 'Project No';
         }

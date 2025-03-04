@@ -7,14 +7,28 @@ codeunit 50103 "AutomateInvoiceFrmBSO"
     var
         SalesLineBOS: Record "Sales Line";
         Shipmentdate: Date;
+        SalesHeader: Record "Sales Header";
     begin
+
         Shipmentdate := CalcDate('3D', Today);
-        SalesLineBOS.Reset();
-        SalesLineBOS.SetRange("Document Type", SalesLineBOS."Document Type"::"Blanket Order");
-        SalesLineBOS.SetRange("Shipment Date", Shipmentdate);
-        SalesLineBOS.SetFilter(Quantity, '>%1', 0);
-        if SalesLineBOS.FindSet() then
-            CreateSalesInvFromBOSLines(SalesLineBOS, false);
+        SalesHeader.Reset();
+        SalesHeader.SetRange("Document Type", SalesHeader."Document Type"::"Blanket Order");
+        SalesHeader.SetRange("Billing Type", SalesHeader."Billing Type"::"Monthly Billing");
+        if SalesHeader.FindSet() then
+            repeat
+                SalesLineBOS.Reset();
+                SalesLineBOS.SetRange("Document Type", SalesLineBOS."Document Type"::"Blanket Order");
+                SalesLineBOS.SetRange("Shipment Date", Shipmentdate);
+                SalesLineBOS.SetFilter(Quantity, '>%1', 0);
+                if SalesLineBOS.FindSet() then
+                    CreateSalesInvFromBOSLines(SalesLineBOS, false);
+            until SalesHeader.Next() = 0;
+        // SalesLineBOS.Reset();
+        // SalesLineBOS.SetRange("Document Type", SalesLineBOS."Document Type"::"Blanket Order");
+        // SalesLineBOS.SetRange("Shipment Date", Shipmentdate);
+        // SalesLineBOS.SetFilter(Quantity, '>%1', 0);
+        // if SalesLineBOS.FindSet() then
+        //     CreateSalesInvFromBOSLines(SalesLineBOS, false);
     end;
     // Job queue related Code End
 
@@ -37,7 +51,7 @@ codeunit 50103 "AutomateInvoiceFrmBSO"
             end;
         until SalesLineBOS.Next() = 0;
 
-        // Process grouped lines by document
+
         TempSalesLineBOS.Reset();
         if TempSalesLineBOS.FindSet() then begin
             // Group by blanket order document
@@ -66,6 +80,7 @@ codeunit 50103 "AutomateInvoiceFrmBSO"
         SalesHeader."Order Date" := Today;
         SalesHeader."Shipment Date" := Today;
         SalesHeader."Document Date" := Today;
+        SalesHeader."Customer PO Number" := SalesHeaderBSO."Customer PO Number";
         SalesHeader."Sales Order No." := SalesHeaderBSO."No.";
         SalesHeader.Insert(true);
         Commit();
@@ -95,7 +110,6 @@ codeunit 50103 "AutomateInvoiceFrmBSO"
                     SalesLine."Shipment Date" := SalesLineBSO."Shipment Date";
                     SalesLine.Insert(true);
 
-                    // Mark line as processed
                     SalesLineBSO."Invoice Created" := true;
                     SalesLineBSO.Modify(true);
                     CreatedInvoice := true;
@@ -111,7 +125,6 @@ codeunit 50103 "AutomateInvoiceFrmBSO"
     end;
     // CreateInvFromBOS Code End
 
-    // Error Log validation Code Start
     local procedure ISHeaderErrorValidation(var SalesHeaderBSO: Record "Sales Header"; SingalRecord: Boolean): Boolean
     var
         Customer: Record Customer;

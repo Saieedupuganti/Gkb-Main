@@ -6,6 +6,13 @@ pageextension 50200 "JobTaskCardExt" extends "Job Task Card"
         {
             ApplicationArea = All;
             Caption = 'Customer No.';
+            Visible = true;
+        }
+        modify("Bill-to Name")
+        {
+            ApplicationArea = All;
+            Caption = 'Customer Name';
+            Visible = true;
         }
         addafter(General)
         {
@@ -73,7 +80,7 @@ pageextension 50200 "JobTaskCardExt" extends "Job Task Card"
                     ApplicationArea = all;
                     Caption = 'Substatus';
                 }
-                field("Customer PO Number";Rec."Customer PO Number")
+                field("Customer PO Number"; Rec."Customer PO Number")
                 {
                     ApplicationArea = All;
                     Caption = 'Customer PO Number';

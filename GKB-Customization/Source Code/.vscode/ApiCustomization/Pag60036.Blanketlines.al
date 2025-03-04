@@ -25,8 +25,6 @@ page 60036 "API Blanket Lines"
                 field("LineNo"; Rec."Line No.") { }
                 field("ItemNo"; Rec."No.") { }
                 field("ItemDescription"; Rec."Description") { }
-
-
                 field(Quantity; Rec.Quantity)
                 {
                     Caption = 'Quantity';
@@ -40,11 +38,12 @@ page 60036 "API Blanket Lines"
                 {
                     Caption = 'Product';
                 }
-
+                field("ShipmentDate";Rec."Shipment Date"){}
                 field("Dimension"; Rec."Shortcut Dimension 1 Code")
                 {
                     Caption = 'Dimension';
                 }
+                
             }
         }
     }

@@ -119,8 +119,24 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
             Editable = false;
             DecimalPlaces = 0 : 5;
         }
+        field(50114; "Item Inventory"; Decimal)
+        {
+            Caption = 'Item Inventory';
+            DataClassification = CustomerContent;
+            Editable = false;
+            DecimalPlaces = 0 : 5;
+            trigger OnValidate()
+            var
+                Item: Record Item;
+            begin
+                if Rec."No." <> '' then begin
+                    if Item.Get(Rec."No.") then begin
+                        Rec."Item Inventory" := Item.Inventory;
+                    end;
+                end;
+            end;
+        }
     }
-
     trigger OnInsert()
     var
         User: Record "User Setup";

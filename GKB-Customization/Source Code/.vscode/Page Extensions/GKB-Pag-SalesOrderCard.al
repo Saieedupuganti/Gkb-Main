@@ -64,6 +64,11 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
                     ApplicationArea = All;
                     Caption = 'Creation Method';
                 }
+                field("Customer PO Number";Rec."Customer PO Number")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Customer PO Number';
+                }
               
             }
         }

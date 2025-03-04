@@ -40,7 +40,7 @@ page 50330 "API Sales Lines"
                 {
                     Caption = 'Product';
                 }
-                field(Amount; Rec.Amount)
+                field(Amount; Rec."Unit Price")
                 {
                     Caption = 'Amount';
                 }
