@@ -39,7 +39,7 @@ codeunit 50123 "Customer Crm Management"
             customerJson.Add('primarycontactid', Contact."CRM ID");
         end;
 
-        Dimension.SetFilter(Code, Customer.Dimension);
+        Dimension.SetFilter(Code, Customer."Global Dimension 1 Code");
         if Dimension.FindFirst then begin
             customerJson.Add('dimensionid', Dimension."CRM ID");
         end;
@@ -80,7 +80,7 @@ codeunit 50123 "Customer Crm Management"
         customerJson.Add('country', Customer."D365 Country");
         customerJson.Add('postCode', Customer."D365 PostCode");
         customerJson.Add('customerprofile', Format(Customer."Customer Profile"));
-        customerJson.Add('customergroup', Format(Customer."Customer group"));
+        customerJson.Add('customergroup', Format(Customer."Customer Price Group"));
         customerJson.Add('contactgroup', Format(Customer."Contact Group"));
         customerJson.Add('credithold', Customer."Credit Hold");
         customerJson.Add('creditlimit', Customer."Credit Limit (LCY)");

@@ -154,7 +154,7 @@ codeunit 50102 "GKB Work Order Mgt."
         JobTask.Init();
         JobTask."Job No." := Job."No.";
         JobTask."Job Task No." := WO."Work Order No.";
-        JobTask."Sell-to Customer No." := WO."Service Account";
+        JobTask.Validate("Sell-to Customer No.",WO."Service Account");
         JobTask."Bill-to Customer No." := WO."Service Account";
         JobTask.Description := WO."Topic";
         JobTask."Fix Type" := WO."Fix Type";

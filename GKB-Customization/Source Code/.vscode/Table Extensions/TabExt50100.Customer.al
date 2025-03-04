@@ -73,6 +73,7 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'ABN No';
             DataClassification = ToBeClassified;
+            ObsoleteState = Removed;
         }
         field(50110; "Customer group"; Option)
         {
@@ -80,6 +81,7 @@ tableextension 50100 "Customer Ext" extends Customer
             DataClassification = ToBeClassified;
             OptionCaption = ' ,Platinum,Gold,Silver,Bronze,N/A';
             OptionMembers = " ",Platinum,Gold,Silver,Bronze,"N/A";
+            ObsoleteState = Removed;
         }
         field(50111; "Contact Group"; Option)
         {
@@ -136,6 +138,7 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'Dimension';
             DataClassification = ToBeClassified;
+            ObsoleteState = Removed;
         }
         field(50501; "Dimension ID"; Text[100])
         {
@@ -257,7 +260,7 @@ tableextension 50100 "Customer Ext" extends Customer
         if (Rec."Dimension ID" <> '') and (xRec."Dimension ID" <> Rec."Dimension ID") then begin
             dimRec.SetFilter("CRM ID", Rec."Dimension ID");
             if dimRec.FindFirst() then begin
-                Rec.Dimension := dimRec.Code;
+                Rec."Global Dimension 1 Code" := dimRec.Code;
                 modified := modified + 1;
             end;
         end;

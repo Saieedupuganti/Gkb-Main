@@ -17,6 +17,10 @@ pageextension 50347 "SalesInvExt" extends "Sales Invoice"
             {
                 ApplicationArea = All;
             }
+            field("Customer PO Number";Rec."Customer PO Number")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }

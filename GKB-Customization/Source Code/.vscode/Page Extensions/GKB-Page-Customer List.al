@@ -48,14 +48,9 @@ pageextension 50123 "GKB customer list EXT" extends "Customer List"
                 ApplicationArea = All;
                 Caption = 'Capex To';
             }
-            field("ABN No."; Rec."ABN No.")
-            {
-                ApplicationArea = All;
-                Caption = 'ABN No.';
-            }
             field(ABN; Rec.ABN)
             {
-                Visible = false;
+                Visible = true;
             }
         }
     }

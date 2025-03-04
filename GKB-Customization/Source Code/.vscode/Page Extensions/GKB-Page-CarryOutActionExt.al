@@ -1,4 +1,4 @@
-reportextension 76654 MyExtension extends "Carry Out Action Msg. - Req."
+reportextension 76654 "Carry Out Ext" extends "Carry Out Action Msg. - Req."
 {
     requestpage
     {

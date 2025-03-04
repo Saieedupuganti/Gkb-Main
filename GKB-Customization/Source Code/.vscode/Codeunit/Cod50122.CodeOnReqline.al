@@ -52,7 +52,34 @@ codeunit 50122 "Requisition Line Handler"
 
         exit(LastLineNo);
     end;
+    
+    //Auto Increatment Line No. In Blanket Order Lines while inserting the record from the other system.
+    [EventSubscriber(ObjectType::Table, Database::"Sales Line", 'OnBeforeInsertEvent', '', false, false)]
+    local procedure OnBeforeInsertBlanketSalesLine(var Rec: Record "Sales Line")
+    begin
+        if (Rec."Line No." = 0) then
+            Rec.Validate("Line No.", GetLastLineNo(Rec));
+    end;
 
+    local procedure GetLastLineNo(BlanketSalesLine: Record "Sales Line"): Integer
+    var
+        LastBlanketSalesLine: Record "Sales Line";
+        LastLineNo: Integer;
+    begin
+        LastBlanketSalesLine.Reset();
+        LastBlanketSalesLine.SetCurrentKey("Document Type", "Document No.", "Line No.");
+        LastBlanketSalesLine.SetRange("Document Type", BlanketSalesLine."Document Type"::"Blanket Order");
+        LastBlanketSalesLine.SetRange("Document No.", BlanketSalesLine."Document No.");
+
+        if LastBlanketSalesLine.FindLast() then
+            LastLineNo := LastBlanketSalesLine."Line No." + 10000
+        else
+            LastLineNo := 10000;
+
+        exit(LastLineNo);
+    end;
+
+    // Update Item Availability By Location
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnAfterValidateEvent', 'Location Code', false, false)]
     local procedure UpdateItemAvailabilityOnLocationChange(var Rec: Record "Requisition Line"; var xRec: Record "Requisition Line")
     begin
@@ -70,14 +97,13 @@ codeunit 50122 "Requisition Line Handler"
         TotalQuantity := 0;
         ItemLedgerEntry.SetFilter("Item No.", ReqLine."No.");
         ItemLedgerEntry.SetFilter("Location Code", ReqLine."Location Code");
-        Message('item availability checking');
+
         if ItemLedgerEntry.FindSet() then
             repeat
                 TotalQuantity += ItemLedgerEntry.Quantity;
             until ItemLedgerEntry.Next() = 0;
-        Message('Item Availability By Location %1', TotalQuantity);
         ReqLine."Item Availability By Location" := TotalQuantity;
 
-        ReqLine.Modify();
+        //  ReqLine.Modify();
     end;
 }

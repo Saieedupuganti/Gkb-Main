@@ -50,9 +50,6 @@ page 60033 "Work Order Lines API"
                 field("UnitCost"; Rec."Unit Cost")
                 {
                 }
-                field("TotalCost"; Rec."Total Cost")
-                {
-                }
                 field("UnitAmount"; Rec."Unit Amount")
                 {
                 }

@@ -6,8 +6,8 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         {
             Editable = true;
             Enabled = true;
-            Visible = false;
-            ShowMandatory = true;
+            Visible = true;
+            
         }
         modify("Post Code")
         {
@@ -74,10 +74,6 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                     ApplicationArea = All;
                     Caption = 'Capex To';
                 }
-                field("Customer group"; Rec."Customer group")
-                {
-                    ApplicationArea = all;
-                }
                 field("Contact Group"; Rec."Contact Group")
                 {
                     ApplicationArea = all;
@@ -108,12 +104,6 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 {
                     ApplicationArea = all;
                     Caption = 'Web';
-                }
-                field(Dimension; Rec.Dimension)
-                {
-                    ApplicationArea = all;
-                    Caption = 'Dimension';
-                    TableRelation = "Dimension Value".Code;
                 }
                 field("Territory"; Rec.Territory)
                 {
@@ -173,15 +163,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 ApplicationArea = all;
             }
         }
-        addbefore("ABN Division Part No.")
-        {
-            field("ABN No."; Rec."ABN No.")
-            {
-                Caption = 'ABN';
-                ApplicationArea = All;
-                ShowMandatory = true;
-            }
-        }
+        
 
     }
 
@@ -216,6 +198,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         UserSetupRec: Record "User Setup";
         IsUserAllowed: Boolean;
         ContactRec: Record Contact;
+        
     begin
         if UserSetupRec.Get(UserId()) then begin
             IsUserAllowed := UserSetupRec."Customer Card";
@@ -226,5 +209,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         if not IsUserAllowed then
             CurrPage.Editable(false);
     end;
+
+    
 }
 

@@ -15,6 +15,11 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                 ApplicationArea = All;
                 Caption = 'Work Order Type';
             }
+            field("Customer PO Number";Rec."Customer PO Number")
+            {
+                ApplicationArea = All;
+                Caption = 'Customer PO Number';
+            }   
             
         }
         addafter(General)
@@ -75,20 +80,6 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                 Promoted = true;
                 PromotedCategory = Process;
                 Image = CreateDocument;
-
-                trigger OnAction()
-                var
-                    BlanketOrderToInv: Codeunit "Milestone Invoicing";
-                begin
-                    BlanketOrderToInv.CreateInvoiceFromBlanketOrder(Rec);
-                end;
-            }
-            action(CreatePercentageInvoice)
-            {
-                ApplicationArea = All;
-                Caption = 'Create Invoice by Percentage';
-                ToolTip = 'Creates an invoice based on the specified percentage.';
-                Image = NewInvoice;
 
                 trigger OnAction()
                 var
