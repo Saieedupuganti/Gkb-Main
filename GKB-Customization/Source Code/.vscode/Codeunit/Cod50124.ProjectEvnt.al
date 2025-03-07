@@ -42,11 +42,9 @@ codeunit 50124 "Event Subscriber"
             end;
         end;
     end;
-    
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterInsertInvoiceHeader', '', false, false)]
     local procedure OnAfterInsertSalesInvHeader(var SalesInvHeader: Record "Sales Invoice Header"; SalesHeader: Record "Sales Header")
     begin
-        // Copy the Customer PO Number from Sales Header to Sales Invoice Header
         SalesInvHeader."Customer PO Number" := SalesHeader."Customer PO Number";
     end;
 }

@@ -112,6 +112,14 @@ tableextension 50103 GKBItemExt extends Item
         {
             DataClassification = ToBeClassified;
         }
+       
+    }
+    
+    fieldgroups
+    {
+        addlast(DropDown; "Vendor No.", "Vendor Item Name", "Vendor 1 Catalogue Number", "Alternative Item No.")
+        {
+        }
     }
     trigger OnAfterModify()
     var
@@ -232,6 +240,4 @@ tableextension 50103 GKBItemExt extends Item
             end;
         end;
     end;
-
-  
 }

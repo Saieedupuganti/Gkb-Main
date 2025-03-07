@@ -22,6 +22,8 @@ pageextension 50202 "Sales Quote Ext" extends "Sales Quote"
             }
         }
     }
+
+    
     trigger OnOpenPage()
     var
     UserSetup : Record "User Setup";

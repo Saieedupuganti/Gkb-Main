@@ -83,9 +83,11 @@ codeunit 50102 "GKB Work Order Mgt."
                 exit;
         end;
         PlanningLine."No." := WOLn.Code;
-        PlanningLine.Description := WOLn.Name;
-        PlanningLine.Quantity := WOLn."Estimate Quantity";
+        PlanningLine.Description := WOLn.Description;
+        PlanningLine.Quantity := WOLn."Quantity to Build";
         PlanningLine.Validate("Unit Price", WOLn."Unit amount");
+        PlanningLine."Location Code" := WOLn."Location Code";
+        PlanningLine."Line Type" := PlanningLine."Line Type"::"Both Budget and Billable";      // Have to Create a Description field in both Job Plaing amnd Work Order lines
         PlanningLine.Insert();//Insert
 
         WOLn."Line Created" := true;
@@ -139,11 +141,43 @@ codeunit 50102 "GKB Work Order Mgt."
         Job."Work Order Type" := WO."Work Order Type";
         Job.Validate("Sell-to Customer No.", WO."Service Account");
         Job."Bill-to Customer No." := WO."Service Account";
-        Job."System Status" := WO."System Status";
+        case WO."System Status" of
+            WO."System Status"::" ":
+                Job."System Status" := Job."System Status"::" ";
+            WO."System Status"::Unscheduled:
+                Job."System Status" := Job."System Status"::Unscheduled;
+            WO."System Status"::Scheduled:
+                Job."System Status" := Job."System Status"::Scheduled;
+            WO."System Status"::"In Progress":
+                Job."System Status" := job."System Status"::"In Progress";
+            WO."System Status"::Completed:
+                Job."System Status" := Job."System Status"::Completed;
+            WO."System Status"::Invoiced:
+                Job."System Status" := Job."System Status"::Invoiced;
+            WO."System Status"::Cancelled:
+                Job."System Status" := Job."System Status"::Cancelled;
+            else
+                exit;
+        end;
         Job."Sales Order" := WO."Sales Order";
         Job."Starting Date" := WO."Time Window Start";
         Job."Ending Date" := WO."Time Window End";
-        Job."Billing Type" := WO."Billing Type";
+        case WO."Billing Type" of
+            WO."Billing Type"::" ":
+                Job."Billing Type" := Job."Billing Type"::" ";
+            WO."Billing Type"::"Charge Up":
+                Job."Billing Type" := Job."Billing Type"::"Charge Up";
+            WO."Billing Type"::"Quoted":
+                Job."Billing Type" := Job."Billing Type"::"Quoted";
+            WO."Billing Type"::"Monthly Billing":
+                Job."Billing Type" := Job."Billing Type"::"Monthly Billing";
+            WO."Billing Type"::"Not Chargeable":
+                Job."Billing Type" := Job."Billing Type"::"Not Chargeable";
+            WO."Billing Type"::"N/A":
+                Job."Billing Type" := Job."Billing Type"::"N/A";
+            else
+                exit;
+        end;
         Job."Customer PO Number" := WO."Customer PO Number";
         Job."Substatus" := WO.Substatus;
 
@@ -154,7 +188,7 @@ codeunit 50102 "GKB Work Order Mgt."
         JobTask.Init();
         JobTask."Job No." := Job."No.";
         JobTask."Job Task No." := WO."Work Order No.";
-        JobTask.Validate("Sell-to Customer No.",WO."Service Account");
+        JobTask.Validate("Sell-to Customer No.", WO."Service Account");
         JobTask."Bill-to Customer No." := WO."Service Account";
         JobTask.Description := WO."Topic";
         JobTask."Fix Type" := WO."Fix Type";
@@ -165,11 +199,43 @@ codeunit 50102 "GKB Work Order Mgt."
         JobTask."Start Date" := WO."Time Window Start";
         JobTask."End Date" := WO."Time Window End";
         JobTask."Work Order Type" := WO."Work Order Type";
-        JobTask."Billing Type" := WO."Billing Type";
+        case WO."Billing Type" of
+            WO."Billing Type"::" ":
+                JobTask."Billing Type" := JobTask."Billing Type"::" ";
+            WO."Billing Type"::"Charge Up":
+                JobTask."Billing Type" := JobTask."Billing Type"::"Charge Up";
+            WO."Billing Type"::"Quoted":
+                JobTask."Billing Type" := JobTask."Billing Type"::"Quoted";
+            WO."Billing Type"::"Monthly Billing":
+                JobTask."Billing Type" := JobTask."Billing Type"::"Monthly Billing";
+            WO."Billing Type"::"Not Chargeable":
+                JobTask."Billing Type" := JobTask."Billing Type"::"Not Chargeable";
+            WO."Billing Type"::"N/A":
+                JobTask."Billing Type" := JobTask."Billing Type"::"N/A";
+            else
+                exit;
+        end;
         JobTask."Description 2" := WO."Description 2";
         JobTask.Substatus := WO.Substatus;
-        JobTask."System Status" := WO."System Status";
-        JobTask."Sales Order" := WO."Sales Order";
+        case WO."System Status" of
+            WO."System Status"::" ":
+                JobTask."System Status" := JobTask."System Status"::" ";
+            WO."System Status"::Unscheduled:
+                JobTask."System Status" := JobTask."System Status"::Unscheduled;
+            WO."System Status"::Scheduled:
+                JobTask."System Status" := JobTask."System Status"::Scheduled;
+            WO."System Status"::"In Progress":
+                JobTask."System Status" := job."System Status"::"In Progress";
+            WO."System Status"::Completed:
+                JobTask."System Status" := JobTask."System Status"::Completed;
+            WO."System Status"::Invoiced:
+                JobTask."System Status" := JobTask."System Status"::Invoiced;
+            WO."System Status"::Cancelled:
+                JobTask."System Status" := JobTask."System Status"::Cancelled;
+            else
+                exit;
+        end;
+       // JobTask."Sales Order" := WO."Sales Order";
         JobTask."Customer PO Number" := WO."Customer PO Number";
         JobTask."Work Order Summary" := WO."Work Order Summary";
         JobTask.Insert();

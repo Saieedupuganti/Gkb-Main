@@ -36,9 +36,14 @@ page 50508 "Work Order Lines ListPart"
                 {
                     ApplicationArea = All;
                 }
+                field(Description; rec.Description)
+                {
+                    ApplicationArea = All;
+                }
                 field(Name; Rec.Name)
                 {
                     ApplicationArea = all;
+                    Visible = false;
                 }
                 field("Unit Code"; rec."Unit Code")
                 {
@@ -68,10 +73,7 @@ page 50508 "Work Order Lines ListPart"
                 {
                     ApplicationArea = All;
                 }
-                field(Description; rec.Description)
-                {
-                    ApplicationArea = All;
-                }
+
             }
         }
     }

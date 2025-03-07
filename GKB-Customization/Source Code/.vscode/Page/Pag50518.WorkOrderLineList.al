@@ -7,7 +7,7 @@ page 50118 "Work Order Lines List"
     UsageCategory = Lists;
     DelayedInsert = true;
     SourceTableView = Sorting("Line No.")
-                       order(ascending);
+                       order(descending);
 
     layout
     {
@@ -41,9 +41,14 @@ page 50118 "Work Order Lines List"
                 {
                     ApplicationArea = All;
                 }
+                field(Description; rec.Description)
+                {
+                    ApplicationArea = All;
+                }
                 field(Name; Rec.Name)
                 {
                     ApplicationArea = all;
+                    Visible = false;
                 }
                 field(Type; Rec.Type)
                 {
@@ -73,10 +78,7 @@ page 50118 "Work Order Lines List"
                 {
                     ApplicationArea = All;
                 }
-                field(Description; rec.Description)
-                {
-                    ApplicationArea = All;
-                }
+
                 field("Project Code"; rec."Job No.")
                 {
                     ApplicationArea = All;
@@ -90,10 +92,6 @@ page 50118 "Work Order Lines List"
                     ApplicationArea = all;
                 }
                 field("Total Cost"; Rec."Total Cost")
-                {
-                    ApplicationArea = all;
-                }
-                field("Total Amount"; Rec."Total Amount")
                 {
                     ApplicationArea = all;
                 }

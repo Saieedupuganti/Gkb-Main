@@ -52,7 +52,7 @@ codeunit 50122 "Requisition Line Handler"
 
         exit(LastLineNo);
     end;
-    
+
     //Auto Increatment Line No. In Blanket Order Lines while inserting the record from the other system.
     [EventSubscriber(ObjectType::Table, Database::"Sales Line", 'OnBeforeInsertEvent', '', false, false)]
     local procedure OnBeforeInsertBlanketSalesLine(var Rec: Record "Sales Line")
@@ -83,6 +83,7 @@ codeunit 50122 "Requisition Line Handler"
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnAfterValidateEvent', 'Location Code', false, false)]
     local procedure UpdateItemAvailabilityOnLocationChange(var Rec: Record "Requisition Line"; var xRec: Record "Requisition Line")
     begin
+
         if Rec.Type = Rec.Type::Item then
             UpdateItemAvailabilityByLocation(Rec);
     end;
@@ -106,4 +107,50 @@ codeunit 50122 "Requisition Line Handler"
 
         //  ReqLine.Modify();
     end;
+
+
+    // Item Quantity based on Location c
+    [EventSubscriber(ObjectType::Table, Database::"Item Journal Line", 'OnAfterValidateEvent', 'Location Code', false, false)]
+    local procedure UpdateItemAvailabilityOnLocationChangeForItemJournel(var Rec: Record "Item Journal Line"; var xRec: Record "Item Journal Line")
+    begin
+        UpdateItemAvailabilityByLocation(Rec);
+    end;
+
+    local procedure UpdateItemAvailabilityByLocation(var ItemJnlLine: Record "Item Journal Line")
+    var
+        ItemLedgerEntry: Record "Item Ledger Entry";
+        TotalQuantity: Decimal;
+    begin
+        if (ItemJnlLine."Item No." = '') or (ItemJnlLine."Location Code" = '') then
+            exit;
+
+        TotalQuantity := 0;
+        ItemLedgerEntry.SetFilter("Item No.", ItemJnlLine."Item No.");
+        ItemLedgerEntry.SetFilter("Location Code", ItemJnlLine."Location Code");
+
+        if ItemLedgerEntry.FindSet() then
+            repeat
+                TotalQuantity += ItemLedgerEntry.Quantity;
+            until ItemLedgerEntry.Next() = 0;
+
+        ItemJnlLine."Item Availability By Location" := TotalQuantity;
+
+        // ItemJnlLine.Modify();
+    end;
+
+    // Upadate the Comment value from Item journel to Item Ledger Entry.
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Jnl.-Post Line", 'OnBeforeInsertItemLedgEntry', '', false, false)]
+    local procedure OnBeforeInsertItemLedgEntry(var ItemLedgerEntry: Record "Item Ledger Entry"; ItemJournalLine: Record "Item Journal Line"; TransferItem: Boolean; OldItemLedgEntry: Record "Item Ledger Entry"; ItemJournalLineOrigin: Record "Item Journal Line")
+    begin
+        ItemLedgerEntry.Comment := ItemJournalLine.Comment;
+    end;
+
+    // Update the trasfer note from the Tranfer line to Posted Transfer Note.
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"TransferOrder-Post Receipt", 'OnBeforeInsertTransRcptLine', '', false, false)]
+    local procedure OnBeforeInsertTransRcptLine(var TransRcptLine: Record "Transfer Receipt Line"; TransLine: Record "Transfer Line"; CommitIsSuppressed: Boolean; var IsHandled: Boolean; TransferReceiptHeader: Record "Transfer Receipt Header")
+    begin
+        TransRcptLine."Transfer Note" := TransLine."Transfer Note";
+    end;
 }
+
+

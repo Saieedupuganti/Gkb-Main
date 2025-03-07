@@ -22,10 +22,12 @@ table 50104 "GKB Work Order Lines"
         field(55; "Name"; Text[200])
         {
             Caption = 'Name';
+            
         }
-        field(3; "Unit Code"; Code[100])
+        field(3; "Unit Code"; Code[50])
         {
             Caption = 'Unit Code';
+            TableRelation = "Unit of Measure";
         }
         field(4; "Line Status"; Option)
         {
@@ -46,7 +48,7 @@ table 50104 "GKB Work Order Lines"
         }
         field(8; Description; Text[250])
         {
-            Caption = 'Description';
+            Caption = 'Name';
         }
         field(9; "Unit Cost"; Decimal)
         {

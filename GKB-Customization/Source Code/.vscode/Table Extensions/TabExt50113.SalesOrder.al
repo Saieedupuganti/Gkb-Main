@@ -261,33 +261,6 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             DataClassification = ToBeClassified;
         }
     }
-    // trigger OnModify()
-    // var
-    //     TotalAmount: Decimal;
-    //     SalesLine: Record "Sales Line";
-    // begin
-    //     if Rec."Document Type" = Rec."Document Type"::"Blanket Order" then begin
-    //         SalesLine.SetRange("Document Type", Rec."Document Type");
-    //         SalesLine.SetRange("Document No.", Rec."No.");
-    //         if SalesLine.FindSet() then begin
-    //             repeat
-    //                 TotalAmount += SalesLine.Amount;
-    //             until SalesLine.Next() = 0;
-    //         end;
-
-    //         Rec."Invoiced Percentage" := Rec."Invoiced Percentage" + Rec."Percentage To Invoice";
-    //         Rec."Remaining Percentage" := 100 - Rec."Invoiced Percentage";
-
-    //         Rec."Invoicing Amount" := Round((Rec."Percentage To Invoice" / 100) * TotalAmount, 0.01);
-    //         Rec."Amount Invoiced" := Round((Rec."Invoiced Percentage" / 100) * TotalAmount, 0.01);
-    //         Rec."Remaining Amount" := Round((Rec."Remaining Percentage" / 100) * TotalAmount, 0.01);
-
-    //         if Rec."Remaining Percentage" < 0 then
-    //             Error('Invoicing exceeds the total allowed percentage.');
-    //     end;
-
-    //     MODIFY(false);
-    // end;
 
     trigger OnModify()
     var
@@ -374,5 +347,8 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         if not typehelper.TryReadAsTextWithSeparator(InStream, typehelper.LFSeparator(), TermConditions) then
             Message(Readdataskippedmsg, FieldCaption(RichText));
     end;
+
 }
+
+
 

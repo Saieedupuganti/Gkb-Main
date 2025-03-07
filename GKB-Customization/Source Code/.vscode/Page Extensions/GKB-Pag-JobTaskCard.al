@@ -41,13 +41,6 @@ pageextension 50200 "JobTaskCardExt" extends "Job Task Card"
                     ApplicationArea = All;
                     Caption = 'Functional Location';
                 }
-
-                field("Sales Order"; Rec."Sales Order")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Sales Order';
-                }
-
                 field("Description 2"; Rec."Description 2")
                 {
                     ApplicationArea = All;
@@ -79,11 +72,6 @@ pageextension 50200 "JobTaskCardExt" extends "Job Task Card"
                 {
                     ApplicationArea = all;
                     Caption = 'Substatus';
-                }
-                field("Customer PO Number"; Rec."Customer PO Number")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Customer PO Number';
                 }
             }
         }

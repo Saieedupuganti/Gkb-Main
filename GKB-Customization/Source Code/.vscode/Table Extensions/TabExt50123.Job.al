@@ -24,18 +24,18 @@ tableextension 50123 GKBJobExt extends Job
         field(50002; "System Status"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = " ",Cancelled,Completed,"In-Progress",Invoiced,Scheduled,Unscheduled;
-            OptionCaption = ' ,Cancelled,Completed,In-Progress,Invoiced,Scheduled,Unscheduled';
+            OptionMembers = " ",Unscheduled,Scheduled,"In Progress",Completed,Invoiced,Cancelled;
         }
         field(50029; "Sales Order"; Code[20])
         {
             DataClassification = CustomerContent;
-            TableRelation = "Sales Header";
+           Caption = 'Sales Order No.';
+            TableRelation = "Sales Header"."No." WHERE("Document Type" = CONST(Order));
         }
           field(50006; "Billing Type"; Option)
         {
             DataClassification = CustomerContent;
-            OptionMembers = "Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
+            OptionMembers = " ","Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
         }
          field(50032; "Customer PO Number"; Text[100])
         {
@@ -48,6 +48,4 @@ tableextension 50123 GKBJobExt extends Job
             TableRelation = "GKB Work Order Substatus";
         }
     }
-    //trigger OnInsert()
-
 }

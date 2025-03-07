@@ -2,6 +2,11 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
 {
     layout
     {
+        moveafter("Status"; "Shortcut Dimension 1 Code")
+        modify("Shortcut Dimension 1 Code")
+        {
+            ShowMandatory = true;
+        }
         addlast(General)
         {
             field("Ordered By"; Rec."Ordered By")
@@ -29,8 +34,6 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
         {
             Enabled = (Rec.Status = Rec.Status::Released);
             trigger OnBeforeAction()
-            var
-                myInt: Integer;
             begin
                 if Rec.Status <> Rec.Status::Released then begin
                     Message('Cannot print. The Purchase Order status must be Released.');
@@ -55,12 +58,19 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
         {
             Enabled = (Rec.Status = Rec.Status::Released);
             trigger OnBeforeAction()
-            var
-                myInt: Integer;
             begin
                 if Rec.Status <> Rec.Status::Released then begin
                     Message('Cannot Release. The Purchase Order status must be Released.');
                     exit;
+                end;
+            end;
+        }
+        modify(Post)
+        {
+            trigger OnBeforeAction()
+            begin
+                if Rec."Shortcut Dimension 1 Code" = '' then begin
+                    Error('Obrien Business Unit Code must have a value');
                 end;
             end;
         }

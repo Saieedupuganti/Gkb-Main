@@ -134,4 +134,5 @@ pageextension 50125 MyExtension extends "Contact List"
             field("CRM ID"; Rec."CRM ID") { ApplicationArea = all; }
         }
     }
+
 }
