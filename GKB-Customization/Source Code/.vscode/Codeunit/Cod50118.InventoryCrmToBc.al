@@ -1,5 +1,35 @@
-// tableextension 50202 "Inventory Adj Update" extends "Item Ledger Entry"
-// {
+tableextension 50202 "Inventory Adj Update" extends "Item Ledger Entry"
+{
+    fields
+    {
+        field(50200; Comment; Text[200])
+        {
+            Caption = 'Comment';
+            DataClassification = ToBeClassified;
+        }
+    }
+}
+pageextension 50362 "Item LedgEntry Ext" extends "Item ledger Entries"
+{
+    layout
+    {
+        addafter("Location Code")
+        {
+            field(Comment; Rec.Comment)
+            {
+                ApplicationArea = all;
+            }
+        }
+    }
+
+    actions
+    {
+        // Add changes to page actions here
+    }
+
+    var
+        myInt: Integer;
+}
 //     trigger OnAfterInsert()
 //     var
 //         entries: Record "Item Ledger Entry";

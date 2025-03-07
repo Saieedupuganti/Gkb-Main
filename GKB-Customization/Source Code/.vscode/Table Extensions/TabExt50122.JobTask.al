@@ -6,7 +6,7 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
         {
             Caption = 'Billing Type';
             DataClassification = CustomerContent;
-            OptionMembers = "Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
+            OptionMembers = " ","Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
         }
 
         field(50201; "Contact"; Code[20])
@@ -27,13 +27,6 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
             TableRelation = "Ship-to Address".Name;
             ValidateTableRelation = false;
         }
-
-        field(50204; "Sales Order"; Code[20])
-        {
-            Caption = 'Sales Order';
-            TableRelation = "Sales Header" WHERE("Document Type" = FILTER(Order));
-        }
-
         // Newly added fields
         field(50205; "Description 2"; Text[100])
         {

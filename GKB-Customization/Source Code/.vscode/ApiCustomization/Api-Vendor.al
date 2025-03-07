@@ -15,7 +15,7 @@ page 50340 "API Vendor"
         {
             repeater(GroupName)
             {
-                field(abn; Rec.ABN)
+                field(abn; Rec."ABN No.")
                 {
                     Caption = 'ABN';
                 }

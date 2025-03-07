@@ -6,6 +6,8 @@ using Microsoft.Integration.Dataverse;
 using System.Security.User;
 using Microsoft.Purchases.Document;
 using Microsoft.Projects.Project.Job;
+using Microsoft.Foundation.Enums;
+using Microsoft.Inventory.Availability;
 using Microsoft.Inventory.Item;
 using Microsoft.Purchases.Vendor;
 
@@ -17,6 +19,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
         modify("Location Code")
         {
             Caption = 'Warehouse';  // Changing the location code to warehouse in req. worksheet.
+            ShowMandatory = true;
         }
         modify(Control1903326807)
         {
@@ -44,11 +47,13 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             {
                 ApplicationArea = all;
                 ShowMandatory = true;
+                Visible = false;
             }
             field("Project Task No"; Rec."Project Task No")
             {
                 ApplicationArea = all;
                 ShowMandatory = true;
+                Visible = false;
             }
             field("Obrien Business Unit Code"; Rec."Shortcut Dimension 1 Code")
             {
@@ -72,10 +77,22 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 ApplicationArea = all;
                 ToolTip = 'Checks item is in stock or not';
             }
-            field("Item Inventory"; Rec."Item Inventory")
+            field(Availability; CalcAvailability(Rec))
             {
-                ApplicationArea = all;
-                ToolTip = 'Shows the item inventory';
+                ApplicationArea = Basic, Suite;
+                Caption = 'Total Availability';
+                DecimalPlaces = 0 : 5;
+                DrillDown = true;
+                Editable = true;
+                ToolTip = 'Specifies how many units of the item on the Requisition line are available.';
+
+                trigger OnDrillDown()
+                var
+                    ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
+                begin
+                    ShowItemAvailFromPurchLine(Rec, ItemAvailFormsMgt.ByEvent());
+                    CurrPage.Update(true);
+                end;
             }
             field("Alternate Vendor For Item"; Rec."Alternate Vendor For Item")
             {
@@ -108,7 +125,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
         }
         addafter("Location Code")
         {
-            field("Item Availability By Location";Rec."Item Availability By Location")
+            field("Item Availability By Location"; Rec."Item Availability By Location")
             {
                 ApplicationArea = all;
             }
@@ -125,6 +142,10 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 FirstBusinessUnitCode: Code[20];
                 IsSame: Boolean;
             begin
+
+                if Rec."Location Code" = '' then
+                    Error('line %1 Warehouse must have a value', Rec."Line No.");
+
                 IsSame := true;
                 if Rec.FindSet then begin
                     FirstBusinessUnitCode := Rec."Shortcut Dimension 1 Code";
@@ -164,4 +185,83 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             }
         }
     }
+
+    // Item Availability Code Starts From here.
+    local procedure CalcAvailability(var ReqLine: Record "Requisition Line"): Decimal
+    var
+        AvailableToPromise: Codeunit "Available to Promise";
+        GrossRequirement: Decimal;
+        ScheduledReceipt: Decimal;
+        AvailableQuantity: Decimal;
+        PeriodType: Enum "Analysis Period Type";
+        AvailabilityDate: Date;
+        LookaheadDateformula: DateFormula;
+        IsHandled: Boolean;
+        Item: Record Item;
+    begin
+        if Item.Get(Rec."No.") then begin
+            if ReqLine."Due Date" <> 0D then //"Expected Receipt Date"
+                AvailabilityDate := ReqLine."Due Date" //"Expected Receipt Date"
+            else
+                AvailabilityDate := WorkDate();
+            Item.Reset();
+            Item.SetRange("Date Filter", 0D, AvailabilityDate);
+            Item.SetRange("Variant Filter", ReqLine."Variant Code");
+            Item.SetRange("Location Filter", ReqLine."Location Code");
+            Item.SetRange("Drop Shipment Filter", false);
+            IsHandled := false;
+            if IsHandled then exit(AvailableQuantity);
+            exit(AvailableToPromise.CalcQtyAvailabletoPromise(Item, GrossRequirement, ScheduledReceipt, AvailabilityDate, PeriodType, LookaheadDateformula));
+        end;
+    end;
+
+    procedure ShowItemAvailFromPurchLine(var ReqLine: Record "Requisition Line"; AvailabilityType: Option Date,Variant,Location,Bin,"Event",BOM,UOM)
+    var
+        Item: Record Item;
+        NewDate: Date;
+        NewVariantCode: Code[10];
+        NewLocationCode: Code[10];
+        NewUnitOfMeasureCode: Code[10];
+        IsHandled: Boolean;
+        ItemAvailCU: Codeunit "Item Availability Forms Mgt";
+    begin
+        ReqLine.TestField(Type, ReqLine.Type::Item);
+        ReqLine.TestField("No.");
+        Item.Reset();
+        Item.Get(ReqLine."No.");
+        FilterItem(Item, ReqLine."Location Code", ReqLine."Variant Code", ReqLine."Due Date"); //"Expected Receipt Date");
+        IsHandled := false;
+        //OnBeforeShowItemAvailFromPurchLine(Item, ReqLine, IsHandled, AvailabilityType);
+        if IsHandled then exit;
+        case AvailabilityType of
+            AvailabilityType::Date:
+                if ItemAvailCU.ShowItemAvailByDate(Item, ReqLine.FieldCaption(ReqLine."Due Date"), ReqLine."Due Date", NewDate) then
+                    ReqLine.Validate(ReqLine."Due Date", NewDate);
+            AvailabilityType::Variant:
+                if ItemAvailCU.ShowItemAvailVariant(Item, ReqLine.FieldCaption(ReqLine."Variant Code"), ReqLine."Variant Code", NewVariantCode) then
+                    ReqLine.Validate(ReqLine."Variant Code", NewVariantCode);
+            AvailabilityType::Location:
+                if ItemAvailCU.ShowItemAvailByLoc(Item, ReqLine.FieldCaption(ReqLine."Location Code"), ReqLine."Location Code", NewLocationCode) then
+                    ReqLine.Validate(ReqLine."Location Code", NewLocationCode);
+            AvailabilityType::"Event":
+                if ItemAvailCU.ShowItemAvailByEvent(Item, ReqLine.FieldCaption(ReqLine."Due Date"), ReqLine."Due Date", NewDate, false) then
+                    ReqLine.Validate(ReqLine."Due Date", NewDate);
+            AvailabilityType::BOM:
+                if ItemAvailCU.ShowItemAvailByBOMLevel(Item, ReqLine.FieldCaption(ReqLine."Due Date"), ReqLine."Due Date", NewDate) then
+                    ReqLine.Validate(ReqLine."Due Date", NewDate);
+            AvailabilityType::UOM:
+                if ItemAvailCU.ShowItemAvailByUOM(Item, ReqLine.FieldCaption(ReqLine."Unit of Measure Code"), ReqLine."Unit of Measure Code", NewUnitOfMeasureCode) then
+                    ReqLine.Validate(ReqLine."Unit of Measure Code", NewUnitOfMeasureCode);
+        end;
+    end;
+
+    local procedure FilterItem(var Item: Record Item; LocationCode: Code[20]; VariantCode: Code[20]; Date: Date)
+    begin
+        // Do not make global
+        // Request to make function global has been rejected as it is a skeleton function of the codeunit
+        Item.SetRange("No.", Item."No.");
+        Item.SetRange("Date Filter", 0D, Date);
+        Item.SetRange("Variant Filter", VariantCode);
+        Item.SetRange("Location Filter", LocationCode);
+    end;
 }

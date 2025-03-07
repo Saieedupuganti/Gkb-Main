@@ -16,7 +16,7 @@ page 50321 "API Customer"
         {
             repeater(GroupName)
             {
-                field(ABN; Rec."ABN")//Check
+                field(ABN; Rec."ABN No.")//Check
                 {
                     Caption = 'ABN';
                 }
@@ -80,10 +80,6 @@ page 50321 "API Customer"
                 {
                     Caption = 'Currency Code';
                 }
-                field("Customergroup"; Rec."Customer Price Group")//Check
-                {
-                    Caption = 'Customer Group';
-                }
                 field("CustomerPriceGroup"; Rec."Customer Price Group")//Check
                 {
                     Caption = 'Customer Price Group';
@@ -100,7 +96,7 @@ page 50321 "API Customer"
                 {
                     Caption = 'Description';
                 }
-                field(Dimension; Rec."Global Dimension 1 Code")//Check
+                field(Dimension; Rec.Dimension)//Check
                 {
                     Caption = 'Dimension';
                 }

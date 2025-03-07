@@ -29,7 +29,7 @@ page 60033 "Work Order Lines API"
                 field("LineType"; Rec."Line Type") { }
                 field(Type; Rec.Type) { }
                 field(Name; Rec.Name) { }
-                field("UnitCode"; Rec."Unit Code")
+                field("UnitCode"; Rec."Unit Code")          //Unit Of Measure
                 {
                 }
                 field("LineStatus"; Rec."Line Status")

@@ -17,6 +17,7 @@ page 50348 "GKB Job Task List"
     applicationarea = All;
     UsageCategory = Lists;
     PageType = List;
+    SourceTableView = sorting("Job No.", "Job Task No.") order(descending);
     SourceTable = "Job Task";
 
     layout
@@ -64,11 +65,6 @@ page 50348 "GKB Job Task List"
                 {
                     ApplicationArea = Jobs;
                     ToolTip = 'Specifies the type of fix that the project task is related to.';
-                }
-                field("Sales Order"; Rec."Sales Order")
-                {
-                    ApplicationArea = Jobs;
-                    ToolTip = 'Specifies the sales order that the project task is related to.';
                 }
                 field("Billing Type"; Rec."Billing Type")
                 {

@@ -209,7 +209,5 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         if not IsUserAllowed then
             CurrPage.Editable(false);
     end;
-
-    
 }
 

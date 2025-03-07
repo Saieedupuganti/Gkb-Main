@@ -73,7 +73,7 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'ABN No';
             DataClassification = ToBeClassified;
-            ObsoleteState = Removed;
+            
         }
         field(50110; "Customer group"; Option)
         {
@@ -138,7 +138,7 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'Dimension';
             DataClassification = ToBeClassified;
-            ObsoleteState = Removed;
+
         }
         field(50501; "Dimension ID"; Text[100])
         {
@@ -217,12 +217,12 @@ tableextension 50100 "Customer Ext" extends Customer
     begin
         UpdateStandardFields();
     end;
-   
+
     trigger OnAfterInsert()
     begin
         UpdateStandardFields();
     end;
-    
+
 
     local procedure UpdateStandardFields()
     begin
@@ -260,7 +260,7 @@ tableextension 50100 "Customer Ext" extends Customer
         if (Rec."Dimension ID" <> '') and (xRec."Dimension ID" <> Rec."Dimension ID") then begin
             dimRec.SetFilter("CRM ID", Rec."Dimension ID");
             if dimRec.FindFirst() then begin
-                Rec."Global Dimension 1 Code" := dimRec.Code;
+                Rec.Dimension := dimRec.Code;
                 modified := modified + 1;
             end;
         end;

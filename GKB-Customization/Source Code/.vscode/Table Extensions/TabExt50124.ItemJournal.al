@@ -17,5 +17,17 @@ tableextension 50124 "Item Journals Ext" extends "Item Journal Line"
             Caption = 'Unit Cost CRMID';
             DataClassification = ToBeClassified;
         }
+        field(50104; "Comment"; Text[200])
+        {
+            Caption = 'Comment';
+            DataClassification = ToBeClassified;
+        }
+        field(50113; "Item Availability By Location"; Decimal)
+        {
+            Caption = 'Item Availability By Location';
+            DataClassification = CustomerContent;
+            Editable = false;
+            DecimalPlaces = 0 : 5;
+        }
     }
 }

@@ -10,15 +10,20 @@ pageextension 50107 "Purchase Order List Ext" extends "Purchase Order List"
                 Caption = 'Amount Excl. GST';
                 Editable = false; // Make it non-editable for display purposes
             }
-            field("CRM ID";Rec."CRM ID"){ApplicationArea=all;}
+            field("CRM ID"; Rec."CRM ID") { ApplicationArea = all; }
         }
     }
-
-    var
-        PurchHeader: Record "Purchase Header";
+    trigger OnOpenPage()
+    begin
+        Rec.SetCurrentKey("No.");
+        rec.Ascending(false);
+    end;
 
     trigger OnAfterGetRecord()
     begin
         PurchHeader.Get(Rec."Document Type", Rec."No."); // Get the Purchase Header based on Document Type and No.
     end;
+
+     var
+        PurchHeader: Record "Purchase Header";
 }

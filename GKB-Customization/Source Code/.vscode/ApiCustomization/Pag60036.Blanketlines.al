@@ -42,8 +42,7 @@ page 60036 "API Blanket Lines"
                 field("Dimension"; Rec."Shortcut Dimension 1 Code")
                 {
                     Caption = 'Dimension';
-                }
-                
+                }       
             }
         }
     }
