@@ -191,8 +191,6 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
             }
         }
     }
-
-
     trigger OnOpenPage();
     var
         UserSetupRec: Record "User Setup";

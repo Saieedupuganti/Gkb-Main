@@ -50,7 +50,11 @@ page 60033 "Work Order Lines API"
                 field("UnitCost"; Rec."Unit Cost")
                 {
                 }
+
                 field("UnitAmount"; Rec."Unit Amount")
+                {
+                }
+                field("ServiceDuration"; Rec."Service Duration")
                 {
                 }
             }

@@ -260,6 +260,13 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             OptionMembers = " ","Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
             DataClassification = ToBeClassified;
         }
+        field(50000; "GST Prod Posting Group"; Code[20])
+        {
+            Caption = 'GST Prod Posting Group';
+            Description = 'GST Product Posting Group at the header level';
+            TableRelation = "VAT Product Posting Group";
+            DataClassification = ToBeClassified;
+        }
     }
 
     trigger OnModify()

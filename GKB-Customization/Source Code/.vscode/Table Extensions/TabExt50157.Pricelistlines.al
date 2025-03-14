@@ -11,7 +11,6 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
 
     trigger OnAfterInsert()
     begin
-        // Exit if not a sales price list
         if not IsSalesPriceList() then
             exit;
 
@@ -22,7 +21,6 @@ tableextension 50157 "PurchPrclistLine" extends "Price List Line"
 
     trigger OnAfterModify()
     begin
-        // Exit if not a sales price list
         if not IsSalesPriceList() then
             exit;
 

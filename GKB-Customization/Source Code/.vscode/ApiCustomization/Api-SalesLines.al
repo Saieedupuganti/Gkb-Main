@@ -44,6 +44,7 @@ page 50330 "API Sales Lines"
                 {
                     Caption = 'Amount';
                 }
+                field("ShipmentDate"; Rec."Shipment Date") { }
                 field("Dimension"; Rec."Shortcut Dimension 1 Code")
                 {
                     Caption = 'Dimension';

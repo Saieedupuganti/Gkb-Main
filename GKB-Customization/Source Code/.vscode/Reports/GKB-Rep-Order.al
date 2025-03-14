@@ -45,12 +45,14 @@ report 60102 "Purchase Order"
             }
             column(Ordered_By; "Ordered By") { }
             column(Created_By; "Created By") { }
+            column(Job_No; "Job No") { }
             column(AmtCaption; AmtCaptionLbl)
             {
             }
             column(PaymentTermsCaption; PaymentTermsCaptionLbl)
             {
             }
+
             column(ShpMethodCaption; ShpMethodCaptionLbl)
             {
             }
