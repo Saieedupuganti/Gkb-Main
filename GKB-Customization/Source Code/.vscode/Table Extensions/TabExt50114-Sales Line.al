@@ -2,7 +2,7 @@ tableextension 50114 "GKBSales LineExt" extends "Sales Line"
 {
     fields
     {
-        field(50100; Comments2; Text[100])
+        field(50100; Comments2; Text[200])
         {
             Caption = 'Comments2';
             DataClassification = ToBeClassified;
@@ -24,17 +24,17 @@ tableextension 50114 "GKBSales LineExt" extends "Sales Line"
             DataClassification = ToBeClassified;
         }
         // Fields For API Table
-        field(50105; "Product"; Code[30])
+        field(50105; "Product"; Code[200])
         {
             DataClassification = ToBeClassified;
             TableRelation = Item."No.";
         }
-        field(50107; "CRM ID"; Text[100])
+        field(50107; "CRM ID"; Text[200])
         {
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
         }
-        field(50108; Topic; Text[100])
+        field(50108; Topic; Text[200])
         {
             Caption = 'Topic';
             DataClassification = ToBeClassified;

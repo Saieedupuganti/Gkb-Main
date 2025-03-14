@@ -19,6 +19,11 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
                 ApplicationArea = all;
                 Caption = 'Created By';
             }
+            field("Job No"; Rec."Job No")
+            {
+                ApplicationArea = all;
+                Caption = 'Work Order No.';
+            }
         }
         addafter("Buy-from Address 2")
         {

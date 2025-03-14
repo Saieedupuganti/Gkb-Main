@@ -8,7 +8,7 @@ pageextension 50118 PurchOrderSubExt extends "Purchase Order Subform"
         }
         modify("Job Task No.")
         {
-            ShowMandatory = true;
+            Visible = false;
         }
         addlast(Control1)
         {
@@ -18,7 +18,5 @@ pageextension 50118 PurchOrderSubExt extends "Purchase Order Subform"
                 ApplicationArea = all;
             }
         }
-
     }
-    
 }

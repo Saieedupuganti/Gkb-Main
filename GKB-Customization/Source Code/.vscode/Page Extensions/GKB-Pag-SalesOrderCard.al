@@ -64,12 +64,17 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
                     ApplicationArea = All;
                     Caption = 'Creation Method';
                 }
-                field("Customer PO Number";Rec."Customer PO Number")
+                field("Customer PO Number"; Rec."Customer PO Number")
                 {
                     ApplicationArea = All;
                     Caption = 'Customer PO Number';
                 }
-              
+                field("GST Prod Posting Group"; Rec."GST Prod Posting Group")
+                {
+                    ApplicationArea = All;
+                    Caption = 'GST Prod Posting Group';
+                }
+
             }
         }
         addafter("Ship-to Address 2")

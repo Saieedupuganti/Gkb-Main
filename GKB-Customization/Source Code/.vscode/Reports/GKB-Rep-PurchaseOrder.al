@@ -44,6 +44,7 @@ report 60100 "Purchase Order Invoice"
             column(CompanyAddress1; CompanyAddr[1])
             {
             }
+
             column(CompanyAddress2; CompanyAddr[2])
             {
             }
@@ -104,6 +105,8 @@ report 60100 "Purchase Order Invoice"
             }
             column(Ordered_By; "Ordered By") { }
             column(Created_By; "Created By") { }
+
+            column(Job_No; "Job No") { }
 
             column(CompanyBankBranchNo_Lbl; CompanyInfo.FieldCaption("Bank Branch No."))
             {

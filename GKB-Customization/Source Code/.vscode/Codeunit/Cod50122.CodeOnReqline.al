@@ -104,12 +104,11 @@ codeunit 50122 "Requisition Line Handler"
                 TotalQuantity += ItemLedgerEntry.Quantity;
             until ItemLedgerEntry.Next() = 0;
         ReqLine."Item Availability By Location" := TotalQuantity;
-
         //  ReqLine.Modify();
     end;
 
 
-    // Item Quantity based on Location c
+    // Item Quantity based on Location code
     [EventSubscriber(ObjectType::Table, Database::"Item Journal Line", 'OnAfterValidateEvent', 'Location Code', false, false)]
     local procedure UpdateItemAvailabilityOnLocationChangeForItemJournel(var Rec: Record "Item Journal Line"; var xRec: Record "Item Journal Line")
     begin
@@ -134,7 +133,6 @@ codeunit 50122 "Requisition Line Handler"
             until ItemLedgerEntry.Next() = 0;
 
         ItemJnlLine."Item Availability By Location" := TotalQuantity;
-
         // ItemJnlLine.Modify();
     end;
 

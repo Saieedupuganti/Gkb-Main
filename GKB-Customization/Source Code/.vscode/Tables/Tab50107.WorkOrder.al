@@ -3,16 +3,14 @@ table 50107 "GKB Work Order"
     DataClassification = CustomerContent;
     DrillDownPageId = "GKB Work Order List";
     LookupPageId = "GKB Work Order Card";
-
-
     fields
     {
-        field(50000; "Work Order No."; Text[50])
+        field(50000; "Work Order No."; Text[200])
         {
             DataClassification = CustomerContent;
 
         }
-        field(50001; "Service Account"; Code[100])
+        field(50001; "Service Account"; Code[200])
         {
             DataClassification = CustomerContent;
             TableRelation = "Customer";
@@ -22,16 +20,16 @@ table 50107 "GKB Work Order"
             DataClassification = CustomerContent;
             OptionMembers = " ",Unscheduled,Scheduled,"In Progress",Completed,Invoiced,Cancelled;
         }
-        field(50003; "Substatus"; Text[100])
+        field(50003; "Substatus"; Text[200])
         {
             DataClassification = CustomerContent;
             TableRelation = "GKB Work Order Substatus";
         }
-        field(50004; "Agreement"; Text[100])
+        field(50004; "Agreement"; Text[200])
         {
             DataClassification = CustomerContent;
         }
-        field(50005; "Billing Account"; Text[100])
+        field(50005; "Billing Account"; Text[200])
         {
             DataClassification = CustomerContent;
             TableRelation = Customer;
@@ -41,7 +39,7 @@ table 50107 "GKB Work Order"
             DataClassification = CustomerContent;
             OptionMembers = " ","Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
         }
-        field(50007; "Case"; Text[100])
+        field(50007; "Case"; Text[200])
         {
             DataClassification = CustomerContent;
         }
@@ -49,12 +47,12 @@ table 50107 "GKB Work Order"
         {
             DataClassification = ToBeClassified;
         }
-        field(50009; "Contact"; Text[30])
+        field(50009; "Contact"; Text[200])
         {
             DataClassification = CustomerContent;
             TableRelation = Contact;
         }
-        field(50010; "Currency"; Text[20])  //Changed from Code to Text.
+        field(50010; "Currency"; Text[200])  //Changed from Code to Text.
         {
             DataClassification = CustomerContent;
             TableRelation = "Currency";
@@ -64,32 +62,32 @@ table 50107 "GKB Work Order"
             DataClassification = CustomerContent;
             OptionMembers = " ","First Time Fix","First Time Fix With Multiple Bookings","Not a First Time Fix";
         }
-        field(50012; "Functional Location"; Code[20])
+        field(50012; "Functional Location"; Code[200])
         {
             DataClassification = CustomerContent;
             TableRelation = "Ship-to Address".Code;
         }
-        field(50013; "Opportunity"; Text[100])
+        field(50013; "Opportunity"; Text[200])
         {
             DataClassification = CustomerContent;
-            TableRelation = Opportunity;
         }
-        field(50014; "Owner"; Text[100])
+        field(50014; "Owner"; Text[200])
         {
             DataClassification = CustomerContent;
             TableRelation = Employee;
         }
-        field(50029; "Sales Order"; Code[20])
+        field(50029; "Sales Order"; Code[200])
         {
             DataClassification = CustomerContent;
-            TableRelation = "Sales Header";
+            Caption = 'Sales Order No.';
+            TableRelation = "Sales Header"."No." WHERE("Document Type" = CONST(Order));
         }
-        field(50015; "Owning Business Unit"; Code[20])
+        field(50015; "Owning Business Unit"; Code[200])
         {
             DataClassification = CustomerContent;
             TableRelation = Dimension;
         }
-        field(50016; "Parent Work Order"; Code[20])
+        field(50016; "Parent Work Order"; Code[200])
         {
             DataClassification = CustomerContent;
             TableRelation = "GKB Work Order";
@@ -111,7 +109,7 @@ table 50107 "GKB Work Order"
         {
             DataClassification = CustomerContent;
         }
-        field(50040; "Shortcut Dimension 1 Code"; Code[20])
+        field(50040; "Shortcut Dimension 1 Code"; Code[200])
         {
             CaptionClass = '1,2,1';
             Caption = 'Obrien_Business unit Code';
@@ -128,7 +126,7 @@ table 50107 "GKB Work Order"
             OptionMembers = " ",Onsite,Remote;
             OptionCaption = ' ,Onsite,Remote';
         }
-        field(50025; "Work Order Type"; Text[100])
+        field(50025; "Work Order Type"; Text[200])
         {
             DataClassification = CustomerContent;
             TableRelation = "GKB Work Order Type";
@@ -143,17 +141,17 @@ table 50107 "GKB Work Order"
             OptionMembers = " ",Active,InActive;
             OptionCaption = 'Active,InActive';
         }
-        field(50028; "Job No."; Code[20])
+        field(50028; "Job No."; Code[200])
         {
             DataClassification = CustomerContent;
             TableRelation = "Job";
         }
-        field(50030; "Project Task No"; Code[30])
+        field(50030; "Project Task No"; Code[200])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Job Task"."Job Task No.";
         }
-        field(50105; "CRM ID"; Text[100])
+        field(50105; "CRM ID"; Text[200])
         {
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
@@ -163,16 +161,16 @@ table 50107 "GKB Work Order"
             Caption = 'job Created';
             DataClassification = ToBeClassified;
         }
-        field(50032; "Customer PO Number"; Text[100])
+        field(50032; "Customer PO Number"; Text[200])
         {
             Caption = 'Customer PO Number';
             DataClassification = ToBeClassified;
         }
-        field(50205; "Description 2"; Text[100])
+        field(50205; "Description 2"; Text[200])
         {
             Caption = 'Description 2';
         }
-        field(50206; "Location Code"; Code[30])
+        field(50206; "Location Code"; Code[200])
         {
             Caption = 'Location Code';
             TableRelation = Location where("Use As In-Transit" = const(false));

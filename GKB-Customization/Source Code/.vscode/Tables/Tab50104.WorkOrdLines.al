@@ -9,12 +9,12 @@ table 50104 "GKB Work Order Lines"
             DataClassification = ToBeClassified;
             AutoIncrement = true;
         }
-        field(1000; "Work Order No."; Code[30])
+        field(1000; "Work Order No."; Code[200])
         {
             Caption = 'Work Order No.';
             TableRelation = "GKB Work Order";
         }
-        field(2; Code; Code[100])
+        field(2; Code; Code[200])
         {
             Caption = 'Product No.';
             TableRelation = Item;
@@ -22,9 +22,9 @@ table 50104 "GKB Work Order Lines"
         field(55; "Name"; Text[200])
         {
             Caption = 'Name';
-            
+
         }
-        field(3; "Unit Code"; Code[50])
+        field(3; "Unit Code"; Code[200])
         {
             Caption = 'Unit Code';
             TableRelation = "Unit of Measure";
@@ -42,7 +42,7 @@ table 50104 "GKB Work Order Lines"
         {
             Caption = 'Quantity to Build';
         }
-        field(7; "Location Code"; Code[100])
+        field(7; "Location Code"; Code[200])
         {
             Caption = 'Location Code';
         }
@@ -66,11 +66,11 @@ table 50104 "GKB Work Order Lines"
         {
             Caption = 'Total Amount';
         }
-        field(13; "Job No."; Code[100])
+        field(13; "Job No."; Code[200])
         {
             Caption = 'Project No';
         }
-        field(50105; "CRM ID"; Text[100])
+        field(50105; "CRM ID"; Text[200])
         {
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
@@ -87,6 +87,20 @@ table 50104 "GKB Work Order Lines"
         field(50117; Type; Enum "GKB Job Journal Line Type")
         {
             Caption = 'Type';
+        }
+        field(50000; "Service Duration"; Decimal)
+        {
+            Caption = 'Service Duration';
+            ToolTip = 'Stores the duration of the service provided';
+            DataClassification = ToBeClassified;
+        }
+
+        field(50001; "Total Cost of Service"; Decimal)
+        {
+            Caption = 'Total Cost of Service';
+            ToolTip = 'Stores the total cost of the service';
+            DataClassification = ToBeClassified;
+            ObsoleteState = Removed;
         }
     }
     keys

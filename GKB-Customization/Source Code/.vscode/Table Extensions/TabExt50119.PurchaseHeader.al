@@ -11,30 +11,36 @@ tableextension 50119 "GKBPurchase HeaderExt" extends "Purchase Header"
         {
             Caption = 'Created By';
         }
-
         field(50102; "Ordered By"; Code[20])
         {
             Caption = 'Ordered By';
             TableRelation = Employee."First Name";
             ValidateTableRelation = false;
         }
-        field(50103; "Address 3";Text[100])
+        field(50103; "Address 3"; Text[100])
         {
             Caption = 'Address 3';
         }
-         field(50107; "CRM ID"; Text[100])
+        field(50107; "CRM ID"; Text[100])
         {
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
+        }
+        field(50108; "Job No"; Code[50])
+        {
+            Caption = 'Work Order No.';
+            DataClassification = ToBeClassified;
+            TableRelation = Job;
+
         }
     }
     trigger OnInsert()
     var
         user: Record "User Setup";
-        //userid: Code[50];
+    //userid: Code[50];
     begin
-        IF User.GET(USERID) THEN 
-        Rec."Created By" := User."User ID";
+        IF User.GET(USERID) THEN
+            Rec."Created By" := User."User ID";
     end;
 
 }

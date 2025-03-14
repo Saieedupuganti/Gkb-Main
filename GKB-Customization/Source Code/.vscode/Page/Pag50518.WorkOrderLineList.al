@@ -87,14 +87,14 @@ page 50118 "Work Order Lines List"
                 {
                     ApplicationArea = All;
                 }
+                 field("Unit Cost";Rec."Unit Cost")
+                {
+                    ApplicationArea = all;
+                }
                 field("Unit Amount"; Rec."Unit Amount")
                 {
                     ApplicationArea = all;
-                }
-                field("Total Cost"; Rec."Total Cost")
-                {
-                    ApplicationArea = all;
-                }
+                }  
                 field("Line Created"; Rec."Line Created")
                 {
                     ApplicationArea = all;

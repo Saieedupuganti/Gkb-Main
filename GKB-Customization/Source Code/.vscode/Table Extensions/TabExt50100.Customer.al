@@ -2,22 +2,22 @@ tableextension 50100 "Customer Ext" extends Customer
 {
     fields
     {
-        field(50149; "D365 State"; Text[100])
+        field(50149; "D365 State"; Text[200])
         {
             Caption = 'State';
             DataClassification = ToBeClassified;
         }
-        field(50150; "D365 Country"; Text[100])
+        field(50150; "D365 Country"; Text[200])
         {
             Caption = 'Country';
             DataClassification = ToBeClassified;
         }
-        field(50145; "D365 City"; Text[100])
+        field(50145; "D365 City"; Text[200])
         {
             Caption = 'City';
             DataClassification = ToBeClassified;
         }
-        field(50146; "D365 PostCode"; Text[100])
+        field(50146; "D365 PostCode"; Text[200])
         {
             Caption = 'PostCode';
             DataClassification = ToBeClassified;
@@ -36,12 +36,12 @@ tableextension 50100 "Customer Ext" extends Customer
             OptionCaption = ' ,Accounting,Amenities,Boiler Ancillaries,Boiler Manufacturer,Burner Management,Communication,Competition,Consultants,Credit Cards,Electrical,Employees,Engineering,Equipment Rental,Freight & Transport,Gas Components,Inspection & Certification,IT,Legal,Motor Vehicles,Plumbing,Safety Equipment,Subcontractor,Tooling,Travel,Other,N/A';
             OptionMembers = " ","Accounting","Amenities","Boiler Ancillaries","Boiler Manufacturer","Burner Management","Communication","Competition","Consultants","Credit Cards","Electrical","Employees","Engineering","Equipment Rental","Freight & Transport","Gas Components","Inspection & Certification","IT","Legal","Motor Vehicles","Plumbing","Safety Equipment","Subcontractor","Tooling","Travel","Other","N/A";
         }
-        field(50103; "D365 Account ID"; Text[100])
+        field(50103; "D365 Account ID"; Text[200])
         {
             Caption = 'D365 Account ID';
             DataClassification = ToBeClassified;
         }
-        field(50104; "SAP Customer Number"; Text[100])
+        field(50104; "SAP Customer Number"; Text[200])
         {
             Caption = 'SAP Customer Number';
             DataClassification = ToBeClassified;
@@ -53,7 +53,7 @@ tableextension 50100 "Customer Ext" extends Customer
             OptionCaption = ' ,Basic,Pro';
             OptionMembers = " ","Basic","Pro";
         }
-        field(50106; "Account Contract Manager"; Text[100])
+        field(50106; "Account Contract Manager"; Text[200])
         {
             Caption = 'Account Contract Manager';
             DataClassification = ToBeClassified;
@@ -69,7 +69,7 @@ tableextension 50100 "Customer Ext" extends Customer
             Caption = 'Capex To';
             DataClassification = ToBeClassified;
         }
-        field(50109; "ABN No."; Text[100])
+        field(50109; "ABN No."; Text[200])
         {
             Caption = 'ABN No';
             DataClassification = ToBeClassified;
@@ -111,101 +111,101 @@ tableextension 50100 "Customer Ext" extends Customer
             OptionMembers = " ",Private,Public,Subsidary,Others;
         }
 
-        field(50117; "Address 3"; Text[100])
+        field(50117; "Address 3"; Text[200])
         {
             Caption = 'Address 3';
         }
-        field(50131; "CRM ID"; Text[100])
+        field(50131; "CRM ID"; Text[200])
         {
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
         }
-        field(50135; "Account Contract Manager ID"; Text[100])
+        field(50135; "Account Contract Manager ID"; Text[200])
         {
             Caption = 'Account Contract Manager ID';
             DataClassification = ToBeClassified;
         }
-        field(50137; WEB; Text[100])
+        field(50137; WEB; Text[200])
         {
             DataClassification = ToBeClassified;
         }
-        field(50138; "Contact Code"; Code[30])
+        field(50138; "Contact Code"; Code[200])
         {
             DataClassification = ToBeClassified;
             TableRelation = Contact;
         }
-        field(50500; "Dimension"; Code[20])
+        field(50500; "Dimension"; Code[200])
         {
             Caption = 'Dimension';
             DataClassification = ToBeClassified;
 
         }
-        field(50501; "Dimension ID"; Text[100])
+        field(50501; "Dimension ID"; Text[200])
         {
             Caption = 'Dimension ID';
             DataClassification = ToBeClassified;
         }
-        field(50502; "Customer Price Group Id"; Text[100])
+        field(50502; "Customer Price Group Id"; Text[200])
         {
             Caption = 'Customer Price Group Id';
             DataClassification = ToBeClassified;
         }
-        field(50503; "Custom Contact Id"; Text[100])
+        field(50503; "Custom Contact Id"; Text[200])
         {
             Caption = 'Custom Contact Id';
             DataClassification = ToBeClassified;
         }
-        field(50504; Territory; Code[20])
+        field(50504; Territory; Code[200])
         {
             Caption = 'Territory';
             DataClassification = ToBeClassified;
         }
-        field(50505; "Territory Code ID"; Text[100])
+        field(50505; "Territory Code ID"; Text[200])
         {
             Caption = 'Territory Code ID';
             DataClassification = ToBeClassified;
         }
-        field(50506; "Territory Id"; Text[100])
+        field(50506; "Territory Id"; Text[200])
         {
             DataClassification = ToBeClassified;
         }
-        field(50133; "Company Contact"; Text[100])
+        field(50133; "Company Contact"; Text[200])
         {
             Caption = 'Company Contact';
             FieldClass = FlowField;
             CalcFormula = Lookup("Contact"."No." WHERE("Name" = FIELD(Name)));
         }
-        field(50136; "Address Name"; Text[100])
+        field(50136; "Address Name"; Text[200])
         {
             Caption = 'Address Name';
             DataClassification = ToBeClassified;
         }
-        field(50140; "Owner Id"; Text[100])
+        field(50140; "Owner Id"; Text[200])
         {
             Caption = 'Owner Id';
             DataClassification = ToBeClassified;
         }
-        field(50141; "Owner"; Code[30])
+        field(50141; "Owner"; Code[200])
         {
             Caption = 'Owner';
             DataClassification = ToBeClassified;
         }
-        field(50142; "Currency Code Id"; Text[100])
+        field(50142; "Currency Code Id"; Text[200])
         {
             Caption = 'Currency Code Id';
             DataClassification = ToBeClassified;
         }
-        field(50143; "Parent Account"; Text[100])
+        field(50143; "Parent Account"; Text[200])
         {
             Caption = 'Parent Account';
             DataClassification = ToBeClassified;
         }
-        field(50144; "Parent Account CRM ID"; Text[100])
+        field(50144; "Parent Account CRM ID"; Text[200])
         {
             Caption = 'Parent Account CRM ID';
             DataClassification = ToBeClassified;
         }
-        field(50151; "Vendor No."; Code[20])
+        field(50151; "Vendor No."; Code[200])
         {
             Caption = 'Vendor No.';
             TableRelation = Vendor."No.";

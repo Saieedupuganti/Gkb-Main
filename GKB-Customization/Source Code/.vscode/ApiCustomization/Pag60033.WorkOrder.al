@@ -17,32 +17,31 @@ page 50100 "WorkOrderAPI"
         {
             repeater(Group)
             {
-
-                field("WorkOrderNumber"; rec."Work Order No.") { }
+                field("workordernumber"; rec."Work Order No.") { }
                 field(crmid; Rec."CRM ID")
                 { Caption = 'CRM ID'; }
-                field("ServiceAccount"; rec."Service Account") { }
-                field("SystemStatus"; rec."System Status") { }
-                field("Substatus"; rec."Substatus") { }
-                field("Agreement"; rec."Agreement") { }
-                field("BillingAccount"; rec."Billing Account") { }
-                field("BillingType"; rec."Billing Type") { }
-                field("Contact"; rec."Contact") { }
-                field("Currency"; rec."Currency") { }
-                field("FixType"; rec."Fix Type") { }
-                field("CustomerPONumber"; Rec."Customer PO Number") { }
-                field("FunctionalLocation"; rec."Functional Location") { }
-                field("Opportunity"; rec."Opportunity") { }
-                field("SalesOrder"; rec."Sales Order") { }
-                field("OwningBusinessUnit"; rec."Shortcut Dimension 1 Code") { }
-                field("ParentWorkOrder"; rec."Parent Work Order") { }
-                field("TimeWindowStart"; rec."Time Window Start") { }
-                field("TimeWindowEnd"; rec."Time Window End") { }
-                field("Topic"; rec."Topic") { }
-                field("WorkDescription"; rec."Work Description") { }
-                field("WorkOrderType"; rec."Work Order Type") { }
-                field("WorkOrderSummary"; rec."Work Order Summary") { }
-                field("Status"; rec."Status") { }
+                field("serviceaccount"; rec."Service Account") { }
+                field("systemstatus"; rec."System Status") { }
+                field("substatus"; rec."Substatus") { }
+                field("agreement"; rec."Agreement") { }
+                field("billingaccount"; rec."Billing Account") { }
+                field("billingtype"; rec."Billing Type") { }
+                field("contact"; rec."Contact") { }
+                field("currency"; rec."Currency") { }
+                field("fixtype"; rec."Fix Type") { }
+                field("customerponumber"; Rec."Customer PO Number") { }
+                field("functionallocation"; rec."Functional Location") { }
+                field("opportunity"; rec."Opportunity") { }
+                field("salesorder"; rec."Sales Order") { }
+                field("owningbusinessunit"; rec."Shortcut Dimension 1 Code") { }
+                field("parentworkorder"; rec."Parent Work Order") { } 
+                field("timewindowstart"; rec."Time Window Start") { }
+                field("timewindowend"; rec."Time Window End") { }
+                field("topic"; rec."Topic") { }
+                field("workdescription"; rec."Work Description") { }
+                field("workordertype"; rec."Work Order Type") { }
+                field("workordersummary"; rec."Work Order Summary") { }
+                field("status"; rec."Status") { }
             }
         }
     }

@@ -42,10 +42,40 @@ codeunit 50124 "Event Subscriber"
             end;
         end;
     end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Sales line", 'OnAfterInsertEvent', '', false, false)]
+    local procedure OnAfterInsertJobPlanningLine(var Rec: Record "Sales Line")
+    var
+        Item: Record Item;
+    begin
+        if (Rec.Type = Rec.Type::Item) and (Rec."No." <> '') and (Rec."Gen. Prod. Posting Group" = '') and (Rec."Unit of Measure" <> '') then begin
+            if Item.Get(Rec."No.") then begin
+                Rec."Gen. Prod. Posting Group" := Item."Gen. Prod. Posting Group";
+                Rec."Unit of Measure":= Item."Base Unit of Measure";
+               // Rec.Validate(Quantity,Rec."");
+                Rec.Modify();
+            end;
+        end;
+    end;
+
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterInsertInvoiceHeader', '', false, false)]
     local procedure OnAfterInsertSalesInvHeader(var SalesInvHeader: Record "Sales Invoice Header"; SalesHeader: Record "Sales Header")
     begin
         SalesInvHeader."Customer PO Number" := SalesHeader."Customer PO Number";
     end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Job Planning Line", OnBeforeInsertEvent, '', false, false)]
+    local procedure OnBeforeCreateSalesInvoice1(var rec: Record "Job Planning Line")
+    var
+        Item: Record Item;
+    begin
+        if (Rec.Type = Rec.Type::Item) and (Rec."No." <> '') then begin
+            if Item.Get(Rec."No.") then begin
+                Rec."Unit of Measure Code" := Item."Base Unit of Measure";
+                Rec."Gen. Prod. Posting Group" := Item."Gen. Prod. Posting Group";
+            end;
+        end;
+    end;
+
 }
 
