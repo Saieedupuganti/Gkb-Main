@@ -133,39 +133,40 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
     }
     actions
     {
-        modify(CarryOutActionMessage)
-        {
-            Caption = 'Create Purchase Order';
-            trigger OnBeforeAction()
-            var
-                RecTemp: Record "Requisition Line";
-                FirstBusinessUnitCode: Code[20];
-                IsSame: Boolean;
-            begin
+        // modify(CarryOutActionMessage)
+        // {
+        //     Caption = 'Create Purchase Order';
+        //     trigger OnBeforeAction()
+        //     var
+        //         RecTemp: Record "Requisition Line";
+        //         FirstBusinessUnitCode: Code[20];
+        //         IsSame: Boolean;
+        //     begin
 
-                if Rec."Location Code" = '' then
-                    Error('line %1 Warehouse must have a value', Rec."Line No.");
+        //         if Rec."Location Code" = '' then
+        //             Error('line %1 Warehouse must have a value', Rec."Line No.");
 
-                IsSame := true;
-                if Rec.FindSet then begin
-                    FirstBusinessUnitCode := Rec."Shortcut Dimension 1 Code";
+        //         IsSame := true;
+        //         if Rec.FindSet then begin
+        //             FirstBusinessUnitCode := Rec."Shortcut Dimension 1 Code";
 
-                    // Loop through all records to check if the Obrien_Business Unit Code matches the first record
-                    repeat
-                        if Rec."Shortcut Dimension 1 Code" <> FirstBusinessUnitCode then begin
-                            IsSame := false;
-                            break;
-                        end;
-                    until Rec.Next() = 0;
-                end;
+        //             // Loop through all records to check if the Obrien_Business Unit Code matches the first record
+        //             repeat
+        //                 if Rec."Shortcut Dimension 1 Code" <> FirstBusinessUnitCode then begin
+        //                     IsSame := false;
+        //                     break;
+        //                 end;
+        //             until Rec.Next() = 0;
+        //         end;
 
-                if not IsSame then begin
-                    Error('The Obrien_Business Unit Codes are not the same.');
-                    // exit;
-                end;
+        //         if not IsSame then begin
+        //             Error('The Obrien_Business Unit Codes are not the same.');
+        //             // exit;
+        //         end;
 
-            end;
-        }
+        //     end;
+        // }
+
         addfirst(processing)
         {
             action(CreatePoAndSendApproval)
@@ -175,11 +176,26 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 Promoted = true;
                 PromotedCategory = Process;
                 AccessByPermission = tabledata 454 = rim;
-                Visible = false;
                 trigger OnAction()
                 var
-                    Ph: Record "Purchase Header";
+                    ReqWkshPO: Codeunit 50127;
+                    ReqLine: Record "Requisition Line";
+                    TempReqLine: Record "Requisition Line" temporary;
                 begin
+                    CurrPage.SetSelectionFilter(ReqLine);
+                    if ReqLine.FindSet() then
+                        repeat
+                            TempReqLine := ReqLine;
+                            TempReqLine.Insert();
+                        until ReqLine.Next() = 0;
+                    ReqLine.Reset();
+                    ReqLine.SetRange("PO Created", false);
+                    ReqLine.SetRange("Journal Batch Name", 'default');
+                    ReqLine.SetRange("Worksheet Template Name", 'REQ');
+                    if ReqLine.FindSet() then
+                        repeat
+                            ReqWkshPO.CreatePOFromReq(ReqLine);
+                        until ReqLine.Next() = 0;
 
                 end;
             }

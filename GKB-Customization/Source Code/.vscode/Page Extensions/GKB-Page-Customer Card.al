@@ -21,11 +21,6 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         {
             Visible = false;
         }
-        // modify("Primary Contact No.")
-        // {
-        //  CalcFormula = Lookup(Contact."No." WHERE ("CRM ID" = Field("Primary Contact CRMID")));
-        // }
-
         addafter(General)
         {
             group("D365 CUSTOM FIELDS")

@@ -547,4 +547,3 @@ report 60120 "Remittance Advice - Journal"
         end;
     end;
 }
-

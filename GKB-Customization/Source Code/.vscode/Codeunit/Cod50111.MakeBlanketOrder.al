@@ -29,9 +29,7 @@ codeunit 50111 SalesQteToBlanketOrder
                 BlanketOrderLine."Document No." := BlanketOrderHeader."No.";
                 BlanketOrderLine."Document Type" := BlanketOrderHeader."Document Type"::"Blanket Order";
                 BlanketOrderLine."Line No." := SalesQuoteLine."Line No.";
-
                 BlanketOrderLine.Validate("Sell-to Customer No.", BlanketOrderHeader."Sell-to Customer No.");
-
                 BlanketOrderLine.Validate("Type", SalesQuoteLine."Type");
                 BlanketOrderLine.Validate("No.", SalesQuoteLine."No.");
                 BlanketOrderLine.Validate(Quantity, SalesQuoteLine.Quantity);

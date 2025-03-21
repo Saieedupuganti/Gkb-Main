@@ -51,10 +51,10 @@ codeunit 50124 "Event Subscriber"
         if (Rec.Type = Rec.Type::Item) and (Rec."No." <> '') and (Rec."Gen. Prod. Posting Group" = '') and (Rec."Unit of Measure" <> '') then begin
             if Item.Get(Rec."No.") then begin
                 Rec."Gen. Prod. Posting Group" := Item."Gen. Prod. Posting Group";
-                Rec."Unit of Measure":= Item."Base Unit of Measure";
-               // Rec.Validate(Quantity,Rec."");
+                Rec."Unit of Measure" := Item."Base Unit of Measure";
                 Rec.Modify();
             end;
+
         end;
     end;
 
@@ -77,5 +77,14 @@ codeunit 50124 "Event Subscriber"
         end;
     end;
 
+    [EventSubscriber(ObjectType::Table, Database::"Job Planning Line", OnAfterInsertEvent, '', false, false)]
+    local procedure QtyToQtytojournelUpdate(var rec: Record "Job Planning Line")
+    var
+        Item: Record Item;
+    begin
+        if (Rec.Type = Rec.Type::Item) and (Rec.Quantity <> 0) then begin
+            rec.Validate(Quantity, rec."Qty. to Transfer to Journal");
+        end;
+    end;
 }
 

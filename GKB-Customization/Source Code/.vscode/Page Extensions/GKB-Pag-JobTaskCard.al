@@ -14,6 +14,17 @@ pageextension 50200 "JobTaskCardExt" extends "Job Task Card"
             Caption = 'Customer Name';
             Visible = true;
         }
+        addfirst(Posting)
+        {
+            field("Total Line Cost"; Rec."Total Line Cost")
+            {
+                ApplicationArea = all;
+            }
+            field("Total Line Amount"; Rec."Total Line Amount")
+            {
+                ApplicationArea = all;
+            }
+        }
         addafter(General)
         {
             group("Custom Fields")

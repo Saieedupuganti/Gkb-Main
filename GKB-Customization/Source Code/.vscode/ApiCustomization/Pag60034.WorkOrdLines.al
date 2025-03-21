@@ -44,6 +44,7 @@ page 60033 "Work Order Lines API"
                 field("LocationCode"; Rec."Location Code")
                 {
                 }
+                
                 field(Description; Rec.Description)
                 {
                 }
@@ -56,6 +57,13 @@ page 60033 "Work Order Lines API"
                 }
                 field("ServiceDuration"; Rec."Service Duration")
                 {
+                }
+                field("WorkStartTime";Rec."Work Start Time")
+                {
+                }
+                field("WorkEndTime";Rec."Work End Time")
+                {
+
                 }
             }
         }

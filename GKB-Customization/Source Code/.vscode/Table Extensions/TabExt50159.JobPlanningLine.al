@@ -19,6 +19,23 @@ tableextension 50159 "Job Planning Line Ext" extends "Job Planning Line"
             DataClassification = CustomerContent;
             Editable = false;
         }
+
+        field(50103; "Total Line Cost"; Decimal)
+        {
+            FieldClass = FlowField;
+            DecimalPlaces = 0 : 5;
+            CalcFormula = Sum("Job Planning Line"."Total Cost" WHERE("Job No." = FIELD("Job No.")));
+            Caption = 'Total Line Cost';
+            Editable = false;
+        }
+        field(50104; "Total Line Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            DecimalPlaces = 0 : 5;
+            CalcFormula = Sum("Job Planning Line"."Line Amount" WHERE("Job No." = FIELD("Job No.")));
+            Caption = 'Total Line Amount';
+            Editable = false;
+        }
     }
 }
 pageextension 50363 "Job Planning Line Lst" extends "Job Planning Lines Part"
@@ -36,6 +53,7 @@ pageextension 50363 "Job Planning Line Lst" extends "Job Planning Lines Part"
                 ApplicationArea = all;
                 ToolTip = 'Specifies the total cost for the Service';
             }
+            
         }
     }
 }

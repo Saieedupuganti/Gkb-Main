@@ -62,6 +62,27 @@ pageextension 50149 GKBItemExt extends "Item Card"
     }
     actions
     {
+        addlast(navigation)
+        {
+            action(UpadateCRM)
+            {
+                Caption = 'Update To CRM';
+                ApplicationArea = All;
+                Image = UpdateDescription;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Update this to CRM';
+
+                trigger OnAction()
+                var
+                    ItemUpadateToCrm: Codeunit "Update to Crm Mngmt";
+                begin
+                    ItemUpadateToCrm.UpadateItemToCRM(Rec);
+                    Message('Record Updated to CRM Successfully');
+                end;
+            }
+        }
         addafter(ApplyTemplate)
         {
             action(CustomerCardBarCode)
@@ -81,6 +102,7 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 end;
             }
         }
+
     }
     // var
     //     GenerateQR: Label 'Generate QR Code';

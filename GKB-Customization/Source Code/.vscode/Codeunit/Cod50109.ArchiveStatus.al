@@ -7,8 +7,7 @@ codeunit 50109 "Archive Status"
         PurchlineArchive: Record "Purchase Line Archive";
         PurchLine: Record "Purchase Line";
     begin
-        PurchOrderArchive.Init();
-        //PurchOrderArchive.Copy(Rec);   
+        PurchOrderArchive.Init();  
         PurchOrderArchive."Document Type" := PurchOrderArchive."Document Type"::Order;
         PurchOrderArchive.Validate("Buy-from Vendor No.", rec."Buy-from Vendor No.");
         PurchOrderArchive."Document Date" := rec."Document Date";
@@ -19,7 +18,6 @@ codeunit 50109 "Archive Status"
         PurchOrderArchive.Insert(true);
         Message('Purchase Archive Created: %1', PurchOrderArchive."No.");
 
-        //Now Coping the lines from purchase line to purchase orchuuve lines.
         Purchline.SetRange("Document Type", rec."Document Type"::Order);
         Purchline.SetRange("Document No.", Rec."No.");
 
@@ -31,10 +29,7 @@ codeunit 50109 "Archive Status"
                 PurchlineArchive."Document Type" := PurchOrderArchive."Document Type"::Order;
                 PurchlineArchive."Line No." := PurchLine."Line No.";
 
-
-                //The Buy from vendor from vendor no is inherited for the lines.
                 PurchlineArchive.Validate("Buy-from Vendor No.", PurchOrderArchive."Buy-from Vendor No.");
-
                 PurchlineArchive.Validate(Type, PurchLine.Type);
                 PurchlineArchive.Validate("No.", PurchLine."No.");
                 PurchlineArchive.Validate(Quantity, PurchLine.Quantity);
@@ -45,7 +40,6 @@ codeunit 50109 "Archive Status"
             Message('Purchase order deleted successfully: %1', PurchOrderArchive."No.");
         end else
             Message('No Lines found for the Purchaae Line');
-
 
         Rec.Status := rec.Status::Open;
         REC.Modify(true);

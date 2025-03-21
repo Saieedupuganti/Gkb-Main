@@ -223,7 +223,6 @@ tableextension 50100 "Customer Ext" extends Customer
         UpdateStandardFields();
     end;
 
-
     local procedure UpdateStandardFields()
     begin
         "City" := "D365 City";
@@ -275,5 +274,4 @@ tableextension 50100 "Customer Ext" extends Customer
             Rec.Modify(false);
         end;
     end;
-
 }
