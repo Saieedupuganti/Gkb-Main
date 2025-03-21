@@ -121,8 +121,6 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
             end;
         end;
 
-
-
         if modified > 0 then begin
             Rec.Modify(false);
         end;

@@ -79,5 +79,21 @@ tableextension 50122 "JobTaskExtension" extends "Job Task"
             DataClassification = ToBeClassified;
             TableRelation = "VAT Product Posting Group";
         }
+         field(50103; "Total Line Cost"; Decimal)
+        {
+            FieldClass = FlowField;
+            DecimalPlaces = 0 : 5;
+            CalcFormula = Sum("Job Planning Line"."Total Cost" WHERE("Job No." = FIELD("Job No.")));
+            Caption = 'Total Line Cost';
+            Editable = false;
+        }
+        field(50104; "Total Line Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            DecimalPlaces = 0 : 5;
+            CalcFormula = Sum("Job Planning Line"."Line Amount" WHERE("Job No." = FIELD("Job No.")));
+            Caption = 'Total Line Amount';
+            Editable = false;
+        }
     }
 }

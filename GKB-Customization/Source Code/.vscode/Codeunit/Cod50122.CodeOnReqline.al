@@ -1,7 +1,6 @@
 codeunit 50122 "Requisition Line Handler"
 {
-    // Code to Check Alternate Vendor for Item
-    [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnAfterInsertEvent', '', false, false)]
+    [EventSubscriber(ObjectType::Table, Database::"Requisition Line", OnAfterValidateEvent, "Vendor No.", false, false)]
     local procedure CheckAlternateVendorsOnAfterInsertPurchaseLine(var Rec: Record "Requisition Line")
     begin
         if Rec.Type = Rec.Type::Item then
@@ -22,7 +21,7 @@ codeunit 50122 "Requisition Line Handler"
 
         if VendorCount > 1 then begin
             ReqLine."Alternate Vendor For Item" := true;
-            ReqLine.Modify();
+            // ReqLine.Modify();
         end;
     end;
 
@@ -150,5 +149,3 @@ codeunit 50122 "Requisition Line Handler"
         TransRcptLine."Transfer Note" := TransLine."Transfer Note";
     end;
 }
-
-

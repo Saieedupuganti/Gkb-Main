@@ -58,10 +58,14 @@ codeunit 50102 "GKB Work Order Mgt."
         PlanningLine."No." := WOLn.Code;
         PlanningLine.Description := WOLn.Description;
         PlanningLine.Quantity := WOLn."Quantity to Build";
+        PlanningLine."Qty. to Transfer to Journal" := WOLn."Quantity to Build";
         PlanningLine.Validate("Unit Cost", WOLn."Unit Cost");
         PlanningLine.Validate("Unit Price", WOLn."Unit amount");
         PlanningLine."Service Duration" := WOLn."Service Duration";
+        PlanningLine."Planning Date" := WOLn."Work Start Time";
+        PlanningLine."Planned Delivery Date" := WOLn."Work End Time";
         PlanningLine."Location Code" := WOLn."Location Code";
+
         //PlanningLine."Line Type" := PlanningLine."Line Type"::"Both Budget and Billable";      // Have to Create a Description field in both Job Plaing amnd Work Order lines
         PlanningLine.Insert();//Insert
 
@@ -256,6 +260,9 @@ codeunit 50102 "GKB Work Order Mgt."
         if WO.topic <> xWO.Topic then
             Job.Description := WO."Topic";
 
+        if WO."Work Order Type" <> xWO."Work Order Type" then
+            Job."Work Order Type" := WO."Work Order Type";
+
         if WO."Service Account" <> xWO."Service Account" then
             Job.Validate("Sell-to Customer No.", WO."Service Account");
 
@@ -422,7 +429,7 @@ codeunit 50102 "GKB Work Order Mgt."
             PlanningLine.Description := WOLn.Description;
 
         if (WOLn."Quantity to Build" <> xWOLn."Quantity to Build") then
-            PlanningLine.Quantity := WOLn."Quantity to Build";
+            PlanningLine.Validate(Quantity, WOLn."Quantity to Build");
 
         if (WOLn."Unit Cost" <> xWOLn."Unit Cost") then
             PlanningLine.Validate("Unit Cost", WOLn."Unit Cost");

@@ -136,6 +136,11 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
                 end;
             end;
         }
+        field(50115; "PO Created"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'PO Created';
+        }
     }
     trigger OnInsert()
     var

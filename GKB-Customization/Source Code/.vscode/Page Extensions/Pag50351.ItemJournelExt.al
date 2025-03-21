@@ -26,30 +26,9 @@ pageextension 50351 "Item Journel Ext" extends "Item Journal"
     }
     actions
     {
-        // modify(Post)
-        // {
-        //     trigger OnBeforeAction()           // If the Location is QLD, NSW and WA then Obrien Business Ubit Code is Mandotory. If any other value no need
-        //     var
-        //         SpecialLocationCodes: List of [Text];
-        //         Location: Record Location;
-        //     begin
-        //         if Rec.IsTemporary then
-        //             exit;
-
-        //         Location.SetRange(Code, rec."Location Code");
-        //         if Location.FindFirst then begin
-        //             SpecialLocationCodes.Add(Location.Name);
-        //         end;
-        //         if SpecialLocationCodes.Contains('NSW')  then begin
-        //             if Rec."Shortcut Dimension 1 Code" = '' then
-        //                 Error('Obrien Business Unit Code is mandatory when Location Code is %1', Location.Name);
-        //         end;
-        //     end;
-
-        // }
         modify(Post)
         {
-            trigger OnBeforeAction()           // If the Location is QLD, NSW and VIC then Obrien Business Unit Code is Mandatory. If any other value no need
+            trigger OnBeforeAction()           // If the Location is QLD, NSW, VIC and WA then Obrien Business Unit Code is Mandatory. If any other value no need
             var
                 Location: Record Location;
             begin

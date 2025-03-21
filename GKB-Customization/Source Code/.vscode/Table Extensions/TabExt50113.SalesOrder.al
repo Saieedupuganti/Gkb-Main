@@ -285,8 +285,6 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
                 until SalesLine.Next() = 0;
             end;
 
-            // Only calculate the Invoicing Amount in the OnModify trigger
-            // This shows the user how much they're about to invoice
             Rec."Invoicing Amount" := Round((Rec."Percentage To Invoice" / 100) * TotalAmount, 0.01);
         end;
     end;

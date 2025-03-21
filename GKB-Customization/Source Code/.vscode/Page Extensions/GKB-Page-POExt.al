@@ -79,22 +79,6 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
                 end;
             end;
         }
-        addafter(SendApprovalRequest)
-        {
-            action("Send Line Approvals")
-            {
-                Caption = 'Send Line Approvals';
-                ApplicationArea = All;
-
-                trigger OnAction()
-                var
-                    LineApproval: Codeunit "Lines Instruction Mgt.";
-                begin
-                    LineApproval.PurchaseCheckAllLinesHaveQuantityAssigned(Rec);
-                    Message('Line-level approvals sent successfully.');
-                end;
-            }
-        }
     }
 
     trigger OnAfterGetRecord()

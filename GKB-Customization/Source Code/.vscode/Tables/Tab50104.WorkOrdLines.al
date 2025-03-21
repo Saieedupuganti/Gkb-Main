@@ -88,6 +88,15 @@ table 50104 "GKB Work Order Lines"
         {
             Caption = 'Type';
         }
+        field(50118;"Work Start Time";Date)
+        {
+            Caption = 'Work Start Date';
+        }
+        field(50119;"Work End Time";Date)
+        {
+            Caption = 'Work Start Date';
+        }
+
         field(50000; "Service Duration"; Decimal)
         {
             Caption = 'Service Duration';
