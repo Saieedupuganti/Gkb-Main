@@ -10,6 +10,11 @@ pageextension 50141 ItemVendCatalog extends "Item Vendor Catalog"
                 Caption = 'Vendor Name';
                 ApplicationArea = All;
             }
+            field("current cost"; Rec."current cost")
+            {
+                Caption = 'Unit Cost';
+                ApplicationArea = All;
+            }
         }
     }
 }

@@ -2,6 +2,10 @@ pageextension 50300 GKBBlanketSalesOrder extends "Blanket Sales Order Subform"
 {
     layout
     {
+        modify("Shortcut Dimension 1 Code")
+        {
+            ShowMandatory = true;
+        }
         modify(Quantity)
         {
             Editable = Rec."Outstanding Qty. (Base)" = Rec.Quantity;

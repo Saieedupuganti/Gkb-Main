@@ -36,6 +36,18 @@ tableextension 50120 "GKBPurchase LineExt" extends "Purchase Line"
         {
             Caption = 'CRM ID';
             DataClassification = ToBeClassified;
-        }     
+        } 
+        field(50108; "ItemDescription"; Text[100])
+        {
+            Caption = 'Item Description';
+            FieldClass = FlowField;
+            CalcFormula = lookup(Item.Description where("No." = field("No.")));
+            Editable = false;
+        }
+        field(50109; "ItemAvailability"; Decimal)
+        {
+            Caption = 'Item Availability';
+            Editable = false;
+        }    
     }
 }

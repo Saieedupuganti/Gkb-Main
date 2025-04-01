@@ -12,8 +12,5 @@ tableextension 50155 "Purchase Order Archive" extends "Purchase Header Archive"
             DataClassification=ToBeClassified;
         }
     }
-    [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnDelete(var PurchaseHeader: Record "Purchase Header"; var IsHandled: Boolean)
-    begin
-    end;
+   
 }

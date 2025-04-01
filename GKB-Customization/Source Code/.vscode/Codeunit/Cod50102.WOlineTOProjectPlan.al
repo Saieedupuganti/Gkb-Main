@@ -412,6 +412,7 @@ codeunit 50102 "GKB Work Order Mgt."
         if not PlanningLine.FindFirst() then
             exit;
 
+        // Handle Type changes first
         if (WOLn.Type <> xWOLn.Type) then
             case WOLn.Type of
                 WOLn.Type::Resource:
@@ -423,24 +424,21 @@ codeunit 50102 "GKB Work Order Mgt."
             end;
 
         if (WOLn.Code <> xWOLn.Code) then
-            PlanningLine."No." := WOLn.Code;
+            PlanningLine.Validate("No.", WOLn.Code);
 
         if (WOLn.Description <> xWOLn.Description) then
             PlanningLine.Description := WOLn.Description;
 
-        if (WOLn."Quantity to Build" <> xWOLn."Quantity to Build") then
-            PlanningLine.Validate(Quantity, WOLn."Quantity to Build");
-
-        if (WOLn."Unit Cost" <> xWOLn."Unit Cost") then
-            PlanningLine.Validate("Unit Cost", WOLn."Unit Cost");
-
-        if (WOLn."Unit amount" <> xWOLn."Unit amount") then
-            PlanningLine.Validate("Unit Price", WOLn."Unit amount");
-
         if (WOLn."Location Code" <> xWOLn."Location Code") then
             PlanningLine."Location Code" := WOLn."Location Code";
 
-        // Modify the planning line with updated values
+        if (WOLn."Quantity to Build" <> xWOLn."Quantity to Build") then
+            PlanningLine.Validate(Quantity, WOLn."Quantity to Build");
+
+        PlanningLine.Validate("Unit Cost", WOLn."Unit Cost");
+        PlanningLine.Validate("Unit Price", WOLn."Unit amount");
+
+        // Save changes
         PlanningLine.Modify();
     end;
 }

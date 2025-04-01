@@ -70,6 +70,17 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
             Caption = 'Project Task No';
             DataClassification = ToBeClassified;
             TableRelation = "Job Task"."Job Task No." WHERE("Job No." = FIELD(projectNo));
+
+            trigger OnValidate()
+            var
+                JobTask: Record "Job Task";
+            begin
+                if JobTask.Get(Rec.projectNo, Rec."Project Task No") then begin
+                    Rec."Shortcut Dimension 1 Code" := JobTask."Global Dimension 1 Code";
+                end else begin
+                    Rec."Shortcut Dimension 1 Code" := '';
+                end;
+            end;
         }
         field(50108; "Dimension Value"; Code[30])
         {

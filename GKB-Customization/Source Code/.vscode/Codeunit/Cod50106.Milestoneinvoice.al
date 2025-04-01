@@ -22,7 +22,6 @@ codeunit 50106 "Milestone Invoicing"
         if BlanketOrderRec."Invoicing Amount" = 0 then
             Error('Invoicing Amount must be greater than 0.');
 
-        // Store current percentage to invoice before resetting
         CurrentInvoicePercentage := BlanketOrderRec."Percentage To Invoice";
 
         SalesInvoiceHeader.Init();
@@ -52,7 +51,6 @@ codeunit 50106 "Milestone Invoicing"
         SalesInvoiceLine.Validate("Unit Price", BlanketOrderRec."Invoicing Amount");
         SalesInvoiceLine.Insert(true);
 
-        // Calculate total amount of blanket order
         TotalAmount := 0;
         SalesLine.Reset();
         SalesLine.SetRange("Document Type", BlanketOrderRec."Document Type");
@@ -63,13 +61,11 @@ codeunit 50106 "Milestone Invoicing"
             until SalesLine.Next() = 0;
         end;
 
-        // Update tracking fields
         BlanketOrderRec."Invoiced Percentage" := BlanketOrderRec."Invoiced Percentage" + CurrentInvoicePercentage;
         BlanketOrderRec."Remaining Percentage" := 100 - BlanketOrderRec."Invoiced Percentage";
         BlanketOrderRec."Amount Invoiced" := Round((BlanketOrderRec."Invoiced Percentage" / 100) * TotalAmount, 0.01);
         BlanketOrderRec."Remaining Amount" := Round((BlanketOrderRec."Remaining Percentage" / 100) * TotalAmount, 0.01);
 
-        // Reset current invoice values after tracking is updated
         BlanketOrderRec."Percentage To Invoice" := 0;
         BlanketOrderRec."Invoicing Amount" := 0;
 

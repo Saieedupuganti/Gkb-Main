@@ -21,6 +21,14 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             Caption = 'Warehouse';  // Changing the location code to warehouse in req. worksheet.
             ShowMandatory = true;
         }
+        modify("Buy-from Vendor Name")
+        {
+            Visible = false;
+        }
+        modify("Description 2")
+        {
+            Visible = false;
+        }
         modify(Control1903326807)
         {
             Visible = false;
@@ -37,24 +45,6 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
         }
         addlast(Control1)
         {
-            field("Work Order No"; Rec."Work Order No")
-            {
-                Caption = 'Work Order No.';
-                ApplicationArea = all;
-                ShowMandatory = true;
-            }
-            field(projectNo; Rec.projectNo)
-            {
-                ApplicationArea = all;
-                ShowMandatory = true;
-                Visible = false;
-            }
-            field("Project Task No"; Rec."Project Task No")
-            {
-                ApplicationArea = all;
-                ShowMandatory = true;
-                Visible = false;
-            }
             field("Obrien Business Unit Code"; Rec."Shortcut Dimension 1 Code")
             {
                 ApplicationArea = all;
@@ -130,43 +120,21 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 ApplicationArea = all;
             }
         }
+        addafter("Vendor Item No.")
+        {
+            field("project no"; Rec.projectNo)
+            {
+                ApplicationArea = all;
+
+            }
+            field("Project Task No"; Rec."Project Task No")
+            {
+                ApplicationArea = all;
+            }
+        }
     }
     actions
     {
-        // modify(CarryOutActionMessage)
-        // {
-        //     Caption = 'Create Purchase Order';
-        //     trigger OnBeforeAction()
-        //     var
-        //         RecTemp: Record "Requisition Line";
-        //         FirstBusinessUnitCode: Code[20];
-        //         IsSame: Boolean;
-        //     begin
-
-        //         if Rec."Location Code" = '' then
-        //             Error('line %1 Warehouse must have a value', Rec."Line No.");
-
-        //         IsSame := true;
-        //         if Rec.FindSet then begin
-        //             FirstBusinessUnitCode := Rec."Shortcut Dimension 1 Code";
-
-        //             // Loop through all records to check if the Obrien_Business Unit Code matches the first record
-        //             repeat
-        //                 if Rec."Shortcut Dimension 1 Code" <> FirstBusinessUnitCode then begin
-        //                     IsSame := false;
-        //                     break;
-        //                 end;
-        //             until Rec.Next() = 0;
-        //         end;
-
-        //         if not IsSame then begin
-        //             Error('The Obrien_Business Unit Codes are not the same.');
-        //             // exit;
-        //         end;
-
-        //     end;
-        // }
-
         addfirst(processing)
         {
             action(CreatePoAndSendApproval)

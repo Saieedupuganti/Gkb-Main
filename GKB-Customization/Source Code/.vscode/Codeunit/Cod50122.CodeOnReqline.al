@@ -78,7 +78,7 @@ codeunit 50122 "Requisition Line Handler"
         exit(LastLineNo);
     end;
 
-    // Update Item Availability By Location
+    // Update Item Availability By Location in Req. Worksheet
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnAfterValidateEvent', 'Location Code', false, false)]
     local procedure UpdateItemAvailabilityOnLocationChange(var Rec: Record "Requisition Line"; var xRec: Record "Requisition Line")
     begin
@@ -107,7 +107,7 @@ codeunit 50122 "Requisition Line Handler"
     end;
 
 
-    // Item Quantity based on Location code
+    // Item Quantity based on Location code in Item Journel
     [EventSubscriber(ObjectType::Table, Database::"Item Journal Line", 'OnAfterValidateEvent', 'Location Code', false, false)]
     local procedure UpdateItemAvailabilityOnLocationChangeForItemJournel(var Rec: Record "Item Journal Line"; var xRec: Record "Item Journal Line")
     begin
