@@ -2,6 +2,18 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
 {
     layout
     {
+        addfirst(factboxes)
+        {
+            part(ItemDetailsFactBox; "Item Details Fact Box")
+            {
+                ApplicationArea = All;
+                Provider = PurchLines;
+                //SubPageLink = "No." = field("No.");
+                SubPageLink = "Document Type" = FIELD("Document Type"),
+                              "Document No." = FIELD("Document No."),
+                              "Line No." = FIELD("Line No.");
+            }
+        }
         moveafter("Status"; "Shortcut Dimension 1 Code")
         modify("Shortcut Dimension 1 Code")
         {

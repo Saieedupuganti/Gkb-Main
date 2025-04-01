@@ -73,7 +73,7 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'ABN No';
             DataClassification = ToBeClassified;
-            
+
         }
         field(50110; "Customer group"; Option)
         {
@@ -213,10 +213,6 @@ tableextension 50100 "Customer Ext" extends Customer
         }
     }
 
-    trigger OnModify()
-    begin
-        UpdateStandardFields();
-    end;
 
     trigger OnAfterInsert()
     begin
@@ -227,7 +223,7 @@ tableextension 50100 "Customer Ext" extends Customer
     begin
         "City" := "D365 City";
         County := "D365 State";
-        "Country/Region Code" := "D365 Country";
+        //Country/Region Code" := "D365 Country";
         "Post Code" := "D365 PostCode";
     end;
 
@@ -240,6 +236,9 @@ tableextension 50100 "Customer Ext" extends Customer
         territoryRec: Record Territory;
         modified: Integer;
     begin
+
+        UpdateStandardFields();
+
         modified := 0;
         // Check if field has changed and is not empty
         if (Rec."CRM ID" <> '') and (xRec."CRM ID" <> Rec."CRM ID") then begin
