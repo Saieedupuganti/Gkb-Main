@@ -2,7 +2,6 @@ codeunit 50106 "Milestone Invoicing"
 {
     Subtype = Normal;
     Access = Public;
-
     procedure CreateInvoiceFromBlanketOrder(var BlanketOrderRec: Record "Sales Header")
     var
         SalesInvoiceHeader: Record "Sales Header";
@@ -22,6 +21,9 @@ codeunit 50106 "Milestone Invoicing"
         if BlanketOrderRec."Invoicing Amount" = 0 then
             Error('Invoicing Amount must be greater than 0.');
 
+        if BlanketOrderRec."Shortcut Dimension 1 Code" = '' then
+            Error('Shortcut Dimension Code cannot be empty in Blanket Sales Order Header %1', BlanketOrderRec."No.");
+
         CurrentInvoicePercentage := BlanketOrderRec."Percentage To Invoice";
 
         SalesInvoiceHeader.Init();
@@ -32,6 +34,9 @@ codeunit 50106 "Milestone Invoicing"
         SalesInvoiceHeader."Order Date" := Today;
         SalesInvoiceHeader."Your Reference" := BlanketOrderRec."No.";
         SalesInvoiceHeader."Customer PO Number" := BlanketOrderRec."Customer PO Number";
+
+        // Assign the dimension code AFTER inserting the Sales Invoice Header
+        SalesInvoiceHeader.Validate("Shortcut Dimension 1 Code", BlanketOrderRec."Shortcut Dimension 1 Code");
         SalesInvoiceHeader.Modify(true);
 
         LineNo := 10000;

@@ -37,7 +37,7 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Customer No.';
                 }
-                field(name;Rec.Name){}
+                field(name; Rec.Name) { }
                 field(addressname; Rec."Bill-to address name")             //Custom 
                 {
                     Caption = 'Address Name';
@@ -75,12 +75,12 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Currency CRM ID';
                 }
-                field(description; Rec."Work Description")
+                field(description; Rec."Description")
                 {
                     Caption = 'Work Description';
                 }
                 field(email; Rec."Sell-to E-Mail")
-                {}
+                { }
                 field(dimension; Rec.Dimension)
                 {
                     Caption = 'Dimension';
@@ -150,6 +150,11 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Ship-to Address 3';
                 }
+                field("requesteddeliverydate"; Rec."Requested Delivery Date")
+                {
+                    Caption = 'Requested Delivery Date';
+                }
+                
             }
         }
     }

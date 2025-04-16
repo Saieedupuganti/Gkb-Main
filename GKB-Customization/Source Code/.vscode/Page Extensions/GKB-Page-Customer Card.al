@@ -7,7 +7,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
             Editable = true;
             Enabled = true;
             Visible = true;
-            
+
         }
         modify("Post Code")
         {
@@ -73,6 +73,11 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 {
                     ApplicationArea = all;
                 }
+                field(Dimension; Rec.Dimension)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Dimension';
+                }
                 field("Credit Hold"; Rec."Credit Hold")
                 {
                     ApplicationArea = all;
@@ -100,11 +105,10 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                     ApplicationArea = all;
                     Caption = 'Web';
                 }
-                field("Territory"; Rec.Territory)
+                field("Territory Code"; Rec."Territory Code")
                 {
                     ApplicationArea = all;
-                    Caption = 'Territory';
-                    TableRelation = Territory.Code;
+                    Caption = 'Territory Code';
                 }
                 field("Primary Contact"; Rec."Company Contact")
                 {
@@ -158,7 +162,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                 ApplicationArea = all;
             }
         }
-        
+
 
     }
 
@@ -191,7 +195,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         UserSetupRec: Record "User Setup";
         IsUserAllowed: Boolean;
         ContactRec: Record Contact;
-        
+
     begin
         if UserSetupRec.Get(UserId()) then begin
             IsUserAllowed := UserSetupRec."Customer Card";

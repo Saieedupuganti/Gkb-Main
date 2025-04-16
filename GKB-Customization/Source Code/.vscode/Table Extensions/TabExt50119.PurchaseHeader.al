@@ -1,7 +1,17 @@
 tableextension 50119 "GKBPurchase HeaderExt" extends "Purchase Header"
 {
+
     fields
     {
+        modify("Vendor Invoice No.")
+        {
+            trigger OnBeforeValidate()
+
+            begin
+                if Rec."Vendor Invoice No." = '' then
+                    exit;
+            end;
+        }
         field(50100; Comments2; Text[100])
         {
             Caption = 'Comments2';
@@ -16,6 +26,7 @@ tableextension 50119 "GKBPurchase HeaderExt" extends "Purchase Header"
             Caption = 'Ordered By';
             TableRelation = Employee."First Name";
             ValidateTableRelation = false;
+           
         }
         field(50103; "Address 3"; Text[100])
         {

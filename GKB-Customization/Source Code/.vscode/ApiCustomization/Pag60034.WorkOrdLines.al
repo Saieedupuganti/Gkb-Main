@@ -10,6 +10,7 @@ page 60033 "Work Order Lines API"
     EntitySetName = 'WorkOrderLines';
     DelayedInsert = true;
 
+    ODataKeyFields = "Work Order No.", "Line No.";
 
     layout
     {
@@ -23,13 +24,22 @@ page 60033 "Work Order Lines API"
                 field("WorkOrderNo"; Rec."Work Order No.")
                 {
                 }
+                field("LineNo"; Rec."Line No.")
+                {
+                }
                 field(Code; Rec.Code)
                 {
                 }
-                field("LineType"; Rec."Line Type") { }
-                field(Type; Rec.Type) { }
-                field(Name; Rec.Name) { }
-                field("UnitCode"; Rec."Unit Code")          //Unit Of Measure
+                field("LineType"; Rec."Line Type")
+                {
+                }
+                field(Type; Rec.Type)
+                {
+                }
+                field(Name; Rec.Name)
+                {
+                }
+                field("UnitCode"; Rec."Unit Code") // Unit Of Measure
                 {
                 }
                 field("LineStatus"; Rec."Line Status")
@@ -44,29 +54,25 @@ page 60033 "Work Order Lines API"
                 field("LocationCode"; Rec."Location Code")
                 {
                 }
-                
                 field(Description; Rec.Description)
                 {
                 }
                 field("UnitCost"; Rec."Unit Cost")
                 {
                 }
-
                 field("UnitAmount"; Rec."Unit Amount")
                 {
                 }
                 field("ServiceDuration"; Rec."Service Duration")
                 {
                 }
-                field("WorkStartTime";Rec."Work Start Time")
+                field("WorkStartTime"; Rec."Work Start Time")
                 {
                 }
-                field("WorkEndTime";Rec."Work End Time")
+                field("WorkEndTime"; Rec."Work End Time")
                 {
-
                 }
             }
         }
     }
 }
-

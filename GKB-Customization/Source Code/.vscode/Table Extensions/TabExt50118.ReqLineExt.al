@@ -2,6 +2,21 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
 {
     fields
     {
+        modify("Vendor No.")
+        {
+            trigger OnAfterValidate()
+            var
+                PriceListLine: Record "Price List Line";
+            begin
+                if Rec."Vendor No." <> '' then begin
+                    PriceListLine.Reset();
+                    PriceListLine.SetRange("Source No.", Rec."Vendor No.");
+                    PriceListLine.SetRange("Product No.", Rec."No.");
+                    if PriceListLine.FindFirst() then
+                        Rec.Validate("Direct Unit Cost", PriceListLine."Direct Unit Cost");
+                end;
+            end;
+        }
         field(50102; "projectNo"; Code[30])
         {
             Caption = 'Project No.';
@@ -126,9 +141,15 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
         field(50113; "Item Availability By Location"; Decimal)
         {
             Caption = 'Item Availability By Location';
-            DataClassification = CustomerContent;
-            Editable = false;
-            DecimalPlaces = 0 : 5;
+
+            trigger OnValidate()
+            var
+                Item: Record Item;
+            begin
+                if rec."Location Code" = '' then
+                    Rec."Item Availability By Location" := 0;
+                exit;
+            end;
         }
         field(50114; "Item Inventory"; Decimal)
         {

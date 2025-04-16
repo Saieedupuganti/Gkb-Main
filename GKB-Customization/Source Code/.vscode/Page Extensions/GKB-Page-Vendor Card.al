@@ -80,6 +80,12 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
                     ApplicationArea = All;
                     Caption = 'Contact Group';
                 }
+                field(Dimension; Rec.Dimension)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Dimension';
+                    TableRelation = "Dimension Value".Code;
+                }
                 field("CreditHold"; Rec."Credit Hold")
                 {
                     ApplicationArea = All;
@@ -139,18 +145,8 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
             {
                 ApplicationArea = all;
             }
-            field(Dimension; Rec.Dimension)
-            {
-                ApplicationArea = all;
-                Caption = 'Dimension';
-                TableRelation = "Dimension Value".Code;
-            }
-            field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
-            {
-                ApplicationArea = all;
-                Caption = 'Global Dimension 1 Code';
-                Visible = false;
-            }
+
+
         }
         addlast("Address & Contact")
         {

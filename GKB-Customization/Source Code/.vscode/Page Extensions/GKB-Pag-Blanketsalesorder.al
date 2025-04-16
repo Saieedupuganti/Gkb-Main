@@ -8,7 +8,7 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
             {
                 ApplicationArea = All;
                 Caption = 'Percentage to Update';
-                Visible = false;                 // Remove this field when you see.
+                Visible = false;                 
             }
             field("Work Order Type"; Rec."Work Order Type")
             {
@@ -25,7 +25,6 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                 ApplicationArea = All;
                 Caption = 'Billing Type';
             }
-
         }
         addafter(General)
         {
@@ -94,5 +93,22 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
                 end;
             }
         }
+        modify(MakeOrder)
+        {
+            trigger OnBeforeAction()
+            var
+                BlanketSalesOrderLine: Record "Sales Line";
+            begin
+                BlanketSalesOrderLine.SetRange("Document Type", BlanketSalesOrderLine."Document Type"::"Blanket Order");
+                BlanketSalesOrderLine.SetRange("Document No.", Rec."No.");
+
+                if BlanketSalesOrderLine.FindSet() then
+                    repeat
+                        if BlanketSalesOrderLine."Shortcut Dimension 1 Code" = '' then
+                            Error('Shortcut Dimension Code cannot be empty in Blanket Sales Order Line %1', BlanketSalesOrderLine."Line No.");
+                    until BlanketSalesOrderLine.Next() = 0;
+            end;
+        }
     }
+
 }

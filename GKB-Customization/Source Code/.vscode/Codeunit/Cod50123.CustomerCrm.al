@@ -39,7 +39,7 @@ codeunit 50123 "Customer Crm Management"
             customerJson.Add('primarycontactid', Contact."CRM ID");
         end;
 
-        Dimension.SetFilter(Code, Customer."Global Dimension 1 Code");
+        Dimension.SetFilter(Code, Customer.Dimension);
         if Dimension.FindFirst then begin
             customerJson.Add('dimensionid', Dimension."CRM ID");
         end;
@@ -59,9 +59,6 @@ codeunit 50123 "Customer Crm Management"
             customerJson.Add('customerpricegroupid', CustPrcGrp."CRM ID");
         end;
 
-        // if Dimension."CRM ID" <> '' then
-        //     customerJson.Add('dimensionid', '/dimensions(' + Dimension."CRM ID" + ')');
-
         customerJson.Add('bcid', Customer."No.");
         customerJson.Add('crmid', Customer."CRM ID");
         customerJson.Add('d365accountid', Customer."D365 Account ID");
@@ -78,7 +75,7 @@ codeunit 50123 "Customer Crm Management"
         customerJson.Add('city', Customer."D365 City");
         customerJson.Add('state', Customer."D365 State");
         customerJson.Add('country', Customer."D365 Country");
-        customerJson.Add('postCode', Customer."D365 PostCode");
+        customerJson.Add('postcode', Customer."D365 PostCode");
         customerJson.Add('customerprofile', Format(Customer."Customer Profile"));
         customerJson.Add('customergroup', Format(Customer."Customer Price Group"));
         customerJson.Add('contactgroup', Format(Customer."Contact Group"));

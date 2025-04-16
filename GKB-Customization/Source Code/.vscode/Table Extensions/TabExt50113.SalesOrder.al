@@ -196,7 +196,11 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             DataClassification = ToBeClassified;
             TableRelation = "Job Task"."Job Task No." WHERE("Job No." = FIELD("Job No."));
         }
-
+        field(50124; Description; Text[300])
+        {
+            Caption = 'Description';
+            DataClassification = ToBeClassified;
+        }
         // Fields are created for the Blanket Sales Order To SALES INVOICE
 
         field(50208; "Percentage To Invoice"; Decimal)
@@ -275,6 +279,14 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         SalesLine: Record "Sales Line";
     begin
         if Rec."Document Type" = Rec."Document Type"::"Blanket Order" then begin
+
+            // Validate percentage limits
+            if Rec."Invoiced Percentage" > 100 then
+                Error('Invoiced Percentage cannot be greater than 100.');
+
+            if (Rec."Percentage To Invoice" + Rec."Invoiced Percentage") > 100 then
+                Error('Total of Invoiced Percentage and Percentage To Invoice cannot exceed 100.');
+
             // Calculate total amount
             TotalAmount := 0;
             SalesLine.SetRange("Document Type", Rec."Document Type");
@@ -352,8 +364,4 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         if not typehelper.TryReadAsTextWithSeparator(InStream, typehelper.LFSeparator(), TermConditions) then
             Message(Readdataskippedmsg, FieldCaption(RichText));
     end;
-
 }
-
-
-
