@@ -38,6 +38,8 @@ codeunit 50127 "Create PO From Req"
             PurchLine.Validate("Unit of Measure Code", ReqLine."Unit of Measure Code");
             PurchLine.Validate("Direct Unit Cost", ReqLine."Direct Unit Cost");
             PurchLine.Validate("Shortcut Dimension 1 Code", ReqLine."Shortcut Dimension 1 Code");
+            PurchLine.Validate("Job No.", ReqLine."ProjectNo");
+            PurchLine.Validate("Job Task No.", ReqLine."Project Task No");
 
             if PurchLine."Shortcut Dimension 1 Code" <> '' then
                 PurchaseHeader.Validate("Shortcut Dimension 1 Code", ReqLine."Shortcut Dimension 1 Code");

@@ -92,8 +92,14 @@ codeunit 50122 "Requisition Line Handler"
         ItemLedgerEntry: Record "Item Ledger Entry";
         TotalQuantity: Decimal;
     begin
-        if (ReqLine."No." = '') or (ReqLine."Location Code" = '') then
+        if (ReqLine."No." = '') then
             exit;
+
+        if (ReqLine."Location Code" = '') then begin
+            ReqLine."Item Availability By Location" := 0;
+            exit;
+        end;
+
         TotalQuantity := 0;
         ItemLedgerEntry.SetFilter("Item No.", ReqLine."No.");
         ItemLedgerEntry.SetFilter("Location Code", ReqLine."Location Code");
@@ -102,8 +108,8 @@ codeunit 50122 "Requisition Line Handler"
             repeat
                 TotalQuantity += ItemLedgerEntry.Quantity;
             until ItemLedgerEntry.Next() = 0;
+
         ReqLine."Item Availability By Location" := TotalQuantity;
-        //  ReqLine.Modify();
     end;
 
 

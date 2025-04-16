@@ -138,6 +138,7 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'Dimension';
             DataClassification = ToBeClassified;
+            TableRelation = "Dimension Value".Code;
 
         }
         field(50501; "Dimension ID"; Text[200])

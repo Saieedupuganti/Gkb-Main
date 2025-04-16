@@ -2,6 +2,10 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
 {
     layout
     {
+        modify("Work Description")
+        {
+            Visible = false;
+        }
         addafter(General)
         {
             group("Dynamics")
@@ -107,6 +111,14 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
             {
                 ApplicationArea = All;
                 Caption = 'Customer CRMID';
+            }
+        }
+        addafter(Status)
+        {
+            field(Description; Rec.Description)
+            {
+                ApplicationArea = All;
+                Caption = 'Description';
             }
         }
     }

@@ -8,10 +8,19 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
             {
                 ApplicationArea = All;
                 Provider = PurchLines;
-                //SubPageLink = "No." = field("No.");
                 SubPageLink = "Document Type" = FIELD("Document Type"),
                               "Document No." = FIELD("Document No."),
                               "Line No." = FIELD("Line No.");
+            }
+        }
+        addafter(ItemDetailsFactBox)
+        {
+            part(AlternateVendorFactbox; "Alternate Vendor Factbox")
+            {
+                ApplicationArea = All;
+                Provider = PurchLines;
+                SubPageLink = "Item No." = field("No.");
+
             }
         }
         moveafter("Status"; "Shortcut Dimension 1 Code")
@@ -19,17 +28,23 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
         {
             ShowMandatory = true;
         }
+        modify("Vendor Invoice No.")
+        {
+            ShowMandatory = false;
+        }
         addlast(General)
         {
             field("Ordered By"; Rec."Ordered By")
             {
                 ApplicationArea = all;
                 Caption = 'Ordered By';
+
             }
             field("Created By"; Rec."Created By")
             {
                 ApplicationArea = all;
                 Caption = 'Created By';
+                Editable = false;
             }
             field("Job No"; Rec."Job No")
             {
@@ -102,4 +117,5 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
             CurrPage.Update(false);
         end;
     end;
+
 }

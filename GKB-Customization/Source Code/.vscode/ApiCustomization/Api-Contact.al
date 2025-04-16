@@ -32,7 +32,7 @@ page 50307 "API Contact"
                 {
                     Caption = 'Company ID';
                 }
-                field(firstname; Rec."First Name")
+                field(firstname; Rec."Name")
                 {
                     Caption = 'First Name';
                 }
@@ -40,7 +40,7 @@ page 50307 "API Contact"
                 {
                     Caption = 'Middle Name';
                 }
-                field(surname; Rec."Surname")
+                field(lastname; Rec."Surname")
                 {
                     Caption = 'Surname';
                 }
@@ -61,6 +61,7 @@ page 50307 "API Contact"
                 {
                     Caption = 'City';
                 }
+                field("d365contactid"; Rec."D365 Contact ID") { }
                 field(state; Rec."D365 State") { }
                 field(county; Rec.County)
                 {
@@ -87,10 +88,7 @@ page 50307 "API Contact"
                 {
                     Caption = 'Fax No';
                 }
-                field(name; Rec.Name)
-                {
-                    Caption = 'Name';
-                }
+
                 field(jobtitle; Rec."Job Title")
                 {
                     Caption = 'Job Title';

@@ -83,6 +83,7 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 end;
             }
         }
+
         addafter(ApplyTemplate)
         {
             action(CustomerCardBarCode)
@@ -103,10 +104,61 @@ pageextension 50149 GKBItemExt extends "Item Card"
             }
         }
 
-    }
-    // var
-    //     GenerateQR: Label 'Generate QR Code';
+        // Jathin's code starts here
+         addafter(ApplyTemplate)
+        {
+            action("Update Sales Price")
+            {
+                ApplicationArea = All;
+                Caption = 'Update Sales Price', comment = 'NLB="YourLanguageCaption"';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Image = UpdateXML;
 
+                trigger OnAction()
+                var
+                    PriceListHeader_lRec: Record "Price List Header";
+                    PriceListLine_lRec: Record "Price List Line";
+                    PriceListLine_lRec1: Record "Price List Line";
+                    PriceListLine_lRec2: Record "Price List Line";
+                    GetUnitPrice: Codeunit "Create Order helper";
+                    LineNo: Integer;
+                begin
+                    PriceListHeader_lRec.Reset();
+                    if PriceListHeader_lRec.FindSet()then begin
+                        repeat PriceListLine_lRec.Reset();
+                            PriceListLine_lRec.SetRange("Price List Code", PriceListHeader_lRec.Code);
+                            PriceListLine_lRec.SetRange("Asset Type", PriceListLine_lRec."Asset Type"::Item);
+                            PriceListLine_lRec.SetRange("Product No.", Rec."No.");
+                            if not PriceListLine_lRec.FindFirst()then begin
+                                Clear(LineNo);
+                                PriceListLine_lRec1.Reset();
+                                PriceListLine_lRec1.SetRange("Price List Code", PriceListHeader_lRec.Code);
+                                if PriceListLine_lRec1.FindLast()then 
+                                LineNo:=PriceListLine_lRec1."Line No." + 10000
+                                else
+                                    LineNo:=10000;
+                                PriceListLine_lRec2.Reset();
+                                PriceListLine_lRec2.Init();
+                                PriceListLine_lRec2.Validate("Price List Code", PriceListHeader_lRec.Code);
+                                PriceListLine_lRec2.Validate("Line No.", LineNo);
+                                PriceListLine_lRec2.Insert(true);
+                                PriceListLine_lRec2.Validate("Asset Type", PriceListLine_lRec2."Asset Type"::Item);
+                                PriceListLine_lRec2.Validate("Product No.", Rec."No.");
+                                PriceListLine_lRec2.Validate("Unit Price", GetUnitPrice.GetPercentageValue(PriceListHeader_lRec, Rec));
+                                PriceListLine_lRec2.Modify(true);
+                            end;
+                        until PriceListHeader_lRec.Next() = 0;
+                        Message('Price List Updated Successfully');
+                    end;
+                end;
+            }
+        }
+        // Jathin's code ends here
+
+    }
+    
     trigger OnOpenPage()
     var
         Client: HttpClient;

@@ -30,6 +30,7 @@ report 60100 "Purchase Order Invoice"
     //EnableHyperlinks = true;
     PreviewMode = PrintLayout;
     WordMergeDataItem = "Purchase Header";
+    
 
     dataset
     {
@@ -969,6 +970,7 @@ report 60100 "Purchase Order Invoice"
                 end;
             end;
         }
+         
     }
 
     requestpage

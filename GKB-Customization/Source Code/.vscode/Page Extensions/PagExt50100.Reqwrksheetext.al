@@ -10,16 +10,31 @@ using Microsoft.Foundation.Enums;
 using Microsoft.Inventory.Availability;
 using Microsoft.Inventory.Item;
 using Microsoft.Purchases.Vendor;
+using Microsoft.Inventory.Item.Catalog;
 
 pageextension 50100 "Req WO" extends "Req. Worksheet"
 {
     Caption = 'Purchase Request';
     layout
     {
+        modify("No.")
+        {
+            trigger OnAfterValidate()
+            var
+                ItemVendorCat: Record "Item Vendor";
+            begin
+                ItemVendorCat.SetRange("Item No.", Rec."No.");
+                Rec."Unit Cost" := ItemVendorCat."Current Cost";
+            end;
+        }
         modify("Location Code")
         {
             Caption = 'Warehouse';  // Changing the location code to warehouse in req. worksheet.
             ShowMandatory = true;
+        }
+        modify("Requester ID")
+        {
+            Caption = 'Current User';
         }
         modify("Buy-from Vendor Name")
         {
@@ -61,11 +76,6 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             field("Requested By Name"; Rec."Requested By Name")
             {
                 ApplicationArea = all;
-            }
-            field("Stock Check"; Rec."Stock Check")
-            {
-                ApplicationArea = all;
-                ToolTip = 'Checks item is in stock or not';
             }
             field(Availability; CalcAvailability(Rec))
             {
@@ -118,6 +128,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             field("Item Availability By Location"; Rec."Item Availability By Location")
             {
                 ApplicationArea = all;
+                Editable = false;
             }
         }
         addafter("Vendor Item No.")
@@ -130,44 +141,44 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             field("Project Task No"; Rec."Project Task No")
             {
                 ApplicationArea = all;
+
             }
         }
     }
     actions
     {
-        addfirst(processing)
+        // Jathin's Code strts from here
+        addafter(Reserve)
         {
-            action(CreatePoAndSendApproval)
+            action("Create Purchase Order")
             {
-                ApplicationArea = all;
-                Caption = 'Create Po And Send Approval';
+                ApplicationArea = All;
+                Caption = 'Create Purchase Order', comment = 'NLB="YourLanguageCaption"';
                 Promoted = true;
                 PromotedCategory = Process;
-                AccessByPermission = tabledata 454 = rim;
+                PromotedIsBig = true;
+                Image = CreateDocuments;
+
                 trigger OnAction()
                 var
-                    ReqWkshPO: Codeunit 50127;
-                    ReqLine: Record "Requisition Line";
-                    TempReqLine: Record "Requisition Line" temporary;
+                    CreatedOrderHelper: Codeunit "Create Order helper";
+                // RequisitionLine: Record "Requisition Line";
                 begin
-                    CurrPage.SetSelectionFilter(ReqLine);
-                    if ReqLine.FindSet() then
-                        repeat
-                            TempReqLine := ReqLine;
-                            TempReqLine.Insert();
-                        until ReqLine.Next() = 0;
-                    ReqLine.Reset();
-                    ReqLine.SetRange("PO Created", false);
-                    ReqLine.SetRange("Journal Batch Name", 'default');
-                    ReqLine.SetRange("Worksheet Template Name", 'REQ');
-                    if ReqLine.FindSet() then
-                        repeat
-                            ReqWkshPO.CreatePOFromReq(ReqLine);
-                        until ReqLine.Next() = 0;
-
+                    //DCS:SK 01/04/2025 NS
+                    if Confirm('Do you want to create purchase orders?', false) then begin
+                        CreatedOrderHelper.CreatePurchpurchaseorder();
+                        // RequisitionLine.Reset();
+                        // RequisitionLine.SetRange("Worksheet Template Name", Rec."Worksheet Template Name");
+                        // RequisitionLine.SetRange("Journal Batch Name", Rec."Journal Batch Name");
+                        // RequisitionLine.DeleteAll();
+                        //DCS:SK 01/04/2025 NE
+                    end;
                 end;
             }
         }
+
+
+        // Jathin's code ends here
     }
 
     // Item Availability Code Starts From here.
@@ -248,4 +259,6 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
         Item.SetRange("Variant Filter", VariantCode);
         Item.SetRange("Location Filter", LocationCode);
     end;
+
+
 }

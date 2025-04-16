@@ -40,7 +40,7 @@ page 50520 "Item Details Fact Box"
     trigger OnAfterGetRecord()
     var
         Item: Record Item;
-        ItemDetailsMgt: Codeunit "ItemFactBox Management";
+        ItemDetailsMgt: Codeunit "Item FactBox Management";
     begin
         Clear(ItemDescription);
         Clear(ItemAvailability);

@@ -232,7 +232,7 @@ codeunit 50102 "GKB Work Order Mgt."
     local procedure OnAfterModifyWO(var Rec: Record "GKB Work Order"; var xRec: Record "GKB Work Order"; RunTrigger: Boolean)
     begin
         if not RunTrigger then
-            exit;
+            exit; 
 
         if Rec."Job Created" and (Rec."Job No." <> '') then
             UpdateJobFromWO(Rec, xRec);
@@ -320,7 +320,7 @@ codeunit 50102 "GKB Work Order Mgt."
 
         // Update Job Task
         if not JobTask.Get(WO."Job No.", WO."Work Order No.") then
-            exit;
+            exit; 
 
         // Update Job Task fields that may have changed
         if (WO."Topic" <> xWO."Topic") then
@@ -412,7 +412,6 @@ codeunit 50102 "GKB Work Order Mgt."
         if not PlanningLine.FindFirst() then
             exit;
 
-        // Handle Type changes first
         if (WOLn.Type <> xWOLn.Type) then
             case WOLn.Type of
                 WOLn.Type::Resource:
@@ -423,22 +422,13 @@ codeunit 50102 "GKB Work Order Mgt."
                     PlanningLine.Type := PlanningLine.Type::"G/L Account";
             end;
 
-        if (WOLn.Code <> xWOLn.Code) then
-            PlanningLine.Validate("No.", WOLn.Code);
-
-        if (WOLn.Description <> xWOLn.Description) then
-            PlanningLine.Description := WOLn.Description;
-
-        if (WOLn."Location Code" <> xWOLn."Location Code") then
-            PlanningLine."Location Code" := WOLn."Location Code";
-
-        if (WOLn."Quantity to Build" <> xWOLn."Quantity to Build") then
-            PlanningLine.Validate(Quantity, WOLn."Quantity to Build");
-
+        PlanningLine.Validate("No.", WOLn.Code);
+        PlanningLine.Validate(Description, WOLn.Description);
+        PlanningLine.Validate("Location Code", WOLn."Location Code");
+        PlanningLine.Validate(Quantity, WOLn."Quantity to Build");
         PlanningLine.Validate("Unit Cost", WOLn."Unit Cost");
         PlanningLine.Validate("Unit Price", WOLn."Unit amount");
 
-        // Save changes
         PlanningLine.Modify();
     end;
 }

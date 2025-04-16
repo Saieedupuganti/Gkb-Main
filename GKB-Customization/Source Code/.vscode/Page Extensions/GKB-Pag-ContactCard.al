@@ -24,6 +24,7 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
         {
             Visible = false;
         }
+
         modify(County)
         {
             Caption = 'County';
@@ -51,6 +52,23 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
             {
                 Caption = 'Address Name';
                 ApplicationArea = all;
+            }
+
+        }
+        addafter(Name)
+        {
+            field(Surname; Rec.Surname)
+            {
+                Caption = 'Last Name';
+                ApplicationArea = All;
+            }
+        }
+        addafter("Search Name")
+        {
+            field("Job Title1"; Rec."Job Title")
+            {
+                Caption = 'Job Title';
+                ApplicationArea = All;
             }
         }
         addafter("Address 2")
