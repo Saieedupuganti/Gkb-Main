@@ -39,7 +39,7 @@ pageextension 50118 PurchOrderSubExt extends "Purchase Order Subform"
         //         exit(false);
         //     end;
         // }
-
+        
         modify("No.")
         {
             trigger OnLookup(var Text: Text): Boolean

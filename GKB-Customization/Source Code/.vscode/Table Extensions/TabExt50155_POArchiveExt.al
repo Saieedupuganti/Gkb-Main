@@ -1,11 +1,15 @@
-tableextension 50140 "GKBPurch. Rcpt. HeaderExt" extends "Purch. Rcpt. Header"
+tableextension 50155 "Purchase Order Archive" extends "Purchase Header Archive"
 {
     fields
     {
-        field(50100; Comments2; Text[100])
+        field(1234; "Po Status"; enum "Purch header Archive")
         {
-            Caption = 'Comments2';
-            DataClassification = ToBeClassified;
+            Caption = 'Po Status';
+        }
+        field(1235;"Entry Type";Text[100])
+        {
+            Caption = 'Entry Type';
+            DataClassification=ToBeClassified;
         }
         field(50101; "Ordered By"; Text[100])
         {
@@ -23,4 +27,5 @@ tableextension 50140 "GKBPurch. Rcpt. HeaderExt" extends "Purch. Rcpt. Header"
             DataClassification = ToBeClassified;
         }
     }
+   
 }

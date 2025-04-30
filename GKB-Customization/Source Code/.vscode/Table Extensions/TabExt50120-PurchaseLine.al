@@ -54,5 +54,10 @@ tableextension 50120 "GKBPurchase LineExt" extends "Purchase Line"
             DataClassification = ToBeClassified;
             TableRelation = "Item Vendor"."Vendor No." where("Item No." = field("No."));
         }
+        field(50111; "Work Order No."; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Work Order No.';
+        }
     }
 }

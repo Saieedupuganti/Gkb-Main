@@ -17,7 +17,6 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
                     ApplicationArea = All;
                     Caption = 'CRM ID';
                 }
-                field(Name; Rec.Name) { ApplicationArea = all; }
                 field("Owner"; Rec."Owner")
                 {
                     ApplicationArea = All;

@@ -176,6 +176,14 @@ page 50321 "API Customer"
                 {
                     Caption = 'WEB';
                 }
+                field("genbuspostinggroup";Rec."Gen. Bus. Posting Group")
+                {
+                    Caption = 'Gen. Bus. Posting Group';
+                }
+                field("customerpostinggroup";Rec."Customer Posting Group")
+                {
+                    Caption = 'Customer Posting Group';
+                }
             }
         }
     }

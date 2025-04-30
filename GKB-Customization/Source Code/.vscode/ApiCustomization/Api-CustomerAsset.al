@@ -168,6 +168,7 @@ page 50227 "CustomerAssetAPI"
                 {
                     Caption = 'Manufacturer';
                 }
+                
             }
         }
     }

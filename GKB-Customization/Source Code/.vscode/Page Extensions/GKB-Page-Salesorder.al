@@ -29,10 +29,9 @@ pageextension 50201 "Sales Order Ext" extends "Sales Order"
             {
                 ApplicationArea = all;
             }
-            field("Sales Order Name";Rec."Sales Order Name")
-            {
-                ApplicationArea = all;
-            }
+            field(Name; Rec.Name)
+             { ApplicationArea = all;
+             Caption = 'Sales order Name'; }
         }
     }
     

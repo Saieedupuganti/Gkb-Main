@@ -170,6 +170,8 @@ page 50340 "API Vendor"
                 {
                     Caption = 'WEB';
                 }
+                field("genbuspostinggroup"; Rec."Gen. Bus. Posting Group") { }
+                field("vendorpostinggroup"; Rec."Vendor Posting Group") { }
 
             }
         }

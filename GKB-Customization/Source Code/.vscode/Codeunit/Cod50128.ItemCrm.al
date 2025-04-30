@@ -80,6 +80,7 @@ codeunit 50128 "Update to Crm Mngmt"
         JObject.Add('bcid', Item."No.");
         JObject.Add('crmid', Item."CRM ID");
         JObject.Add('defaultunitid', unitcrmid);
+        JObject.Add('d365productid', Item."D365 Product Id");
         JObject.Add('defaultunitgroupid', unitgroupcrmid);
         JObject.Add('currencyid', Item."Currency Id");
         JObject.Add('name', Item.Description);
@@ -109,10 +110,18 @@ codeunit 50128 "Update to Crm Mngmt"
         if IsSuccessful then begin
             Response.Content().ReadAs(ResponseText);
             if ResponseJObject.ReadFrom(ResponseText) then begin
+
                 if ResponseJObject.Contains('crmid') then begin
                     ResponseJObject.Get('crmid', TokenValue);
                     TokenString := TokenValue.AsValue().AsText();
                     Item."CRM ID" := CopyStr(TokenString, 1, 100);
+                    Item.Modify(false);
+                end;
+
+                if ResponseJObject.Contains('d365productid') then begin
+                    ResponseJObject.Get('d365productid', TokenValue);
+                    TokenString := TokenValue.AsValue().AsText();
+                    Item."D365 Product Id" := CopyStr(TokenString, 1, 100);
                     Item.Modify(false);
                 end;
             end;

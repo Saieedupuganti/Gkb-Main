@@ -44,7 +44,7 @@ tableextension 50114 "GKBSales LineExt" extends "Sales Line"
             DataClassification = ToBeClassified;
             Caption = 'Invoice Created';
         }
-
+        
     }
     }
    
