@@ -174,6 +174,7 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         field(50203; "Sales Order Name"; Text[100])
         {
             Caption = 'Sales Order Name';
+            ObsoleteState = Pending;
         }
         field(50204; "Invoice Created"; Boolean)
         {
@@ -269,6 +270,11 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
             Caption = 'GST Prod Posting Group';
             Description = 'GST Product Posting Group at the header level';
             TableRelation = "VAT Product Posting Group";
+            DataClassification = ToBeClassified;
+        }
+        field(50001; "Sales Name"; Text[100])
+        {
+            Caption = 'Name';
             DataClassification = ToBeClassified;
         }
     }

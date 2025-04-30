@@ -1311,5 +1311,7 @@ report 60102 "Purchase Order"
     local procedure OnAfterPostDataItem(var PurchaseHeader: Record "Purchase Header")
     begin
     end;
+
+    
 }
 

@@ -25,7 +25,10 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
         {
             Visible = false;
         }
-
+        modify(MobilePhoneNo)
+        {
+            visible = false;
+        }
         addafter(General)
         {
             group("D365 CUSTOM FIELDS")
@@ -145,7 +148,6 @@ pageextension 70125 "GKB Vendor EXT" extends "Vendor Card"
             {
                 ApplicationArea = all;
             }
-
 
         }
         addlast("Address & Contact")

@@ -154,7 +154,10 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Requested Delivery Date';
                 }
-                
+                field("owningbusinessunit"; Rec."Shortcut Dimension 1 Code")
+                {
+                    Caption = 'Shortcut Dimension 1 Code';
+                }
             }
         }
     }

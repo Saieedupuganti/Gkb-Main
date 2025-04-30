@@ -105,7 +105,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
                     ApplicationArea = all;
                     Caption = 'Web';
                 }
-                field("Territory Code"; Rec."Territory Code")
+                field("Territory Code"; Rec."Territory")
                 {
                     ApplicationArea = all;
                     Caption = 'Territory Code';

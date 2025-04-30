@@ -13,7 +13,7 @@ codeunit 50102 "GKB Work Order Mgt."
         Job: Code[20];
         JobTask: Code[20];
     begin
-        CreateJobTaskLinesFromWOLs(Rec);//, Job, JobTask);
+        CreateJobTaskLinesFromWOLs(Rec);
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"GKB Work Order", 'OnAfterInsertEvent', '', false, false)]
@@ -232,7 +232,7 @@ codeunit 50102 "GKB Work Order Mgt."
     local procedure OnAfterModifyWO(var Rec: Record "GKB Work Order"; var xRec: Record "GKB Work Order"; RunTrigger: Boolean)
     begin
         if not RunTrigger then
-            exit; 
+            exit;
 
         if Rec."Job Created" and (Rec."Job No." <> '') then
             UpdateJobFromWO(Rec, xRec);
@@ -320,7 +320,7 @@ codeunit 50102 "GKB Work Order Mgt."
 
         // Update Job Task
         if not JobTask.Get(WO."Job No.", WO."Work Order No.") then
-            exit; 
+            exit;
 
         // Update Job Task fields that may have changed
         if (WO."Topic" <> xWO."Topic") then
@@ -428,6 +428,8 @@ codeunit 50102 "GKB Work Order Mgt."
         PlanningLine.Validate(Quantity, WOLn."Quantity to Build");
         PlanningLine.Validate("Unit Cost", WOLn."Unit Cost");
         PlanningLine.Validate("Unit Price", WOLn."Unit amount");
+        PlanningLine.Validate("Planning Date", WOLn."Work Start Time");
+        PlanningLine.Validate("Planned Delivery Date", WOLn."Work End Time");
 
         PlanningLine.Modify();
     end;

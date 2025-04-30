@@ -8,7 +8,7 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
             {
                 ApplicationArea = All;
                 Caption = 'Percentage to Update';
-                Visible = false;                 
+                Visible = false;
             }
             field("Work Order Type"; Rec."Work Order Type")
             {
@@ -24,6 +24,21 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
             {
                 ApplicationArea = All;
                 Caption = 'Billing Type';
+            }
+            field(Quote; Rec.Quote)
+            {
+                ApplicationArea = All;
+                Caption = 'Quote';
+            }
+            field("CRM ID"; Rec."CRM ID")
+            {
+                ApplicationArea = All;
+                Caption = 'CRM ID';
+            }
+            field("Sales Name"; Rec."Sales Name")
+            {
+                ApplicationArea = All;
+                Caption = 'Name';
             }
         }
         addafter(General)

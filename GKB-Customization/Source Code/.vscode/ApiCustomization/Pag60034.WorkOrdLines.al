@@ -10,7 +10,7 @@ page 60033 "Work Order Lines API"
     EntitySetName = 'WorkOrderLines';
     DelayedInsert = true;
 
-    ODataKeyFields = "Work Order No.", "Line No.";
+
 
     layout
     {
@@ -36,7 +36,7 @@ page 60033 "Work Order Lines API"
                 field(Type; Rec.Type)
                 {
                 }
-                field(Name; Rec.Name)
+                field(Name; Rec.Description)
                 {
                 }
                 field("UnitCode"; Rec."Unit Code") // Unit Of Measure

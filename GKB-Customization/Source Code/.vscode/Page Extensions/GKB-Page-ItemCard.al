@@ -36,6 +36,11 @@ pageextension 50149 GKBItemExt extends "Item Card"
                     Caption = 'OBS ItemName';
                     Visible = false;
                 }
+                field(Currency; Rec.Currency)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Currency';
+                }
             }
         }
         addafter("Vendor Item No.")
@@ -105,7 +110,7 @@ pageextension 50149 GKBItemExt extends "Item Card"
         }
 
         // Jathin's code starts here
-         addafter(ApplyTemplate)
+        addafter(ApplyTemplate)
         {
             action("Update Sales Price")
             {
@@ -126,19 +131,20 @@ pageextension 50149 GKBItemExt extends "Item Card"
                     LineNo: Integer;
                 begin
                     PriceListHeader_lRec.Reset();
-                    if PriceListHeader_lRec.FindSet()then begin
-                        repeat PriceListLine_lRec.Reset();
+                    if PriceListHeader_lRec.FindSet() then begin
+                        repeat
+                            PriceListLine_lRec.Reset();
                             PriceListLine_lRec.SetRange("Price List Code", PriceListHeader_lRec.Code);
                             PriceListLine_lRec.SetRange("Asset Type", PriceListLine_lRec."Asset Type"::Item);
                             PriceListLine_lRec.SetRange("Product No.", Rec."No.");
-                            if not PriceListLine_lRec.FindFirst()then begin
+                            if not PriceListLine_lRec.FindFirst() then begin
                                 Clear(LineNo);
                                 PriceListLine_lRec1.Reset();
                                 PriceListLine_lRec1.SetRange("Price List Code", PriceListHeader_lRec.Code);
-                                if PriceListLine_lRec1.FindLast()then 
-                                LineNo:=PriceListLine_lRec1."Line No." + 10000
+                                if PriceListLine_lRec1.FindLast() then
+                                    LineNo := PriceListLine_lRec1."Line No." + 10000
                                 else
-                                    LineNo:=10000;
+                                    LineNo := 10000;
                                 PriceListLine_lRec2.Reset();
                                 PriceListLine_lRec2.Init();
                                 PriceListLine_lRec2.Validate("Price List Code", PriceListHeader_lRec.Code);
@@ -158,7 +164,7 @@ pageextension 50149 GKBItemExt extends "Item Card"
         // Jathin's code ends here
 
     }
-    
+
     trigger OnOpenPage()
     var
         Client: HttpClient;
