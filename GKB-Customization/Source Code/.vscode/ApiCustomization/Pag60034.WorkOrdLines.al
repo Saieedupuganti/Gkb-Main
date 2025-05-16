@@ -53,10 +53,7 @@ page 60033 "Work Order Lines API"
                 }
                 field("LocationCode"; Rec."Location Code")
                 {
-                }
-                field(Description; Rec.Description)
-                {
-                }
+                }   
                 field("UnitCost"; Rec."Unit Cost")
                 {
                 }

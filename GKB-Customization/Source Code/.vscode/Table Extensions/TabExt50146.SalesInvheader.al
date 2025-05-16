@@ -12,6 +12,11 @@ tableextension 50146 "GKBSales Invoice HeaderExt" extends "Sales Invoice Header"
             Caption = 'Customer PO Number';
             DataClassification = ToBeClassified;
         }
+        field(50033; "Address 3"; Text[100])
+        {
+            Caption = 'Address 3';
+            DataClassification = ToBeClassified;
+        }
     }
 }
 pageextension 50349 "Posted Sale Inv Ext" extends "Posted Sales Invoice"
@@ -20,7 +25,14 @@ pageextension 50349 "Posted Sale Inv Ext" extends "Posted Sales Invoice"
     {
         addlast(General)
         {
-            field("Customer PO Number";Rec."Customer PO Number")
+            field("Customer PO Number"; Rec."Customer PO Number")
+            {
+                ApplicationArea = All;
+            }
+        }
+        addafter("Bill-to Address 2")
+        {
+            field("Address 3"; Rec."Address 3")
             {
                 ApplicationArea = All;
             }

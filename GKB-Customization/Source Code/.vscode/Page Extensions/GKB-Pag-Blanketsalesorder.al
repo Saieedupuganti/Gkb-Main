@@ -2,6 +2,33 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
 {
     layout
     {
+        addafter("Sell-to Address 2")
+        {
+            field("D365 Sell-to Address 3"; Rec."D365 Sell-to Address 3")
+            {
+                ApplicationArea = All;
+                Caption = 'Address 3';
+                ToolTip = 'Specifies the third line of the D365 sell-to address.';
+            }
+        }
+        addafter("Bill-to Address 2")
+        {
+            field("D365 Bill-to Address 3"; Rec."D365 Bill-to Address 3")
+            {
+                ApplicationArea = All;
+                Caption = 'Address 3';
+                ToolTip = 'Specifies the third line of the D365 bill-to address.';
+            }
+        }
+        addafter("Ship-to Address 2")
+        {
+            field("D365 Ship-to Address 3"; Rec."Ship-to Address 3")
+            {
+                ApplicationArea = All;
+                Caption = 'Address 3';
+                ToolTip = 'Specifies the third line of the D365 ship-to address.';
+            }
+        }
         addafter(Status)
         {
             field("Percentage"; Rec.Percentage)
@@ -39,6 +66,11 @@ pageextension 50101 GKBBlanketSalesOrdereader extends "Blanket Sales Order"
             {
                 ApplicationArea = All;
                 Caption = 'Name';
+            }
+            field("Job No."; Rec."Job No.")
+            {
+                ApplicationArea = All;
+                Caption = 'Work Order No.';
             }
         }
         addafter(General)

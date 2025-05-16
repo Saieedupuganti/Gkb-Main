@@ -63,14 +63,7 @@ pageextension 50122 "GKB Contacts" extends "Contact Card"
                 ApplicationArea = All;
             }
         }
-        addafter("Search Name")
-        {
-            field("Job Title1"; Rec."Job Title")
-            {
-                Caption = 'Job Title';
-                ApplicationArea = All;
-            }
-        }
+
         addafter("Address 2")
         {
             field("Address 3"; Rec."Address 3")

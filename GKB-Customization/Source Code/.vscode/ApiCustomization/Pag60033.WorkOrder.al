@@ -18,8 +18,7 @@ page 50100 "WorkOrderAPI"
             repeater(Group)
             {
                 field("workordernumber"; rec."Work Order No.") { }
-                field(crmid; Rec."CRM ID")
-                { Caption = 'CRM ID'; }
+                field(crmid; Rec."CRM ID") { }
                 field("serviceaccount"; rec."Service Account") { }
                 field("systemstatus"; rec."System Status") { }
                 field("substatus"; rec."Substatus") { }
@@ -34,7 +33,7 @@ page 50100 "WorkOrderAPI"
                 field("opportunity"; rec."Opportunity") { }
                 field("salesorder"; rec."Sales Order") { }
                 field("owningbusinessunit"; rec."Shortcut Dimension 1 Code") { }
-                field("parentworkorder"; rec."Parent Work Order") { } 
+                field("parentworkorder"; rec."Parent Work Order") { }
                 field("timewindowstart"; rec."Time Window Start") { }
                 field("timewindowend"; rec."Time Window End") { }
                 field("topic"; rec."Topic") { }

@@ -159,6 +159,7 @@ codeunit 50102 "GKB Work Order Mgt."
         end;
         Job."Customer PO Number" := WO."Customer PO Number";
         Job."Substatus" := WO.Substatus;
+        Job."Global Dimension 1 Code" := WO."Shortcut Dimension 1 Code";
 
         Job.Insert();
         Message('Job card created with no %1', Job."No.");

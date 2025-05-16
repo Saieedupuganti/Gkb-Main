@@ -1,4 +1,4 @@
-codeunit 50131 "Item FactBox Management"
+codeunit 50129 "Item FactBox Management"
 {
     procedure GetItemAvailability(ItemNo: Code[20]; LocationCode: Code[10]): Decimal
     var

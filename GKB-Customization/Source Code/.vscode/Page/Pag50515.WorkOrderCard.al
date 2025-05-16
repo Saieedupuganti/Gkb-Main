@@ -127,16 +127,20 @@ page 50515 "GKB Work Order Card"
                     ApplicationArea = All;
                     Caption = 'Owner';
                 }
-                field("Owning Business Unit"; rec."Owning Business Unit")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Owning Business Unit';
-                    Visible = false;
-                }
                 field("Parent Work Order"; rec."Parent Work Order")
                 {
                     ApplicationArea = All;
                     Caption = 'Parent Work Order';
+                }
+                field("Sales Order";Rec."Sales Order")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Sales Order No.';
+                }
+                field("Blanket Order";Rec."Blanket Order")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Blanket Order No.';
                 }
                 field("Taxable"; rec.Taxable)
                 {
@@ -190,32 +194,7 @@ page 50515 "GKB Work Order Card"
             }
         }
     }
-    // actions
-    // {
-    //     area(Processing)
-    //     {
-    //         action(InsertProject)
-    //         {
-    //             trigger OnAction()
-    //             begin
-    //                 if Rec.JobNotExistForWO(Rec) then
-    //                     Rec.CreateJobFromWO(Rec);
-    //             end;
-    //         }
-    //         action(MultipleWOs)
-    //         {
-    //             trigger OnAction()
-    //             begin
-    //                 SetSelectionFilter(rec);
-    //                 if Rec.FindSet() then
-    //                     repeat
-    //                         if rec.JobNotExistForWO(rec) then
-    //                             rec.CreateJobFromWO(rec);
-    //                     until rec.Next() = 0;
-    //             end;
-    //         }
-    //     }
-    // }
+
     trigger OnAfterGetRecord()
     begin
         CurrPage.Update(false);

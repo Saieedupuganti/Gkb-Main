@@ -82,11 +82,6 @@ table 50107 "GKB Work Order"
             Caption = 'Sales Order No.';
             TableRelation = "Sales Header"."No." WHERE("Document Type" = CONST(Order));
         }
-        field(50015; "Owning Business Unit"; Code[200])
-        {
-            DataClassification = CustomerContent;
-            TableRelation = Dimension;
-        }
         field(50016; "Parent Work Order"; Code[200])
         {
             DataClassification = CustomerContent;
@@ -109,7 +104,7 @@ table 50107 "GKB Work Order"
         {
             DataClassification = CustomerContent;
         }
-        field(50040; "Shortcut Dimension 1 Code"; Code[200])
+        field(50040; "Shortcut Dimension 1 Code"; Code[50])
         {
             CaptionClass = '1,2,1';
             Caption = 'Obrien_Business unit Code';
@@ -174,6 +169,12 @@ table 50107 "GKB Work Order"
         {
             Caption = 'Location Code';
             TableRelation = Location where("Use As In-Transit" = const(false));
+            DataClassification = CustomerContent;
+        }
+        field(50207; "Blanket Order"; Code[200])
+        {
+            Caption = 'Blanket Order';
+            TableRelation = "Sales Header"."No." WHERE("Document Type" = CONST("Blanket Order"));
             DataClassification = CustomerContent;
         }
     }

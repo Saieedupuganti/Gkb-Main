@@ -2,6 +2,10 @@ tableextension 50103 GKBItemExt extends Item
 {
     fields
     {
+        modify(Description)
+        {
+            Caption = 'OBS Product Name';
+        }
         field(50099; "D365 Product ID"; Code[30])
         {
             Caption = 'D365 Product ID';
@@ -21,7 +25,7 @@ tableextension 50103 GKBItemExt extends Item
         }
         field(50100; "OBS Item Name"; Text[100])
         {
-            Caption = 'OBS Item Name';
+            Caption = 'Customer Product Name';
             DataClassification = ToBeClassified;
         }
         field(50101; "Vendor Item Name"; Text[100])
@@ -65,20 +69,12 @@ tableextension 50103 GKBItemExt extends Item
         field(50108; "Vendor Id"; Text[100])   //lookup
         {
             DataClassification = ToBeClassified;
-            trigger OnLookup()
-            var
-                vendor: Record Vendor;
-            begin
-                vendor.Reset();
-                if page.RunModal(page::"Vendor Card", vendor) = Action::LookupOK then
-                    "Vendor Id" := vendor."Dimension ID";
-            end;
+
         }
         field(50109; "Product Type"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = " ;1;2;3;4";
-            OptionCaption = ' ,Sales Inventory,Miscellaneous Charges,Services,Flat Fees';
+            OptionMembers = "Sales Inventory","Miscellaneous Charges","Services","Flat Fees";
         }
         field(50110; "Product Structure"; Option)
         {
@@ -111,9 +107,19 @@ tableextension 50103 GKBItemExt extends Item
         {
             DataClassification = ToBeClassified;
         }
-       
+        field(50510; "D365 Item Description"; Text[300])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Description';
+            
+        }
+        field(50511; "Row"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Row';
+        }
     }
-    
+
     fieldgroups
     {
         addlast(DropDown; "Vendor No.", "Vendor Item Name", "Vendor 1 Catalogue Number", "Alternative Item No.")

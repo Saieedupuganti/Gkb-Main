@@ -125,9 +125,9 @@ report 60102 "Purchase Order"
                     column(CompanyInfoVATRegNo; CompanyInfo."VAT Registration No.")
                     {
                     }
-                    column(CompanyInfoHomePage; CompanyInfo."Home Page")
-                    {
-                    }
+                    // column(CompanyInfoHomePage; CompanyInfo."Home Page")
+                    // {
+                    // }
                     column(CompanyInfoEmail; CompanyInfo."E-Mail")
                     {
                     }

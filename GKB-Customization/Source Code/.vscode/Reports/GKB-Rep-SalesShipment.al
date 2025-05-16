@@ -103,9 +103,9 @@ report 60101 "Sales - Shipment Invoice"
                     column(CompanyInfoVATRegNo; CompanyInfo."VAT Registration No.")
                     {
                     }
-                    column(CompanyInfoHomePage; CompanyInfo."Home Page")
-                    {
-                    }
+                    // column(CompanyInfoHomePage; CompanyInfo."Home Page")
+                    // {
+                    // }
                     column(CompanyInfoEmail; CompanyInfo."E-Mail")
                     {
                     }

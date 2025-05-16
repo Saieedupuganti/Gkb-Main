@@ -71,9 +71,9 @@ report 60100 "Purchase Order Invoice"
             column(CompanyHomePage_Lbl; HomePageCaptionLbl)
             {
             }
-            column(CompanyHomePage; CompanyInfo."Home Page")
-            {
-            }
+            // column(CompanyHomePage; CompanyInfo."Home Page")
+            // {
+            // }
             column(CompanyEmail_Lbl; EmailIDCaptionLbl)
             {
             }

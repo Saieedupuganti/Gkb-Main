@@ -51,7 +51,7 @@ page 60035 "Api Blanket SO"
                     Caption = 'Country';
                 }
                 field(State; Rec."Bill-to County") { }
-                field(postcode; Rec."D365 Bill-to Post Code")               // Custom
+                field(billtopostcode; Rec."D365 Bill-to Post Code")               // Custom
                 {
                     Caption = 'Sell-to Post Code';
                 }
@@ -76,6 +76,7 @@ page 60035 "Api Blanket SO"
                     Caption = 'Currency CRM ID';
                 }
                 field(description; Rec."Work Description")
+
                 {
                     Caption = 'Work Description';
                 }
@@ -152,9 +153,14 @@ page 60035 "Api Blanket SO"
                 {
                     Caption = 'Ship-to Address 2';
                 }
+                field("billingtype"; Rec."Billing Type") { }
                 field(shiptoaddress3; Rec."Ship-to Address 3")
                 {
                     Caption = 'Ship-to Address 3';
+                }
+                field(owningbusinessunit; Rec."Shortcut Dimension 1 Code")
+                {
+                    Caption = 'Owing Business Unit';
                 }
             }
         }

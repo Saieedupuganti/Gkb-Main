@@ -59,5 +59,12 @@ tableextension 50120 "GKBPurchase LineExt" extends "Purchase Line"
             DataClassification = ToBeClassified;
             Caption = 'Work Order No.';
         }
+        field(50112; "Ordered By"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Ordered By';
+            // TableRelation = Employee."First Name";
+            // ValidateTableRelation = false;
+        }
     }
 }

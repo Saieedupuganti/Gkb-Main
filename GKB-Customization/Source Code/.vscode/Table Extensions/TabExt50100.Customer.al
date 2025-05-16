@@ -2,6 +2,7 @@ tableextension 50100 "Customer Ext" extends Customer
 {
     fields
     {
+        
         field(50149; "D365 State"; Text[200])
         {
             Caption = 'State';
@@ -11,6 +12,7 @@ tableextension 50100 "Customer Ext" extends Customer
         {
             Caption = 'Country';
             DataClassification = ToBeClassified;
+            
         }
         field(50145; "D365 City"; Text[200])
         {
@@ -224,7 +226,7 @@ tableextension 50100 "Customer Ext" extends Customer
     begin
         "City" := "D365 City";
         County := "D365 State";
-        //Country/Region Code" := "D365 Country";
+        "Country/Region Code" := "D365 Country";
         "Post Code" := "D365 PostCode";
     end;
 
@@ -274,4 +276,6 @@ tableextension 50100 "Customer Ext" extends Customer
             Rec.Modify(false);
         end;
     end;
+
+
 }

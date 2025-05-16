@@ -43,9 +43,9 @@ report 60106 "Sales - Pro Forma Inv"
             column(CompanyEMail; CompanyInformation."E-Mail")
             {
             }
-            column(CompanyHomePage; CompanyInformation."Home Page")
-            {
-            }
+            // column(CompanyHomePage; CompanyInformation."Home Page")
+            // {
+            // }
             column(CompanyPhoneNo; CompanyInformation."Phone No.")
             {
             }
@@ -188,9 +188,9 @@ report 60106 "Sales - Pro Forma Inv"
             column(EMailLbl; CompanyInformation.FieldCaption("E-Mail"))
             {
             }
-            column(HomePageLbl; CompanyInformation.FieldCaption("Home Page"))
-            {
-            }
+            // column(HomePageLbl; CompanyInformation.FieldCaption("Home Page"))
+            // {
+            // }
             column(CompanyPhoneNoLbl; CompanyInformation.FieldCaption("Phone No."))
             {
             }
@@ -454,8 +454,8 @@ report 60106 "Sales - Pro Forma Inv"
         OnInitReportForGlobalVariable(IsHandled, LegalOfficeTxt, LegalOfficeLbl);
 #if not CLEAN23
         if not IsHandled then begin
-            LegalOfficeTxt := CompanyInformation.GetLegalOffice();
-            LegalOfficeLbl := CompanyInformation.GetLegalOfficeLbl();
+            // LegalOfficeTxt := CompanyInformation.GetLegalOffice();
+            // LegalOfficeLbl := CompanyInformation.GetLegalOfficeLbl();
         end;
 #endif
     end;

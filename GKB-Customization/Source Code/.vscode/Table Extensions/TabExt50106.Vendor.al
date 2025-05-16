@@ -1,7 +1,17 @@
 tableextension 50106 "Vendor Ext" extends Vendor
 {
+
     fields
     {
+        // modify("Gen. Bus. Posting Group")
+        // {
+        //     trigger OnAfterValidate()
+        //     begin
+        //         if "Gen. Bus. Posting Group" = 'Domestic' then begin
+        //             rec.Validate("Currency Code", '');
+        //         end;
+        //     end;
+        // }
         field(50149; "D365 State"; Text[100])
         {
             Caption = 'State';
@@ -11,6 +21,7 @@ tableextension 50106 "Vendor Ext" extends Vendor
         {
             Caption = 'Country';
             DataClassification = ToBeClassified;
+            TableRelation = "Country/Region".Name;
         }
         field(50147; "D365 City"; Text[100])
         {
