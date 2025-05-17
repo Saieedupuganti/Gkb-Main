@@ -48,7 +48,7 @@ codeunit 55000 "Inventory Reorder"
                         Recipients.Add(User."Contact Email");
                         Item.CalcFields(Inventory);
                         BodyMessage := 'Dear User,<br><br>The Item <strong>%1</strong> has reached its reorder point. Current inventory is <strong>%2</strong> which is less than or equal to the reorder point of <strong>%3</strong>.<br><br>Please take necessary action.<br><br>This is a system generated email. Please do not reply to this mail.<br>';
-                        BodyMessage := StrSubstNo(BodyMessage, Item."No.", Format(Item.Inventory), Format(Item."Reorder Point"));
+                        BodyMessage := StrSubstNo(BodyMessage, Item."No.", Item."Description", Format(Item.Inventory), Format(Item."Reorder Point"));
                         EmailMessage.Create(Recipients, 'Inventory Reorder Point Alert', BodyMessage, true);
                         EmailSend.Send(EmailMessage, Enum::"Email Scenario"::"Default");
                     until User.Next() = 0;

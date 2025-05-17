@@ -71,9 +71,9 @@ report 60110 "Sales - Invoice"
             column(CompanyAddress8; CompanyAddr[8])
             {
             }
-            column(CompanyHomePage; CompanyInfo."Home Page")
-            {
-            }
+            // column(CompanyHomePage; CompanyInfo."Home Page")
+            // {
+            // }
             column(CompanyEMail; CompanyInfo."E-Mail")
             {
             }
@@ -462,12 +462,12 @@ report 60110 "Sales - Invoice"
             column(VATClause_Lbl; VATClause.TableCaption())
             {
             }
-            column(PackageTrackingNo; "Package Tracking No.")
-            {
-            }
-            column(PackageTrackingNo_Lbl; FieldCaption("Package Tracking No."))
-            {
-            }
+            // column(PackageTrackingNo; "Package Tracking No.")
+            // {
+            // }
+            // column(PackageTrackingNo_Lbl; FieldCaption("Package Tracking No."))
+            // {
+            // }
             column(ShippingAgentCode; "Shipping Agent Code")
             {
             }
@@ -1310,10 +1310,10 @@ report 60110 "Sales - Invoice"
         OnInitReportForGlobalVariable(IsHandled, LegalOfficeTxt, LegalOfficeLbl, CustomGiroTxt, CustomGiroLbl, LegalStatementLbl);
 #if not CLEAN23
         if not IsHandled then begin
-            LegalOfficeTxt := CompanyInfo.GetLegalOffice();
-            LegalOfficeLbl := CompanyInfo.GetLegalOfficeLbl();
-            CustomGiroTxt := CompanyInfo.GetCustomGiro();
-            CustomGiroLbl := CompanyInfo.GetCustomGiroLbl();
+            // LegalOfficeTxt := CompanyInfo.GetLegalOffice();
+            // LegalOfficeLbl := CompanyInfo.GetLegalOfficeLbl();
+            // CustomGiroTxt := CompanyInfo.GetCustomGiro();
+            // CustomGiroLbl := CompanyInfo.GetCustomGiroLbl();
         end;
 #endif
     end;
@@ -1638,7 +1638,7 @@ report 60110 "Sales - Invoice"
             RightHeader.DeleteAll();
 
             FillNameValueTable(RightHeader, EMailLbl, CompanyInfo."E-Mail");
-            FillNameValueTable(RightHeader, HomePageLbl, CompanyInfo."Home Page");
+         ///   FillNameValueTable(RightHeader, HomePageLbl, CompanyInfo."Home Page");
             FillNameValueTable(RightHeader, CompanyInfoPhoneNoLbl, CompanyInfo."Phone No.");
             FillNameValueTable(RightHeader, CompanyInfo.GetRegistrationNumberLbl(), CompanyInfo.GetRegistrationNumber());
             FillNameValueTable(RightHeader, CompanyInfo.GetVATRegistrationNumberLbl(), CompanyInfo.GetVATRegistrationNumber());

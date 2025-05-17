@@ -51,6 +51,11 @@ pageextension 50108 PurchaseOrderExt extends "Purchase Order"
                 ApplicationArea = all;
                 Caption = 'Work Order No.';
             }
+            field("Delivery Docket No."; Rec."Delivery Docket No.")
+            {
+                ApplicationArea = all;
+                Caption = 'Delivery Docket No.';
+            }
         }
         addafter("Buy-from Address 2")
         {

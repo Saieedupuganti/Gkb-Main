@@ -137,9 +137,9 @@ report 60103 "Purchase - Quote"
                     column(EMailCompanyInfo; CompanyInfo."E-Mail")
                     {
                     }
-                    column(HomePageCompanyInfo; CompanyInfo."Home Page")
-                    {
-                    }
+                    // column(HomePageCompanyInfo; CompanyInfo."Home Page")
+                    // {
+                    // }
                     column(BankNameCompanyInfo; CompanyInfo."Bank Name")
                     {
                     }

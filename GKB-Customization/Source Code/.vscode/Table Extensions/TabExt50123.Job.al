@@ -29,15 +29,16 @@ tableextension 50123 GKBJobExt extends Job
         field(50029; "Sales Order"; Code[200])
         {
             DataClassification = CustomerContent;
-           Caption = 'Sales Order No.';
-            TableRelation = "Sales Header"."No." WHERE("Document Type" = CONST(Order));
+            Caption = 'Blanket Order No.';
+            TableRelation = "Sales Header"."No." WHERE("Document Type" = CONST("Blanket Order"));
         }
-          field(50006; "Billing Type"; Option)
+
+        field(50006; "Billing Type"; Option)
         {
             DataClassification = CustomerContent;
             OptionMembers = " ","Charge Up","Quoted","Monthly Billing","Not Chargeable","N/A";
         }
-         field(50032; "Customer PO Number"; Text[200])
+        field(50032; "Customer PO Number"; Text[200])
         {
             Caption = 'Customer PO Number';
             DataClassification = ToBeClassified;

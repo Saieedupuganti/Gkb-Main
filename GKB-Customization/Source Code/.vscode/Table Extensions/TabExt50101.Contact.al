@@ -2,6 +2,11 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
 {
     fields
     {
+        field(50102; "D365 Job Title"; Text[200])
+        {
+            DataClassification = ToBeClassified;
+            ObsoleteState = Removed;
+        }
         field(50149; "D365 State"; Text[200])
         {
             Caption = 'State';
@@ -131,7 +136,7 @@ tableextension 50101 "GKB Contacts Ext " extends Contact
         UpdateStandardFields();
     end;
 
-trigger OnAfterInsert()
+    trigger OnAfterInsert()
     begin
         UpdateStandardFields();
     end;

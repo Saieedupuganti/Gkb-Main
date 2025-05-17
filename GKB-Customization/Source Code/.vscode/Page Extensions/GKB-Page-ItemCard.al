@@ -2,8 +2,39 @@ pageextension 50149 GKBItemExt extends "Item Card"
 {
     layout
     {
+        addlast(InventoryGrp)
+        {
+            field("Item Availability By Location"; Rec."No.")
+            {
+                ApplicationArea = All;
+                Caption = 'Item Availability By Location';
+                DrillDown = true;
+                Editable = false;
+                trigger OnDrillDown()
+                var
+                    ItemAvailabilityPage: Page "Item Availability by Location";
+                    ItemFilter: Record Item;
+                begin
+                    ItemFilter.SetRange("No.", Rec."No.");
+                    ItemAvailabilityPage.SetTableView(ItemFilter);
+                    ItemAvailabilityPage.Run();
+                end;
+            }
+        }
+        addafter(Description)
+        {
+            field("D365 Item Description"; Rec."D365 Item Description")
+            {
+                ApplicationArea = All;
+            }
+            field("Product Type"; Rec."Product Type")
+            {
+                ApplicationArea = All;
+            }
+        }
         addafter(Item)
         {
+
             group("D365 Custom Fields")
             {
                 field("D365 Product ID"; Rec."D365 Product ID")          //Custom
@@ -28,18 +59,22 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 field(SAPITEMID; Rec.SAPITEMID)                  //custom
                 {
                     ApplicationArea = all;
-                    Caption = 'Sap Item Id';
+                    Caption = 'SAP Capital';
                 }
                 field(OBSItemName; Rec."OBS Item Name")                    //custom
                 {
                     ApplicationArea = all;
-                    Caption = 'OBS ItemName';
                     Visible = false;
                 }
                 field(Currency; Rec.Currency)
                 {
                     ApplicationArea = all;
                     Caption = 'Currency';
+                }
+                field(Row; Rec.Row)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Row';
                 }
             }
         }
@@ -62,6 +97,14 @@ pageextension 50149 GKBItemExt extends "Item Card"
             {
                 ApplicationArea = All;
                 SubPageLink = "No." = FIELD("No.");
+            }
+        }
+        addlast("D365 Custom Fields")
+        {
+            field("OBS Item Name"; Rec."OBS Item Name")
+            {
+                ApplicationArea = All;
+                ToolTip = 'OBS Item Name';
             }
         }
     }

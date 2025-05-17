@@ -129,9 +129,9 @@ report 60200 "Purchase - Receipt"
                     column(CompanyInfoEmail; CompanyInfo."E-Mail")
                     {
                     }
-                    column(CompanyInfoHomePage; CompanyInfo."Home Page")
-                    {
-                    }
+                    // column(CompanyInfoHomePage; CompanyInfo."Home Page")
+                    // {
+                    // }
                     column(ShipToAddr6; ShipToAddr[6])
                     {
                     }

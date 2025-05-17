@@ -2,6 +2,7 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
 {
     layout
     {
+       
         modify(ABN)             // Used Custom Field ABN No. instead of ABN
         {
             Editable = true;
@@ -206,5 +207,6 @@ pageextension 50121 "customercustom/mandatory" extends "Customer Card"
         if not IsUserAllowed then
             CurrPage.Editable(false);
     end;
+    
 }
 

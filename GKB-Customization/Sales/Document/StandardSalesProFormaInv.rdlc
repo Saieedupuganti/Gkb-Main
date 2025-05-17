@@ -73,9 +73,6 @@ End Function
         <Field Name="CompanyEMail">
           <DataField>CompanyEMail</DataField>
         </Field>
-        <Field Name="CompanyHomePage">
-          <DataField>CompanyHomePage</DataField>
-        </Field>
         <Field Name="CompanyPhoneNo">
           <DataField>CompanyPhoneNo</DataField>
         </Field>
@@ -225,9 +222,6 @@ End Function
         </Field>
         <Field Name="EMailLbl">
           <DataField>EMailLbl</DataField>
-        </Field>
-        <Field Name="HomePageLbl">
-          <DataField>HomePageLbl</DataField>
         </Field>
         <Field Name="CompanyPhoneNoLbl">
           <DataField>CompanyPhoneNoLbl</DataField>

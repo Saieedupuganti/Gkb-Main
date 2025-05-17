@@ -51,7 +51,7 @@ page 60322 "API Sales Order"
                     Caption = 'Country';
                 }
                 field(State; Rec."Bill-to County") { }
-                field(postcode; Rec."D365 Bill-to Post Code")               // Custom
+                field(billtopostcode; Rec."D365 Bill-to Post Code")               // Custom
                 {
                     Caption = 'Sell-to Post Code';
                 }
@@ -101,6 +101,7 @@ page 60322 "API Sales Order"
                 {
                     Caption = 'Quote';
                 }
+                field("billingtype"; Rec."Billing Type") { }
                 field(opportunity; Rec."Opportunity")
                 {
                     Caption = 'Opportunity';

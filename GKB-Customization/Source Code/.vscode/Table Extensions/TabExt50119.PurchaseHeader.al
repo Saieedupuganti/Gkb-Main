@@ -26,7 +26,7 @@ tableextension 50119 "GKBPurchase HeaderExt" extends "Purchase Header"
             Caption = 'Ordered By';
             TableRelation = Employee."First Name";
             ValidateTableRelation = false;
-           
+
         }
         field(50103; "Address 3"; Text[100])
         {
@@ -42,13 +42,16 @@ tableextension 50119 "GKBPurchase HeaderExt" extends "Purchase Header"
             Caption = 'Work Order No.';
             DataClassification = ToBeClassified;
             TableRelation = Job;
-
+        }
+        field(50110; "Delivery Docket No."; Code[50])
+        {
+            Caption = 'Delivery Docket No.';
+            DataClassification = ToBeClassified;
         }
     }
     trigger OnInsert()
     var
         user: Record "User Setup";
-    //userid: Code[50];
     begin
         IF User.GET(USERID) THEN
             Rec."Created By" := User."User ID";

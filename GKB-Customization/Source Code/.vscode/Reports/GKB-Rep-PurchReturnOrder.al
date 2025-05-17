@@ -100,9 +100,9 @@ report 60104 "Return Order"
                     column(CompanyInfoPhoneNo; CompanyInfo."Phone No.")
                     {
                     }
-                    column(CompanyInfoHomePage; CompanyInfo."Home Page")
-                    {
-                    }
+                    // column(CompanyInfoHomePage; CompanyInfo."Home Page")
+                    // {
+                    // }
                     column(CompanyInfoEmail; CompanyInfo."E-Mail")
                     {
                     }

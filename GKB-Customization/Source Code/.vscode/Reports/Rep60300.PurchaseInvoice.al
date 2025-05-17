@@ -94,9 +94,9 @@ report 60300 "Purchase - Invoice"
                 dataitem(PageLoop; "Integer")
                 {
                     DataItemTableView = sorting(Number) where(Number = const(1));
-                    column(CompanyInfoHomePage; CompanyInfo."Home Page")
-                    {
-                    }
+                    // column(CompanyInfoHomePage; CompanyInfo."Home Page")
+                    // {
+                    // }
                     column(CompanyInfoEmail; CompanyInfo."E-Mail")
                     {
                     }

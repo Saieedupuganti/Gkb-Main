@@ -160,6 +160,7 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         {
             Caption = 'Work Details';
             DataClassification = ToBeClassified;
+            ObsoleteState = Removed;
             // ExtendedDatatype= RichContent
         }
         field(50200; RichText; Blob)
@@ -169,7 +170,7 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         }
         field(50202; "D365 Bill-to Address 3"; Text[100])
         {
-            Caption = 'Address 3';
+            Caption = 'Bill-to Address 3';
         }
         field(50203; "Sales Order Name"; Text[100])
         {
@@ -188,8 +189,17 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         }
         field(50206; "Job No."; Text[100])
         {
-            Caption = 'Project No.';
-            TableRelation = Job;
+            Caption = 'Work Order No.';
+            TableRelation = Job."No.";
+
+            trigger OnLookup()
+            var
+                JobRec: Record Job;
+                JobListPage: Page "Job List";
+            begin
+                JobRec.SetRange("Sales Order", Rec."No.");
+                PAGE.RunModal(PAGE::"Job List", JobRec);
+            end;
         }
         field(50207; "Job Task No"; Code[30])
         {
@@ -275,6 +285,19 @@ tableextension 50113 "Sales Header Ext" extends "Sales Header"
         field(50001; "Sales Name"; Text[100])
         {
             Caption = 'Name';
+            DataClassification = ToBeClassified;
+        }
+        field(50002; "D365 Sell-to Address 3"; Text[100])
+        {
+            Caption = 'Sell-to Address 3';
+        }
+        field(50520; "Delivery Docket No."; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50521; "Delivery Docket Date"; Date)
+        {
+            Caption = 'Delivery Docket Date';
             DataClassification = ToBeClassified;
         }
     }

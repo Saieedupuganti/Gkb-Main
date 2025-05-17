@@ -7,5 +7,9 @@ tableextension 50148 "GKBSales Shipment HeaderExt" extends "Sales Shipment Heade
             Caption = 'Comments2';
             DataClassification = ToBeClassified;
         }
+        field(50101; "Delivery Docket No."; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 }

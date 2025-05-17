@@ -2,6 +2,51 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
 {
     layout
     {
+        addafter("Sell-to Address 2")
+        {
+            field("Address 3"; Rec."Bill-to address name")
+            {
+                ApplicationArea = all;
+            }
+            field(Name; Rec.Name)
+            {
+                ApplicationArea = all;
+                Caption = 'Sales order Name';
+            }
+        }
+        addafter("Bill-to Address 2")
+        {   
+            field("D365 Bill-to Address 3"; Rec."D365 Bill-to Address 3")
+            {
+                ApplicationArea = all;
+            }
+        }
+        addafter("Sell-to Address 2")
+        {
+            field("D365 Sell-to Address 3"; Rec."D365 Sell-to Address 3")
+            {
+                ApplicationArea = all;
+            }
+        }
+        addafter(General)
+        {
+            group("Rich Text")
+            {
+                Caption = 'Rich Text';
+                field(RichText; RichTextVar)
+                {
+                    ApplicationArea = all;
+                    MultiLine = true;
+                    ExtendedDatatype = RichContent;
+                    ShowCaption = false;
+
+                    trigger OnValidate()
+                    begin
+                        Rec.SetRichText(RichTextVar);
+                    end;
+                }
+            }
+        }
         modify("Work Description")
         {
             Visible = false;
@@ -77,6 +122,11 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
                     ApplicationArea = All;
                     Caption = 'GST Prod Posting Group';
                 }
+                field("Delivery Docket No."; Rec."Delivery Docket No.")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Delivery Docket No.';
+                }
 
             }
         }
@@ -121,4 +171,21 @@ pageextension 50341 "Sales Order Card Ext" extends "Sales Order"
             }
         }
     }
+    trigger OnAfterGetCurrRecord()
+    begin
+        RichTextVar := Rec.GetRichText();
+    end;
+
+    trigger OnAfterGetRecord()
+    var
+        CustomerRec: Record Customer;
+    begin
+        if CustomerRec.Get(Rec."Sell-to Customer No.") then begin
+            Rec."D365 Bill-to Address 3" := CustomerRec."Address 3";
+            CurrPage.Update(false);
+        end;
+    end;
+
+    var
+        RichTextVar: Text;
 }

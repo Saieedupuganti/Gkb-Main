@@ -2,43 +2,14 @@ pageextension 50118 PurchOrderSubExt extends "Purchase Order Subform"
 {
     layout
     {
-        // modify("No.")
-        // {
-        //     trigger OnLookup(var Text: Text): Boolean
-        //     var
-        //         ItemRec: Record Item;
-        //         PurchaseHeader: Record "Purchase Header";
-        //         ItemListPage: Page "Item List";
-        //     begin
-        //         if PurchaseHeader.Get(Rec."Document Type", Rec."Document No.") then begin
-        //             ItemRec.Reset();
-        //             ItemRec.SetRange(Blocked, false);
-        //             ItemRec.SetRange(Type, ItemRec.Type::"Non-Inventory");
-        //             if ItemRec.FindSet() then
-        //                 repeat
-        //                     ItemRec.Mark(true);
-        //                 until ItemRec.Next() = 0;
-        //             ItemRec.SetRange(Type);
-        //             if PurchaseHeader."Buy-from Vendor No." <> '' then begin
-        //                 ItemRec.SetRange("Vendor No.", PurchaseHeader."Buy-from Vendor No.");
-        //                 if ItemRec.FindSet() then
-        //                     repeat
-        //                         ItemRec.Mark(true);
-        //                     until ItemRec.Next() = 0;
-        //             end;
-        //         end;
-        //         ItemRec.MarkedOnly();
-        //         ItemListPage.SetTableView(ItemRec);
-        //         ItemListPage.LookupMode(true);
-        //         if ItemListPage.RunModal = Action::LookupOK then begin
-        //             ItemListPage.GetRecord(ItemRec);
-        //             Text := ItemRec."No.";
-        //             Rec.Validate("No.", ItemRec."No.");
-        //             exit(true);
-        //         end;
-        //         exit(false);
-        //     end;
-        // }
+        addafter("Shortcut Dimension 1 Code")
+        {
+            field("Ordered By";Rec."Ordered By")
+            {
+                ApplicationArea = all;
+                ToolTip = 'Specifies the name of the person who ordered the item.';    
+            }
+        }
         
         modify("No.")
         {
