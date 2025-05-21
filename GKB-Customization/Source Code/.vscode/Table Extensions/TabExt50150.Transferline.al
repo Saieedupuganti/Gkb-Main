@@ -12,8 +12,12 @@ tableextension 50150 "GKBTransfer LineExt" extends "Transfer Line"
             Caption = 'Transfer Note';
             DataClassification = ToBeClassified;
         }
+
+
+
     }
 }
+
 pageextension 50360 "Transfer Order Subform Ext" extends "Transfer Order Subform"
 {
     layout
@@ -24,6 +28,7 @@ pageextension 50360 "Transfer Order Subform Ext" extends "Transfer Order Subform
             {
                 ApplicationArea = all;
             }
+
         }
     }
 }

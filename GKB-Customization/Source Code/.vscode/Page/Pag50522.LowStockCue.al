@@ -1,6 +1,7 @@
 page 50522 "Low Stock"
 {
     PageType = CardPart;
+    SourceTable = Item;
     RefreshOnActivate = true;
     ApplicationArea = All;
 
@@ -23,31 +24,15 @@ page 50522 "Low Stock"
                     trigger OnDrillDown()
                     var
                         Item: Record Item;
-                        TempItem: Record Item temporary;
                         ItemList: Page "Item List";
                     begin
-                        // Reset and set filter for items with a reorder point
                         Item.Reset();
-                        Item.SetFilter("Reorder Point", '<>0');
+                        Item.SetFilter("Low Stock", 'true');
 
-                        // Find all items below reorder point and add to temp table
-                        if Item.FindSet() then
-                            repeat
-                                Item.CalcFields(Inventory);
-                                if Item.Inventory <= Item."Reorder Point" then begin
-                                    TempItem.Init();
-                                    TempItem.TransferFields(Item);
-                                    TempItem.Insert();
-                                end;
-                            until Item.Next() = 0;
-
-                        // Run the page with the temporary table
-                        if TempItem.FindFirst() then begin
-                            Clear(ItemList);
-                            ItemList.SetTableView(TempItem);
+                        if Item.FindSet() then begin
+                            ItemList.SetTableView(Item);
                             ItemList.Run();
-                        end else
-                            Message('No items found below reorder point.');
+                        end;
                     end;
                 }
             }
@@ -56,21 +41,9 @@ page 50522 "Low Stock"
 
     local procedure CountLowStock(): Integer
     var
-        Item: Record Item;
-        Count: Integer;
+        Item: Record "Item";
     begin
-        Count := 0;
-
-        Item.Reset();
-        Item.SetFilter("Reorder Point", '<>0');
-
-        if Item.FindSet() then
-            repeat
-                Item.CalcFields(Inventory);
-                if Item.Inventory <= Item."Reorder Point" then
-                    Count += 1;
-            until Item.Next() = 0;
-
-        exit(Count);
+        Item.SetRange("Low Stock", true);
+        exit(Item.Count());
     end;
 }

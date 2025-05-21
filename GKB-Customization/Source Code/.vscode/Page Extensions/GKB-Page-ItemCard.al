@@ -2,6 +2,25 @@ pageextension 50149 GKBItemExt extends "Item Card"
 {
     layout
     {
+        modify("Manufacturer Code")
+        {
+            Caption = 'Manufacturer Name';
+
+        }
+        addafter("Manufacturer Code")
+        {
+            field("Manufacturer Part Name"; Rec."Manufacturer Part Name")
+            {
+                ApplicationArea = All;
+                Caption = 'Manufacturer Part Name';
+            }
+            field("Manufacturer Part No."; Rec."Manufacturer Part No.")
+            {
+                ApplicationArea = All;
+                Caption = 'Manufacturer Part No.';
+
+            }
+        }
         addlast(InventoryGrp)
         {
             field("Item Availability By Location"; Rec."No.")
@@ -26,6 +45,8 @@ pageextension 50149 GKBItemExt extends "Item Card"
             field("D365 Item Description"; Rec."D365 Item Description")
             {
                 ApplicationArea = All;
+                multiline = true;
+                Caption = 'OBS Product Description';
             }
             field("Product Type"; Rec."Product Type")
             {
@@ -59,7 +80,7 @@ pageextension 50149 GKBItemExt extends "Item Card"
                 field(SAPITEMID; Rec.SAPITEMID)                  //custom
                 {
                     ApplicationArea = all;
-                    Caption = 'SAP Capital';
+                    Caption = 'Item Number';
                 }
                 field(OBSItemName; Rec."OBS Item Name")                    //custom
                 {

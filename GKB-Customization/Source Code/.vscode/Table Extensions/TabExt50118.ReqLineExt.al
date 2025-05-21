@@ -185,17 +185,24 @@ tableextension 50118 "Requesion Line Ext" extends "Requisition Line"
             DataClassification = ToBeClassified;
             Caption = 'PO Created';
         }
+       
     }
+
     trigger OnInsert()
     var
         User: Record "User Setup";
+
     begin
         IF User.GET(USERID) THEN
             Rec."Requested By Name" := User."User ID";
+        // Newly created requisition lines will have the same attachment ID as the requisition line
+
     end;
 
     [IntegrationEvent(false, false)]
     local procedure OnBeforePLInsert(var PurchaseLine: Record "Purchase Line"; var IsHandled: Boolean)
     begin
     end;
+
+
 }

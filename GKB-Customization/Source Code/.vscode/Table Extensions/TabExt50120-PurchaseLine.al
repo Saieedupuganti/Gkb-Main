@@ -66,5 +66,6 @@ tableextension 50120 "GKBPurchase LineExt" extends "Purchase Line"
             // TableRelation = Employee."First Name";
             // ValidateTableRelation = false;
         }
+       
     }
 }
