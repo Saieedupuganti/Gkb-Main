@@ -9,6 +9,7 @@ pageextension 50352 "Transfer Order Ext" extends "Transfer Order"
                 ApplicationArea = All;
                 Caption = 'Transfer Note';
             }
+            
         }
     }
 

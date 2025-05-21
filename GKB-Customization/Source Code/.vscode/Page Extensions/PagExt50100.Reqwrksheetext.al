@@ -65,8 +65,8 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
             {
                 ApplicationArea = all;
             }
-            
-             //DCS:SK 17/04/2025 NS
+
+            //DCS:SK 17/04/2025 NS
             field(Availability; CalcAvailability(Rec)) //DCS:SK 17/04/2025 NS
             {
                 ApplicationArea = Basic, Suite;
@@ -117,6 +117,7 @@ pageextension 50100 "Req WO" extends "Req. Worksheet"
                 ApplicationArea = all;
                 Editable = false;
             }
+
         }
         addafter("Vendor Item No.")
         {

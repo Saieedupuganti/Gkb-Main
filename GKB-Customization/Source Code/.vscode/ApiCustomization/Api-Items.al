@@ -16,7 +16,7 @@ page 50312 "API Items"
         {
             repeater(GroupName)
             {
-                field("BaseUnitofMeasure"; Rec."Base Unit of Measure")   //lookup
+                field("baseunitofmeasure"; Rec."Base Unit of Measure")   //lookup
                 {
                     Caption = 'Base Unit Of Measure';
                 }
@@ -28,78 +28,81 @@ page 50312 "API Items"
                 {
                     Caption = 'CRM ID';
                 }
-                field(Currency; Rec.Currency)
+                field(currency; Rec.Currency)
                 {
                     Caption = 'Currency';
                 }
-                field("CurrencyId"; Rec."Currency Id")
+                field("currencyid"; Rec."Currency Id")
                 {
                     Caption = 'Currency Id';
                 }
-                field("CustomVendorId"; Rec."Custom Vendor Id")
+                field("customvendorid"; Rec."Custom Vendor Id")
                 {
                     Caption = 'Custom Vendor Id';
                 }
-                field(Description; Rec.Description)
+                field(description; Rec.Description)
                 {
                     Caption = 'Name';
                 }
-                field("Description2"; Rec."Description 2")
+                field("description2"; Rec."Description 2")
                 {
                     Caption = 'Description';
                 }
-                field("No"; Rec."No.")
+                field("no"; Rec."No.")
                 {
                     Caption = 'No';
                 }
-                field("OBSItemName"; Rec."OBS Item Name")
+                field("customerproductname"; Rec."OBS Item Name")
                 {
                     Caption = 'OBS Item Name';
                 }
-                field("PostingGroup"; Rec."Posting Group")
+                field("postinggroup"; Rec."Posting Group")
                 {
                     Caption = 'Posting Group';
                 }
-                field("ProductStructure"; Rec."Product Structure")
+                field("productstructure"; Rec."Product Structure")
                 {
                     Caption = 'Product Structure';
                 }
-                field("ProductType"; Rec."Product Type")
+                field("producttype"; Rec."Product Type")
                 {
                     Caption = 'Product Type';
                 }
-                field("StandardCost"; Rec."Standard Cost")
+                field("standardcost"; Rec."Standard Cost")
                 {
                     Caption = 'Standard Cost';
                 }
-                field(Status; Rec.Status)
+                field(status; Rec.Status)
                 {
                     Caption = 'Status';
                 }
-                field("TradeType"; Rec."Trade Type")
+                field("tradetype"; Rec."Trade Type")
                 {
                     Caption = 'Trade Type';
                 }
-                field(Type; Rec.Type)
+                field(type; Rec.Type)
                 {
                     Caption = 'Type';
                 }
-                field("UnitCost"; Rec."Unit Cost")
+                field("unitcost"; Rec."Unit Cost")
                 {
                     Caption = 'Unit Cost';
                 }
-                field("UnitPrice"; Rec."Unit Price")
+                field("unitprice"; Rec."Unit Price")
                 {
                     Caption = 'Unit Price';
                 }
-                field("Vendor1CatalogueNumber"; Rec."Vendor 1 Catalogue Number")
+                field("vendor1cataloguenumber"; Rec."Vendor 1 Catalogue Number")
                 {
                     Caption = 'Vendor Catalogue Number';
                 }
-                field("VendorId"; Rec."Vendor Id")
+                field("vendorid"; Rec."Vendor Id")
                 {
                     Caption = 'Vendor Id';
                 }
+                field(sapitemnumber; Rec.SAPITEMID) { }
+                field("d365productid"; Rec."D365 Product ID") { }
+                field("d365ItemDescription";Rec."D365 Item Description"){}
             }
         }
     }

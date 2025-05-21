@@ -4,13 +4,14 @@ pageextension 50118 PurchOrderSubExt extends "Purchase Order Subform"
     {
         addafter("Shortcut Dimension 1 Code")
         {
-            field("Ordered By";Rec."Ordered By")
+            field("Ordered By"; Rec."Ordered By")
             {
                 ApplicationArea = all;
-                ToolTip = 'Specifies the name of the person who ordered the item.';    
+                ToolTip = 'Specifies the name of the person who ordered the item.';
             }
+           
         }
-        
+
         modify("No.")
         {
             trigger OnLookup(var Text: Text): Boolean

@@ -83,9 +83,8 @@ codeunit 50128 "Update to Crm Mngmt"
         JObject.Add('d365productid', Item."D365 Product Id");
         JObject.Add('defaultunitgroupid', unitgroupcrmid);
         JObject.Add('currencyid', Item."Currency Id");
-        JObject.Add('name', Item.Description);
         JObject.Add('description', Item.Description);
-        JObject.Add('internalproductname', Item."OBS Item Name");
+        JObject.Add('customerproductname', Item."OBS Item Name");
         JObject.Add('postinggroup', Item."Posting Group");
         JObject.Add('standardcost', Item."Standard Cost");
         JObject.Add('tradetype', tradetype);
@@ -93,6 +92,8 @@ codeunit 50128 "Update to Crm Mngmt"
         JObject.Add('currentcost', Item."Unit Cost");
         JObject.Add('vendorcatalogueno', Item."Vendor 1 Catalogue Number");
         JObject.Add('vendorid', vendorid);
+        JObject.Add('obsproductdescription', Item."D365 Item Description");
+        JObject.Add('sapitemnumber', Item.SAPITEMID);
 
         if (Format(Item."Product Type") <> '') and (Format(Item."Product Type") <> '0') then begin
             if Format(Item."Product Type") = ' ' then
@@ -124,6 +125,14 @@ codeunit 50128 "Update to Crm Mngmt"
                     Item."D365 Product Id" := CopyStr(TokenString, 1, 100);
                     Item.Modify(false);
                 end;
+
+                if ResponseJObject.Contains('sapitemnumber') then begin
+                    ResponseJObject.Get('sapitemnumber', TokenValue);
+                    TokenString := TokenValue.AsValue().AsText();
+                    Item."SAPITEMID" := CopyStr(TokenString, 1, 100);
+                    Item.Modify(false);
+                end;
+
             end;
         end;
     end;

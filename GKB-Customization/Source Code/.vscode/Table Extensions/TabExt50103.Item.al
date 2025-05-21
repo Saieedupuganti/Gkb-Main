@@ -2,10 +2,6 @@ tableextension 50103 GKBItemExt extends Item
 {
     fields
     {
-        modify(Description)
-        {
-            Caption = 'OBS Product Name';
-        }
         field(50099; "D365 Product ID"; Code[30])
         {
             Caption = 'D365 Product ID';
@@ -110,13 +106,29 @@ tableextension 50103 GKBItemExt extends Item
         field(50510; "D365 Item Description"; Text[300])
         {
             DataClassification = ToBeClassified;
-            Caption = 'Description';
-            
+          
+
         }
         field(50511; "Row"; Text[100])
         {
             DataClassification = ToBeClassified;
             Caption = 'Row';
+        }
+        field(50512; "Manufacturer Part Name"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Manufacturer Part Name';
+        }
+        field(50513; "Manufacturer Part No."; Text[100])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Manufacturer Part No.';
+        }
+        field(50514; "Low Stock"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Low Stock';
+
         }
     }
 
@@ -126,4 +138,23 @@ tableextension 50103 GKBItemExt extends Item
         {
         }
     }
+    trigger OnInsert()
+    begin
+        UpdateLowStock();
+    end;
+
+    trigger OnModify()
+    begin
+        UpdateLowStock();
+    end;
+
+    procedure UpdateLowStock()
+    begin
+        CalcFields("Inventory");
+
+        if "Inventory" <= "Reorder Point" then
+            "Low Stock" := true
+        else
+            "Low Stock" := false;
+    end;
 }
